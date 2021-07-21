@@ -69,13 +69,14 @@ function App() {
 
   useEffect(() => {
     async function getData() {
-      const response = await fetch('/data/frontend_data.csv')
+      const response = await fetch('/Roznavene-project-demo/data/frontend_data.csv')
       const reader = response.body.getReader()
       const result = await reader.read() // raw array
       const decoder = new TextDecoder('utf-8')
       const csv = decoder.decode(result.value) // the csv text
       const results = Papa.parse(csv, { header: true }) // object with { data, errors, meta }
       const rows = results.data // array of objects
+      console.log(rows)
       setRows(rows)
     }
     getData()
@@ -188,7 +189,7 @@ function App() {
                     </span>
                     <img
                       style={{ transform: "scale(-1, 1)", display: 'block', margin: 'auto' }}
-                      src={`/icons/intensity_pie_${wine[qual]}.svg`}
+                      src={`/Roznavene-project-demo/icons/intensity_pie_${wine[qual]}.svg`}
                       width='20px'
                     />
                   </div>
