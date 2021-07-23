@@ -148,8 +148,15 @@ function App() {
               src={imageLink(wine.link)}
               height="80px"
             />
-            <div style={{ float: 'left', marginLeft: '20px', position: 'relative' }}>
-              <span style={{ display: 'block', textOverflow: 'ellipsis', width: '250px', fontSize: '14px', textAlign: 'start' }}>
+            <div style={{ float: 'left', marginLeft: '20px', position: 'relative', width:'60%' }}>
+              <span style={{ 
+                display: 'block', 
+                whiteSpace: 'nowrap', 
+                overflow:'hidden', 
+                textOverflow: 'ellipsis', 
+                width: '250px', 
+                fontSize: '14px', 
+                textAlign: 'start' }}>
                 <b>{truncate(wine.name.replaceAll('-', ' '), 100)}</b>
               </span>
               <div style={{ color: 'gray', left: '0px', position: 'absolute' }}>
@@ -162,7 +169,7 @@ function App() {
               </div>
             </div>
           </div>
-          <div style={{ width: '100%' }}>
+          <div style={{ width: '100%', display:'block' }}>
             {
               Object.keys(qualities).map(qual => {
                 return (
