@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.scss';
-import { Card, Button, Fade, ButtonGroup, Form } from 'react-bootstrap'
+import { Card, Button, Fade, ButtonGroup, Form, Alert } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MealIcon from './components/MealIcon';
 import React, { useEffect, useState } from 'react';
@@ -11,29 +11,6 @@ const courses = [
   "appetizer",
   "main",
   "dessert"
-]
-
-const wines = [
-  {
-    img: 'icons/appetizer.png',
-    name: 'Burgundy Olala',
-    type: 'red'
-  },
-  {
-    img: 'icons/appetizer.png',
-    name: 'Burgundy Olala',
-    type: 'red'
-  },
-  {
-    img: 'icons/appetizer.png',
-    name: 'Burgundy Olala',
-    type: 'red'
-  },
-  {
-    img: 'icons/appetizer.png',
-    name: 'Burgundy Olala',
-    type: 'red'
-  }
 ]
 
 const qualities = {
@@ -59,6 +36,8 @@ function App() {
   const [pair, setPair] = useState('')
   const [wining, setWining] = useState(false)
   const [advSearch, setAdvSearch] = useState(false)
+  const [displayedWines, setDisplayedWines] = useState([])
+  const [searchErr, setSearchErr] = useState('')
 
 
   const [filterWhite, setFilterWhite] = useState(true)
@@ -111,8 +90,18 @@ function App() {
   const handleWineMe = () => {
     setPair(meal)
     setWining(true)
+
+    const wines = rows.filter(e => e.pair && e.pair.toUpperCase() === meal.toUpperCase())
+    setDisplayedWines(
+      wines
+    )
+
     setTimeout(
       function () {
+        if (wines.length == 0)
+          setSearchErr(`"${meal}" is not a supported dish`)
+        else
+          setSearchErr(false)
         setWining(false)
       },
       1000
@@ -153,7 +142,7 @@ function App() {
             <img
               style={{
                 float: 'left',
-                transform: hovered ? 'scale(1.1)' : '', 
+                transform: hovered ? 'scale(1.1)' : '',
                 transition: 'transform 0.3s'
               }}
               src={imageLink(wine.link)}
@@ -208,7 +197,7 @@ function App() {
         className="no-scrollbar"
         id="wine-display">
         {
-          rows.filter(e => e.pair === pair).map(wine =>
+          displayedWines.map(wine =>
             WinePlate(wine)
           )
         }
@@ -218,14 +207,8 @@ function App() {
 
   return (
     <div className="App">
-      <div style={{
-        minHeight: '730px',
-        width: '400px',
-        textAlign: 'center',
-        margin: 'auto',
-        marginTop: '100px'
-      }}>
-        <Card style={{ width: '500px' }}>
+      <div className="mainBody">
+        <Card>
           <Card.Body>
             <div style={{ height: '80px' }}>
               <b style={{ fontSize: '23px' }}>PocketSomm</b><br />
@@ -255,6 +238,9 @@ function App() {
               />
             </Form.Group>
             {
+              searchErr ? <Alert style={{ width: '80%', margin: 'auto' }} variant="danger">{searchErr}</Alert> : null
+            }
+            {/* {
               pair && !wining ? <div className="animated" style={{ width: '80%', margin: 'auto', height: `${getAdvSearchHeight()}px` }}>
                 <a style={{ color: 'gray', fontSize: '13px' }} href="#" onClick={e => { setAdvSearch(!advSearch) }}>Adjust preference</a>
                 <Fade in={advSearch}>
@@ -270,21 +256,18 @@ function App() {
                   </div>
                 </Fade>
               </div> : null
-            }
+            } */}
             <div
               id="winelist"
               className="animated"
               style={{
                 width: '90%',
                 margin: 'auto',
-                height: pair && !wining ? `${500 - getAdvSearchHeight()}px` : '25px',
+                height: (pair && !wining && !searchErr) ? `${500 - getAdvSearchHeight()}px` : '0px',
                 overflowY: 'auto',
                 overflowX: 'hidden'
               }}>
               {pair && !wining ? <WineDisplay /> : null}
-            </div>
-            <div id="foot" style={{ position: 'relative', height: '5px' }}>
-              <span style={{ right: '0px', position: 'absolute', fontSize: '13px', color: 'gray' }}>powered by PocketSomm™</span>
             </div>
           </Card.Body>
           <Card.Footer>
@@ -293,6 +276,9 @@ function App() {
             </Button>
           </Card.Footer>
         </Card>
+        <div id="foot" style={{ position: 'relative', height: '5px' }}>
+          <span style={{ right: '0px', position: 'absolute', fontSize: '13px', color: 'gray' }}>powered by PocketSomm™</span>
+        </div>
       </div>
     </div>
   );

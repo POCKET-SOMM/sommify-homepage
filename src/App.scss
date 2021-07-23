@@ -3,6 +3,31 @@
   font-family: "Rubik", sans-serif;
 }
 
+.mainBody{
+}
+
+@media only screen and (max-width: 500px){
+  .mainBody{
+    min-height: 730px;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    margin-top: 100px
+  }
+}
+
+@media only screen and (min-width: 500px){
+  .mainBody{
+    min-height: 730px;
+    width: 500px;
+    text-align: center;
+    margin: auto;
+    margin-top: 100px
+  }
+}
+
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
