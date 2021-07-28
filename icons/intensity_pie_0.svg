@@ -1,1 +1,49 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="sv" width="180" height="180" viewBox="0 0 180 180"><path id="0" fill="#df4759" d="M90, 0 A90,90 0 0 1 90,0 L90,90 A0,0 0 0 0 90,90 Z"></path><path id="1" fill="#f7f7f7" d="M90, 0 A90,90 0 1 1 89.98429203681187,0.0000013707783779182137 L90,90 A0,0 0 1 0 90,90 Z"></path></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="sv"
+   width="180"
+   height="180"
+   viewBox="0 0 180 180"
+   version="1.1"
+   sodipodi:docname="intensity_pie_00.svg"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs7" />
+  <sodipodi:namedview
+     id="namedview5"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="4.6777778"
+     inkscape:cx="89.893112"
+     inkscape:cy="73.004751"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="1072"
+     inkscape:window-y="608"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="sv" />
+  <path
+     id="0"
+     fill="#df4759"
+     d="M90, 0 A90,90 0 0 1 90,0 L90,90 A0,0 0 0 0 90,90 Z" />
+  <path
+     id="1"
+     fill="#f7f7f7"
+     d="M90, 0 A90,90 0 1 1 89.98429203681187,0.0000013707783779182137 L90,90 A0,0 0 1 0 90,90 Z" />
+  <rect
+     style="fill:#808080"
+     id="rect55"
+     width="86.365799"
+     height="19.239904"
+     x="46.817101"
+     y="80.380051" />
+</svg>
