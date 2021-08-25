@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/Roznavene-project-demo/static/css/main.a578e88e.chunk.css",
-    "main.js": "/Roznavene-project-demo/static/js/main.c8bb23e4.chunk.js",
-    "main.js.map": "/Roznavene-project-demo/static/js/main.c8bb23e4.chunk.js.map",
-    "runtime-main.js": "/Roznavene-project-demo/static/js/runtime-main.9af6494c.js",
-    "runtime-main.js.map": "/Roznavene-project-demo/static/js/runtime-main.9af6494c.js.map",
-    "static/js/2.7db67f37.chunk.js": "/Roznavene-project-demo/static/js/2.7db67f37.chunk.js",
-    "static/js/2.7db67f37.chunk.js.map": "/Roznavene-project-demo/static/js/2.7db67f37.chunk.js.map",
-    "static/js/3.cbac9aa8.chunk.js": "/Roznavene-project-demo/static/js/3.cbac9aa8.chunk.js",
-    "static/js/3.cbac9aa8.chunk.js.map": "/Roznavene-project-demo/static/js/3.cbac9aa8.chunk.js.map",
+    "main.css": "/Roznavene-project-demo/static/css/main.62f0a69e.chunk.css",
+    "main.js": "/Roznavene-project-demo/static/js/main.55501ff4.chunk.js",
+    "main.js.map": "/Roznavene-project-demo/static/js/main.55501ff4.chunk.js.map",
+    "runtime-main.js": "/Roznavene-project-demo/static/js/runtime-main.1cfa7255.js",
+    "runtime-main.js.map": "/Roznavene-project-demo/static/js/runtime-main.1cfa7255.js.map",
+    "static/js/2.d65c3bbb.chunk.js": "/Roznavene-project-demo/static/js/2.d65c3bbb.chunk.js",
+    "static/js/2.d65c3bbb.chunk.js.map": "/Roznavene-project-demo/static/js/2.d65c3bbb.chunk.js.map",
+    "static/js/3.ce2cb94b.chunk.js": "/Roznavene-project-demo/static/js/3.ce2cb94b.chunk.js",
+    "static/js/3.ce2cb94b.chunk.js.map": "/Roznavene-project-demo/static/js/3.ce2cb94b.chunk.js.map",
     "index.html": "/Roznavene-project-demo/index.html",
-    "static/css/main.a578e88e.chunk.css.map": "/Roznavene-project-demo/static/css/main.a578e88e.chunk.css.map",
-    "static/js/2.7db67f37.chunk.js.LICENSE.txt": "/Roznavene-project-demo/static/js/2.7db67f37.chunk.js.LICENSE.txt",
+    "static/css/main.62f0a69e.chunk.css.map": "/Roznavene-project-demo/static/css/main.62f0a69e.chunk.css.map",
+    "static/js/2.d65c3bbb.chunk.js.LICENSE.txt": "/Roznavene-project-demo/static/js/2.d65c3bbb.chunk.js.LICENSE.txt",
     "static/media/logo.6ce24c58.svg": "/Roznavene-project-demo/static/media/logo.6ce24c58.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.9af6494c.js",
-    "static/js/2.7db67f37.chunk.js",
-    "static/css/main.a578e88e.chunk.css",
-    "static/js/main.c8bb23e4.chunk.js"
+    "static/js/runtime-main.1cfa7255.js",
+    "static/js/2.d65c3bbb.chunk.js",
+    "static/css/main.62f0a69e.chunk.css",
+    "static/js/main.55501ff4.chunk.js"
   ]
 }
