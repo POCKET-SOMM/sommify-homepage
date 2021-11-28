@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Roznavene-project-demo/static/css/main.a6b32c1d.chunk.css",
-    "main.js": "/Roznavene-project-demo/static/js/main.fb158a61.chunk.js",
-    "main.js.map": "/Roznavene-project-demo/static/js/main.fb158a61.chunk.js.map",
+    "main.js": "/Roznavene-project-demo/static/js/main.ed5808fb.chunk.js",
+    "main.js.map": "/Roznavene-project-demo/static/js/main.ed5808fb.chunk.js.map",
     "runtime-main.js": "/Roznavene-project-demo/static/js/runtime-main.6206ec08.js",
     "runtime-main.js.map": "/Roznavene-project-demo/static/js/runtime-main.6206ec08.js.map",
     "static/js/2.57f18b0e.chunk.js": "/Roznavene-project-demo/static/js/2.57f18b0e.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.6206ec08.js",
     "static/js/2.57f18b0e.chunk.js",
     "static/css/main.a6b32c1d.chunk.css",
-    "static/js/main.fb158a61.chunk.js"
+    "static/js/main.ed5808fb.chunk.js"
   ]
 }
