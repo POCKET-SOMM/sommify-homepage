@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/Roznavene-project-demo/static/css/main.c7388686.chunk.css",
-    "main.js": "/Roznavene-project-demo/static/js/main.9aaf21f0.chunk.js",
-    "main.js.map": "/Roznavene-project-demo/static/js/main.9aaf21f0.chunk.js.map",
+    "main.js": "/Roznavene-project-demo/static/js/main.9614490b.chunk.js",
+    "main.js.map": "/Roznavene-project-demo/static/js/main.9614490b.chunk.js.map",
     "runtime-main.js": "/Roznavene-project-demo/static/js/runtime-main.59f7d0a9.js",
     "runtime-main.js.map": "/Roznavene-project-demo/static/js/runtime-main.59f7d0a9.js.map",
-    "static/js/2.f8bccf1f.chunk.js": "/Roznavene-project-demo/static/js/2.f8bccf1f.chunk.js",
-    "static/js/2.f8bccf1f.chunk.js.map": "/Roznavene-project-demo/static/js/2.f8bccf1f.chunk.js.map",
+    "static/js/2.97e614e8.chunk.js": "/Roznavene-project-demo/static/js/2.97e614e8.chunk.js",
+    "static/js/2.97e614e8.chunk.js.map": "/Roznavene-project-demo/static/js/2.97e614e8.chunk.js.map",
     "static/js/3.57a2b335.chunk.js": "/Roznavene-project-demo/static/js/3.57a2b335.chunk.js",
     "static/js/3.57a2b335.chunk.js.map": "/Roznavene-project-demo/static/js/3.57a2b335.chunk.js.map",
     "index.html": "/Roznavene-project-demo/index.html",
     "static/css/main.c7388686.chunk.css.map": "/Roznavene-project-demo/static/css/main.c7388686.chunk.css.map",
-    "static/js/2.f8bccf1f.chunk.js.LICENSE.txt": "/Roznavene-project-demo/static/js/2.f8bccf1f.chunk.js.LICENSE.txt"
+    "static/js/2.97e614e8.chunk.js.LICENSE.txt": "/Roznavene-project-demo/static/js/2.97e614e8.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.59f7d0a9.js",
-    "static/js/2.f8bccf1f.chunk.js",
+    "static/js/2.97e614e8.chunk.js",
     "static/css/main.c7388686.chunk.css",
-    "static/js/main.9aaf21f0.chunk.js"
+    "static/js/main.9614490b.chunk.js"
   ]
 }
