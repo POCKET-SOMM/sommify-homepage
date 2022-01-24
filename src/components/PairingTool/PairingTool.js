@@ -6,6 +6,7 @@ import { BsXLg } from "react-icons/bs";
 import Tag from './Tag';
 import Loadable from '../Loadable';
 import { ChevronCompactLeft, ChevronCompactRight } from 'react-bootstrap-icons';
+import { SERVER_URL } from '../../App';
 
 
 const emptyRecipe = {
@@ -96,7 +97,7 @@ class PairingTool extends React.Component {
 
         const options = {
             method: 'POST',
-            url: 'https://pocketsomm.dev/api/v1/recipePairing',
+            url: `${SERVER_URL}/api/v1/recipePairing`,
             headers: { 'Content-Type': 'application/json' },
             data: {
                 wines: this.listOfUrls(this.state.textBoxContent).map(l => ({ link: l, info: '' })),
@@ -136,7 +137,7 @@ class PairingTool extends React.Component {
 
     nextRecipe() {
         this.setState({ loading: true })
-        axios.get('https://pocketsomm.dev/api/v1/randomRecipe').then(res => {
+        axios.get(`${SERVER_URL}/api/v1/randomRecipe`).then(res => {
             this.setState(oldState => ({
                 loading: false,
                 recipeHistory: [...oldState.recipeHistory, {
