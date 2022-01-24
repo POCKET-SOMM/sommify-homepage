@@ -12,6 +12,7 @@ import CustomOption from './CustomComponent';
 import CustomMenuList from './CustomMenuList';
 import CustomMultiValue from './CustomMultiValue';
 import WinePlate from './WinePlate';
+import { SERVER_URL } from '../App';
 
 const courses = [
   "appetizer",
@@ -240,7 +241,7 @@ function Body({ isMobile, screenWidth }) {
 
     const options = {
       method: 'POST',
-      url: `https://pocketsomm.dev/api/v1/${endpoint}`,
+      url: `${SERVER_URL}/api/v1/${endpoint}`,
       headers: { 'Content-Type': 'application/json' },
       data: data
     };
