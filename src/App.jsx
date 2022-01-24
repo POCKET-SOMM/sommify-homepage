@@ -88,18 +88,18 @@ function App() {
           alignItems: 'center',
           justifyContent: 'center',
         }}
-        onClick={e => { window.location.replace('/Roznavene-project-demo') }}
+        onClick={e => { window.location.replace('/') }}
       >
         <img
           style={{ objectFit: 'cover' }}
-          href="/Roznavene-project-demo"
+          href="/"
           className="clickable nodrag"
-          src="/Roznavene-project-demo/PocketSomm.LOGO.svg"
+          src="PocketSomm.LOGO.svg"
           width="200px"
           height="80px">
         </img>
       </div>
-      <Router basename='/Roznavene-project-demo'>
+      <Router basename='/'>
         <Routes>
           <Route path="/" element={
             isDesktop ? <div style={{ height: 'calc(100vh - 80px)', width: '100%' }}>
@@ -115,7 +115,7 @@ function App() {
                 </Card>
                 <img
                   width={200}
-                  src='/Roznavene-project-demo/try_our_demo.png'
+                  src='try_our_demo.png'
                   style={{ position: 'absolute', zIndex: 5, marginLeft: '580px', marginTop: '30px' }}></img>
               </div>
 
@@ -129,7 +129,7 @@ function App() {
                       height: 'calc(100vh - 80px)'
                     }}
                     // className="w-100 h-100"
-                    src="/Roznavene-project-demo/homecook.jpg"
+                    src="homecook.jpg"
                     alt="First slide"
                   />
                   <Carousel.Caption style={captionStyle}>
@@ -141,7 +141,7 @@ function App() {
                   <img
                     style={{ objectFit: 'cover', width: '100%', height: 'calc(100vh - 80px)' }}
                     // className="w-100 h-100"
-                    src="/Roznavene-project-demo/restaurant.jpg"
+                    src="restaurant.jpg"
                     alt="Second slide"
                   />
 
@@ -155,7 +155,7 @@ function App() {
                   <img
                     style={{ objectFit: 'cover', width: '100%', height: 'calc(100vh - 80px)' }}
                     // className="w-100 h-100"
-                    src="/Roznavene-project-demo/delivery.jpg"
+                    src="delivery.jpg"
                     alt="Third slide"
                   />
 

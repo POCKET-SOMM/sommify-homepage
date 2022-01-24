@@ -63,7 +63,7 @@ class TagSearch extends React.Component {
     }
 
     readFile(file) {
-        fetch(`Roznavene-project-demo/data/${file}.txt`)
+        fetch(`data/${file}.txt`)
             .then(response => response.text())
             .then(text => {
                 var phraseList = text.split(',\r\n')

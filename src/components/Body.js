@@ -179,7 +179,7 @@ function Body({ isMobile, screenWidth }) {
   }
 
   function readFile(file, cb) {
-    fetch(`/Roznavene-project-demo/data/${file}.txt`)
+    fetch(`data/${file}.txt`)
       .then(response => response.text())
       .then(cb)
   }

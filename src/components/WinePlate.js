@@ -471,7 +471,7 @@ function WinePlate(wine) {
                         <div style={{ height: '100%', width: '20%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             <img
                                 style={{ marginLeft: 'auto', marginRight: 'auto', display: 'block', marginTop: 'auto', marginBottom: 'auto' }}
-                                src="/Roznavene-project-demo/icons/grapes.png"
+                                src="icons/grapes.png"
                                 width="22" />
                         </div>
                         <div style={{ height: '100%', width: '80%' }}>
