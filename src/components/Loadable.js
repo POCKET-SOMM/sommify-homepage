@@ -2,9 +2,9 @@ import React from 'react';
 import { Spinner } from 'react-bootstrap';
 
 const Loadable = ({ loading, component, className, style = {
-    marginTop: '100px',
-    width: '50px',
-    height: '50px'
+    // marginTop: '100px',
+    // width: '50px',
+    // height: '50px'
 } }) => (
     <div className="Loadable">
         <div style={{ display: loading ? 'none' : '' }}>
@@ -12,10 +12,10 @@ const Loadable = ({ loading, component, className, style = {
         </div>
         <div className={className} style={{ display: loading ? 'flex' : 'none', justifyContent: 'center' }}>
             <Spinner
-                // style={{
-                //     ...style,
-                //     display: loading ? '' : 'none'
-                // }}
+                style={{
+                    ...style,
+                    display: loading ? '' : 'none'
+                }}
                 as="span"
                 animation="border"
                 role="status"
