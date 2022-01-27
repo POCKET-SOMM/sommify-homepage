@@ -1,11 +1,12 @@
 import React from 'react';
-import { Linkedin, Globe2 } from 'react-bootstrap-icons';
+import { Linkedin, Globe2, Envelope } from 'react-bootstrap-icons';
+import { MAIN_COLOR_DEP } from '../App';
 
 const teamMembers = [
-    { image: 'team_jp.jpeg', name: 'Jacob Pichna', title: 'Co-Founder & CEO', linked: 'https://www.linkedin.com/in/pichna/' },
+    { image: 'team_jp.jpeg', name: 'Jacob Pichna', title: 'Co-Founder & Business', linked: 'https://www.linkedin.com/in/pichna/' },
     { image: 'team_jd.jpeg', name: 'Julie Dupouy', title: 'Wine Expert', linked: 'https://www.linkedin.com/in/julie-dupouy-50305925/', website: 'https://www.juliedupouy.com/' },
-    { image: 'team_tb.jpeg', name: 'Tomas Bedej', title: 'Co-Founder & CDO', linked: 'https://www.linkedin.com/in/bedej/' },
-    { image: 'team_wb.jpeg', name: 'William Brach', title: 'Co-Founder & CTO', linked: 'https://www.linkedin.com/in/william-brach-4a20b6213/' },
+    { image: 'team_tb.jpeg', name: 'Tomas Bedej', title: 'Co-Founder & Developer', linked: 'https://www.linkedin.com/in/bedej/' },
+    { image: 'team_wb.jpeg', name: 'William Brach', title: 'Co-Founder & Developer', linked: 'https://www.linkedin.com/in/william-brach-4a20b6213/' },
 ]
 
 class AboutUs extends React.Component {
@@ -17,7 +18,7 @@ class AboutUs extends React.Component {
                     <h3>About Us</h3>
                 </div>
                 <span>
-                    <span style={{ fontStyle: 'italic' }}>We are creating an artificial intelligence sommelier</span> that will make quality pairings accessible to
+                    We are creating an <span style={{ fontStyle: 'italic' }}>artificial intelligence sommelier</span> that will make quality pairings accessible to
                     anyone anywhere. Just paste a recipe link or type in what you are about to eat and our AI somm
                     will pair the meal with a selection of wines for a wonderful culinary experience.
                 </span>
@@ -37,7 +38,7 @@ class AboutUs extends React.Component {
                     that.
                 </span><br /> */}
                 <span>
-                    Download our <a className="link clickable" onClick={e => { window.open('https://drive.google.com/file/d/1G1I1LyJBbGbM-ZcHsYxKfxbW77CiCziW/') }}>deck</a>.
+                    Download our <a style={{ color: 'white' }} className="link clickable" onClick={e => { window.open('https://drive.google.com/file/d/1G1I1LyJBbGbM-ZcHsYxKfxbW77CiCziW/') }}>deck</a>.
                 </span>
 
                 <br /><br /><br />
@@ -46,7 +47,7 @@ class AboutUs extends React.Component {
                     <h4>Team</h4>
                     {
                         teamMembers.map(member =>
-                            <div style={{ height: '100px', marginBottom: '20px', width: '300px', display: 'inline-block' }}>
+                            <div style={{ height: '100px', marginBottom: '20px', width: '340px', display: 'inline-block' }}>
                                 <img src={member.image} width={100} style={{ float: 'left' }} />
                                 <span style={{ float: 'left', marginLeft: '20px' }}>
                                     <b>{member.name}</b><br />
@@ -64,9 +65,18 @@ class AboutUs extends React.Component {
 
                 <br />
                 <span style={{ fontStyle: 'italic' }}>let’s talk</span><br />
-                <a className="link clickable" onClick={e => { window.open('partner@pocketsomm.dev') }}>partner@pocketsomm.dev</a><br />
-                <a className="link clickable" onClick={e => { window.open('https://www.linkedin.com/company/pocketsomm') }}>https://www.linkedin.com/company/pocketsomm</a><br />
-                <a className="link clickable" onClick={e => { window.open('https://www.crunchbase.com/organization/pocketsomm') }}>https://www.crunchbase.com/organization/pocketsomm</a><br />
+                <div style={{ color: 'white !important' }}>
+                    <Envelope />
+                    <span className="m-2">
+                        partner@pocketsomm.dev
+                    </span><br />
+                    <Linkedin />
+                    <span style={{textDecoration:'underline'}} className="clickable m-2" onClick={e => { window.open('https://www.linkedin.com/company/pocketsomm') }}>Linked In
+                    </span><br />
+                    <img src="/icons/crunchbase_icon.svg" width={16}></img>
+                    <span style={{textDecoration:'underline'}} className="clickable m-2" onClick={e => { window.open('https://www.crunchbase.com/organization/pocketsomm') }}>Crunchbase
+                    </span><br />
+                </div>
             </div>
         )
     }
