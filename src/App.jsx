@@ -1,13 +1,16 @@
 import './App.scss';
 import React, { useEffect, useState } from 'react';
 import Body from './components/Body';
-import { Card, Carousel } from 'react-bootstrap';
+import { Card, Carousel, Nav, Navbar, Offcanvas } from 'react-bootstrap';
 import {
   BrowserRouter as Router,
   Routes,
   Route
 } from "react-router-dom";
 import PairingTool from './components/PairingTool/PairingTool';
+import AboutUs from './components/AboutUs';
+import DemoGuide from './components/DemoGuide';
+import ContactUs from './components/ContactUs';
 
 const MAIN_COLOR = '#e7154e'
 const SECONDARY_COLOR = '#fce3ee'
@@ -17,6 +20,8 @@ export const SERVER_URL = 'http://138.68.92.212'
 
 function App() {
   const [width, setWidth] = useState(window.innerWidth);
+
+  const [pane, setPane] = useState('')
 
   useEffect(() => {
     console.log(window.location)
@@ -68,7 +73,8 @@ function App() {
     width: '400px',
     height: '300px',
     top: '300px',
-    left: '300px'
+    left: '300px',
+    textAlign: 'left'
   }
 
   const getDeviceStyle = () => {
@@ -79,28 +85,125 @@ function App() {
     return desktopStyle
   }
 
-  return (
-    <div className="App">
-      <div id="body-logo"
+  function Logo() {
+    return (
+      <img
         style={{
-          // marginBottom: isMobile ? '20px' : '40px',
-          height: '80px',
-          backgroundColor: MAIN_COLOR_DEP,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          objectFit: 'cover',
+          position: 'absolute',
+          left: '0px',
+          right: '0px',
+          marginLeft: 'auto',
+          marginRight: 'auto'
         }}
         onClick={e => { window.location.replace('/') }}
+        className="clickable nodrag"
+        src="PocketSomm.LOGO.svg"
+        width="230px"
+        height="80px">
+      </img>
+    )
+  }
+
+  function handleNavClick(l) {
+    pane === l ? setPane('') : setPane(l)
+  }
+
+  function Content() {
+    if (pane === 'ABOUT US') {
+      return (<AboutUs />)
+    }
+    if (pane === 'DEMO GUIDE') {
+      return (<DemoGuide />)
+    }
+    if (pane === 'CONTACT US') {
+      return (<ContactUs />)
+    }
+    return null
+  }
+
+  const CarouselItems = [
+    { img: 'winestore.png', title: 'Online Wine Store', text: 'Selling wine online? Let PocketSomm help create the customer experience of a brick-andmortar location with quality pairing advice.' },
+    { img: 'homecook.jpg', title: 'Smart Home', text: 'Imagine a world in which you have a world-class sommelier at home advising you on which bottle from your wine cooler pairs the best with the meals possible from the ingredients in your refrigerator' },
+    { img: 'delivery.jpg', title: 'Food Delivery', text: 'Whether you are offering food boxes or delivery from restaurants PocketSomm offers the opportunity to cross-sell wine or just enhance the experience.' },
+    { img: 'retail.webp', title: 'Add-On', text: 'You might already have an app or website that relates to food, like a grocery chain or a recipe site, and you want to enhance the customer experience or drive sales.' },
+    { img: 'other.jpg', title: 'Other', text: 'the possibilities are endless; the only barriers are your imagination and local alcohol regulation' }
+  ]
+
+  return (
+    <div className="App">
+      <Navbar
+        className="nodrag"
+        variant="dark"
+        id="body-logo"
+        style={{
+          zIndex: 6,
+          // boxShadow: '0px 11px 17px 2px rgba(0,0,0,0.45)',
+          height: '80px',
+          backgroundColor: MAIN_COLOR_DEP
+        }}
       >
-        <img
-          style={{ objectFit: 'cover' }}
-          href="/"
-          className="clickable nodrag"
-          src="PocketSomm.LOGO.svg"
-          width="200px"
-          height="80px">
-        </img>
-      </div>
+        <Nav style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'start',
+          fontSize: '14px',
+          width: '100%'
+        }}>
+          {
+            isDesktop ? ['ABOUT US', 'DEMO GUIDE'].map(l =>
+              <Nav.Item>
+                <Nav.Link active={pane === l} onClick={e => { handleNavClick(l) }} style={{ width: '130px', alignItems: 'center', display: 'flex', justifyContent: 'center' }}>{l}</Nav.Link>
+              </Nav.Item>
+            ) : null
+          }
+          <Logo />
+        </Nav>
+      </Navbar>
+
+      <Offcanvas style={{
+        width: '42%',
+        backgroundColor: '#1f202b',
+        borderColor: '#12131a',
+        borderRightStyle: 'solid',
+        borderWidth: '1px',
+        zIndex: 5,
+        color: 'white',
+        padding: '40px',
+        textAlign: 'left',
+      }} backdrop={false} scroll={true} show={pane} onHide={e => { setPane('') }}>
+        <div style={{ width: '100%', height: '80px' }}></div>
+        <div style={{height:'calc(100%)', width:'100%', overflowY: 'auto'}}>
+          <Content />
+        </div>
+      </Offcanvas>
+
+      {/* <div id="dropdown-banner" style={{
+        display: pane ? '' : 'none',
+        position: 'absolute',
+        top: '80px',
+        left: '0%',
+        width: '45%',
+        height: 'calc(100vh - 80px)',
+        backgroundColor: '#1f202b',
+        borderColor: '#12131a',
+        borderTopWidth: '0px',
+        borderRightStyle: 'solid',
+        borderWidth: '1px',
+        zIndex: 5,
+        color: 'white',
+        padding: '40px',
+        textAlign: 'left',
+        overflowY: 'auto'
+      }}>
+        <Content />
+      </div> */}
+      {/* <Navbar variant="dark" style={{ fontSize: '12px', height: '26px', backgroundColor: '#171717', justifyContent:'center' }}>
+        <Nav>
+          <Nav.Link style={{ marginRight:'20px', width: '140px', alignItems: 'center', justifyContent: 'end', display: 'flex' }}>ABOUT US</Nav.Link>
+          <Nav.Link style={{ marginLeft:'20px', width: '140px', alignItems: 'center', justifyContent: 'start', display: 'flex' }}>DEMO</Nav.Link>
+        </Nav>
+      </Navbar> */}
       <Router basename='/'>
         <Routes>
           <Route path="/" element={
@@ -122,50 +225,27 @@ function App() {
               </div>
 
               <div style={{ width: '100%', height: 'calc(100vh - 80px)', position: 'absolute', zIndex: 2, background: '#3b3e4f', opacity: '0.85' }} />
-              <Carousel indicatorLabels={[1, 2, 3]} style={{ width: '100%', height: 'calc(100vh - 80px)' }}>
-                <Carousel.Item>
-                  <img
-                    style={{
-                      objectFit: 'cover',
-                      width: '100%',
-                      height: 'calc(100vh - 80px)'
-                    }}
-                    // className="w-100 h-100"
-                    src="homecook.jpg"
-                    alt="First slide"
-                  />
-                  <Carousel.Caption style={captionStyle}>
-                    <h3>Home Cooking</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                  </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                  <img
-                    style={{ objectFit: 'cover', width: '100%', height: 'calc(100vh - 80px)' }}
-                    // className="w-100 h-100"
-                    src="restaurant.jpg"
-                    alt="Second slide"
-                  />
-
-                  <Carousel.Caption style={captionStyle}>
-                    <h3>Restaurants</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                  </Carousel.Caption>
-                </Carousel.Item>
-
-                <Carousel.Item>
-                  <img
-                    style={{ objectFit: 'cover', width: '100%', height: 'calc(100vh - 80px)' }}
-                    // className="w-100 h-100"
-                    src="delivery.jpg"
-                    alt="Third slide"
-                  />
-
-                  <Carousel.Caption style={captionStyle}>
-                    <h3>Food Delivery</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                  </Carousel.Caption>
-                </Carousel.Item>
+              <Carousel interval={10000} indicatorLabels={[1, 2, 3]} style={{ width: '100%', height: 'calc(100vh - 80px)' }}>
+                {
+                  CarouselItems.map((item, i) =>
+                    <Carousel.Item>
+                      <img
+                        style={{
+                          objectFit: 'cover',
+                          width: '100%',
+                          height: 'calc(100vh - 80px)'
+                        }}
+                        // className="w-100 h-100"
+                        src={item.img}
+                        alt={`Slide ${i}`}
+                      />
+                      <Carousel.Caption style={captionStyle}>
+                        <h3>{item.title}</h3>
+                        <p style={{ fontStyle: 'italic' }}>{item.text}</p>
+                      </Carousel.Caption>
+                    </Carousel.Item>
+                  )
+                }
               </Carousel>
             </div> : <Card
               className="mainBody"
