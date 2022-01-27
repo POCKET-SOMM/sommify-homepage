@@ -1,12 +1,13 @@
 import React from 'react';
+import {Offcanvas} from 'react-bootstrap'
 
 class DemoGuide extends React.Component {
     render() {
         return (
             <div>
-                <div style={{ height: '60px' }}>
-                    <h3>Demo Guide</h3>
-                </div>
+                <Offcanvas.Header closeButton>
+                    <Offcanvas.Title><h3>Demo Guide</h3></Offcanvas.Title>
+                </Offcanvas.Header>
                 <span>By pasting a recipe link:</span><br /><br />
                 <ol>
                     <li>go to BBC Food (only works with BBC Food for now)</li>

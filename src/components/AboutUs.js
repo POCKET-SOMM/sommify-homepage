@@ -1,4 +1,5 @@
 import React from 'react';
+import { Offcanvas } from 'react-bootstrap';
 import { Linkedin, Globe2, Envelope } from 'react-bootstrap-icons';
 import { MAIN_COLOR_DEP } from '../App';
 
@@ -14,9 +15,12 @@ class AboutUs extends React.Component {
     render() {
         return (
             <div>
-                <div style={{ height: '60px' }}>
+                <Offcanvas.Header closeButton>
+                    <Offcanvas.Title><h3>About Us</h3></Offcanvas.Title>
+                </Offcanvas.Header>
+                {/* <div style={{ height: '60px' }}>
                     <h3>About Us</h3>
-                </div>
+                </div> */}
                 <span>
                     We are creating an <span style={{ fontStyle: 'italic' }}>artificial intelligence sommelier</span> that will make quality pairings accessible to
                     anyone anywhere. Just paste a recipe link or type in what you are about to eat and our AI somm
@@ -71,10 +75,10 @@ class AboutUs extends React.Component {
                         partner@pocketsomm.dev
                     </span><br />
                     <Linkedin />
-                    <span style={{textDecoration:'underline'}} className="clickable m-2" onClick={e => { window.open('https://www.linkedin.com/company/pocketsomm') }}>Linked In
+                    <span style={{ textDecoration: 'underline' }} className="clickable m-2" onClick={e => { window.open('https://www.linkedin.com/company/pocketsomm') }}>Linked In
                     </span><br />
                     <img src="/icons/crunchbase_icon.svg" width={16}></img>
-                    <span style={{textDecoration:'underline'}} className="clickable m-2" onClick={e => { window.open('https://www.crunchbase.com/organization/pocketsomm') }}>Crunchbase
+                    <span style={{ textDecoration: 'underline' }} className="clickable m-2" onClick={e => { window.open('https://www.crunchbase.com/organization/pocketsomm') }}>Crunchbase
                     </span><br />
                 </div>
             </div>
