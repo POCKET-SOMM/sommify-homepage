@@ -16,7 +16,7 @@ const MAIN_COLOR = '#e7154e'
 const SECONDARY_COLOR = '#fce3ee'
 export const MAIN_COLOR_DEP = '#80183b'
 
-export const SERVER_URL = 'http://138.68.92.212'
+export const SERVER_URL = 'https://pocketsommapi.azurewebsites.net'
 
 function App() {
   const [width, setWidth] = useState(window.innerWidth);
