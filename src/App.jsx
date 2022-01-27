@@ -126,7 +126,7 @@ function App() {
     { img: 'winestore.jpg', title: 'Online Wine Store', text: 'Selling wine online? Let PocketSomm help create the customer experience of a brick-and-mortar location with quality pairing advice.' },
     { img: 'homecook.jpg', title: 'Smart Home', text: 'Imagine a world in which you have a world-class sommelier at home advising you on which bottle from your wine cooler pairs the best with the meals possible from the ingredients in your refrigerator.' },
     { img: 'delivery.jpg', title: 'Food Delivery', text: 'Whether you are offering food boxes or delivery from restaurants PocketSomm offers the opportunity to cross-sell wine or just enhance the experience.' },
-    { img: 'retail.webp', title: 'Add-On', text: 'You might already have an app or website that relates to food, like a grocery chain or a recipe site, and you want to enhance the customer experience or drive sales.' },
+    { img: 'retail.webp', title: 'Add-On', text: 'You might already have an app or website that relates to food, like a grocery chain, where you want to enhance the customer experience or drive sales.' },
     { img: 'other.jpg', title: 'Other', text: 'The possibilities are endless; the only barriers are your imagination and local alcohol regulation...' }
   ]
 
