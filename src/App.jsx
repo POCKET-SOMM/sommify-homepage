@@ -161,22 +161,24 @@ function App() {
         </Nav>
       </Navbar>
 
-      <Offcanvas style={{
-        width: '42%',
-        backgroundColor: '#1f202b',
-        borderColor: '#12131a',
-        borderRightStyle: 'solid',
-        borderWidth: '1px',
-        zIndex: 5,
-        color: 'white',
-        padding: '40px',
-        textAlign: 'left',
-      }} backdrop={false} scroll={true} show={pane} onHide={e => { setPane('') }}>
-        <div style={{ width: '100%', height: '80px' }}></div>
-        <div style={{height:'calc(100%)', width:'100%', overflowY: 'auto'}}>
-          <Content />
-        </div>
-      </Offcanvas>
+      {
+        isDesktop ? <Offcanvas style={{
+          width: '42%',
+          backgroundColor: '#1f202b',
+          borderColor: '#12131a',
+          borderRightStyle: 'solid',
+          borderWidth: '1px',
+          zIndex: 5,
+          color: 'white',
+          padding: '40px',
+          textAlign: 'left',
+        }} backdrop={false} scroll={true} show={pane} onHide={e => { setPane('') }}>
+          <div style={{ width: '100%', height: '80px' }}></div>
+          <div style={{ height: 'calc(100%)', width: '100%', overflowY: 'auto' }}>
+            <Content />
+          </div>
+        </Offcanvas> : null
+      }
 
       {/* <div id="dropdown-banner" style={{
         display: pane ? '' : 'none',
