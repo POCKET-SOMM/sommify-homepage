@@ -123,11 +123,11 @@ function App() {
   }
 
   const CarouselItems = [
-    { img: 'winestore.png', title: 'Online Wine Store', text: 'Selling wine online? Let PocketSomm help create the customer experience of a brick-andmortar location with quality pairing advice.' },
-    { img: 'homecook.jpg', title: 'Smart Home', text: 'Imagine a world in which you have a world-class sommelier at home advising you on which bottle from your wine cooler pairs the best with the meals possible from the ingredients in your refrigerator' },
+    { img: 'winestore.jpg', title: 'Online Wine Store', text: 'Selling wine online? Let PocketSomm help create the customer experience of a brick-and-mortar location with quality pairing advice.' },
+    { img: 'homecook.jpg', title: 'Smart Home', text: 'Imagine a world in which you have a world-class sommelier at home advising you on which bottle from your wine cooler pairs the best with the meals possible from the ingredients in your refrigerator.' },
     { img: 'delivery.jpg', title: 'Food Delivery', text: 'Whether you are offering food boxes or delivery from restaurants PocketSomm offers the opportunity to cross-sell wine or just enhance the experience.' },
-    { img: 'retail.webp', title: 'Add-On', text: 'You might already have an app or website that relates to food, like a grocery chain or a recipe site, and you want to enhance the customer experience or drive sales.' },
-    { img: 'other.jpg', title: 'Other', text: 'the possibilities are endless; the only barriers are your imagination and local alcohol regulation' }
+    { img: 'retail.webp', title: 'Add-On', text: 'You might already have an app or website that relates to food, like a grocery chain, where you want to enhance the customer experience or drive sales.' },
+    { img: 'other.jpg', title: 'Other', text: 'The possibilities are endless; the only barriers are your imagination and local alcohol regulation...' }
   ]
 
   return (
@@ -165,7 +165,7 @@ function App() {
         isDesktop ? <Offcanvas style={{
           width: '42%',
           backgroundColor: '#1f202b',
-          borderColor: '#12131a',
+          borderColor: '#393b4d',
           borderRightStyle: 'solid',
           borderWidth: '1px',
           zIndex: 5,
@@ -225,13 +225,20 @@ function App() {
                   src='try_our_demo.png'
                   style={{ position: 'absolute', zIndex: 5, marginLeft: '580px', marginTop: '30px' }}></img>
               </div>
-
-              <div style={{ width: '100%', height: 'calc(100vh - 80px)', position: 'absolute', zIndex: 2, background: '#3b3e4f', opacity: '0.85' }} />
-              <Carousel interval={10000} indicatorLabels={[1, 2, 3]} style={{ width: '100%', height: 'calc(100vh - 80px)' }}>
+              <Carousel interval={8500} indicatorLabels={[1, 2, 3]} style={{ width: '100%', height: 'calc(100vh - 80px)' }}>
                 {
                   CarouselItems.map((item, i) =>
                     <Carousel.Item>
-                      <img
+                      <div style={{
+                        background: `linear-gradient(to top, rgba(59,62,79,0.8), rgba(59,62,79,0.8)), url(${item.img}) no-repeat top center`,
+                        // backgroundImage: `url(${item.img})`,
+                        backgroundSize: 'cover',
+                        width: '100%',
+                        height: 'calc(100vh - 80px)'
+                      }}>
+
+                      </div>
+                      {/* <img
                         style={{
                           objectFit: 'cover',
                           width: '100%',
@@ -240,7 +247,7 @@ function App() {
                         // className="w-100 h-100"
                         src={item.img}
                         alt={`Slide ${i}`}
-                      />
+                      /> */}
                       <Carousel.Caption style={captionStyle}>
                         <h3>{item.title}</h3>
                         <p style={{ fontStyle: 'italic' }}>{item.text}</p>
