@@ -75,7 +75,7 @@ class AboutUs extends React.Component {
                         partner@pocketsomm.dev
                     </span><br />
                     <Linkedin />
-                    <span style={{ textDecoration: 'underline' }} className="clickable m-2" onClick={e => { window.open('https://www.linkedin.com/company/pocketsomm') }}>Linked In
+                    <span style={{ textDecoration: 'underline' }} className="clickable m-2" onClick={e => { window.open('https://www.linkedin.com/company/pocketsomm') }}>Linkedin
                     </span><br />
                     <img src="/icons/crunchbase_icon.svg" width={16}></img>
                     <span style={{ textDecoration: 'underline' }} className="clickable m-2" onClick={e => { window.open('https://www.crunchbase.com/organization/pocketsomm') }}>Crunchbase
