@@ -10,6 +10,11 @@ $theme-colors: (
   "dark": #343a40
 );
 
+.custom-backdrop{
+  z-index: 0 !important;
+  opacity: 0% !important;
+}
+
 .App {
   text-align: center;
   font-family: "Rubik", sans-serif;

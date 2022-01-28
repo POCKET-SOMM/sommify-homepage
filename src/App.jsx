@@ -172,7 +172,7 @@ function App() {
           color: 'white',
           padding: '40px',
           textAlign: 'left',
-        }} backdrop={false} scroll={true} show={pane} onHide={e => { setPane('') }}>
+        }} backdrop backdropClassName='custom-backdrop' scroll={true} show={pane} onHide={e => { setPane('') }}>
           <div style={{ width: '100%', height: '80px' }}></div>
           <div style={{ height: 'calc(100%)', width: '100%', overflowY: 'auto' }}>
             <Content />
