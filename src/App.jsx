@@ -206,8 +206,13 @@ function App() {
           <Nav.Link style={{ marginLeft:'20px', width: '140px', alignItems: 'center', justifyContent: 'start', display: 'flex' }}>DEMO</Nav.Link>
         </Nav>
       </Navbar> */}
-      <Router basename='/'>
+      <Router>
         <Routes>
+          <Route path="/pairing" element={
+            <PairingTool />
+          }>
+          </Route>
+
           <Route path="/" element={
             isDesktop ? <div style={{ height: 'calc(100vh - 80px)', width: '100%' }}>
               <div style={{ position: 'relative' }}>
@@ -266,11 +271,6 @@ function App() {
               <Body isMobile={isMobile || isTablet} screenWidth={width} />
             </Card>
           } />
-
-          <Route path="/pairing" element={
-            <PairingTool />
-          }>
-          </Route>
         </Routes>
       </Router>
     </div>
