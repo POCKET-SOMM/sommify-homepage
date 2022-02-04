@@ -99,7 +99,7 @@ function App() {
         onClick={e => { window.location.replace('/') }}
         className="clickable nodrag"
         src="PocketSomm.LOGO.svg"
-        width={isDesktop ? '230px' : '170px'}
+        width={isDesktop ? '230px' : '150px'}
         height={isDesktop ? "80px" : '56px'}>
       </img>
     )
@@ -139,7 +139,7 @@ function App() {
         style={{
           zIndex: 6,
           // boxShadow: '0px 11px 17px 2px rgba(0,0,0,0.45)',
-          height: isDesktop ? '80px' : '56px',
+          height: isDesktop ? '80px' : '80px',
           backgroundColor: MAIN_COLOR_DEP
         }}
       >
@@ -155,14 +155,30 @@ function App() {
               <Nav.Item>
                 <Nav.Link active={pane === l} onClick={e => { handleNavClick(l) }} style={{ width: '130px', alignItems: 'center', display: 'flex', justifyContent: 'center' }}>{l}</Nav.Link>
               </Nav.Item>
-            ) : null
+            ) : <div style={{fontSize: '10px', width:'100%', height:'100%', display:'flex', alignItems:'center'}}>
+              <Nav.Link active={pane === 'ABOUT US'}
+                onClick={e => { handleNavClick('ABOUT US') }}
+                style={{
+                  width: '90px',
+                  alignItems: 'center',
+                  position: 'absolute',
+                  left: '5px',
+                }}>ABOUT US</Nav.Link>
+              <Nav.Link active={pane === 'DEMO GUIDE'}
+                onClick={e => { handleNavClick('DEMO GUIDE') }}
+                style={{
+                  width: '90px',
+                  alignItems: 'center',
+                  position: 'absolute',
+                  right: '5px',
+                }}>DEMO INSTRUCTIONS</Nav.Link>
+            </div>
           }
           <Logo />
         </Nav>
       </Navbar>
 
       {
-
         true ? <Offcanvas style={{
           width: isDesktop ? '42%' : '100%',
           backgroundColor: '#1f202b',
@@ -201,14 +217,27 @@ function App() {
       }}>
         <Content />
       </div> */}
-      {
+      {/* {
         isDesktop ? null : <Navbar variant="dark" style={{ fontSize: '12px', height: '24px', backgroundColor: '#171717', justifyContent: 'center' }}>
           <Nav>
-            <Nav.Link active={pane === 'ABOUT US'} onClick={e => { handleNavClick('ABOUT US') }} style={{ marginRight: '20px', width: '140px', alignItems: 'center', justifyContent: 'end', display: 'flex' }}>ABOUT US</Nav.Link>
-            <Nav.Link active={pane === 'DEMO GUIDE'} onClick={e => { handleNavClick('DEMO GUIDE') }} style={{ marginLeft: '20px', width: '140px', alignItems: 'center', justifyContent: 'start', display: 'flex' }}>GUIDE</Nav.Link>
+            <Nav.Link active={pane === 'ABOUT US'}
+              onClick={e => { handleNavClick('ABOUT US') }}
+              style={{
+                width: '100px',
+                alignItems: 'center',
+              }}>ABOUT US</Nav.Link>
+            <Nav.Link active={pane === 'DEMO GUIDE'}
+              onClick={e => { handleNavClick('DEMO GUIDE') }}
+              style={{
+                // borderLeftWidth:'2px',
+                // borderLeftStyle:'solid',
+                // borderLeftColor:'white',
+                width: '100px',
+                alignItems: 'center',
+              }}>DEMO GUIDE</Nav.Link>
           </Nav>
         </Navbar>
-      }
+      } */}
       <Router>
         <Routes>
           <Route path="/pairing" element={
