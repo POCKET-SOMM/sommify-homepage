@@ -99,8 +99,8 @@ function App() {
         onClick={e => { window.location.replace('/') }}
         className="clickable nodrag"
         src="PocketSomm.LOGO.svg"
-        width="230px"
-        height="80px">
+        width={isDesktop ? '230px' : '170px'}
+        height={isDesktop ? "80px" : '56px'}>
       </img>
     )
   }
@@ -139,7 +139,7 @@ function App() {
         style={{
           zIndex: 6,
           // boxShadow: '0px 11px 17px 2px rgba(0,0,0,0.45)',
-          height: '80px',
+          height: isDesktop ? '80px' : '56px',
           backgroundColor: MAIN_COLOR_DEP
         }}
       >
@@ -162,15 +162,16 @@ function App() {
       </Navbar>
 
       {
-        isDesktop ? <Offcanvas style={{
-          width: '42%',
+
+        true ? <Offcanvas style={{
+          width: isDesktop ? '42%' : '100%',
           backgroundColor: '#1f202b',
           borderColor: '#393b4d',
           borderRightStyle: 'solid',
           borderWidth: '1px',
           zIndex: 5,
           color: 'white',
-          padding: '40px',
+          padding: isDesktop ? '40px' : '20px',
           textAlign: 'left',
         }} backdrop backdropClassName='custom-backdrop' scroll={true} show={pane} onHide={e => { setPane('') }}>
           <div style={{ width: '100%', height: '80px' }}></div>
@@ -200,12 +201,14 @@ function App() {
       }}>
         <Content />
       </div> */}
-      {/* <Navbar variant="dark" style={{ fontSize: '12px', height: '26px', backgroundColor: '#171717', justifyContent:'center' }}>
-        <Nav>
-          <Nav.Link style={{ marginRight:'20px', width: '140px', alignItems: 'center', justifyContent: 'end', display: 'flex' }}>ABOUT US</Nav.Link>
-          <Nav.Link style={{ marginLeft:'20px', width: '140px', alignItems: 'center', justifyContent: 'start', display: 'flex' }}>DEMO</Nav.Link>
-        </Nav>
-      </Navbar> */}
+      {
+        isDesktop ? null : <Navbar variant="dark" style={{ fontSize: '12px', height: '24px', backgroundColor: '#171717', justifyContent: 'center' }}>
+          <Nav>
+            <Nav.Link active={pane === 'ABOUT US'} onClick={e => { handleNavClick('ABOUT US') }} style={{ marginRight: '20px', width: '140px', alignItems: 'center', justifyContent: 'end', display: 'flex' }}>ABOUT US</Nav.Link>
+            <Nav.Link active={pane === 'DEMO GUIDE'} onClick={e => { handleNavClick('DEMO GUIDE') }} style={{ marginLeft: '20px', width: '140px', alignItems: 'center', justifyContent: 'start', display: 'flex' }}>GUIDE</Nav.Link>
+          </Nav>
+        </Navbar>
+      }
       <Router>
         <Routes>
           <Route path="/pairing" element={
