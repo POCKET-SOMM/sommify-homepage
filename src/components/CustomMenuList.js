@@ -25,9 +25,9 @@ export default class CustomMenuList extends React.Component {
   }
 
   render() {
-    const { options, children, maxHeight, getValue } = this.props;
+    const { children, maxHeight } = this.props;
 
-    const [value] = getValue();
+    // const [value] = getValue();
     // const initialOffset   = options.indexOf(value) * DefaultItemHeight;
     const initialOffset = 0;
     const childrenOptions = React.Children.toArray(children);
