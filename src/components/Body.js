@@ -1,5 +1,5 @@
 // import './App.scss';
-import { Card, Button, Fade, ButtonGroup, Form, Alert, InputGroup, FormControl, Accordion } from 'react-bootstrap'
+import { Button, Fade, ButtonGroup, Form } from 'react-bootstrap'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
@@ -10,33 +10,32 @@ import CreatableSelect from 'react-select/creatable'
 // import { FixedSizeList as List } from "react-window";
 import CustomOption from './CustomComponent';
 import CustomMenuList from './CustomMenuList';
-import CustomMultiValue from './CustomMultiValue';
 import WinePlate from './WinePlate';
 import { SERVER_URL } from '../App';
 
-const courses = [
-  "appetizer",
-  "main",
-  "dessert"
-]
+// const courses = [
+//   "appetizer",
+//   "main",
+//   "dessert"
+// ]
 
-const types = {
-  'red': '#731624',
-  'white': '#fadb7d',
-  'sparkling': '#305432',
-  'rose': '#e0c8df',
-  'desert': '#adbdd9'
-}
+// const types = {
+//   'red': '#731624',
+//   'white': '#fadb7d',
+//   'sparkling': '#305432',
+//   'rose': '#e0c8df',
+//   'desert': '#adbdd9'
+// }
 
-const pairs = ['grilled food', 'pork', 'mutton, lamb', 'beef', 'savoury snacks',
-  'casseroles', 'chicken, turkey', 'lean fish',
-  'salads, vegetarian food', 'pasta and pizza', 'party wine',
-  'oriental food', 'buffet', 'strong cheeses', 'game', 'fatty fish',
-  'mild cheeses', 'spicy and meaty sausages', 'sushi',
-  'mild sausages', 'tapas and antipasti', 'berries and fruits',
-  'hot food', 'seafood', 'blini', 'sweet desserts',
-  'clams, mussels, scallops and oysters', 'chocolate desserts',
-  'mushrooms', 'soups', 'liver', 'game birds']
+// const pairs = ['grilled food', 'pork', 'mutton, lamb', 'beef', 'savoury snacks',
+//   'casseroles', 'chicken, turkey', 'lean fish',
+//   'salads, vegetarian food', 'pasta and pizza', 'party wine',
+//   'oriental food', 'buffet', 'strong cheeses', 'game', 'fatty fish',
+//   'mild cheeses', 'spicy and meaty sausages', 'sushi',
+//   'mild sausages', 'tapas and antipasti', 'berries and fruits',
+//   'hot food', 'seafood', 'blini', 'sweet desserts',
+//   'clams, mussels, scallops and oysters', 'chocolate desserts',
+//   'mushrooms', 'soups', 'liver', 'game birds']
 
 export const winePlateHeight = 90
 
@@ -52,8 +51,8 @@ function Body({ isMobile, screenWidth }) {
   const [searchVisible, setSearchVisible] = useState(true);
 
   const [selectedTags, setSelectedTags] = useState([]);
-  const [phrases, setPhrases] = useState([]);
-  const [ings, setIngs] = useState([]);
+  // const [phrases, setPhrases] = useState([]);
+  // const [ings, setIngs] = useState([]);
   const [tags, setTags] = useState([])
 
   const [isMulti, setIsMulti] = useState(true);
@@ -104,14 +103,14 @@ function Body({ isMobile, screenWidth }) {
     //   .catch(err => console.log("Failed to load images", err))
   }
 
-  const resetApp = () => {
-    setPair('');
-    setSearchVisible(true);
-    setPriceRange('$$');
-    setMeal('')
-    // document.getElementById(
-    //   'inlineFormInputGroup').value = ''
-  }
+  // const resetApp = () => {
+  //   setPair('');
+  //   setSearchVisible(true);
+  //   setPriceRange('$$');
+  //   setMeal('')
+  //   // document.getElementById(
+  //   //   'inlineFormInputGroup').value = ''
+  // }
 
   const loadWines = (data) => {
     const wines = data.wines
@@ -126,7 +125,7 @@ function Body({ isMobile, screenWidth }) {
 
     console.log(wines[priceIndex(priceRange)][0]['PRODUCT NUMBER'])
 
-    if (wines.length == 3) {
+    if (wines.length === 3) {
       setAllWines(
         wines
       )
@@ -152,7 +151,7 @@ function Body({ isMobile, screenWidth }) {
   }
 
   function isLink(text) {
-    var expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+    var expression = /[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/gi;
     var regex = new RegExp(expression)
 
     if (text.match(regex)) {
@@ -198,7 +197,7 @@ function Body({ isMobile, screenWidth }) {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'start',
-              paddingBottom: i == displayedWines.length - 1 ? '' : '10px'
+              paddingBottom: i === displayedWines.length - 1 ? '' : '10px'
             }}>
               {WinePlate(wine)}
             </div>
@@ -297,7 +296,7 @@ function Body({ isMobile, screenWidth }) {
     let newTags = tags.sort((a, b) => {
       let a_i = a.value.indexOf(input.toLowerCase())
       let b_i = b.value.indexOf(input.toLowerCase())
-      if (a_i == b_i) {
+      if (a_i === b_i) {
         return a.index - b.index
       } else {
         return a_i - b_i
@@ -346,11 +345,12 @@ function Body({ isMobile, screenWidth }) {
   }
 
   return (
-    <div style={{ 
-      height: '100%', 
-      width: '100%', 
-      display: 'flex', 
-      flexDirection: 'column' }}>
+    <div style={{
+      height: '100%',
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
       <div id="body-header" style={{ minHeight: `${searchErr ? '88' : '68'}px` }}>
         <div id="body-query" style={{ minHeight: '68px', width: isMobile ? '95%' : '80%', margin: 'auto', textAlign: 'start' }}>
           {/* <Fade in={!recipe['title'] || wining}> */}
@@ -484,7 +484,7 @@ function Body({ isMobile, screenWidth }) {
                   }}
                   size="sm"
                   variant="outline-danger"
-                  active={priceRange == level}
+                  active={priceRange === level}
                   style={{
                     padding: '0px',
                     width: '45px',

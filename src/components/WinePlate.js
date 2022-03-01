@@ -1,9 +1,7 @@
-import PieChart from 'react-simple-pie-chart';
-import React, { useState } from 'react';
-import { Accordion, Card, Fade, Row, Col, ProgressBar, Form } from 'react-bootstrap';
+import React from 'react';
+import { Card, Fade } from 'react-bootstrap';
 import { CircleFlag } from 'react-circle-flags';
 import * as Icon from 'react-bootstrap-icons';
-import { SCRIPT_PATH } from 'papaparse';
 
 const MAIN_COLOR = '#80183b'
 const SECONDARY_COLOR = '#ededed'
@@ -307,267 +305,271 @@ const wineOrigin = (wine) => {
             {reg_list.join(', ')} {wine['year'] ? wine['year'] : ''}
         </span>
     )
-
-    if (wine['wine_region'] || wine['wine_subregion'])
-        return (
-            <span>
-                <CircleFlag countryCode={country_code[wine['country']].toLowerCase()} height="15" style={{ marginRight: '5px' }} />
-                {/* <Flag country={country_code[wine['country']]} size={15} style={{ marginRight: '5px' }}></Flag> */}
-                {wine['wine_region']}{wine['wine_region'] && wine['wine_subregion'] ? ', ' : ''}{wine['wine_subregion']}
-                {wine['year'] ? ` - ${wine['year']}` : ''}
-            </span>
-        )
-    else
-        return (
-            <span>
-                <CircleFlag countryCode={country_code[wine['country']].toLowerCase()} height="15" style={{ marginRight: '5px' }} />
-                {/* <Flag country={country_code[wine['country']]} size={15} style={{ marginRight: '5px' }}></Flag> */}
-                {/* {wine['country']} */}
-                {wine['year'] ? ` ${wine['year']}` : ''}
-            </span>
-        )
 }
 
 const wineQualsCollapsed = (wine) => {
     return Object.keys(qualities).map(qual =>
         wine[qual] >= 3 ? `${qualities[qual]}` :
-            wine[qual] == 0 ? `${qualitiesB[qual]}` :
+            wine[qual] === 0 ? `${qualitiesB[qual]}` :
                 '').filter(e => e).join(' • ')
 }
 
 const stringToList = (str) => {
-    return str.match(RegExp(/(?:\'([^,]+)\'|"([^,]+)")/g)).map(e => e.slice(1, -1))
+    return str.match(RegExp(/(?:'([^,]+)'|"([^,]+)")/g)).map(e => e.slice(1, -1))
 }
 
-function WinePlate(wine) {
-    const [hovered, setHovered] = useState(false)
-    const [toggled, setToggled] = useState(false)
+class WinePlate extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            hovered: false,
+            toggled: false
+        }
+    }
 
-    return (
-        <Card
-            key={wine['PRODUCT NUMBER']}
-            className="clickable wineplate animated"
-            onMouseEnter={e => { setHovered(true) }}
-            onMouseLeave={e => { setHovered(false) }}
-            border={hovered ? 'lightgray' : 'light'}
-            style={{
-                backgroundColor: '#f7f7f7',
-                borderColor: hovered ? MAIN_COLOR : SECONDARY_COLOR,
-                width: '95%',
-                margin: '0px !important'
-                // boxShadow:`inset 37px 0px 1px -30px ${types[wine.type]}` 
-            }}>
-            <div style={{
-                borderRadius: '0px 3px 0px 5px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: toggled ? MAIN_COLOR : SECONDARY_COLOR,
-                color: toggled ? 'white' : 'black',
-                width: '80px',
-                height: '30px',
-                position: 'absolute',
-                right: '0px',
-                top: '0px',
-                fontSize: '15px'
-            }}>
-                <div>
-                    <span style={{ display: 'block' }}>€{wine['price'].toFixed(2)}</span>
-                    {/* <a style={{ display: 'block', fontSize: '10px' }}>see store</a> */}
+    // const [hovered, setHovered] = useState(false)
+    // const [toggled, setToggled] = useState(false)
+
+    setHovered = (v) => {
+        if(!this.props.disabled)
+            this.setState({
+                hovered: v
+            })
+    }
+
+    setToggled = (v) => {
+        if(!this.props.disabled)
+            this.setState({
+                toggled: v
+            })
+    }
+
+    render() {
+        return (
+            <Card
+                key={this.props.wine['PRODUCT NUMBER']}
+                className={`${this.state.disabled ? 'clickable' : ''} wineplate animated`}
+                onMouseEnter={e => { this.setHovered(true) }}
+                onMouseLeave={e => { this.setHovered(false) }}
+                border={this.state.hovered ? 'lightgray' : 'light'}
+                style={{
+                    backgroundColor: '#f7f7f7',
+                    borderColor: this.state.hovered ? MAIN_COLOR : SECONDARY_COLOR,
+                    width: '95%',
+                    margin: '0px !important'
+                    // boxShadow:`inset 37px 0px 1px -30px ${types[wine.type]}` 
+                }}>
+                <div style={{
+                    borderRadius: '0px 3px 0px 5px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: this.state.toggled ? MAIN_COLOR : SECONDARY_COLOR,
+                    color: this.state.toggled ? 'white' : 'black',
+                    width: '80px',
+                    height: '30px',
+                    position: 'absolute',
+                    right: '0px',
+                    top: '0px',
+                    fontSize: '15px'
+                }}>
+                    <div>
+                        <span style={{ display: 'block' }}>€{this.props.wine['price'].toFixed(2)}</span>
+                        {/* <a style={{ display: 'block', fontSize: '10px' }}>see store</a> */}
+                    </div>
                 </div>
-            </div>
-            <div onClick={e => { setToggled(!toggled) }} id="wine-basics" style={{
-                height: '90px',
-                padding: '10px',
-                marginBottom: '10px'
-            }}>
-                {
-                    toggled ? <Icon.CaretUpFill color={MAIN_COLOR} style={{
-                        position: 'absolute',
-                        top: '55px',
-                        right: '10px'
-                    }} /> : <Icon.CaretDownFill color={MAIN_COLOR} style={{
-                        position: 'absolute',
-                        top: '55px',
-                        right: '10px'
-                    }} />
+                <div onClick={e => { this.setToggled(!this.state.toggled) }} id="wine-basics" style={{
+                    height: '90px',
+                    padding: '10px',
+                    marginBottom: '10px'
+                }}>
+                    {   !this.props.disabled ?
+                        this.state.toggled ? <Icon.CaretUpFill color={MAIN_COLOR} style={{
+                            position: 'absolute',
+                            top: '55px',
+                            right: '10px'
+                        }} /> : <Icon.CaretDownFill color={MAIN_COLOR} style={{
+                            position: 'absolute',
+                            top: '55px',
+                            right: '10px'
+                        }} /> : null
 
-                }
-                <img
-                    className="nodrag"
-                    style={{
-                        marginRight: '10px',
-                        float: 'left',
-                        transform: hovered ? 'scale(1.1)' : '',
-                        transition: 'transform 0.3s',
-                        display: 'inline-block'
-                    }}
-                    src={imageLink(wine.link)}
-                    height="70px"
-                />
-                <div style={{ float: 'left', position: 'relative', width: 'calc(100% - 146.66px)', display: 'inline-block', height: '100%' }}>
-                    <span
+                    }
+                    <img
+                        alt="wine-img"
+                        className="nodrag"
                         style={{
-                            display: 'block',
-                            whiteSpace: 'nowrap',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            fontSize: '14px',
-                            textAlign: 'start'
-                        }}>
-                        <b className="winelink"
-                            onClick={e => { window.open(wine['link'], '_blank') }} >{truncate(wine.name.replaceAll('-', ' '), 100)}</b>
-                    </span>
-                    <div style={{ color: 'gray', left: '0px' }}>
-                        <span style={{
-                            display: 'block', textAlign: 'start', fontSize: '13px',
-                            width: 'calc(100%)',
-                            whiteSpace: toggled ? '' : 'nowrap',
-                            overflow: toggled ? '' : 'hidden',
-                            display: 'block',
-                            textOverflow: 'ellipsis',
-                        }}>
-                            {wineOrigin(wine)}
-                            {/* <Flag country={country_code[wine['country']]} size={15} style={{ marginRight: '5px' }}></Flag>{wine['wine_region']}{wine['wine_subregion'] ? `, ${wine['wine_subregion']}` : ''}{wine['year'] !== '0' ? ` - ${wine['year']}` : ''} */}
-                        </span>
-                        <span style={{
-                            display: 'block', textAlign: 'start', fontSize: '13px', width: 'calc(100%)',
-                            whiteSpace: toggled ? '' : 'nowrap',
-                            overflow: toggled ? '' : 'hidden',
-                            display: 'block',
-                            textOverflow: 'ellipsis',
-                        }}>
-                            {capitalizeFirstLetter(wine['type'] == 'desert' ? 'Dessert' : wine['type'])}
-                        </span>
-                        <Fade in={!toggled}>
-                            <span style={{
-                                display: 'block', textAlign: 'start', fontSize: '13px', width: 'calc(100%)',
-                                whiteSpace: toggled ? '' : 'nowrap',
-                                overflow: toggled ? '' : 'hidden',
+                            marginRight: '10px',
+                            float: 'left',
+                            transform: this.state.hovered ? 'scale(1.1)' : '',
+                            transition: 'transform 0.3s',
+                            display: 'inline-block'
+                        }}
+                        src={imageLink(this.props.wine.link)}
+                        height="70px"
+                    />
+                    <div style={{ float: 'left', position: 'relative', width: 'calc(100% - 146.66px)', display: 'inline-block', height: '100%' }}>
+                        <span
+                            style={{
                                 display: 'block',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                fontSize: '14px',
+                                textAlign: 'start'
+                            }}>
+                            <b className="winelink"
+                                onClick={e => { window.open(this.props.wine['link'], '_blank') }} >{truncate(this.props.wine.name.replaceAll('-', ' '), 100)}</b>
+                        </span>
+                        <div style={{ color: 'gray', left: '0px' }}>
+                            <span style={{
+                                display: 'block', textAlign: 'start', fontSize: '13px',
+                                width: 'calc(100%)',
+                                whiteSpace: this.state.toggled ? '' : 'nowrap',
+                                overflow: this.state.toggled ? '' : 'hidden',
                                 textOverflow: 'ellipsis',
                             }}>
-                                {
-                                    wineQualsCollapsed(wine)
-                                }
+                                {wineOrigin(this.props.wine)}
+                                {/* <Flag country={country_code[wine['country']]} size={15} style={{ marginRight: '5px' }}></Flag>{wine['wine_region']}{wine['wine_subregion'] ? `, ${wine['wine_subregion']}` : ''}{wine['year'] !== '0' ? ` - ${wine['year']}` : ''} */}
                             </span>
-                        </Fade>
+                            <span style={{
+                                display: 'block', textAlign: 'start', fontSize: '13px', width: 'calc(100%)',
+                                whiteSpace: this.state.toggled ? '' : 'nowrap',
+                                overflow: this.state.toggled ? '' : 'hidden',
+                                textOverflow: 'ellipsis',
+                            }}>
+                                {capitalizeFirstLetter(this.props.wine['type'] === 'desert' ? 'Dessert' : this.props.wine['type'])}
+                            </span>
+                            <Fade in={!this.state.toggled}>
+                                <span style={{
+                                    display: 'block', textAlign: 'start', fontSize: '13px', width: 'calc(100%)',
+                                    whiteSpace: this.state.toggled ? '' : 'nowrap',
+                                    overflow: this.state.toggled ? '' : 'hidden',
+                                    textOverflow: 'ellipsis',
+                                }}>
+                                    {
+                                        wineQualsCollapsed(this.props.wine)
+                                    }
+                                </span>
+                            </Fade>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <Fade in={toggled}>
-                <div style={{ display: toggled ? '' : 'none'}}>
-                    <div id="wine-variety"
-                        style={{
-                            display: wine['variety'].length < 3 ? 'none' : 'flex',
-                            width: '100%',
-                            backgroundColor: '#ededed',
-                            padding: '10px',
-                            minHeight: '50px',
-                            justifyContent: 'stretch',
-                            alignItems: 'center'
-                        }}>
-                        <div style={{ height: '100%', width: '20%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <img
-                                style={{ marginLeft: 'auto', marginRight: 'auto', display: 'block', marginTop: 'auto', marginBottom: 'auto' }}
-                                src="icons/grapes.png"
-                                width="22" />
+                <Fade in={this.state.toggled}>
+                    <div style={{ display: this.state.toggled ? '' : 'none' }}>
+                        <div id="wine-variety"
+                            style={{
+                                display: this.props.wine['variety'].length < 3 ? 'none' : 'flex',
+                                width: '100%',
+                                backgroundColor: '#ededed',
+                                padding: '10px',
+                                minHeight: '50px',
+                                justifyContent: 'stretch',
+                                alignItems: 'center'
+                            }}>
+                            <div style={{ height: '100%', width: '20%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <img
+                                    alt="grape_icon"
+                                    style={{ marginLeft: 'auto', marginRight: 'auto', display: 'block', marginTop: 'auto', marginBottom: 'auto' }}
+                                    src="icons/grapes.png"
+                                    width="22" />
+                            </div>
+                            <div style={{ height: '100%', width: '80%' }}>
+                                {
+                                    this.props.wine['variety'].length > 3 ? stringToList(this.props.wine['variety']).map(v =>
+                                        <div key={`${this.props.wine['PRODUCT NUMBER']}_${v}_variety`} style={{
+                                            backgroundColor: 'white',
+                                            borderStyle: 'solid',
+                                            borderWidth: '1px',
+                                            borderColor: '#d4d4d4',
+                                            borderRadius: '1px',
+                                            padding: '2px',
+                                            paddingLeft: '5px',
+                                            paddingRight: '5px',
+                                            margin: '3px',
+                                            height: '25px',
+                                            display: 'inline-block',
+                                            fontSize: '13px',
+                                            float: 'left'
+                                        }}>{v}</div>
+                                    ) : null
+                                }
+                            </div>
                         </div>
-                        <div style={{ height: '100%', width: '80%' }}>
+                        <div id="wine-quals" style={{ width: '70%', float: 'left', padding: '15px' }}>
                             {
-                                wine['variety'].length > 3 ? stringToList(wine['variety']).map(v =>
-                                    <div key={`${wine['PRODUCT NUMBER']}_${v}_variety`} style={{
-                                        backgroundColor: 'white',
-                                        borderStyle: 'solid',
-                                        borderWidth: '1px',
-                                        borderColor: '#d4d4d4',
-                                        borderRadius: '1px',
-                                        padding: '2px',
-                                        paddingLeft: '5px',
-                                        paddingRight: '5px',
-                                        margin: '3px',
-                                        height: '25px',
-                                        display: 'inline-block',
-                                        fontSize: '13px',
-                                        float: 'left'
-                                    }}>{v}</div>
-                                ) : null
+                                Object.keys(qualities).map(qual => {
+                                    return (
+
+                                        <div key={`${qual}_bar`} style={{ width: '100%', height: '35px' }}>
+                                            <div style={{
+                                                height: '35px',
+                                                width: '30%',
+                                                float: 'left',
+                                                textAlign: 'center',
+                                                verticalAlign: 'middle',
+                                                lineHeight: '30px'
+                                            }}>
+                                                <span style={{
+                                                    fontSize: '11px',
+                                                    padding: '4px',
+                                                    color: this.props.wine[qual] > 1 ? 'gray' : ''
+                                                }}>
+                                                    {
+                                                        this.props.wine[qual] <= 1 ? <b>{qualitiesB[qual].toUpperCase()}</b> : qualitiesB[qual].toUpperCase()
+                                                    }
+                                                </span>
+                                            </div>
+                                            <div style={{ height: '35px', width: '40%', float: 'left', position: 'relative', display: 'flex' }}>
+                                                <div style={{ alignSelf: 'center', width: '100%', height: '3px', position: 'absolute', backgroundColor: '#eaeaea', borderRadius: '2px' }} />
+                                                <div style={{ alignSelf: 'center', width: '7px', height: '7px', position: 'absolute', marginLeft: `calc(${this.props.wine[qual] * 25}% - 2px)`, borderRadius: '25px', zIndex: 0, backgroundColor: MAIN_COLOR }} />
+                                            </div>
+                                            <div style={{
+                                                height: '35px',
+                                                width: '30%',
+                                                float: 'left',
+                                                textAlign: 'center',
+                                                verticalAlign: 'middle',
+                                                lineHeight: '30px'
+                                            }}>
+                                                <span style={{
+                                                    fontSize: '11px',
+                                                    padding: '4px',
+                                                    color: this.props.wine[qual] < 3 ? 'gray' : ''
+                                                }}>
+                                                    {
+                                                        this.props.wine[qual] >= 3 ? <b>{qualities[qual].toUpperCase()}</b> : qualities[qual].toUpperCase()
+                                                    }
+                                                </span>
+                                            </div>
+                                        </div>
+                                    )
+                                })
                             }
                         </div>
-                    </div>
-                    <div id="wine-quals" style={{ width: '70%', float: 'left', padding: '15px' }}>
-                        {
-                            Object.keys(qualities).map(qual => {
-                                return (
-
-                                    <div key={`${qual}_bar`} style={{ width: '100%', height: '35px' }}>
-                                        <div style={{
-                                            height: '35px',
-                                            width: '30%',
-                                            float: 'left',
-                                            textAlign: 'center',
-                                            verticalAlign: 'middle',
-                                            lineHeight: '30px'
-                                        }}>
-                                            <span style={{
-                                                fontSize: '11px',
-                                                padding: '4px',
-                                                color: wine[qual] > 1 ? 'gray' : ''
-                                            }}>
-                                                {
-                                                    wine[qual] <= 1 ? <b>{qualitiesB[qual].toUpperCase()}</b> : qualitiesB[qual].toUpperCase()
-                                                }
-                                            </span>
-                                        </div>
-                                        <div style={{ height: '35px', width: '40%', float: 'left', position: 'relative', display: 'flex' }}>
-                                            <div style={{ alignSelf: 'center', width: '100%', height: '3px', position: 'absolute', backgroundColor: '#eaeaea', borderRadius: '2px' }} />
-                                            <div style={{ alignSelf: 'center', width: '7px', height: '7px', position: 'absolute', marginLeft: `calc(${wine[qual] * 25}% - 2px)`, borderRadius: '25px', zIndex: 0, backgroundColor: MAIN_COLOR }} />
-                                        </div>
-                                        <div style={{
-                                            height: '35px',
-                                            width: '30%',
-                                            float: 'left',
-                                            textAlign: 'center',
-                                            verticalAlign: 'middle',
-                                            lineHeight: '30px'
-                                        }}>
-                                            <span style={{
-                                                fontSize: '11px',
-                                                padding: '4px',
-                                                color: wine[qual] < 3 ? 'gray' : ''
-                                            }}>
-                                                {
-                                                    wine[qual] >= 3 ? <b>{qualities[qual].toUpperCase()}</b> : qualities[qual].toUpperCase()
-                                                }
-                                            </span>
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                    <div id="wine-alcohol" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', width: '30%', float: 'left', marginBottom: '15px', marginTop: '15px', height: `${4 * 35}px` }}>
-                        <div>
-                            <span style={{
-                                fontSize: '13px',
-                                textAlign: 'center',
-                                padding: '4px',
-                            }}>
-                                ALCOHOL
-                            </span>
-                            <div style={{
-                                display: 'block', margin: 'auto'
-                            }}>
-                                <span style={{ fontSize: '14px' }}>{wine['ALCOHOL']}%</span>
+                        <div id="wine-alcohol" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', width: '30%', float: 'left', marginBottom: '15px', marginTop: '15px', height: `${4 * 35}px` }}>
+                            <div>
+                                <span style={{
+                                    fontSize: '13px',
+                                    textAlign: 'center',
+                                    padding: '4px',
+                                }}>
+                                    ALCOHOL
+                                </span>
+                                <div style={{
+                                    display: 'block', margin: 'auto'
+                                }}>
+                                    <span style={{ fontSize: '14px' }}>{this.props.wine['ALCOHOL']}%</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </Fade>
-            {/* </Card.Body> */}
-        </Card >
-    )
+                </Fade>
+                {/* </Card.Body> */}
+            </Card >
+        )
+    }
 }
 
 export default WinePlate;
