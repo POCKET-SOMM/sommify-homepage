@@ -199,7 +199,7 @@ function Body({ isMobile, screenWidth }) {
               alignItems: 'start',
               paddingBottom: i === displayedWines.length - 1 ? '' : '10px'
             }}>
-              {WinePlate(wine)}
+              <WinePlate wine={wine} />
             </div>
           ) : <span>No recommendations in this price range.</span>
         }

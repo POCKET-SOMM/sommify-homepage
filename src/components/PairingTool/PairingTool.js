@@ -471,7 +471,8 @@ class PairingTool extends React.Component {
 
     nextRecipe() {
         this.setState({ loading: true })
-        axios.get(`${SERVER_URL}/api/v1/randomRecipe`).then(res => {
+        axios.get(`${SERVER_URL}/api/v1/randomRecipe?category=fish`).then(res => {
+            console.log(res)
             this.setState(oldState => ({
                 loading: false,
                 recipeHistory: [...oldState.recipeHistory, {
