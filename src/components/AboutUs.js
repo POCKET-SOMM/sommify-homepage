@@ -1,7 +1,7 @@
 import React from 'react';
 import { Offcanvas } from 'react-bootstrap';
 import { Linkedin, Globe2, Envelope } from 'react-bootstrap-icons';
-import { MAIN_COLOR_DEP } from '../App';
+// import { MAIN_COLOR_DEP } from '../App';
 
 const teamMembers = [
     { image: 'team_jp.jpeg', name: 'Jacob Pichna', title: 'Co-Founder & Business', linked: 'https://www.linkedin.com/in/pichna/' },
@@ -42,7 +42,7 @@ class AboutUs extends React.Component {
                     that.
                 </span><br /> */}
                 <span>
-                    Download our <a style={{ color: 'white' }} className="link clickable" onClick={e => { window.open('https://drive.google.com/file/d/1G1I1LyJBbGbM-ZcHsYxKfxbW77CiCziW/') }}>deck</a>.
+                    Download our <span style={{ color: 'white' }} className="link clickable" onClick={e => { window.open('https://drive.google.com/file/d/1G1I1LyJBbGbM-ZcHsYxKfxbW77CiCziW/') }}>deck</span>.
                 </span>
 
                 <br /><br /><br />
@@ -52,7 +52,7 @@ class AboutUs extends React.Component {
                     {
                         teamMembers.map(member =>
                             <div style={{ height: '100px', marginBottom: '20px', width: '340px', display: 'inline-block' }}>
-                                <img src={member.image} width={100} style={{ float: 'left' }} />
+                                <img alt={`${member.image}`} src={member.image} width={100} style={{ float: 'left' }} />
                                 <span style={{ float: 'left', marginLeft: '20px' }}>
                                     <b>{member.name}</b><br />
                                     {member.title} <br />
@@ -77,7 +77,7 @@ class AboutUs extends React.Component {
                     <Linkedin />
                     <span style={{ textDecoration: 'underline' }} className="clickable m-2" onClick={e => { window.open('https://www.linkedin.com/company/pocketsomm') }}>Linkedin
                     </span><br />
-                    <img src="/icons/crunchbase_icon.svg" width={16}></img>
+                    <img alt="crunchbase icon" src="/icons/crunchbase_icon.svg" width={16}></img>
                     <span style={{ textDecoration: 'underline' }} className="clickable m-2" onClick={e => { window.open('https://www.crunchbase.com/organization/pocketsomm') }}>Crunchbase
                     </span><br />
                 </div>

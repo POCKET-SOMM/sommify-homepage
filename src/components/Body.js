@@ -40,7 +40,7 @@ import { SERVER_URL } from '../App';
 export const winePlateHeight = 90
 
 function Body({ isMobile, screenWidth }) {
-  const [meal, setMeal] = useState('');
+  const [meal] = useState('');
   const [pair, setPair] = useState('');
   const [recipe, setRecipe] = useState({});
   const [wining, setWining] = useState(false);

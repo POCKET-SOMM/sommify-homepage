@@ -16,293 +16,6 @@ const emptyRecipe = {
     pairingText: ''
 }
 
-const testWines = [
-    {
-        "type": "red",
-        "link": "https://www.alko.fi/en/products/438847/Santiago-1541-Gran-Reserva-Cabernet-Sauvignon-Syrah-Malbec-2020/",
-        "name": "Santiago 1541 Gran Reserva Cabernet Sauvignon Syrah Malbec 2020",
-        "pair": "party wine",
-        "price": 10.99,
-        "volume": "0.75 l",
-        "tags": "['Red wine', 'Luscious & jammy']",
-        "PRODUCT NUMBER": 438847,
-        "ALCOHOL": 13.5,
-        "SUGAR": 3,
-        "ACIDS": 5.3,
-        "ENERGY": 80,
-        "PRICE / LITRE": "14.52 EUR",
-        "MORE INFORMATION": null,
-        "ADDITIONAL INFORMATION": null,
-        "INGREDIENTS DECLARED BY THE PRODUCER": "Contains sulphites",
-        "PACKAGING": "bottle",
-        "CLOSURE": "metal screw cap",
-        "PRODUCER": "TIB",
-        "SUPPLIER": "Beverage Partners Finland",
-        "SELECTION": "general selection",
-        "text": "Red wines are best served slightly below room temperature, at 16–18°C. Chilling a bottle from room temperature to the perfect serving temperature takes about half an hour in a fridge.",
-        "topNotch": "Wines with rich flavours and aromas are a good choice when serving meat dishes.\r\nTry with BBQ-marinated pork ribs, beef and vegetable skewers or T bone steaks.",
-        "tips": "Any allergens possibly contained in the beverages are mentioned on the label. The manufacturer and importer of an alcoholic beverage are responsible for the quality and composition of an alcoholic beverage delivered for consumption, as well as for ensuring that the product and its labels and other product promotion are in accordance with the relevant provisions and regulations. Please note! The product image or vintage can differ from the distributed product.",
-        "features": "Full-bodied, medium tannic, dark cherry notes, blueberry jam notes, ripe blackberry notes, cocoa notes \r\n",
-        "region": "['Rapel', 'Chile', 'DO Rapel Valley']",
-        "variety": "['Malbec', 'Syrah', 'Cabernet Sauvignon']",
-        "acid": 0,
-        "bodied": 3,
-        "dry": 0,
-        "sweet": 0,
-        "tannic": 2,
-        "fruits": 3,
-        "flowers": 0,
-        "spices": 0,
-        "herbal": 0,
-        "minerality": 0,
-        "oak": 1,
-        "fermentation_yeasts": 1,
-        "autolytic": 0,
-        "tertiary": 0,
-        "fish_food": 0,
-        "desserts_food": 0,
-        "fruit_food": 1,
-        "vegetables_food": 0,
-        "sweet_food": 1,
-        "salty_food": 0,
-        "sour_food": 1,
-        "bitter_food": 1,
-        "beef_food": 0,
-        "poultry_food": 0,
-        "game_food": 0,
-        "pork_food": 0,
-        "dairy_food": 0,
-        "fatty_food": 0,
-        "lamb_food": 0,
-        "nutty_food": 0,
-        "box": 0,
-        "dessert": 0,
-        "red": 1,
-        "rose": 0,
-        "sparkling": 0,
-        "white": 0,
-        "name_year": "Santiago-1541-Gran-Reserva-Cabernet-Sauvignon-Syrah-Malbec-2020",
-        "year": 2020,
-        "type_2": "red",
-        "country": "Chile",
-        "quality": null,
-        "cuisine": "South American"
-    },
-    {
-        "type": "red",
-        "link": "https://www.alko.fi/en/products/006614/Gato-Negro-Merlot-2020/",
-        "name": "Gato Negro Merlot 2020",
-        "pair": "chicken, turkey",
-        "price": 7.99,
-        "volume": "0.75 l",
-        "tags": "['Red wine', 'Luscious & jammy']",
-        "PRODUCT NUMBER": 6614,
-        "ALCOHOL": 13,
-        "SUGAR": 3,
-        "ACIDS": 4.9,
-        "ENERGY": 70,
-        "PRICE / LITRE": "10.52 EUR",
-        "MORE INFORMATION": null,
-        "ADDITIONAL INFORMATION": null,
-        "INGREDIENTS DECLARED BY THE PRODUCER": "Contains sulphites",
-        "PACKAGING": "bottle",
-        "CLOSURE": "metal screw cap",
-        "PRODUCER": "Viña San Pedro",
-        "SUPPLIER": "Pernod Ricard Finland",
-        "SELECTION": "general selection",
-        "text": "Red wines are best served slightly below room temperature, at 16–18°C. Chilling a bottle from room temperature to the perfect serving temperature takes about half an hour in a fridge.",
-        "topNotch": "Wines with rich flavours and aromas are a good choice when serving meat dishes.\r\nTry with BBQ-marinated pork ribs, beef and vegetable skewers or T bone steaks.",
-        "tips": "Any allergens possibly contained in the beverages are mentioned on the label. The manufacturer and importer of an alcoholic beverage are responsible for the quality and composition of an alcoholic beverage delivered for consumption, as well as for ensuring that the product and its labels and other product promotion are in accordance with the relevant provisions and regulations. Please note! The product image or vintage can differ from the distributed product.",
-        "features": "Medium-bodied, medium tannic, blackberry notes, plum notes, cherry notes, light mocha notes \r\n",
-        "region": "['Wine of Chile', 'Others', 'Chile']",
-        "variety": "['Merlot']",
-        "acid": 0,
-        "bodied": 2,
-        "dry": 0,
-        "sweet": 0,
-        "tannic": 2,
-        "fruits": 3,
-        "flowers": 0,
-        "spices": 0,
-        "herbal": 1,
-        "minerality": 0,
-        "oak": 0,
-        "fermentation_yeasts": 0,
-        "autolytic": 0,
-        "tertiary": 0,
-        "fish_food": 0,
-        "desserts_food": 0,
-        "fruit_food": 0,
-        "vegetables_food": 0,
-        "sweet_food": 0,
-        "salty_food": 1,
-        "sour_food": 0,
-        "bitter_food": 0,
-        "beef_food": 0,
-        "poultry_food": 1,
-        "game_food": 0,
-        "pork_food": 0,
-        "dairy_food": 0,
-        "fatty_food": 0,
-        "lamb_food": 0,
-        "nutty_food": 0,
-        "box": 0,
-        "dessert": 0,
-        "red": 1,
-        "rose": 0,
-        "sparkling": 0,
-        "white": 0,
-        "name_year": "Gato-Negro-Merlot-2020",
-        "year": 2020,
-        "type_2": "red",
-        "country": "Chile",
-        "quality": null,
-        "cuisine": "South American"
-    },
-    {
-        "type": "white",
-        "link": "https://www.alko.fi/en/products/925317/Llai-Llai-Sauvignon-Blanc-2015/",
-        "name": "Llai Llai Sauvignon Blanc 2015",
-        "pair": "salads, vegetarian food",
-        "price": 11.21,
-        "volume": "0.75 l",
-        "tags": "['White wine', 'Nuanced & structured']",
-        "PRODUCT NUMBER": 925317,
-        "ALCOHOL": 13,
-        "SUGAR": 3,
-        "ACIDS": 6.1,
-        "ENERGY": 70,
-        "PRICE / LITRE": "14.95 EUR",
-        "MORE INFORMATION": null,
-        "ADDITIONAL INFORMATION": null,
-        "INGREDIENTS DECLARED BY THE PRODUCER": "Contains sulphites",
-        "PACKAGING": "bottle",
-        "CLOSURE": "metal screw cap",
-        "PRODUCER": "Dos Andes",
-        "SUPPLIER": "Vinum Import Oy",
-        "SELECTION": "sale-to-order selection",
-        "text": "White wines are best served chilled, at 10–12°C. Chilling a bottle from room temperature to the perfect serving temperature takes about two hours in a fridge. The sweeter the wine, the cooler it can be served.",
-        "topNotch": "Nuanced flavours combined with robust acidity make these wines an excellent match for fish and seafood dishes as well as slightly stronger flavours.\r\nTry with Finnish crayfish, clam dishes or blinis.",
-        "tips": "Any allergens possibly contained in the beverages are mentioned on the label. The manufacturer and importer of an alcoholic beverage are responsible for the quality and composition of an alcoholic beverage delivered for consumption, as well as for ensuring that the product and its labels and other product promotion are in accordance with the relevant provisions and regulations. Please note! The product image or vintage can differ from the distributed product.",
-        "features": "Dry, acidic, citrus notes, fruity, herbal notes, aromatic \r\n",
-        "region": "['Bío Bío', 'Chile', 'Valle del Bío Bío']",
-        "variety": "['Sauvignon Blanc']",
-        "acid": 3,
-        "bodied": 0,
-        "dry": 3,
-        "sweet": 0,
-        "tannic": 0,
-        "fruits": 1,
-        "flowers": 0,
-        "spices": 0,
-        "herbal": 1,
-        "minerality": 0,
-        "oak": 0,
-        "fermentation_yeasts": 0,
-        "autolytic": 0,
-        "tertiary": 0,
-        "fish_food": 0,
-        "desserts_food": 0,
-        "fruit_food": 0,
-        "vegetables_food": 1,
-        "sweet_food": 1,
-        "salty_food": 1,
-        "sour_food": 1,
-        "bitter_food": 1,
-        "beef_food": 0,
-        "poultry_food": 0,
-        "game_food": 0,
-        "pork_food": 0,
-        "dairy_food": 1,
-        "fatty_food": 0,
-        "lamb_food": 0,
-        "nutty_food": 1,
-        "box": 0,
-        "dessert": 0,
-        "red": 0,
-        "rose": 0,
-        "sparkling": 0,
-        "white": 1,
-        "name_year": "Llai-Llai-Sauvignon-Blanc-2015",
-        "year": 2015,
-        "type_2": "white",
-        "country": "Chile",
-        "quality": null,
-        "cuisine": "South American"
-    },
-    {
-        "type": "sparkling",
-        "link": "https://www.alko.fi/en/products/939752/Belvino-Vino-Ros-Extra-Dry/",
-        "name": "Belvino Vino Rosé Extra Dry",
-        "pair": "party wine",
-        "price": 9.98,
-        "volume": "0.75 l",
-        "tags": "['Sparkling wine & champagne', 'Smooth & light']",
-        "PRODUCT NUMBER": 939752,
-        "ALCOHOL": 11,
-        "SUGAR": 11,
-        "ACIDS": 5.1,
-        "ENERGY": 70,
-        "PRICE / LITRE": "13.17 EUR",
-        "MORE INFORMATION": null,
-        "ADDITIONAL INFORMATION": null,
-        "INGREDIENTS DECLARED BY THE PRODUCER": "Contains sulphites",
-        "PACKAGING": "bottle",
-        "CLOSURE": "natural cork",
-        "PRODUCER": "Enoitalia",
-        "SUPPLIER": "Servaali",
-        "SELECTION": "general selection",
-        "text": "Sparkling wines made using the traditional method are served well-chilled, at 8–12°C. Fresh, crisp sparkling wines are served slightly cooler, at 6–8°C. A sparkling wine stopper will keep the bubbles in the bottle for several days, as long as the bottle is stored in the fridge. The fuller the bottle, the longer the bubbles will last. Using a gel cooler stored in the freezer, you can chill a bottle from room temperature to the perfect serving temperature in about 20 minutes. In a large cooler or bucket filled with ice cubes and water, you can chill a bottle in 15 minutes.",
-        "topNotch": "Sparkling wines and Champagnes are ideal for toasting, as aperitifs, for socialising or for serving throughout a meal.",
-        "tips": "Any allergens possibly contained in the beverages are mentioned on the label. The manufacturer and importer of an alcoholic beverage are responsible for the quality and composition of an alcoholic beverage delivered for consumption, as well as for ensuring that the product and its labels and other product promotion are in accordance with the relevant provisions and regulations. Please note! The product image or vintage can differ from the distributed product.",
-        "features": "Dry, medium acidic, citrus notes, whitecurrant notes, light raspberry notes, hint of herb \r\n",
-        "region": "['Italy']",
-        "variety": "[]",
-        "acid": 2,
-        "bodied": 0,
-        "dry": 3,
-        "sweet": 0,
-        "tannic": 0,
-        "fruits": 3,
-        "flowers": 0,
-        "spices": 0,
-        "herbal": 1,
-        "minerality": 0,
-        "oak": 0,
-        "fermentation_yeasts": 0,
-        "autolytic": 0,
-        "tertiary": 0,
-        "fish_food": 0,
-        "desserts_food": 0,
-        "fruit_food": 1,
-        "vegetables_food": 0,
-        "sweet_food": 1,
-        "salty_food": 0,
-        "sour_food": 1,
-        "bitter_food": 1,
-        "beef_food": 0,
-        "poultry_food": 0,
-        "game_food": 0,
-        "pork_food": 0,
-        "dairy_food": 0,
-        "fatty_food": 0,
-        "lamb_food": 0,
-        "nutty_food": 0,
-        "box": 0,
-        "dessert": 0,
-        "red": 0,
-        "rose": 0,
-        "sparkling": 1,
-        "white": 0,
-        "name_year": "Belvino-Vino-Ros-Extra-Dry",
-        "year": 0,
-        "type_2": "sparkling",
-        "country": "Italy",
-        "quality": null,
-        "cuisine": "Italian"
-    }
-]
-
 class PairingTool extends React.Component {
 
     constructor(props) {
@@ -408,11 +121,11 @@ class PairingTool extends React.Component {
         })
     }
 
-    submitRecipe() {
+    submitRecipe(wines) {
         const title = this.currentRecipe().title
 
         let history = this.state.recipeHistory
-        history[this.state.recipeIndex].paired = this.listOfUrls(this.state.textBoxContent).length
+        history[this.state.recipeIndex].paired = wines.length
         history[this.state.recipeIndex].pairingText = this.state.textBoxContent
         // let isUpdate = this.state.recipeIndex + 1 !== this.state.recipeHistory.length
 
@@ -421,7 +134,7 @@ class PairingTool extends React.Component {
             url: `${SERVER_URL}/api/v1/recipePairing`,
             headers: { 'Content-Type': 'application/json' },
             data: {
-                wines: this.listOfUrls(this.state.textBoxContent).map(l => ({ link: l, info: '' })),
+                wines: wines,
                 recipeId: this.currentRecipe().id,
                 recipeTitle: this.currentRecipe().title
             }
@@ -436,22 +149,20 @@ class PairingTool extends React.Component {
         //     recipeHistory: history
         // })
 
-        // this.setState({ updating: false })
-
-        this.setState({
-            toastShow: true,
-            toastContent: `Pairing of ${title} successful.`,
-            recipeHistory: history,
-            updating: false
-        })
+        // this.setState({
+        //     toastShow: true,
+        //     toastContent: `Pairing of ${title} successful.`,
+        //     recipeHistory: history,
+        //     updating: false
+        // })
 
         axios.request(options).then(res => {
-            // this.setState({
-            //     toastShow: true,
-            //     toastContent: `Pairing of ${title} successful.`,
-            //     recipeHistory: history,
-            //     updating: false
-            // })
+            this.setState({
+                toastShow: true,
+                toastContent: `Pairing of ${title} successful.`,
+                recipeHistory: history,
+                updating: false
+            })
         }).catch(function (error) {
             console.error(error);
         });
@@ -469,30 +180,47 @@ class PairingTool extends React.Component {
         return this.currentRecipe().wines.map(wine => wine.state)
     }
 
-    nextRecipe() {
+    fbCategory = () => {
+        let fbCats = ['dessert']
+        return fbCats[Math.floor(Math.random() * fbCats.length)]
+    }
+
+    nextRecipe = async () => {
+        let isFb = (this.state.recipeHistory.length + 1) % 4 === 0
+        let category = isFb ? this.fbCategory() : 'fish'
+
         this.setState({ loading: true })
-        axios.get(`${SERVER_URL}/api/v1/randomRecipe?category=fish`).then(res => {
-            console.log(res)
-            this.setState(oldState => ({
-                loading: false,
-                recipeHistory: [...oldState.recipeHistory, {
-                    id: res.data.Recipe_id,
-                    title: res.data.Recipe_title,
-                    regions: Object.entries(res.data.Cuisine)
-                        .sort(([, a], [, b]) => b - a).slice(0, 3).map(e => `${e[0]} ${Math.round(e[1] * 100)}%`),
-                    labels: res.data.Category ? res.data.Category.map(c => c.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())) : [],
-                    ingredients: res.data.Ingredients.slice(2, -2).split("', '"),
-                    steps: res.data.Steps,
-                    pairingText: '',
-                    paired: 0,
-                    wines: testWines,
-                }],
-                recipeIndex: oldState.recipeIndex + 1,
-                textBoxContent: ''
-            }))
-        }).catch(err=>{
-            console.log(err)
-        })
+
+        const recipeResponse = await axios.get(`${SERVER_URL}/api/v1/randomRecipe?category=${category}`)
+
+        const options = {
+            method: 'POST',
+            url: `https://pocketsommapi.azurewebsites.net/api/v1/recipeId2wineAi`,
+            headers: { 'Content-Type': 'application/json' },
+            data: { id: parseInt(recipeResponse.data.Recipe_id) }
+        };
+
+        let wineResponse = isFb ? await axios.request(options) : { data: null }
+
+
+        this.setState(oldState => ({
+            loading: false,
+            recipeHistory: [...oldState.recipeHistory, {
+                id: recipeResponse.data.Recipe_id,
+                title: recipeResponse.data.Recipe_title,
+                regions: Object.entries(recipeResponse.data.Cuisine)
+                    .sort(([, a], [, b]) => b - a).slice(0, 3).map(e => `${e[0]} ${Math.round(e[1] * 100)}%`),
+                labels: recipeResponse.data.Category ? recipeResponse.data.Category.map(c => c.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())) : [],
+                ingredients: recipeResponse.data.Ingredients.slice(2, -2).split("', '"),
+                steps: recipeResponse.data.Steps,
+                pairingText: '',
+                paired: 0,
+                wines: wineResponse.data,
+                category: category
+            }],
+            recipeIndex: oldState.recipeIndex + 1,
+            textBoxContent: ''
+        }))
     }
 
     handleTextChange = text => {
@@ -535,8 +263,18 @@ class PairingTool extends React.Component {
             return 'Submit'
     }
 
+    handleTextFieldSubmit = () => {
+        this.submitRecipe(
+            this.listOfUrls(this.state.textBoxContent).map(l => ({ link: l, info: '' }))
+        )
+    }
+
     handleRecomStatesSubmit = () => {
         let history = this.state.recipeHistory
+        let acceptedWines = this.currentRecipe().wines.filter(w => w.state === 'accepted').map(w => ({ link: w.link, info: '' }))
+
+        this.submitRecipe(acceptedWines)
+
         history[this.state.recipeIndex].recomSubmitted = true
         this.setState({
             recipeHistory: history
@@ -556,7 +294,7 @@ class PairingTool extends React.Component {
                                 <Modal.Body>
                                     <ListGroup variant="flush">
                                         {this.currentRecipe().steps.split(/\| [0-9]+\./).splice(1).map((step, i) =>
-                                            <ListGroup.Item>
+                                            <ListGroup.Item key={`recipe_step_${i}`}>
                                                 <span style={{ display: 'block', marginBottom: '10px' }}>
                                                     <b>{i + 1}.</b> {step}
                                                 </span>
@@ -595,14 +333,22 @@ class PairingTool extends React.Component {
                                     <ListGroup variant="flush">
                                         {
                                             this.state.recipeHistory.map((r, i) =>
-                                                <ListGroup.Item onClick={e => this.goToRecipe(i)} action>
+                                                <ListGroup.Item key={`recipe_history_${i}`} onClick={e => this.goToRecipe(i)} action>
                                                     {
                                                         this.state.recipeIndex === i ? <strong>{r.title}</strong> : <span>{r.title}</span>
                                                     }
                                                     {
+                                                        // if recipe is FLASHBACK
+                                                        r.wines ? <Badge style={{ float: 'right' }} bg="info">
+                                                            RECAP
+                                                        </Badge> : null
+                                                    }
+                                                    {
                                                         r.paired ? <Badge style={{ float: 'right' }} bg="success">
-                                                            {r.paired} Pairings
-                                                        </Badge> : <Badge style={{ float: 'right' }} bg="secondary">No Pairings</Badge>
+                                                            {r.wines ? 'Paired' : `${r.paired} Pairing${r.paired > 1 ? 's' : ''}`}
+                                                        </Badge> : <Badge style={{ float: 'right' }} bg="secondary">
+                                                            Unpaired
+                                                        </Badge>
                                                     }
                                                 </ListGroup.Item>
                                             )}
@@ -618,8 +364,13 @@ class PairingTool extends React.Component {
                                 </Button>
 
                                 <div style={{ width: '100%', height: '100px', paddingTop: '10px' }}>
-                                    <h4>{this.currentRecipe().title}</h4>
-                                    <button class="btn btn-link" onClick={this.handleShow}>View steps</button>
+                                    <h4>
+                                        {this.currentRecipe().title}
+                                        {this.currentRecipe().wines ? <Badge bg="info" style={{marginLeft:'20px'}}>
+                                            RECAP
+                                        </Badge> : null}
+                                    </h4>
+                                    <button className="btn btn-link" onClick={this.handleShow}>View steps</button>
                                     {/* <div style={{ width: '100%', textAlign: 'start', height: '32px', display: 'flex', alignItems: 'center' }}>
                                         Predicted Regions: {this.currentRecipe().regions.length ? this.currentRecipe().regions.map(r =>
                                             <Tag content={`${r}`} declinable={true} />
@@ -635,89 +386,95 @@ class PairingTool extends React.Component {
                                 <Card style={{ backgroundColor: '#f8f8f8', padding: '20px', height: 'calc(100% - 210px)', width: '400px', textAlign: 'start', float: 'left' }}>
                                     <Card.Title>Ingredient List</Card.Title>
                                     <Card.Body style={{ overflowY: 'auto' }}>
-                                        {this.currentRecipe().ingredients.map(i => <span style={{ display: 'block' }}>• {i}</span>)}
+                                        {this.currentRecipe().ingredients.map((ing, i) =>
+                                            <span key={`ingredient_${i}`} style={{ display: 'block' }}>• {ing}</span>)
+                                        }
                                     </Card.Body>
                                 </Card>
 
                                 <div style={{ width: 'calc(100% - 400px)', height: 'calc(100% - 210px)', float: 'left', position: 'relative' }}>
-                                    {/* <div id="ai-recommendations" style={{ float: 'left', width: '50%', height: '100%', paddingLeft: '20px', paddingRight: '10px' }}>
-                                        <Card style={{ width: '100%', height: '100%', padding: '20px', backgroundColor: '#f8f8f8' }}>
-                                            <Card.Title style={{ textAlign: 'left' }}>AI recommendations</Card.Title>
-                                            <Card.Body style={{ overflowY: 'auto' }}>
-                                                {
-                                                    testWines ? testWines.map((wine, i) =>
-                                                        <div style={{
-                                                            marginBottom: '10px'
+                                    {
+                                        this.currentRecipe().wines ? <div id="ai-recommendations" style={{ float: 'left', width: '50%', height: '100%', paddingLeft: '20px', paddingRight: '10px' }}>
+                                            <Card style={{ width: '100%', height: '100%', padding: '20px', backgroundColor: '#f8f8f8' }}>
+                                                <Card.Title style={{ textAlign: 'left' }}>AI recommendations</Card.Title>
+                                                <Card.Body style={{ overflowY: 'auto' }}>
+                                                    {
+                                                        this.currentRecipe().wines ? this.currentRecipe().wines.map((wine, i) =>
+                                                            <div key={`AI_wines_${i}`} style={{
+                                                                marginBottom: '10px'
+                                                            }}>
+                                                                <div style={{ width: '85%', float: 'left', position: 'relative' }}>
+                                                                    {
+                                                                        wine.state ?
+                                                                            <div style={{ width: '100%', height: '100%', position: 'absolute', backgroundColor: wine.state === 'accepted' ? 'green' : 'red', zIndex: 5, opacity: '20%' }}></div>
+                                                                            : null
+                                                                    }
+                                                                    <WinePlate wine={wine} disabled={true} />
+                                                                </div>
+                                                                <div style={{ height: '90px', width: '15%', float: 'left', display: 'flex', alignContent: 'center', justifyItems: 'center' }}>
+                                                                    <BsXLg
+                                                                        style={{ alignSelf: 'center', marginLeft: '20px', opacity: wine.state === 'accepted' ? '30%' : '' }}
+                                                                        color={wine.state === 'declined' ? 'darkred' : ''}
+                                                                        className="clickable"
+                                                                        size={wine.state === 'declined' ? 30 : 20}
+                                                                        onClick={e => { this.handleWineCancel(i) }}
+                                                                    />
+                                                                    <BsCheckLg
+                                                                        style={{ alignSelf: 'center', marginLeft: '20px', opacity: wine.state === 'declined' ? '30%' : '' }}
+                                                                        color={wine.state === 'accepted' ? 'darkgreen' : ''}
+                                                                        className="clickable"
+                                                                        size={wine.state === 'accepted' ? 30 : 20}
+                                                                        onClick={e => { this.handleWineAccept(i) }}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        ) : <span style={{ color: 'gray' }}>No Recommendations.</span>
+                                                    }
+                                                    <Button
+                                                        disabled={this.wineStates().some(e => !e) || this.recomSubmitButtonText() === 'Submitted'}
+                                                        onClick={this.handleRecomStatesSubmit}
+                                                        variant="danger"
+                                                        style={{
+                                                            position: 'absolute',
+                                                            bottom: '15px',
+                                                            right: '15px'
                                                         }}>
-                                                            <div style={{ width: '85%', float: 'left', position: 'relative' }}>
-                                                                {
-                                                                    wine.state ?
-                                                                        <div style={{ width: '100%', height: '100%', position: 'absolute', backgroundColor: wine.state === 'accepted' ? 'green' : 'red', zIndex: 5, opacity: '20%' }}></div>
-                                                                        : null
-                                                                }
-                                                                <WinePlate wine={wine} disabled={true} />
-                                                            </div>
-                                                            <div style={{ height: '90px', width: '15%', float: 'left', display: 'flex', alignContent: 'center', justifyItems: 'center' }}>
-                                                                <BsXLg
-                                                                    style={{ alignSelf: 'center', marginLeft: '20px', opacity: wine.state === 'accepted' ? '30%' : '' }}
-                                                                    color={wine.state === 'declined' ? 'darkred' : ''}
-                                                                    className="clickable"
-                                                                    size={wine.state === 'declined' ? 30 : 20}
-                                                                    onClick={e => { this.handleWineCancel(i) }}
-                                                                />
-                                                                <BsCheckLg
-                                                                    style={{ alignSelf: 'center', marginLeft: '20px', opacity: wine.state === 'declined' ? '30%' : '' }}
-                                                                    color={wine.state === 'accepted' ? 'darkgreen' : ''}
-                                                                    className="clickable"
-                                                                    size={wine.state === 'accepted' ? 30 : 20}
-                                                                    onClick={e => { this.handleWineAccept(i) }}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    ) : <span style={{color:'gray'}}>No Recommendations.</span>
-                                                }
-                                                <Button
-                                                    disabled={this.wineStates().some(e => !e) || this.recomSubmitButtonText() === 'Submitted'}
-                                                    onClick={this.handleRecomStatesSubmit}
-                                                    variant="danger"
-                                                    style={{
-                                                        position: 'absolute',
-                                                        bottom: '15px',
-                                                        right: '15px'
-                                                    }}>
-                                                    {this.recomSubmitButtonText()}
-                                                </Button>
-                                            </Card.Body>
-                                        </Card>
-                                    </div> */}
-                                    <div id="pairing-window" style={{
-                                        float: 'right',
-                                        width: '50%',
-                                        height: '100%',
-                                        display: 'flex',
-                                        flexDirection: 'column-reverse',
-                                        alignItems: 'flex-end',
-                                        paddingLeft: '10px'
-                                    }}>
-                                        <Form.Control
-                                            onChange={e => this.handleTextChange(e.target.value)}
-                                            value={this.state.textBoxContent}
-                                            as="textarea"
-                                            placeholder="Paste wine links here (one per row)"
-                                            style={{ height: '190px', width: '100%' }}
-                                        />
+                                                        {this.recomSubmitButtonText()}
+                                                    </Button>
+                                                </Card.Body>
+                                            </Card>
+                                        </div> : null
+                                    }
+                                    {
+                                        this.currentRecipe().wines ? null : <div id="pairing-window" style={{
+                                            float: 'right',
+                                            width: '50%',
+                                            height: '100%',
+                                            display: 'flex',
+                                            flexDirection: 'column-reverse',
+                                            alignItems: 'flex-end',
+                                            paddingLeft: '10px'
+                                        }}>
+                                            <Form.Control
+                                                onChange={e => this.handleTextChange(e.target.value)}
+                                                value={this.state.textBoxContent}
+                                                as="textarea"
+                                                placeholder="Paste wine links here (one per row)"
+                                                style={{ height: '190px', width: '100%' }}
+                                            />
 
-                                        <button style={{ float: 'right', marginBottom: '10px' }} disabled={
-                                            !this.state.textBoxContent ||
-                                            !this.isUrl(this.state.textBoxContent.split('\n')[0]) ||
-                                            !this.pairingChanged()
-                                        } type="button" class="btn btn-danger" onClick={e => this.submitRecipe()}>
-                                            {
-                                                this.state.updating ? <Spinner animation="border" size='sm' style={{ marginRight: '5px' }} /> : null
-                                            }
-                                            {this.submitButtonText()}
-                                        </button>
-                                    </div>
+                                            <button style={{ float: 'right', marginBottom: '10px' }} disabled={
+                                                !this.state.textBoxContent ||
+                                                !this.isUrl(this.state.textBoxContent.split('\n')[0]) ||
+                                                !this.pairingChanged()
+                                            } type="button" className="btn btn-danger" onClick={this.handleTextFieldSubmit}>
+                                                {
+                                                    this.state.updating ? <Spinner animation="border" size='sm' style={{ marginRight: '5px' }} /> : null
+                                                }
+                                                {this.submitButtonText()}
+                                            </button>
+                                        </div>
+                                    }
                                 </div>
                             </div>
 
