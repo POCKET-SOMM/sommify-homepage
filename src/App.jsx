@@ -12,8 +12,8 @@ import AboutUs from './components/AboutUs';
 import DemoGuide from './components/DemoGuide';
 import ContactUs from './components/ContactUs';
 
-const MAIN_COLOR = '#e7154e'
-const SECONDARY_COLOR = '#fce3ee'
+// const MAIN_COLOR = '#e7154e'
+// const SECONDARY_COLOR = '#fce3ee'
 export const MAIN_COLOR_DEP = '#80183b'
 
 export const SERVER_URL = 'https://pocketsommapi.azurewebsites.net'
@@ -88,6 +88,7 @@ function App() {
   function Logo() {
     return (
       <img
+        alt="logo"
         style={{
           objectFit: 'cover',
           position: 'absolute',
@@ -151,11 +152,11 @@ function App() {
           width: '100%'
         }}>
           {
-            isDesktop ? ['ABOUT US', 'DEMO GUIDE'].map(l =>
-              <Nav.Item>
+            isDesktop ? ['ABOUT US', 'DEMO GUIDE'].map((l, i) =>
+              <Nav.Item key={`nav_item_${i}`}>
                 <Nav.Link active={pane === l} onClick={e => { handleNavClick(l) }} style={{ width: '130px', alignItems: 'center', display: 'flex', justifyContent: 'center' }}>{l}</Nav.Link>
               </Nav.Item>
-            ) : <div style={{fontSize: '10px', width:'100%', height:'100%', display:'flex', alignItems:'center'}}>
+            ) : <div style={{ fontSize: '10px', width: '100%', height: '100%', display: 'flex', alignItems: 'center' }}>
               <Nav.Link active={pane === 'ABOUT US'}
                 onClick={e => { handleNavClick('ABOUT US') }}
                 style={{
@@ -258,6 +259,7 @@ function App() {
                   <Body isMobile={isMobile || isTablet} screenWidth={width} />
                 </Card>
                 <img
+                  alt="try our demo"
                   width={200}
                   src='try_our_demo.png'
                   style={{ position: 'absolute', zIndex: 5, marginLeft: '580px', marginTop: '30px' }}></img>
@@ -265,7 +267,7 @@ function App() {
               <Carousel interval={8500} indicatorLabels={[1, 2, 3]} style={{ width: '100%', height: 'calc(100vh - 80px)' }}>
                 {
                   CarouselItems.map((item, i) =>
-                    <Carousel.Item>
+                    <Carousel.Item key={`bg_carousel_${i}`}>
                       <div style={{
                         background: `linear-gradient(to top, rgba(59,62,79,0.8), rgba(59,62,79,0.8)), url(${item.img}) no-repeat top center`,
                         // backgroundImage: `url(${item.img})`,
