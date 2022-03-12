@@ -143,29 +143,29 @@ class PairingTool extends React.Component {
         this.setState({ updating: true })
 
         // FOR TESTING
-        this.setState({
-            toastShow: true,
-            toastContent: `Pairing of ${title} successful.`,
-            recipeHistory: history
-        })
+        // this.setState({
+        //     toastShow: true,
+        //     toastContent: `Pairing of ${title} successful.`,
+        //     recipeHistory: history
+        // })
 
-        this.setState({
-            toastShow: true,
-            toastContent: `Pairing of ${title} successful.`,
-            recipeHistory: history,
-            updating: false
-        })
+        // this.setState({
+        //     toastShow: true,
+        //     toastContent: `Pairing of ${title} successful.`,
+        //     recipeHistory: history,
+        //     updating: false
+        // })
 
-        // axios.request(options).then(res => {
-        //     this.setState({
-        //         toastShow: true,
-        //         toastContent: `Pairing of ${title} successful.`,
-        //         recipeHistory: history,
-        //         updating: false
-        //     })
-        // }).catch(function (error) {
-        //     console.error(error);
-        // });
+        axios.request(options).then(res => {
+            this.setState({
+                toastShow: true,
+                toastContent: `Pairing of ${title} successful.`,
+                recipeHistory: history,
+                updating: false
+            })
+        }).catch(function (error) {
+            console.error(error);
+        });
     }
 
     currentRecipe = () => {
