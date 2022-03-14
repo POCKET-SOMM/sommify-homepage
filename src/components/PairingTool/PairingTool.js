@@ -7,6 +7,7 @@ import Loadable from '../Loadable';
 import { ChevronCompactLeft, ChevronCompactRight } from 'react-bootstrap-icons';
 import { SERVER_URL } from '../../App';
 import WinePlate from '../WinePlate';
+import Tag from './Tag';
 
 const emptyRecipe = {
     steps: '',
@@ -136,7 +137,8 @@ class PairingTool extends React.Component {
             data: {
                 wines: wines,
                 recipeId: this.currentRecipe().id,
-                recipeTitle: this.currentRecipe().title
+                recipeTitle: this.currentRecipe().title,
+                pairingInfo: this.currentRecipe().category
             }
         };
 
@@ -187,21 +189,22 @@ class PairingTool extends React.Component {
 
     nextRecipe = async () => {
         let isFb = (this.state.recipeHistory.length + 1) % 4 === 0
-        let category = isFb ? this.fbCategory() : 'fish'
+        let category = isFb ? this.fbCategory() : 'seafood'
 
         this.setState({ loading: true })
 
         const recipeResponse = await axios.get(`${SERVER_URL}/api/v1/randomRecipe?category=${category}`)
 
-        const options = {
+        const options_2 = {
             method: 'POST',
             url: `https://pocketsommapi.azurewebsites.net/api/v1/recipeId2wineAi`,
             headers: { 'Content-Type': 'application/json' },
             data: { id: parseInt(recipeResponse.data.Recipe_id) }
         };
 
-        let wineResponse = isFb ? await axios.request(options) : { data: null }
+        let wineResponse = isFb ? await axios.request(options_2) : { data: null }
 
+        console.log(recipeResponse.data.Cuisine)
 
         this.setState(oldState => ({
             loading: false,
@@ -265,13 +268,20 @@ class PairingTool extends React.Component {
 
     handleTextFieldSubmit = () => {
         this.submitRecipe(
-            this.listOfUrls(this.state.textBoxContent).map(l => ({ link: l, info: '' }))
+            this.listOfUrls(this.state.textBoxContent).map(l => ({
+                link: l,
+                info: ''
+            }))
         )
     }
 
     handleRecomStatesSubmit = () => {
         let history = this.state.recipeHistory
-        let acceptedWines = this.currentRecipe().wines.filter(w => w.state === 'accepted').map(w => ({ link: w.link, info: '' }))
+
+        let acceptedWines = this.currentRecipe().wines.filter(w => w.state === 'accepted').map(w => ({
+            link: w.link,
+            info: w.state
+        }))
 
         this.submitRecipe(acceptedWines)
 
@@ -359,24 +369,24 @@ class PairingTool extends React.Component {
 
 
                             <div id="recipe-window" style={{ position: 'relative', width: '100%', height: 'calc((100vh - 80px))', paddingLeft: '60px', paddingRight: '60px' }}>
-                                <Button variant="link" onClick={this.handleShowHistory} style={{ position: 'absolute', top: '10px', right: '10px' }}>
+                                <Button variant="link" onClick={this.handleShowHistory} style={{ position: 'absolute', top: '10px', right: '10px', zIndex:10 }}>
                                     Session History
                                 </Button>
 
-                                <div style={{ width: '100%', height: '100px', paddingTop: '10px' }}>
+                                <div style={{ width: '100%', height: '100px', paddingTop: '10px', position: 'relative' }}>
                                     <h4>
                                         {this.currentRecipe().title}
-                                        {this.currentRecipe().wines ? <Badge bg="info" style={{marginLeft:'20px'}}>
+                                        {this.currentRecipe().wines ? <Badge bg="info" style={{ marginLeft: '20px' }}>
                                             RECAP
                                         </Badge> : null}
                                     </h4>
                                     <button className="btn btn-link" onClick={this.handleShow}>View steps</button>
-                                    {/* <div style={{ width: '100%', textAlign: 'start', height: '32px', display: 'flex', alignItems: 'center' }}>
-                                        Predicted Regions: {this.currentRecipe().regions.length ? this.currentRecipe().regions.map(r =>
-                                            <Tag content={`${r}`} declinable={true} />
+                                    {/* <div style={{ width: '100%', textAlign: 'start', height: '32px', display: 'flex', alignItems: 'center', position:'absolute', top:'10px' }}>
+                                        {this.currentRecipe().regions.length ? this.currentRecipe().regions.map((r,i) =>
+                                            <Tag key={`tag_${i}`} content={`${r}`} declinable={true} />
                                         ) : <span style={{ marginLeft: '30px', fontSize: '14px', color: 'darkgray' }}>None</span>}
-                                    </div>
-                                    <div style={{ width: '100%', textAlign: 'start', height: '32px', display: 'flex', alignItems: 'center' }}>
+                                    </div> */}
+                                    {/* <div style={{ width: '100%', textAlign: 'start', height: '32px', display: 'flex', alignItems: 'center' }}>
                                         Predicted Categories: {this.currentRecipe().labels.length ? this.currentRecipe().labels.map(l =>
                                             <Tag content={`${l} `} declinable={true} />
                                         ) : <span style={{ marginLeft: '30px', fontSize: '14px', color: 'darkgray' }}>None</span>}
@@ -394,56 +404,62 @@ class PairingTool extends React.Component {
 
                                 <div style={{ width: 'calc(100% - 400px)', height: 'calc(100% - 210px)', float: 'left', position: 'relative' }}>
                                     {
-                                        this.currentRecipe().wines ? <div id="ai-recommendations" style={{ float: 'left', width: '50%', height: '100%', paddingLeft: '20px', paddingRight: '10px' }}>
-                                            <Card style={{ width: '100%', height: '100%', padding: '20px', backgroundColor: '#f8f8f8' }}>
-                                                <Card.Title style={{ textAlign: 'left' }}>AI recommendations</Card.Title>
-                                                <Card.Body style={{ overflowY: 'auto' }}>
-                                                    {
-                                                        this.currentRecipe().wines ? this.currentRecipe().wines.map((wine, i) =>
-                                                            <div key={`AI_wines_${i}`} style={{
-                                                                marginBottom: '10px'
+                                        this.currentRecipe().wines ?
+                                            <div id="ai-recommendations" style={{
+                                                float: 'left', width: '50%', height: '100%', paddingLeft: '20px', paddingRight: '10px', position: 'relative'
+                                            }}>
+                                                <Card style={{ width: '100%', height: '100%', padding: '20px', backgroundColor: '#f8f8f8' }}>
+                                                    <Card.Title style={{ textAlign: 'left' }}>AI recommendations</Card.Title>
+                                                    <Card.Body style={{ overflowY: 'auto' }}>
+                                                        {
+                                                            this.currentRecipe().wines ? this.currentRecipe().wines.map((wine, i) =>
+                                                                <div key={`AI_wines_${i}`} style={{
+                                                                    marginBottom: '10px'
+                                                                }}>
+                                                                    <div style={{ width: '85%', float: 'left', position: 'relative' }}>
+                                                                        {
+                                                                            wine.state ?
+                                                                                <div style={{ width: '100%', height: '100%', position: 'absolute', backgroundColor: wine.state === 'accepted' ? 'green' : 'red', zIndex: 5, opacity: '20%' }}></div>
+                                                                                : null
+                                                                        }
+                                                                        <WinePlate wine={wine} disabled={true} />
+                                                                    </div>
+                                                                    <div style={{ height: '90px', width: '15%', float: 'left', display: 'flex', alignContent: 'center', justifyItems: 'center' }}>
+                                                                        <BsXLg
+                                                                            style={{ alignSelf: 'center', marginLeft: '20px', opacity: wine.state === 'accepted' ? '30%' : '' }}
+                                                                            color={wine.state === 'declined' ? 'darkred' : ''}
+                                                                            className="clickable"
+                                                                            size={wine.state === 'declined' ? 30 : 20}
+                                                                            onClick={e => { this.handleWineCancel(i) }}
+                                                                        />
+                                                                        <BsCheckLg
+                                                                            style={{ alignSelf: 'center', marginLeft: '20px', opacity: wine.state === 'declined' ? '30%' : '' }}
+                                                                            color={wine.state === 'accepted' ? 'darkgreen' : ''}
+                                                                            className="clickable"
+                                                                            size={wine.state === 'accepted' ? 30 : 20}
+                                                                            onClick={e => { this.handleWineAccept(i) }}
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                            ) : <span style={{ color: 'gray' }}>No Recommendations.</span>
+                                                        }
+                                                        <Button
+                                                            disabled={this.wineStates().some(e => !e) || this.recomSubmitButtonText() === 'Submitted'}
+                                                            onClick={this.handleRecomStatesSubmit}
+                                                            variant="danger"
+                                                            style={{
+                                                                position: 'absolute',
+                                                                bottom: '15px',
+                                                                right: '15px'
                                                             }}>
-                                                                <div style={{ width: '85%', float: 'left', position: 'relative' }}>
-                                                                    {
-                                                                        wine.state ?
-                                                                            <div style={{ width: '100%', height: '100%', position: 'absolute', backgroundColor: wine.state === 'accepted' ? 'green' : 'red', zIndex: 5, opacity: '20%' }}></div>
-                                                                            : null
-                                                                    }
-                                                                    <WinePlate wine={wine} disabled={true} />
-                                                                </div>
-                                                                <div style={{ height: '90px', width: '15%', float: 'left', display: 'flex', alignContent: 'center', justifyItems: 'center' }}>
-                                                                    <BsXLg
-                                                                        style={{ alignSelf: 'center', marginLeft: '20px', opacity: wine.state === 'accepted' ? '30%' : '' }}
-                                                                        color={wine.state === 'declined' ? 'darkred' : ''}
-                                                                        className="clickable"
-                                                                        size={wine.state === 'declined' ? 30 : 20}
-                                                                        onClick={e => { this.handleWineCancel(i) }}
-                                                                    />
-                                                                    <BsCheckLg
-                                                                        style={{ alignSelf: 'center', marginLeft: '20px', opacity: wine.state === 'declined' ? '30%' : '' }}
-                                                                        color={wine.state === 'accepted' ? 'darkgreen' : ''}
-                                                                        className="clickable"
-                                                                        size={wine.state === 'accepted' ? 30 : 20}
-                                                                        onClick={e => { this.handleWineAccept(i) }}
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                        ) : <span style={{ color: 'gray' }}>No Recommendations.</span>
-                                                    }
-                                                    <Button
-                                                        disabled={this.wineStates().some(e => !e) || this.recomSubmitButtonText() === 'Submitted'}
-                                                        onClick={this.handleRecomStatesSubmit}
-                                                        variant="danger"
-                                                        style={{
-                                                            position: 'absolute',
-                                                            bottom: '15px',
-                                                            right: '15px'
-                                                        }}>
-                                                        {this.recomSubmitButtonText()}
-                                                    </Button>
-                                                </Card.Body>
-                                            </Card>
-                                        </div> : null
+                                                            {
+                                                                this.state.updating ? <Spinner animation="border" size='sm' style={{ marginRight: '5px' }} /> : null
+                                                            }
+                                                            {this.recomSubmitButtonText()}
+                                                        </Button>
+                                                    </Card.Body>
+                                                </Card>
+                                            </div> : null
                                     }
                                     {
                                         this.currentRecipe().wines ? null : <div id="pairing-window" style={{
