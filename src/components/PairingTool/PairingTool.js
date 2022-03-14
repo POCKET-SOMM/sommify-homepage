@@ -381,11 +381,11 @@ class PairingTool extends React.Component {
                                         </Badge> : null}
                                     </h4>
                                     <button className="btn btn-link" onClick={this.handleShow}>View steps</button>
-                                    {/* <div style={{ width: '100%', textAlign: 'start', height: '32px', display: 'flex', alignItems: 'center', position:'absolute', top:'10px' }}>
+                                    <div style={{ width: '100%', textAlign: 'start', height: '32px', display: 'flex', alignItems: 'center', position:'absolute', top:'10px' }}>
                                         {this.currentRecipe().regions.length ? this.currentRecipe().regions.map((r,i) =>
-                                            <Tag key={`tag_${i}`} content={`${r}`} declinable={true} />
+                                            <Tag key={`tag_${i}`} content={`${r}`} declinable={false} />
                                         ) : <span style={{ marginLeft: '30px', fontSize: '14px', color: 'darkgray' }}>None</span>}
-                                    </div> */}
+                                    </div>
                                     {/* <div style={{ width: '100%', textAlign: 'start', height: '32px', display: 'flex', alignItems: 'center' }}>
                                         Predicted Categories: {this.currentRecipe().labels.length ? this.currentRecipe().labels.map(l =>
                                             <Tag content={`${l} `} declinable={true} />
