@@ -393,7 +393,7 @@ class PairingTool extends React.Component {
                                     </div> */}
                                 </div>
 
-                                <Card style={{ backgroundColor: '#f8f8f8', padding: '20px', height: 'calc(100% - 210px)', width: '400px', textAlign: 'start', float: 'left' }}>
+                                <Card style={{ backgroundColor: '#f8f8f8', padding: '20px', height: 'calc(100% - 170px)', width: '400px', textAlign: 'start', float: 'left' }}>
                                     <Card.Title>Ingredient List</Card.Title>
                                     <Card.Body style={{ overflowY: 'auto' }}>
                                         {this.currentRecipe().ingredients.map((ing, i) =>
@@ -402,21 +402,21 @@ class PairingTool extends React.Component {
                                     </Card.Body>
                                 </Card>
 
-                                <div style={{ width: 'calc(100% - 400px)', height: 'calc(100% - 210px)', float: 'left', position: 'relative' }}>
+                                <div style={{ width: 'calc(100% - 400px)', height: 'calc(100% - 170px)', float: 'left', position: 'relative' }}>
                                     {
                                         this.currentRecipe().wines ?
                                             <div id="ai-recommendations" style={{
-                                                float: 'left', width: '50%', height: '100%', paddingLeft: '20px', paddingRight: '10px', position: 'relative'
+                                                float: 'left', width: '80%', height: '100%', paddingLeft: '20px', paddingRight: '10px', position: 'relative'
                                             }}>
                                                 <Card style={{ width: '100%', height: '100%', padding: '20px', backgroundColor: '#f8f8f8' }}>
                                                     <Card.Title style={{ textAlign: 'left' }}>AI recommendations</Card.Title>
-                                                    <Card.Body style={{ overflowY: 'auto' }}>
+                                                    <Card.Body style={{}}>
                                                         {
-                                                            this.currentRecipe().wines ? this.currentRecipe().wines.map((wine, i) =>
+                                                            this.currentRecipe().wines ? this.currentRecipe().wines.slice(0,4).map((wine, i) =>
                                                                 <div key={`AI_wines_${i}`} style={{
                                                                     marginBottom: '10px'
                                                                 }}>
-                                                                    <div style={{ width: '85%', float: 'left', position: 'relative' }}>
+                                                                    <div style={{ width: '65%', float: 'left', position: 'relative' }}>
                                                                         {
                                                                             wine.state ?
                                                                                 <div style={{ width: '100%', height: '100%', position: 'absolute', backgroundColor: wine.state === 'accepted' ? 'green' : 'red', zIndex: 5, opacity: '20%' }}></div>
@@ -507,12 +507,12 @@ class PairingTool extends React.Component {
                     } />
                 </div>
 
-                <div style={{ position: 'absolute', width: '100%', bottom: '25px', fontSize: '30px', display: 'flex', justifyContent: 'center' }}>
+                <div style={{ position: 'absolute', width: '100%', bottom: '10px', fontSize: '25px', display: 'flex', justifyContent: 'center' }}>
                     <ChevronCompactLeft
                         style={{ opacity: this.state.recipeIndex && !this.state.loading ? '' : '20%' }}
                         onClick={this.handlePrevClick}
                         className={this.state.recipeIndex && !this.state.loading ? 'clickable' : ''}
-                        size={50} />
+                        size={40} />
                     <div style={{ width: '100px' }}>
                         <span>{this.state.recipeIndex + 1}/{this.state.recipeHistory.length}</span>
                     </div>
@@ -520,7 +520,7 @@ class PairingTool extends React.Component {
                         style={{ opacity: !this.state.loading ? '' : '20%' }}
                         onClick={this.handleNextClick}
                         className={!this.state.loading ? 'clickable' : ''}
-                        size={50} />
+                        size={40} />
                 </div>
             </div>
         )
