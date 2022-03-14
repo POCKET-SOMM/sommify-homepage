@@ -189,7 +189,7 @@ class PairingTool extends React.Component {
 
     nextRecipe = async () => {
         let isFb = (this.state.recipeHistory.length + 1) % 4 === 0
-        let category = isFb ? this.fbCategory() : 'fish'
+        let category = isFb ? this.fbCategory() : 'seafood'
 
         this.setState({ loading: true })
 
@@ -369,7 +369,7 @@ class PairingTool extends React.Component {
 
 
                             <div id="recipe-window" style={{ position: 'relative', width: '100%', height: 'calc((100vh - 80px))', paddingLeft: '60px', paddingRight: '60px' }}>
-                                <Button variant="link" onClick={this.handleShowHistory} style={{ position: 'absolute', top: '10px', right: '10px' }}>
+                                <Button variant="link" onClick={this.handleShowHistory} style={{ position: 'absolute', top: '10px', right: '10px', zIndex:10 }}>
                                     Session History
                                 </Button>
 
