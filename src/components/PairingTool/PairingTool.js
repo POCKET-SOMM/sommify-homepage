@@ -204,7 +204,7 @@ class PairingTool extends React.Component {
 
         let wineResponse = isFb ? await axios.request(options_2) : { data: null }
 
-        console.log(recipeResponse.data.Cuisine)
+        // console.log(recipeResponse.data.Cuisine)
 
         this.setState(oldState => ({
             loading: false,
@@ -218,7 +218,7 @@ class PairingTool extends React.Component {
                 steps: recipeResponse.data.Steps,
                 pairingText: '',
                 paired: 0,
-                wines: wineResponse.data,
+                wines: wineResponse.data ? wineResponse.data.slice(0,4) : wineResponse.data,
                 category: category
             }],
             recipeIndex: oldState.recipeIndex + 1,
@@ -412,7 +412,7 @@ class PairingTool extends React.Component {
                                                     <Card.Title style={{ textAlign: 'left' }}>AI recommendations</Card.Title>
                                                     <Card.Body style={{}}>
                                                         {
-                                                            this.currentRecipe().wines ? this.currentRecipe().wines.slice(0,4).map((wine, i) =>
+                                                            this.currentRecipe().wines ? this.currentRecipe().wines.map((wine, i) =>
                                                                 <div key={`AI_wines_${i}`} style={{
                                                                     marginBottom: '10px'
                                                                 }}>
