@@ -278,10 +278,12 @@ class PairingTool extends React.Component {
     handleRecomStatesSubmit = () => {
         let history = this.state.recipeHistory
 
-        let acceptedWines = this.currentRecipe().wines.filter(w => w.state === 'accepted').map(w => ({
+        let acceptedWines = this.currentRecipe().wines.map(w => ({
             link: w.link,
             info: w.state
         }))
+
+        // console.log(acceptedWines)
 
         this.submitRecipe(acceptedWines)
 
@@ -455,7 +457,7 @@ class PairingTool extends React.Component {
                                                             {
                                                                 this.state.updating ? <Spinner animation="border" size='sm' style={{ marginRight: '5px' }} /> : null
                                                             }
-                                                            {this.recomSubmitButtonText()}
+                                                            { this.recomSubmitButtonText() }
                                                         </Button>
                                                     </Card.Body>
                                                 </Card>
