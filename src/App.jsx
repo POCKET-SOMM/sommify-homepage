@@ -12,19 +12,42 @@ import AboutUs from './components/AboutUs';
 import DemoGuide from './components/DemoGuide';
 import ContactUs from './components/ContactUs';
 
+import SimpleBar from 'simplebar-react';
+import 'simplebar/dist/simplebar.min.css';
+
 // const MAIN_COLOR = '#e7154e'
 // const SECONDARY_COLOR = '#fce3ee'
 export const MAIN_COLOR_DEP = '#80183b'
-
 export const SERVER_URL = 'https://pocketsommapi.azurewebsites.net'
+
+
+const IMAGES = ['team_jp.jpeg', 'team_jd.jpeg', 'team_wb.jpeg', 'team_tb.jpeg']
+
+const loadImage = image => {
+  return new Promise((resolve, reject) => {
+    const loadImg = new Image()
+    loadImg.src = image
+    // wait 2 seconds to simulate loading time
+    loadImg.onload = () =>
+      setTimeout(() => {
+        resolve(image)
+      }, 2000)
+
+    loadImg.onerror = err => reject(err)
+  })
+}
 
 function App() {
   const [width, setWidth] = useState(window.innerWidth);
-
   const [pane, setPane] = useState('')
+  const [loadingPfps, setLoadingPfps] = useState(true)
 
   useEffect(() => {
-    console.log(window.location)
+    Promise.all(IMAGES.map(image => loadImage(image)))
+      .then(() => {
+        setLoadingPfps(false)
+      })
+      .catch(err => console.log("Failed to load profile pictures", err))
 
     window.addEventListener('resize', handleWindowSizeChange);
     return () => {
@@ -112,7 +135,7 @@ function App() {
 
   function Content() {
     if (pane === 'ABOUT US') {
-      return (<AboutUs />)
+      return (<AboutUs loading={loadingPfps} />)
     }
     if (pane === 'DEMO GUIDE') {
       return (<DemoGuide />)
@@ -124,15 +147,16 @@ function App() {
   }
 
   const CarouselItems = [
+    { img: 'phone_app.webp', title: 'Phone App', text: 'PocketSomm will be launched as an app for Android and iOS to make quality pairings accessible to anyone anywhere. Stay tuned.' },
     { img: 'winestore.jpg', title: 'Online Wine Store', text: 'Selling wine online? Let PocketSomm help create the customer experience of a brick-and-mortar location with quality pairing advice.' },
     { img: 'homecook.jpg', title: 'Smart Home', text: 'Imagine a world in which you have a world-class sommelier at home advising you on which bottle from your wine cooler pairs the best with the meals possible from the ingredients in your refrigerator.' },
     { img: 'delivery.jpg', title: 'Food Delivery', text: 'Whether you are offering food boxes or delivery from restaurants PocketSomm offers the opportunity to cross-sell wine or just enhance the experience.' },
     { img: 'retail.webp', title: 'Add-On', text: 'You might already have an app or website that relates to food, like a grocery chain, where you want to enhance the customer experience or drive sales.' },
-    { img: 'other.jpg', title: 'Other', text: 'The possibilities are endless; the only barriers are your imagination and local alcohol regulation...' }
+    // { img: 'other.jpg', title: 'Other', text: 'The possibilities are endless; the only barriers are your imagination and local alcohol regulation...' }
   ]
 
   return (
-    <div className="App">
+    <div className="App" style={{ overflow: 'hidden' }}>
       <Navbar
         className="nodrag"
         variant="dark"
@@ -141,7 +165,7 @@ function App() {
           zIndex: 6,
           // boxShadow: '0px 11px 17px 2px rgba(0,0,0,0.45)',
           height: isDesktop ? '80px' : '80px',
-          backgroundColor: MAIN_COLOR_DEP
+          backgroundColor: MAIN_COLOR_DEP,
         }}
       >
         <Nav style={{
@@ -181,6 +205,7 @@ function App() {
 
       {
         true ? <Offcanvas style={{
+          // marginTop: '80px',
           width: isDesktop ? '42%' : '100%',
           backgroundColor: '#1f202b',
           borderColor: '#393b4d',
@@ -188,13 +213,18 @@ function App() {
           borderWidth: '1px',
           zIndex: 5,
           color: 'white',
-          padding: isDesktop ? '40px' : '20px',
+          padding: '5px',
           textAlign: 'left',
-        }} backdrop backdropClassName='custom-backdrop' scroll={true} show={pane} onHide={e => { setPane('') }}>
-          <div style={{ width: '100%', height: '80px' }}></div>
-          <div style={{ height: 'calc(100%)', width: '100%', overflowY: 'auto' }}>
+        }}
+          backdrop
+          backdropClassName='custom-backdrop'
+          scroll={true}
+          show={pane}
+          onHide={e => { setPane('') }}>
+          <div style={{ height: '80px' }}></div>
+          <SimpleBar style={{ height: 'calc(100% - 80px)', width: '100%', padding: isDesktop ? '40px' : '20px', }}>
             <Content />
-          </div>
+          </SimpleBar>
         </Offcanvas> : null
       }
 
@@ -264,7 +294,7 @@ function App() {
                   src='try_our_demo.png'
                   style={{ position: 'absolute', zIndex: 5, marginLeft: '580px', marginTop: '30px' }}></img>
               </div>
-              <Carousel interval={8500} indicatorLabels={[1, 2, 3]} style={{ width: '100%', height: 'calc(100vh - 80px)' }}>
+              <Carousel fade interval={8500} indicatorLabels={[1, 2, 3]} style={{ width: '100%', height: 'calc(100vh - 80px)' }}>
                 {
                   CarouselItems.map((item, i) =>
                     <Carousel.Item key={`bg_carousel_${i}`}>

@@ -4,8 +4,8 @@ import {Offcanvas} from 'react-bootstrap'
 class DemoGuide extends React.Component {
     render() {
         return (
-            <div>
-                <Offcanvas.Header closeButton>
+            <div style={{ fontSize: '15px' }}>
+                <Offcanvas.Header style={{paddingTop:'0px', paddingLeft:'0px'}}>
                     <Offcanvas.Title><h3>Demo Guide</h3></Offcanvas.Title>
                 </Offcanvas.Header>
                 <span>By pasting a recipe link:</span><br /><br />
