@@ -1,6 +1,7 @@
 import React from 'react';
-import { Offcanvas } from 'react-bootstrap';
+import { Fade, Offcanvas } from 'react-bootstrap';
 import { Linkedin, Globe2, Envelope } from 'react-bootstrap-icons';
+import Loadable from './Loadable';
 // import { MAIN_COLOR_DEP } from '../App';
 
 const teamMembers = [
@@ -11,11 +12,14 @@ const teamMembers = [
 ]
 
 class AboutUs extends React.Component {
+    constructor(props) {
+        super(props)
+    }
 
     render() {
         return (
-            <div>
-                <Offcanvas.Header closeButton>
+            <div style={{ fontSize: '15px' }}>
+                <Offcanvas.Header style={{ paddingTop: '0px', paddingLeft: '0px' }}>
                     <Offcanvas.Title><h3>About Us</h3></Offcanvas.Title>
                 </Offcanvas.Header>
                 {/* <div style={{ height: '60px' }}>
@@ -42,7 +46,14 @@ class AboutUs extends React.Component {
                     that.
                 </span><br /> */}
                 <span>
-                    Download our <span style={{ color: 'white' }} className="link clickable" onClick={e => { window.open('https://drive.google.com/file/d/1G1I1LyJBbGbM-ZcHsYxKfxbW77CiCziW/') }}>deck</span>.
+                    We are packaging the AI somm into an app and also licensing it as an API to large actors in the wine and food space.
+                    <br />
+                    To find out more, download our <span
+                        style={{ color: 'white', textDecoration: 'underline' }}
+                        className="link clickable"
+                        onClick={e => { window.open('https://drive.google.com/file/d/1G1I1LyJBbGbM-ZcHsYxKfxbW77CiCziW/') }}>
+                        deck
+                    </span>.
                 </span>
 
                 <br /><br /><br />
@@ -52,7 +63,13 @@ class AboutUs extends React.Component {
                     {
                         teamMembers.map(member =>
                             <div style={{ height: '100px', marginBottom: '20px', width: '340px', display: 'inline-block' }}>
-                                <img alt={`${member.image}`} src={member.image} width={100} style={{ float: 'left' }} />
+                                <div style={{ width: '100px', height: '100px', float: 'left', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Loadable style={{ margin: 'auto' }} loading={this.props.loading} component={
+                                        <Fade appear in={!this.props.loading}>
+                                            <img alt={`${member.image}`} src={member.image} width={100} />
+                                        </Fade>
+                                    } />
+                                </div>
                                 <span style={{ float: 'left', marginLeft: '20px' }}>
                                     <b>{member.name}</b><br />
                                     {member.title} <br />
