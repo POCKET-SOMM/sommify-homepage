@@ -130,6 +130,7 @@ class PairingTool extends React.Component {
         history[this.state.recipeIndex].pairingText = this.state.textBoxContent
         // let isUpdate = this.state.recipeIndex + 1 !== this.state.recipeHistory.length
 
+        
         const options = {
             method: 'POST',
             url: `${SERVER_URL}/api/v1/recipePairing`,
@@ -183,7 +184,7 @@ class PairingTool extends React.Component {
     }
 
     fbCategory = () => {
-        let fbCats = ['dessert']
+        let fbCats = ['dessert', 'fish']
         return fbCats[Math.floor(Math.random() * fbCats.length)]
     }
 
@@ -218,7 +219,7 @@ class PairingTool extends React.Component {
                 steps: recipeResponse.data.Steps,
                 pairingText: '',
                 paired: 0,
-                wines: wineResponse.data ? wineResponse.data.slice(0,4) : wineResponse.data,
+                wines: wineResponse.data ? wineResponse.data.slice(0, 4) : wineResponse.data,
                 category: category
             }],
             recipeIndex: oldState.recipeIndex + 1,
@@ -371,7 +372,7 @@ class PairingTool extends React.Component {
 
 
                             <div id="recipe-window" style={{ position: 'relative', width: '100%', height: 'calc((100vh - 80px))', paddingLeft: '60px', paddingRight: '60px' }}>
-                                <Button variant="link" onClick={this.handleShowHistory} style={{ position: 'absolute', top: '10px', right: '10px', zIndex:10 }}>
+                                <Button variant="link" onClick={this.handleShowHistory} style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 10 }}>
                                     Session History
                                 </Button>
 
@@ -383,8 +384,8 @@ class PairingTool extends React.Component {
                                         </Badge> : null}
                                     </h4>
                                     <button className="btn btn-link" onClick={this.handleShow}>View steps</button>
-                                    <div style={{ width: '100%', textAlign: 'start', height: '32px', display: 'flex', alignItems: 'center', position:'absolute', top:'10px' }}>
-                                        {this.currentRecipe().regions.length ? this.currentRecipe().regions.map((r,i) =>
+                                    <div style={{ width: '100%', textAlign: 'start', height: '32px', display: 'flex', alignItems: 'center', position: 'absolute', top: '10px' }}>
+                                        {this.currentRecipe().regions.length ? this.currentRecipe().regions.map((r, i) =>
                                             <Tag key={`tag_${i}`} content={`${r}`} declinable={false} />
                                         ) : <span style={{ marginLeft: '30px', fontSize: '14px', color: 'darkgray' }}>None</span>}
                                     </div>
@@ -457,7 +458,7 @@ class PairingTool extends React.Component {
                                                             {
                                                                 this.state.updating ? <Spinner animation="border" size='sm' style={{ marginRight: '5px' }} /> : null
                                                             }
-                                                            { this.recomSubmitButtonText() }
+                                                            {this.recomSubmitButtonText()}
                                                         </Button>
                                                     </Card.Body>
                                                 </Card>
