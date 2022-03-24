@@ -123,14 +123,13 @@ function Body({ isMobile, screenWidth }) {
       })
     }
 
-    console.log(wines[priceIndex(priceRange)][0]['PRODUCT NUMBER'])
-
     if (wines.length === 3) {
       setAllWines(
         wines
       )
       setDisplayedWines(wines[priceIndex(priceRange)])
     } else {
+      setAllWines([])
       setDisplayedWines(wines)
     }
 
@@ -256,8 +255,8 @@ function Body({ isMobile, screenWidth }) {
           "" : error.message
       )
       if (error.response) {
-        console.log(error.response.data.detail)
-        loadWines(error.response.data.detail)
+        console.log(error.response.data)
+        loadWines(error.response.data)
       } else {
         setWining(false)
       }
@@ -479,6 +478,7 @@ function Body({ isMobile, screenWidth }) {
               ["$", "$$", "$$$"].map(level =>
                 <Button
                   key={level}
+                  disabled={allWines.length===0}
                   onClick={e => {
                     handlePriceLevelChange(level)
                   }}
@@ -486,6 +486,7 @@ function Body({ isMobile, screenWidth }) {
                   variant="outline-danger"
                   active={priceRange === level}
                   style={{
+                    opacity: allWines.length===0 ? '0' : '1',
                     padding: '0px',
                     width: '45px',
                     height: '20px',
