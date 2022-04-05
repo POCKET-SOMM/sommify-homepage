@@ -184,18 +184,22 @@ class PairingTool extends React.Component {
     }
 
     fbCategory = () => {
-        let fbCats = ['dessert', 'fish']
+        let fbCats = [
+            'dessert', 
+            // 'fish', 
+            'seafood'
+        ]
         return fbCats[Math.floor(Math.random() * fbCats.length)]
     }
 
     nextRecipe = async () => {
         let isFb = (this.state.recipeHistory.length + 1) % 4 === 0
-        let category = isFb ? this.fbCategory() : 'seafood'
+        let category = isFb ? this.fbCategory() : 'meat'
 
         this.setState({ loading: true })
 
         const recipeResponse = await axios.get(`${SERVER_URL}/api/v1/randomRecipe?category=${category}`)
-
+ 
         const options_2 = {
             method: 'POST',
             url: `https://pocketsommapi.azurewebsites.net/api/v1/recipeId2wineAi`,
