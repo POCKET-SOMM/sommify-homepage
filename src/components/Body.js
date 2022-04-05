@@ -245,7 +245,7 @@ function Body({ isMobile, screenWidth }) {
     };
 
     axios.request(options).then(function (response) {
-      console.log(response.data.wines)
+      console.log(response.data)
       setSearchErr(false)
       // console.log(response.data)
       loadWines(response.data)

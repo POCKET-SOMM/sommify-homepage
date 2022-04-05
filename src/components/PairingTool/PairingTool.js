@@ -184,13 +184,17 @@ class PairingTool extends React.Component {
     }
 
     fbCategory = () => {
-        let fbCats = ['dessert', 'fish']
+        let fbCats = [
+            'dessert', 
+            // 'fish', 
+            'seafood'
+        ]
         return fbCats[Math.floor(Math.random() * fbCats.length)]
     }
 
     nextRecipe = async () => {
         let isFb = (this.state.recipeHistory.length + 1) % 4 === 0
-        let category = isFb ? this.fbCategory() : 'seafood'
+        let category = isFb ? this.fbCategory() : 'meat'
 
         this.setState({ loading: true })
 
