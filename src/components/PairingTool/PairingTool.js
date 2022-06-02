@@ -202,7 +202,7 @@ class PairingTool extends React.Component {
  
         const options_2 = {
             method: 'POST',
-            url: `https://pocketsommapi.azurewebsites.net/api/v1/recipeId2wineAi`,
+            url: `https://pocketsommapi.azurewebsites.net/api/v1/recipeId2wineAi?category=${category}`,
             headers: { 'Content-Type': 'application/json' },
             data: { id: parseInt(recipeResponse.data.Recipe_id) }
         };
