@@ -633,21 +633,21 @@ class PairingTool extends React.Component {
                     justifyContent: 'center'
                 }}>
                     {
-                        this.state.progression !== null && !this.state.loading ?
-                            <Card style={{ height: '100%', width: '300px', position: 'absolute', left: '70px', bottom: '20px' }}>
-                                {/* {this.state.progression} */}
-                                <span style={{fontSize:'15px'}}>
-                                    {this.currentRecipe().category} pairings
-                                </span>
-                                <ProgressBar
-                                    variant='danger'
-                                    now={(parseInt(this.state.progression) / 300) * 100}
-                                    striped
-                                    animated
-                                    label={`${this.state.progression} / 300`}
-                                />
-                            </Card> :
-                            null
+                        // this.state.progression !== null && !this.state.loading ?
+                        //     <Card bg='dark' style={{ height: '100%', width: '300px', position: 'absolute', left: '70px', bottom: '20px', color: 'white' }}>
+                        //         {/* {this.state.progression} */}
+                        //         <span style={{ fontSize: '15px' }}>
+                        //             {this.currentRecipe().category} pairings
+                        //         </span>
+                        //         <ProgressBar
+                        //             variant='danger'
+                        //             now={(parseInt(this.state.progression) / 300) * 100}
+                        //             striped
+                        //             animated
+                        //             label={`${this.state.progression} / 300`}
+                        //         />
+                        //     </Card> :
+                        //     null
                     }
 
                     <ChevronCompactLeft
