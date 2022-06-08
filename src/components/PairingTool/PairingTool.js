@@ -1,6 +1,6 @@
 import './PairingTool.scss';
 import React from 'react';
-import { Form, Modal, Button, ListGroup, Toast, Offcanvas, Badge, Card, Spinner } from 'react-bootstrap';
+import { Form, Modal, Button, ListGroup, Toast, Offcanvas, Badge, Card, Spinner, ProgressBar } from 'react-bootstrap';
 import axios from 'axios';
 import { BsXLg, BsCheckLg } from "react-icons/bs";
 import Loadable from '../Loadable';
@@ -8,13 +8,16 @@ import { ChevronCompactLeft, ChevronCompactRight } from 'react-bootstrap-icons';
 import { SERVER_URL } from '../../App';
 import WinePlate from '../WinePlate';
 import Tag from './Tag';
+import ContentCard from './ContentCard';
 
 const emptyRecipe = {
     steps: '',
+    thumbnails: [],
     ingredients: [],
     regions: [],
     labels: [],
-    pairingText: ''
+    pairingText: '',
+    similarWines: []
 }
 
 class PairingTool extends React.Component {
@@ -31,7 +34,10 @@ class PairingTool extends React.Component {
             toastShow: false,
             showHistory: false,
             toastContent: '',
-            textBoxContent: ''
+            textBoxContent: '',
+            similarWines: [],
+            loadingRecommended: false,
+            progression: null
         }
 
         this.pairingChanged = this.pairingChanged.bind(this)
@@ -39,7 +45,23 @@ class PairingTool extends React.Component {
     }
 
     componentDidMount() {
+        axios.get(`${SERVER_URL}/api/pairingtool/getPairingStats`).then(res => {
+            console.log(res)
+        })
         this.nextRecipe()
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.textBoxContent !== this.state.textBoxContent) {
+            this.fetchSimilarWines(
+                this.listOfUrls(this.state.textBoxContent)
+            )
+        }
+        if (prevState.similarWines !== this.state.similarWines) {
+            this.setState({
+                loadingRecommended: false
+            })
+        }
     }
 
     handleClose = () => this.setState({ show: false })
@@ -48,10 +70,13 @@ class PairingTool extends React.Component {
     handleShowHistory = () => this.setState({ showHistory: true })
 
     goToRecipe = (index) => {
+        const textBoxContent = this.state.recipeHistory[index].pairingText
         this.setState({
             recipeIndex: index,
-            textBoxContent: this.state.recipeHistory[index].pairingText
+            textBoxContent: textBoxContent,
+            similarWines: []
         })
+        this.fetchSimilarWines(this.listOfUrls(textBoxContent))
     }
 
     handleNextClick = () => {
@@ -130,7 +155,7 @@ class PairingTool extends React.Component {
         history[this.state.recipeIndex].pairingText = this.state.textBoxContent
         // let isUpdate = this.state.recipeIndex + 1 !== this.state.recipeHistory.length
 
-        
+
         const options = {
             method: 'POST',
             url: `${SERVER_URL}/api/v1/recipePairing`,
@@ -185,7 +210,7 @@ class PairingTool extends React.Component {
 
     fbCategory = () => {
         let fbCats = [
-            'dessert', 
+            'dessert',
             // 'fish', 
             'seafood'
         ]
@@ -198,18 +223,27 @@ class PairingTool extends React.Component {
 
         this.setState({ loading: true })
 
-        const recipeResponse = await axios.get(`${SERVER_URL}/api/v1/randomRecipe?category=${category}`)
- 
+        const recipeResponse = await axios.get(`${SERVER_URL}/api/pairingtool/randomRecipe?category=${category}`)
+
         const options_2 = {
             method: 'POST',
-            url: `https://pocketsommapi.azurewebsites.net/api/v1/recipeId2wineAi?category=${category}`,
+            url: `${SERVER_URL}/api/v1/recipeId2wineAi?category=${category}`,
             headers: { 'Content-Type': 'application/json' },
             data: { id: parseInt(recipeResponse.data.Recipe_id) }
         };
 
         let wineResponse = isFb ? await axios.request(options_2) : { data: null }
 
+        let progression = await axios.request({
+            method: 'GET',
+            url: `${SERVER_URL}/api/pairingtool/getPairingStats`,
+            // headers: { 'Content-Type': 'application/json' },
+            // data: { id: parseInt(recipeResponse.data.Recipe_id) }
+        })
+
         // console.log(recipeResponse.data.Cuisine)
+        // console.log(recipeResponse.data)
+        // console.log(progression.data.counts.find(e => e._id === category).count)
 
         this.setState(oldState => ({
             loading: false,
@@ -224,20 +258,23 @@ class PairingTool extends React.Component {
                 pairingText: '',
                 paired: 0,
                 wines: wineResponse.data ? wineResponse.data.slice(0, 4) : wineResponse.data,
-                category: category
+                category: category,
+                thumbnails: recipeResponse.data.thumbnails
             }],
             recipeIndex: oldState.recipeIndex + 1,
-            textBoxContent: ''
+            textBoxContent: '',
+            similarWines: [],
+            progression: progression.data.counts.find(e => e._id === category).count
         }))
     }
 
     handleTextChange = text => {
-        this.setState({ textBoxContent: text })
+        this.setState({ textBoxContent: text.replace(/\n+/, '\n') })
 
-        // let recipeHistory = this.state.recipeHistory
-        // recipeHistory[this.state.recipeIndex].pairingText = text
+        console.log(this.listOfUrls(text))
 
-        // this.setState({ recipeHistory: recipeHistory })
+        if (this.listOfUrls(text).length)
+            this.fetchSimilarWines(this.listOfUrls(text))
     }
 
     listOfUrls = (text) => {
@@ -298,9 +335,55 @@ class PairingTool extends React.Component {
         })
     }
 
+    fetchSimilarWines = (urls) => {
+        if (!urls.length) {
+            this.setState({
+                loadingRecommended: false,
+                similarWines: []
+            })
+            return
+        }
+        this.setState({
+            loadingRecommended: true
+        })
+        axios.post(`${SERVER_URL}/api/pairingtool/similarWinesByLink`, {
+            wineLinks: urls
+        }).then(res => {
+            this.setState({
+                similarWines: res.data
+            })
+            // console.log(res.data)
+        }).catch(err => {
+            console.error('Fetching similar wines failed', err)
+        })
+    }
+
+    addSimilarWine = (wine) => {
+        const updatedList = this.state.textBoxContent + '\n' + wine.link
+        this.setState({
+            textBoxContent: updatedList
+        })
+        this.fetchSimilarWines(this.listOfUrls(updatedList))
+    }
+
+    similarWinesList = () => {
+        return this.state.similarWines.filter(wine => !this.listOfUrls(this.state.textBoxContent).includes(wine.link)).map(
+            wine => <div style={{ width: '100%' }}>
+                <div style={{ width: 'calc(100% - 100px)', float: 'left', height: '90px' }}>
+                    <WinePlate wine={wine} disabled={true} />
+                </div>
+                <div style={{ width: '100px', height: '90px', float: 'left', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Button onClick={() => { this.addSimilarWine(wine) }} size='sm' variant='danger'>
+                        Add
+                    </Button>
+                </div>
+            </div>
+        )
+    }
+
     render() {
         return (
-            <div className='nodrag' style={{ display: 'flex', height: 'calc(100vh - 80px)', width: '100%', backgroundColor: '#f0f0f0' }}>
+            <div style={{ display: 'flex', height: 'calc(100vh - 80px)', width: '100%', backgroundColor: '#f0f0f0' }}>
                 <div style={{ width: '100%', height: '100%', position: 'relative' }}>
                     <Loadable style={{ marginTop: '300px' }} loading={this.state.loading} component={
                         <div id="page-body">
@@ -309,6 +392,18 @@ class PairingTool extends React.Component {
                                     <Modal.Title>{this.currentRecipe().title}</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
+                                    <div style={{ width: '100%', height: '200px', display: 'flex', padding: '20px' }}>
+                                        {
+                                            this.currentRecipe().thumbnails.map(
+                                                (thumb, i) => <img
+                                                    // style={{ flex: 1 }}
+                                                    key={`recipe_thumb_${i}`}
+                                                    alt={`recipe_thumb_${i}`}
+                                                    src={thumb}
+                                                />
+                                            )
+                                        }
+                                    </div>
                                     <ListGroup variant="flush">
                                         {this.currentRecipe().steps.split(/\| [0-9]+\./).splice(1).map((step, i) =>
                                             <ListGroup.Item key={`recipe_step_${i}`}>
@@ -380,14 +475,14 @@ class PairingTool extends React.Component {
                                     Session History
                                 </Button>
 
-                                <div style={{ width: '100%', height: '100px', paddingTop: '10px', position: 'relative' }}>
+                                <div id='title-header' style={{ width: '100%', height: '100px', paddingTop: '10px', position: 'relative' }}>
                                     <h4>
                                         {this.currentRecipe().title}
                                         {this.currentRecipe().wines ? <Badge bg="info" style={{ marginLeft: '20px' }}>
                                             RECAP
                                         </Badge> : null}
                                     </h4>
-                                    <button className="btn btn-link" onClick={this.handleShow}>View steps</button>
+                                    <button className="btn btn-link" onClick={this.handleShow}>View detail</button>
                                     <div style={{ width: '100%', textAlign: 'start', height: '32px', display: 'flex', alignItems: 'center', position: 'absolute', top: '10px' }}>
                                         {this.currentRecipe().regions.length ? this.currentRecipe().regions.map((r, i) =>
                                             <Tag key={`tag_${i}`} content={`${r}`} declinable={false} />
@@ -400,121 +495,161 @@ class PairingTool extends React.Component {
                                     </div> */}
                                 </div>
 
-                                <Card style={{ backgroundColor: '#f8f8f8', padding: '20px', height: 'calc(100% - 170px)', width: '400px', textAlign: 'start', float: 'left' }}>
+                                <ContentCard id='ing-list' style={{ height: 'calc(100% - 170px)', width: '400px', float: 'left' }}>
                                     <Card.Title>Ingredient List</Card.Title>
                                     <Card.Body style={{ overflowY: 'auto' }}>
                                         {this.currentRecipe().ingredients.map((ing, i) =>
                                             <span key={`ingredient_${i}`} style={{ display: 'block' }}>• {ing}</span>)
                                         }
                                     </Card.Body>
-                                </Card>
+                                </ContentCard>
 
-                                <div style={{ width: 'calc(100% - 400px)', height: 'calc(100% - 170px)', float: 'left', position: 'relative' }}>
+                                <div id='feedback-window' style={{ width: 'calc(100% - 400px)', height: 'calc(100% - 170px)', float: 'left', position: 'relative' }}>
                                     {
                                         this.currentRecipe().wines ?
-                                            <div id="ai-recommendations" style={{
-                                                float: 'left', width: '80%', height: '100%', paddingLeft: '20px', paddingRight: '10px', position: 'relative'
-                                            }}>
-                                                <Card style={{ width: '100%', height: '100%', padding: '20px', backgroundColor: '#f8f8f8' }}>
-                                                    <Card.Title style={{ textAlign: 'left' }}>AI recommendations</Card.Title>
-                                                    <Card.Body style={{}}>
-                                                        {
-                                                            this.currentRecipe().wines ? this.currentRecipe().wines.map((wine, i) =>
-                                                                <div key={`AI_wines_${i}`} style={{
-                                                                    marginBottom: '10px'
-                                                                }}>
-                                                                    <div style={{ width: '65%', float: 'left', position: 'relative' }}>
-                                                                        {
-                                                                            wine.state ?
-                                                                                <div style={{ width: '100%', height: '100%', position: 'absolute', backgroundColor: wine.state === 'accepted' ? 'green' : 'red', zIndex: 5, opacity: '20%' }}></div>
-                                                                                : null
-                                                                        }
-                                                                        <WinePlate wine={wine} disabled={true} />
-                                                                    </div>
-                                                                    <div style={{ height: '90px', width: '15%', float: 'left', display: 'flex', alignContent: 'center', justifyItems: 'center' }}>
-                                                                        <BsXLg
-                                                                            style={{ alignSelf: 'center', marginLeft: '20px', opacity: wine.state === 'accepted' ? '30%' : '' }}
-                                                                            color={wine.state === 'declined' ? 'darkred' : ''}
-                                                                            className="clickable"
-                                                                            size={wine.state === 'declined' ? 30 : 20}
-                                                                            onClick={e => { this.handleWineCancel(i) }}
-                                                                        />
-                                                                        <BsCheckLg
-                                                                            style={{ alignSelf: 'center', marginLeft: '20px', opacity: wine.state === 'declined' ? '30%' : '' }}
-                                                                            color={wine.state === 'accepted' ? 'darkgreen' : ''}
-                                                                            className="clickable"
-                                                                            size={wine.state === 'accepted' ? 30 : 20}
-                                                                            onClick={e => { this.handleWineAccept(i) }}
-                                                                        />
-                                                                    </div>
-                                                                </div>
-                                                            ) : <span style={{ color: 'gray' }}>No Recommendations.</span>
-                                                        }
-                                                        <Button
-                                                            disabled={this.wineStates().some(e => !e) || this.recomSubmitButtonText() === 'Submitted'}
-                                                            onClick={this.handleRecomStatesSubmit}
-                                                            variant="danger"
-                                                            style={{
-                                                                position: 'absolute',
-                                                                bottom: '15px',
-                                                                right: '15px'
+                                            <ContentCard style={{ height: '100%', width: '1000px' }}>
+                                                <Card.Title style={{ textAlign: 'left' }}>Recommended wines</Card.Title>
+                                                <Card.Body>
+                                                    {
+                                                        this.currentRecipe().wines ? this.currentRecipe().wines.map((wine, i) =>
+                                                            <div key={`AI_wines_${i}`} style={{
+                                                                marginBottom: '10px'
                                                             }}>
+                                                                <div style={{ width: '65%', float: 'left', position: 'relative' }}>
+                                                                    {
+                                                                        wine.state ?
+                                                                            <div style={{ width: '100%', height: '100%', position: 'absolute', backgroundColor: wine.state === 'accepted' ? 'green' : 'red', zIndex: 5, opacity: '20%' }}></div>
+                                                                            : null
+                                                                    }
+                                                                    <WinePlate wine={wine} disabled={true} />
+                                                                </div>
+                                                                <div style={{ height: '90px', width: '15%', float: 'left', display: 'flex', alignContent: 'center', justifyItems: 'center' }}>
+                                                                    <BsXLg
+                                                                        style={{ alignSelf: 'center', marginLeft: '20px', opacity: wine.state === 'accepted' ? '30%' : '' }}
+                                                                        color={wine.state === 'declined' ? 'darkred' : ''}
+                                                                        className="clickable"
+                                                                        size={wine.state === 'declined' ? 30 : 20}
+                                                                        onClick={e => { this.handleWineCancel(i) }}
+                                                                    />
+                                                                    <BsCheckLg
+                                                                        style={{ alignSelf: 'center', marginLeft: '20px', opacity: wine.state === 'declined' ? '30%' : '' }}
+                                                                        color={wine.state === 'accepted' ? 'darkgreen' : ''}
+                                                                        className="clickable"
+                                                                        size={wine.state === 'accepted' ? 30 : 20}
+                                                                        onClick={e => { this.handleWineAccept(i) }}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        ) : <span style={{ color: 'gray' }}>No Recommendations.</span>
+                                                    }
+                                                    <Button
+                                                        disabled={this.wineStates().some(e => !e) || this.recomSubmitButtonText() === 'Submitted'}
+                                                        onClick={this.handleRecomStatesSubmit}
+                                                        variant="danger"
+                                                        style={{
+                                                            position: 'absolute',
+                                                            bottom: '15px',
+                                                            right: '15px'
+                                                        }}>
+                                                        {
+                                                            this.state.updating ? <Spinner animation="border" size='sm' style={{ marginRight: '5px' }} /> : null
+                                                        }
+                                                        {this.recomSubmitButtonText()}
+                                                    </Button>
+                                                </Card.Body>
+                                            </ContentCard> : <ContentCard
+                                                style={{
+                                                    width: 'calc(100% - 600px)',
+                                                    float: 'left',
+                                                    height: '100%',
+                                                }}>
+                                                <Card.Title>
+                                                    Recommended wines
+                                                </Card.Title>
+                                                <div style={{ height: '100%', width: '100%', overflowY: 'auto' }}>
+                                                    <Loadable style={{ width: '30px', height: '30px' }} loading={this.state.loadingRecommended} component={
+                                                        <div>
                                                             {
-                                                                this.state.updating ? <Spinner animation="border" size='sm' style={{ marginRight: '5px' }} /> : null
+                                                                this.state.similarWines.length ? this.similarWinesList() : <div style={{
+                                                                    color: 'gray',
+                                                                    fontSize: '13px'
+                                                                }}>
+                                                                    Add some wine links to Input Window. Our software will then fetch similar wines for easier input.
+                                                                </div>
                                                             }
-                                                            {this.recomSubmitButtonText()}
-                                                        </Button>
-                                                    </Card.Body>
-                                                </Card>
-                                            </div> : null
+                                                        </div>
+                                                    } />
+                                                </div>
+                                            </ContentCard>
+
                                     }
                                     {
-                                        this.currentRecipe().wines ? null : <div id="pairing-window" style={{
+                                        this.currentRecipe().wines ? null : <ContentCard id="pairing-window" style={{
                                             float: 'right',
-                                            width: '50%',
+                                            width: '600px',
                                             height: '100%',
                                             display: 'flex',
-                                            flexDirection: 'column-reverse',
+                                            flexDirection: 'column',
                                             alignItems: 'flex-end',
-                                            paddingLeft: '10px'
+                                            padding: '5px'
                                         }}>
+                                            <Card.Title style={{ marginBottom: '20px' }}>
+                                                Input Window
+                                            </Card.Title>
                                             <Form.Control
                                                 onChange={e => this.handleTextChange(e.target.value)}
                                                 value={this.state.textBoxContent}
                                                 as="textarea"
                                                 placeholder="Paste wine links here (one per row)"
-                                                style={{ height: '190px', width: '100%' }}
+                                                style={{ height: '400px', width: '100%', fontSize: '14px' }}
                                             />
 
-                                            <button style={{ float: 'right', marginBottom: '10px' }} disabled={
-                                                !this.state.textBoxContent ||
-                                                !this.isUrl(this.state.textBoxContent.split('\n')[0]) ||
-                                                !this.pairingChanged()
-                                            } type="button" className="btn btn-danger" onClick={this.handleTextFieldSubmit}>
-                                                {
-                                                    this.state.updating ? <Spinner animation="border" size='sm' style={{ marginRight: '5px' }} /> : null
-                                                }
-                                                {this.submitButtonText()}
-                                            </button>
-                                        </div>
+                                            <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                                                <button style={{ marginTop: '20px' }} disabled={
+                                                    !this.state.textBoxContent ||
+                                                    !this.isUrl(this.state.textBoxContent.split('\n')[0]) ||
+                                                    !this.pairingChanged()
+                                                } type="button" className="btn btn-danger" onClick={this.handleTextFieldSubmit}>
+                                                    {
+                                                        this.state.updating ? <Spinner animation="border" size='sm' style={{ marginRight: '5px' }} /> : null
+                                                    }
+                                                    {this.submitButtonText()}
+                                                </button>
+                                            </div>
+                                        </ContentCard>
                                     }
                                 </div>
                             </div>
-
-                            {/* <div id="pairing-window" style={{ width: 'calc((100vh - 80px)*0.35)', height: '30%' }}>
-                                <Form.Control
-                                    onChange={e => this.handleTextChange(e.target.value)}
-                                    value={this.currentRecipe().pairingText}
-                                    as="textarea"
-                                    placeholder="Paste wine links here (one per row)"
-                                    style={{ height: '190px', width: '650px', marginLeft: '40px', marginTop: '20px' }}
-                                />
-                            </div> */}
                         </div>
                     } />
                 </div>
 
-                <div style={{ position: 'absolute', width: '100%', bottom: '10px', fontSize: '25px', display: 'flex', justifyContent: 'center' }}>
+                <div className='nodrag' style={{
+                    position: 'absolute',
+                    width: '100%',
+                    bottom: '10px',
+                    fontSize: '25px',
+                    display: 'flex',
+                    justifyContent: 'center'
+                }}>
+                    {
+                        // this.state.progression !== null && !this.state.loading ?
+                        //     <Card bg='dark' style={{ height: '100%', width: '300px', position: 'absolute', left: '70px', bottom: '20px', color: 'white' }}>
+                        //         {/* {this.state.progression} */}
+                        //         <span style={{ fontSize: '15px' }}>
+                        //             {this.currentRecipe().category} pairings
+                        //         </span>
+                        //         <ProgressBar
+                        //             variant='danger'
+                        //             now={(parseInt(this.state.progression) / 300) * 100}
+                        //             striped
+                        //             animated
+                        //             label={`${this.state.progression} / 300`}
+                        //         />
+                        //     </Card> :
+                        //     null
+                    }
+
                     <ChevronCompactLeft
                         style={{ opacity: this.state.recipeIndex && !this.state.loading ? '' : '20%' }}
                         onClick={this.handlePrevClick}
@@ -529,7 +664,7 @@ class PairingTool extends React.Component {
                         className={!this.state.loading ? 'clickable' : ''}
                         size={40} />
                 </div>
-            </div>
+            </div >
         )
     }
 }
