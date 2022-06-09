@@ -1,6 +1,6 @@
 import './PairingTool.scss';
 import React from 'react';
-import { Form, Modal, Button, ListGroup, Toast, Offcanvas, Badge, Card, Spinner, ProgressBar } from 'react-bootstrap';
+import { Form, Modal, Button, ListGroup, Toast, Offcanvas, Badge, Card, Spinner, ProgressBar, Navbar, NavDropdown } from 'react-bootstrap';
 import axios from 'axios';
 import { BsXLg, BsCheckLg } from "react-icons/bs";
 import Loadable from '../Loadable';
@@ -20,6 +20,9 @@ const emptyRecipe = {
     similarWines: []
 }
 
+const categories_all = ['dessert', 'seafood', 'meat']
+const categories_active = ['meat']
+
 class PairingTool extends React.Component {
 
     constructor(props) {
@@ -37,7 +40,8 @@ class PairingTool extends React.Component {
             textBoxContent: '',
             similarWines: [],
             loadingRecommended: false,
-            progression: null
+            progression: [],
+            category: categories_active[0]
         }
 
         this.pairingChanged = this.pairingChanged.bind(this)
@@ -218,8 +222,11 @@ class PairingTool extends React.Component {
     }
 
     nextRecipe = async () => {
-        let isFb = (this.state.recipeHistory.length + 1) % 4 === 0
-        let category = isFb ? this.fbCategory() : 'meat'
+        // let isFb = (this.state.recipeHistory.length + 1) % 4 === 0
+        // let category = isFb ? this.fbCategory() : 'meat'
+
+        let category = this.state.category
+        let isFb = !categories_active.includes(category)
 
         this.setState({ loading: true })
 
@@ -264,8 +271,13 @@ class PairingTool extends React.Component {
             recipeIndex: oldState.recipeIndex + 1,
             textBoxContent: '',
             similarWines: [],
-            progression: progression.data.counts.find(e => e._id === category).count
+            progression: progression.data.counts
         }))
+    }
+
+    getProgression = () => {
+        const cat = this.state.progression.find(e => e._id === this.state.category)
+        return cat ? cat.count : null
     }
 
     handleTextChange = text => {
@@ -368,7 +380,7 @@ class PairingTool extends React.Component {
 
     similarWinesList = () => {
         return this.state.similarWines.filter(wine => !this.listOfUrls(this.state.textBoxContent).includes(wine.link)).map(
-            wine => <div style={{ width: '100%' }}>
+            wine => <div style={{ width: '100%'}}>
                 <div style={{ width: 'calc(100% - 100px)', float: 'left', height: '90px' }}>
                     <WinePlate wine={wine} disabled={true} />
                 </div>
@@ -383,8 +395,69 @@ class PairingTool extends React.Component {
 
     render() {
         return (
-            <div style={{ display: 'flex', height: 'calc(100vh - 80px)', width: '100%', backgroundColor: '#f0f0f0' }}>
-                <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+            <div style={{ height: '100vh', width: '100%', backgroundColor: '#f0f0f0' }}>
+                <div id='navbar' style={{ position: 'relative', width: '100%', height: '40px', backgroundColor: 'black' }}>
+                    <div style={{
+                        position: 'absolute',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        left: '20px',
+                        top: '0px',
+                        height: '100%',
+                        width: '300px'
+                    }}>
+                        <span style={{ color: 'white', marginRight: '10px', fontSize: '14px' }}>
+                            Pairing:
+                        </span>
+                        <Form.Select onChange={e => {
+                            this.setState({ category: e.target.value })
+                        }} defaultValue={categories_active[0]} size='sm' style={{
+                            width: '225px',
+                            backgroundColor: '#1c1c1c',
+                            color: 'white',
+                            borderWidth: '0px'
+                        }}>
+                            {/* <option></option> */}
+                            {
+                                categories_all.map(
+                                    category => <option value={category}>
+                                        {!categories_active.includes(category) ? '📝 (checking) ' : '🧠 (pairing) '}
+                                        {category.toUpperCase()}
+                                    </option>
+                                )
+                            }
+                        </Form.Select>
+                    </div>
+                    <img
+                        alt="logo"
+                        style={{
+                            objectFit: 'cover',
+                            position: 'absolute',
+                            left: '0px',
+                            right: '0px',
+                            marginLeft: 'auto',
+                            marginRight: 'auto'
+                        }}
+                        onClick={e => { window.location.replace('/') }}
+                        className="clickable nodrag"
+                        src="PocketSomm.LOGO.svg"
+                        width='120px'
+                        height='40px'
+                    >
+                    </img>
+                </div>
+                <div style={{ height: '16px', marginBottom: '4px', width: '100%', visibility: this.getProgression() ? 'visible' : 'hidden' }}>
+                    <ProgressBar
+                        style={{ borderRadius: '0px', height: '12px' }}
+                        variant='danger'
+                        now={(parseInt(this.getProgression()) / 300) * 100}
+                        // striped
+                        // animated
+                        label={`${this.state.category} pairings: ${this.getProgression()} / 300`}
+                    />
+                </div>
+                <div style={{ width: '100%', height: 'calc(100% - 60px)', position: 'relative' }}>
                     <Loadable style={{ marginTop: '300px' }} loading={this.state.loading} component={
                         <div id="page-body">
                             <Modal scrollable centered size="lg" show={this.state.show} onHide={this.handleClose}>
@@ -396,7 +469,7 @@ class PairingTool extends React.Component {
                                         {
                                             this.currentRecipe().thumbnails.map(
                                                 (thumb, i) => <img
-                                                    // style={{ flex: 1 }}
+                                                    style={{ margin: '5px' }}
                                                     key={`recipe_thumb_${i}`}
                                                     alt={`recipe_thumb_${i}`}
                                                     src={thumb}
@@ -470,7 +543,7 @@ class PairingTool extends React.Component {
 
 
 
-                            <div id="recipe-window" style={{ position: 'relative', width: '100%', height: 'calc((100vh - 80px))', paddingLeft: '60px', paddingRight: '60px' }}>
+                            <div id="recipe-window" style={{ position: 'relative', width: '100%', height: 'calc(100vh - 60px)', paddingLeft: '60px', paddingRight: '60px' }}>
                                 <Button variant="link" onClick={this.handleShowHistory} style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 10 }}>
                                     Session History
                                 </Button>
@@ -496,8 +569,8 @@ class PairingTool extends React.Component {
                                 </div>
 
                                 <ContentCard id='ing-list' style={{ height: 'calc(100% - 170px)', width: '400px', float: 'left' }}>
-                                    <Card.Title>Ingredient List</Card.Title>
-                                    <Card.Body style={{ overflowY: 'auto' }}>
+                                    <Card.Title>Ingredient List 🗒️</Card.Title>
+                                    <Card.Body style={{ overflowY: 'auto', fontSize: '14px' }}>
                                         {this.currentRecipe().ingredients.map((ing, i) =>
                                             <span key={`ingredient_${i}`} style={{ display: 'block' }}>• {ing}</span>)
                                         }
@@ -508,7 +581,7 @@ class PairingTool extends React.Component {
                                     {
                                         this.currentRecipe().wines ?
                                             <ContentCard style={{ height: '100%', width: '1000px' }}>
-                                                <Card.Title style={{ textAlign: 'left' }}>Recommended wines</Card.Title>
+                                                <Card.Title style={{ textAlign: 'left' }}>Recommended wines (AI)</Card.Title>
                                                 <Card.Body>
                                                     {
                                                         this.currentRecipe().wines ? this.currentRecipe().wines.map((wine, i) =>
@@ -559,12 +632,12 @@ class PairingTool extends React.Component {
                                                 </Card.Body>
                                             </ContentCard> : <ContentCard
                                                 style={{
-                                                    width: 'calc(100% - 600px)',
+                                                    width: 'calc(100% - 500px)',
                                                     float: 'left',
                                                     height: '100%',
                                                 }}>
                                                 <Card.Title>
-                                                    Recommended wines
+                                                    Recommended wines (similar properties)
                                                 </Card.Title>
                                                 <div style={{ height: '100%', width: '100%', overflowY: 'auto' }}>
                                                     <Loadable style={{ width: '30px', height: '30px' }} loading={this.state.loadingRecommended} component={
@@ -586,7 +659,7 @@ class PairingTool extends React.Component {
                                     {
                                         this.currentRecipe().wines ? null : <ContentCard id="pairing-window" style={{
                                             float: 'right',
-                                            width: '600px',
+                                            width: '500px',
                                             height: '100%',
                                             display: 'flex',
                                             flexDirection: 'column',
