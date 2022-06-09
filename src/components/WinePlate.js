@@ -331,14 +331,14 @@ class WinePlate extends React.Component {
     // const [toggled, setToggled] = useState(false)
 
     setHovered = (v) => {
-        if(!this.props.disabled)
+        if (!this.props.disabled)
             this.setState({
                 hovered: v
             })
     }
 
     setToggled = (v) => {
-        if(!this.props.disabled)
+        if (!this.props.disabled)
             this.setState({
                 toggled: v
             })
@@ -356,7 +356,7 @@ class WinePlate extends React.Component {
                     backgroundColor: '#f7f7f7',
                     borderColor: this.state.hovered ? MAIN_COLOR : SECONDARY_COLOR,
                     width: '95%',
-                    margin: '0px !important'
+                    margin: '0px !important',
                     // boxShadow:`inset 37px 0px 1px -30px ${types[wine.type]}` 
                 }}>
                 <div style={{
@@ -371,7 +371,8 @@ class WinePlate extends React.Component {
                     position: 'absolute',
                     right: '0px',
                     top: '0px',
-                    fontSize: '15px'
+                    fontSize: '15px',
+                    visibility: this.props.disabled ? 'hidden' : 'visible'
                 }}>
                     <div>
                         <span style={{ display: 'block' }}>€{this.props.wine['price'].toFixed(2)}</span>
@@ -383,7 +384,7 @@ class WinePlate extends React.Component {
                     padding: '10px',
                     marginBottom: '10px'
                 }}>
-                    {   !this.props.disabled ?
+                    {!this.props.disabled ?
                         this.state.toggled ? <Icon.CaretUpFill color={MAIN_COLOR} style={{
                             position: 'absolute',
                             top: '55px',

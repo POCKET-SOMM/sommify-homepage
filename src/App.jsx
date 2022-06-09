@@ -162,6 +162,7 @@ function App() {
         variant="dark"
         id="body-logo"
         style={{
+          display: window.location.href.split("/").pop() === 'pairing' ? 'none' : '',
           zIndex: 6,
           // boxShadow: '0px 11px 17px 2px rgba(0,0,0,0.45)',
           height: isDesktop ? '80px' : '80px',
