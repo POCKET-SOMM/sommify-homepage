@@ -162,7 +162,7 @@ class PairingTool extends React.Component {
 
         const options = {
             method: 'POST',
-            url: `${SERVER_URL}/api/v1/recipePairing`,
+            url: `${SERVER_URL}/api/pairingtool/recipePairing`,
             headers: { 'Content-Type': 'application/json' },
             data: {
                 wines: wines,
@@ -439,7 +439,7 @@ class PairingTool extends React.Component {
                             marginLeft: 'auto',
                             marginRight: 'auto'
                         }}
-                        onClick={e => { window.location.replace('/') }}
+                        // onClick={e => { window.location.replace('/') }}
                         className="clickable nodrag"
                         src="PocketSomm.LOGO.svg"
                         width='120px'
@@ -501,7 +501,7 @@ class PairingTool extends React.Component {
                                 autohide
                                 show={this.state.toastShow}
                                 style={{
-                                    position: 'absolute', right: '50px', top: '50px'
+                                    position: 'absolute', right: '50px', top: '50px', zIndex: 9999
                                 }}
                             >
                                 <Toast.Header>
