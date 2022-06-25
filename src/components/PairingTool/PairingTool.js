@@ -362,7 +362,7 @@ class PairingTool extends React.Component {
             wineLinks: urls
         }).then(res => {
             this.setState({
-                similarWines: res.data
+                similarWines: res.data.reverse()
             })
             // console.log(res.data)
         }).catch(err => {
@@ -381,10 +381,10 @@ class PairingTool extends React.Component {
     similarWinesList = () => {
         return this.state.similarWines.filter(wine => !this.listOfUrls(this.state.textBoxContent).includes(wine.link)).map(
             wine => <div style={{ width: '100%'}}>
-                <div style={{ width: 'calc(100% - 100px)', float: 'left', height: '90px' }}>
+                <div style={{ width: 'calc(100% - 60px)', float: 'left', height: '90px' }}>
                     <WinePlate wine={wine} disabled={true} />
                 </div>
-                <div style={{ width: '100px', height: '90px', float: 'left', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div style={{ width: '60px', height: '90px', float: 'left', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <Button onClick={() => { this.addSimilarWine(wine) }} size='sm' variant='danger'>
                         Add
                     </Button>
@@ -457,7 +457,7 @@ class PairingTool extends React.Component {
                         label={`${this.state.category} pairings: ${this.getProgression()} / 300`}
                     />
                 </div>
-                <div style={{ width: '100%', height: 'calc(100% - 60px)', position: 'relative' }}>
+                <div style={{ width: '100%', height: 'calc(100% - 52px)', position: 'relative' }}>
                     <Loadable style={{ marginTop: '300px' }} loading={this.state.loading} component={
                         <div id="page-body">
                             <Modal scrollable centered size="lg" show={this.state.show} onHide={this.handleClose}>
@@ -543,7 +543,7 @@ class PairingTool extends React.Component {
 
 
 
-                            <div id="recipe-window" style={{ position: 'relative', width: '100%', height: 'calc(100vh - 60px)', paddingLeft: '60px', paddingRight: '60px' }}>
+                            <div id="recipe-window" style={{ position: 'relative', width: '100%', height: 'calc(100vh - 52px)', paddingLeft: '20px', paddingRight: '20px' }}>
                                 <Button variant="link" onClick={this.handleShowHistory} style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 10 }}>
                                     Session History
                                 </Button>
@@ -568,7 +568,7 @@ class PairingTool extends React.Component {
                                     </div> */}
                                 </div>
 
-                                <ContentCard id='ing-list' style={{ height: 'calc(100% - 170px)', width: '400px', float: 'left' }}>
+                                <ContentCard id='ing-list' style={{ height: 'calc(100% - 150px)', width: '400px', float: 'left' }}>
                                     <Card.Title>Ingredient List 🗒️</Card.Title>
                                     <Card.Body style={{ overflowY: 'auto', fontSize: '14px' }}>
                                         {this.currentRecipe().ingredients.map((ing, i) =>
@@ -577,7 +577,7 @@ class PairingTool extends React.Component {
                                     </Card.Body>
                                 </ContentCard>
 
-                                <div id='feedback-window' style={{ width: 'calc(100% - 400px)', height: 'calc(100% - 170px)', float: 'left', position: 'relative' }}>
+                                <div id='feedback-window' style={{ width: 'calc(100% - 400px)', height: 'calc(100% - 150px)', float: 'left', position: 'relative' }}>
                                     {
                                         this.currentRecipe().wines ?
                                             <ContentCard style={{ height: '100%', width: '1000px' }}>
@@ -678,16 +678,16 @@ class PairingTool extends React.Component {
                                             />
 
                                             <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                                                <button style={{ marginTop: '20px' }} disabled={
+                                                <Button style={{ marginTop: '20px' }} disabled={
                                                     !this.state.textBoxContent ||
                                                     !this.isUrl(this.state.textBoxContent.split('\n')[0]) ||
                                                     !this.pairingChanged()
-                                                } type="button" className="btn btn-danger" onClick={this.handleTextFieldSubmit}>
+                                                } variant='danger' size='sm' onClick={this.handleTextFieldSubmit}>
                                                     {
                                                         this.state.updating ? <Spinner animation="border" size='sm' style={{ marginRight: '5px' }} /> : null
                                                     }
                                                     {this.submitButtonText()}
-                                                </button>
+                                                </Button>
                                             </div>
                                         </ContentCard>
                                     }
@@ -701,7 +701,7 @@ class PairingTool extends React.Component {
                     position: 'absolute',
                     width: '100%',
                     bottom: '10px',
-                    fontSize: '25px',
+                    fontSize: '20px',
                     display: 'flex',
                     justifyContent: 'center'
                 }}>
@@ -727,7 +727,7 @@ class PairingTool extends React.Component {
                         style={{ opacity: this.state.recipeIndex && !this.state.loading ? '' : '20%' }}
                         onClick={this.handlePrevClick}
                         className={this.state.recipeIndex && !this.state.loading ? 'clickable' : ''}
-                        size={40} />
+                        size={30} />
                     <div style={{ width: '100px' }}>
                         <span>{this.state.recipeIndex + 1}/{this.state.recipeHistory.length}</span>
                     </div>
@@ -735,7 +735,7 @@ class PairingTool extends React.Component {
                         style={{ opacity: !this.state.loading ? '' : '20%' }}
                         onClick={this.handleNextClick}
                         className={!this.state.loading ? 'clickable' : ''}
-                        size={40} />
+                        size={30} />
                 </div>
             </div >
         )

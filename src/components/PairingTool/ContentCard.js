@@ -7,7 +7,7 @@ const ContentCard = (props) => (
             width: '100%',
             height: '100%',
             backgroundColor: '#f8f8f8',
-            padding: '20px',
+            padding: '10px',
             textAlign: 'start'
         }}>
             {props.children}
