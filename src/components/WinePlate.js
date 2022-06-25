@@ -409,7 +409,11 @@ class WinePlate extends React.Component {
                         src={imageLink(this.props.wine.link)}
                         height="70px"
                     />
-                    <div style={{ float: 'left', position: 'relative', width: 'calc(100% - 146.66px)', display: 'inline-block', height: '100%' }}>
+                    <div style={{
+                        float: 'left', position: 'relative',
+                        width: !this.props.disabled ? 'calc(100% - 146.66px)' : 'calc(100% - 70px)',
+                        display: 'inline-block', height: '100%'
+                    }}>
                         <span
                             style={{
                                 display: 'block',
