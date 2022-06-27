@@ -21,7 +21,7 @@ const emptyRecipe = {
 }
 
 const categories_all = ['dessert', 'seafood', 'meat', 'soup', 'vegetarian']
-const categories_active = ['meat', 'soup', 'vegetarian']
+const categories_active = ['soup', 'vegetarian']
 
 class PairingTool extends React.Component {
 
