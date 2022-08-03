@@ -20,8 +20,8 @@ const emptyRecipe = {
     similarWines: []
 }
 
-const categories_all = ['dessert', 'seafood', 'meat', 'soup', 'vegetarian']
-const categories_active = ['soup', 'vegetarian']
+const categories_all = ['dessert', 'seafood', 'meat', 'soup', 'vegetarian', 'pasta']
+const categories_active = ['soup', 'vegetarian', 'pasta']
 
 class PairingTool extends React.Component {
 
