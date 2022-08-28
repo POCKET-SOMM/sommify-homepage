@@ -257,8 +257,8 @@ class PairingTool extends React.Component {
             recipeHistory: [...oldState.recipeHistory, {
                 id: recipeResponse.data.Recipe_id,
                 title: recipeResponse.data.Recipe_title,
-                regions: Object.entries(recipeResponse.data.Cuisine)
-                    .sort(([, a], [, b]) => b - a).slice(0, 3).map(e => `${e[0]} ${Math.round(e[1] * 100)}%`),
+                regions: recipeResponse.data.Cuisine ? Object.entries(recipeResponse.data.Cuisine)
+                    .sort(([, a], [, b]) => b - a).slice(0, 3).map(e => `${e[0]} ${Math.round(e[1] * 100)}%`) : [],
                 labels: recipeResponse.data.Category ? recipeResponse.data.Category.map(c => c.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())) : [],
                 ingredients: recipeResponse.data.Ingredients.slice(2, -2).split("', '"),
                 steps: recipeResponse.data.Steps,
@@ -380,7 +380,7 @@ class PairingTool extends React.Component {
 
     similarWinesList = () => {
         return this.state.similarWines.filter(wine => !this.listOfUrls(this.state.textBoxContent).includes(wine.link)).map(
-            wine => <div style={{ width: '100%'}}>
+            wine => <div style={{ width: '100%' }}>
                 <div style={{ width: 'calc(100% - 60px)', float: 'left', height: '90px' }}>
                     <WinePlate wine={wine} disabled={true} />
                 </div>
