@@ -2,6 +2,7 @@ import './PairingTool.scss';
 import React from 'react';
 import { Form, Modal, Button, ListGroup, Toast, Offcanvas, Badge, Card, Spinner, ProgressBar, Navbar, NavDropdown } from 'react-bootstrap';
 import axios from 'axios';
+import axiosRetry from 'axios-retry';
 import { BsXLg, BsCheckLg } from "react-icons/bs";
 import Loadable from '../Loadable';
 import { ChevronCompactLeft, ChevronCompactRight } from 'react-bootstrap-icons';
@@ -49,6 +50,18 @@ class PairingTool extends React.Component {
     }
 
     componentDidMount() {
+        axiosRetry(axios, {
+            retries: 10, // number of retries
+            retryDelay: (retryCount) => {
+                console.log(`retry attempt: ${retryCount}`);
+                return 500; // time interval between retries
+            },
+            retryCondition: (error) => {
+                // if retry condition is not specified, by default idempotent requests are retried
+                return error.response.status >= 100;
+            },
+        });
+
         axios.get(`${SERVER_URL}/api/pairingtool/getPairingStats`).then(res => {
             console.log(res)
         })
@@ -230,7 +243,9 @@ class PairingTool extends React.Component {
 
         this.setState({ loading: true })
 
-        const recipeResponse = await axios.get(`${SERVER_URL}/api/pairingtool/randomRecipe?category=${category}`)
+        const recipeResponse = await axios.get(`${SERVER_URL}/api/pairingtool/randomRecipe?category=${category}`).catch(res=>{
+            console.log(res)
+        })
 
         const options_2 = {
             method: 'POST',
@@ -247,10 +262,6 @@ class PairingTool extends React.Component {
             // headers: { 'Content-Type': 'application/json' },
             // data: { id: parseInt(recipeResponse.data.Recipe_id) }
         })
-
-        // console.log(recipeResponse.data.Cuisine)
-        // console.log(recipeResponse.data)
-        // console.log(progression.data.counts.find(e => e._id === category).count)
 
         this.setState(oldState => ({
             loading: false,
