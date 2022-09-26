@@ -113,7 +113,7 @@ function Body({ isMobile, screenWidth }) {
   // }
 
   const loadWines = (data) => {
-    const wines = data.wines
+    let wines = data.wines
 
     if (data.recipe) {
       setRecipe(data.recipe)
@@ -124,6 +124,10 @@ function Body({ isMobile, screenWidth }) {
     }
 
     if (wines.length === 3) {
+      console.log(wines)
+      wines = wines.map(
+        wine => wine.filter(w => !w.PACKAGING.includes('box'))
+      )
       setAllWines(
         wines
       )
