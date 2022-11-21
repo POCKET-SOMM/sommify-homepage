@@ -51,7 +51,7 @@ class AboutUs extends React.Component {
                     To find out more, download our <span
                         style={{ color: 'white', textDecoration: 'underline' }}
                         className="link clickable"
-                        onClick={e => { window.open('https://drive.google.com/file/d/1G1I1LyJBbGbM-ZcHsYxKfxbW77CiCziW/') }}>
+                        onClick={e => { window.open('https://drive.google.com/file/d/1o6ZzFJWISmbcfqlkM6P8NxpmAVfoNrnf/view?usp=sharing') }}>
                         deck
                     </span>.
                 </span>
