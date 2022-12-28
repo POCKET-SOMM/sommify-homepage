@@ -1,343 +1,238 @@
 import './App.scss';
-import React, { useEffect, useState } from 'react';
-import Body from './components/Body';
-import { Card, Carousel, Nav, Navbar, Offcanvas } from 'react-bootstrap';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
-import PairingTool from './components/PairingTool/PairingTool';
 import AboutUs from './components/AboutUs';
-import DemoGuide from './components/DemoGuide';
-import ContactUs from './components/ContactUs';
+import Guide from './components/Guide';
+import Team from './components/Team';
+import Widget from './components/Widget';
+import colors from './data/colors';
+import logo from './assets/logo_white.png';
+import bgImage from './assets/bg.jpg';
+import bgImage2 from './assets/bg2.jpg';
+import { CgAirplane } from 'react-icons/cg';
+import { SiCrunchbase, SiLinkedin, SiMinutemailer } from 'react-icons/si';
+import { Button } from 'react-bootstrap';
 
-import SimpleBar from 'simplebar-react';
-import 'simplebar/dist/simplebar.min.css';
-
-// const MAIN_COLOR = '#e7154e'
-// const SECONDARY_COLOR = '#fce3ee'
-export const MAIN_COLOR_DEP = '#80183b'
-export const SERVER_URL = 'https://pocketsommapi.azurewebsites.net'
-
-
-const IMAGES = ['team_jp.jpeg', 'team_jd.jpeg', 'team_wb.jpeg', 'team_tb.jpeg']
-
-const loadImage = image => {
-  return new Promise((resolve, reject) => {
-    const loadImg = new Image()
-    loadImg.src = image
-    // wait 2 seconds to simulate loading time
-    loadImg.onload = () =>
-      setTimeout(() => {
-        resolve(image)
-      }, 2000)
-
-    loadImg.onerror = err => reject(err)
-  })
-}
+export const Logo = ({ fontSize }) => (
+  <div style={{ color: colors.primary, fontSize }} className='d-flex px-2'>
+    <div className='h-100' style={{ fontWeight: 600 }}>
+      SOMMIFY
+    </div>
+    <div
+      className='h-100'
+      style={{ color: colors.primary, fontWeight: 300, opacity: 0.33 }}
+    >
+      AI.
+    </div>
+  </div>
+);
 
 function App() {
-  const [width, setWidth] = useState(window.innerWidth);
-  const [pane, setPane] = useState('')
-  const [loadingPfps, setLoadingPfps] = useState(true)
-
-  useEffect(() => {
-    Promise.all(IMAGES.map(image => loadImage(image)))
-      .then(() => {
-        setLoadingPfps(false)
-      })
-      .catch(err => console.log("Failed to load profile pictures", err))
-
-    window.addEventListener('resize', handleWindowSizeChange);
-    return () => {
-      window.removeEventListener('resize', handleWindowSizeChange);
-    }
-  }, [])
-
-  let isMobile = (width < 768);
-  let isTablet = (width >= 768 && width < 1024)
-  let isDesktop = !isMobile && !isTablet
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-
-  function handleWindowSizeChange() {
-    setWidth(window.innerWidth);
-  }
-
-  let mobileStyle = {
-    width: '100%',
-    height: 'calc(var(--vh, 1vh) * 100 - 100px)',
-    borderWidth: '0px',
-    padding: '2px'
-  }
-  let tabletStyle = {
-    width: '80%',
-    height: 'calc(var(--vh, 1vh) * 100 - 120px)',
-    borderWidth: '0px',
-    padding: '10px'
-  }
-  let desktopStyle = {
-    marginTop: '100px',
-    width: '500px',
-    padding: '10px',
-
-    zIndex: 3,
-    position: 'absolute',
-    left: '0px',
-    right: '0px',
-    marginLeft: '55%',
-    // marginRight: 'auto'
-  }
-
-  const captionStyle = {
-    zIndex: 4,
-    position: 'absolute',
-    width: '400px',
-    height: '300px',
-    top: '300px',
-    left: '300px',
-    textAlign: 'left'
-  }
-
-  const getDeviceStyle = () => {
-    if (isMobile)
-      return mobileStyle
-    if (isTablet)
-      return tabletStyle
-    return desktopStyle
-  }
-
-  function Logo() {
-    return (
-      <img
-        alt="logo"
+  const ContactRow = ({ icon, title, content }) => (
+    <div className='d-flex px-2' style={{ flex: 1 }}>
+      <div
+        className='d-flex justify-content-center align-items-center rounded-circle'
         style={{
-          objectFit: 'cover',
-          position: 'absolute',
-          left: '0px',
-          right: '0px',
-          marginLeft: 'auto',
-          marginRight: 'auto'
-        }}
-        onClick={e => { window.location.replace('/') }}
-        className="clickable nodrag"
-        src="PocketSomm.LOGO.svg"
-        width={isDesktop ? '230px' : '150px'}
-        height={isDesktop ? "80px" : '56px'}>
-      </img>
-    )
-  }
-
-  function handleNavClick(l) {
-    pane === l ? setPane('') : setPane(l)
-  }
-
-  function Content() {
-    if (pane === 'ABOUT US') {
-      return (<AboutUs loading={loadingPfps} />)
-    }
-    if (pane === 'DEMO GUIDE') {
-      return (<DemoGuide />)
-    }
-    if (pane === 'CONTACT US') {
-      return (<ContactUs />)
-    }
-    return null
-  }
-
-  const CarouselItems = [
-    { img: 'phone_app.webp', title: 'Phone App', text: 'PocketSomm will be launched as an app for Android and iOS to make quality pairings accessible to anyone anywhere. Stay tuned.' },
-    { img: 'winestore.jpg', title: 'Online Wine Store', text: 'Selling wine online? Let PocketSomm help create the customer experience of a brick-and-mortar location with quality pairing advice.' },
-    { img: 'homecook.jpg', title: 'Smart Home', text: 'Imagine a world in which you have a world-class sommelier at home advising you on which bottle from your wine cooler pairs the best with the meals possible from the ingredients in your refrigerator.' },
-    { img: 'delivery.jpg', title: 'Food Delivery', text: 'Whether you are offering food boxes or delivery from restaurants PocketSomm offers the opportunity to cross-sell wine or just enhance the experience.' },
-    { img: 'retail.webp', title: 'Add-On', text: 'You might already have an app or website that relates to food, like a grocery chain, where you want to enhance the customer experience or drive sales.' },
-    // { img: 'other.jpg', title: 'Other', text: 'The possibilities are endless; the only barriers are your imagination and local alcohol regulation...' }
-  ]
-
-  return (
-    <div className="App" style={{ overflow: 'hidden' }}>
-      <Navbar
-        className="nodrag"
-        variant="dark"
-        id="body-logo"
-        style={{
-          display: window.location.href.split("/").pop() === 'pairing' ? 'none' : '',
-          zIndex: 6,
-          // boxShadow: '0px 11px 17px 2px rgba(0,0,0,0.45)',
-          height: isDesktop ? '80px' : '80px',
-          backgroundColor: MAIN_COLOR_DEP,
+          width: '50px',
+          height: '50px',
+          background: '#e5e5e5',
+          color: '#404040',
         }}
       >
-        <Nav style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'start',
-          fontSize: '14px',
-          width: '100%'
-        }}>
-          {
-            isDesktop ? ['ABOUT US', 'DEMO GUIDE'].map((l, i) =>
-              <Nav.Item key={`nav_item_${i}`}>
-                <Nav.Link active={pane === l} onClick={e => { handleNavClick(l) }} style={{ width: '130px', alignItems: 'center', display: 'flex', justifyContent: 'center' }}>{l}</Nav.Link>
-              </Nav.Item>
-            ) : <div style={{ fontSize: '10px', width: '100%', height: '100%', display: 'flex', alignItems: 'center' }}>
-              <Nav.Link active={pane === 'ABOUT US'}
-                onClick={e => { handleNavClick('ABOUT US') }}
-                style={{
-                  width: '90px',
-                  alignItems: 'center',
-                  position: 'absolute',
-                  left: '5px',
-                }}>ABOUT US</Nav.Link>
-              <Nav.Link active={pane === 'DEMO GUIDE'}
-                onClick={e => { handleNavClick('DEMO GUIDE') }}
-                style={{
-                  width: '90px',
-                  alignItems: 'center',
-                  position: 'absolute',
-                  right: '5px',
-                }}>DEMO INSTRUCTIONS</Nav.Link>
+        {icon}
+      </div>
+      <div className='d-flex flex-column text-start mx-3'>
+        <div
+          className='d-flex align-items-center'
+          style={{ fontWeight: 600, flex: 1 }}
+        >
+          {title}
+        </div>
+        {content && <div style={{ flex: 1 }}>{content}</div>}
+      </div>
+    </div>
+  );
+
+  return (
+    <div className='d-flex flex-column'>
+      <div style={{ backgroundImage: 'url(' + bgImage2 + ')' }}>
+        <div
+          className='d-flex justify-content-center align-items-center position-relative py-4'
+          style={{
+            color: '#252525',
+            marginLeft: 200,
+            marginRight: 200,
+          }}
+        >
+          <Logo fontSize='40px' />
+        </div>
+        <div
+          className='d-flex w-100 justify-content-between'
+          style={{
+            paddingInline: '200px',
+            height: '85vh',
+          }}
+        >
+          <div className='d-flex justify-content-center align-items-center'>
+            <div>
+              <h1 style={{ fontWeight: 700 }}>
+                The <span className='text-primary'>AI</span> sommelier.
+              </h1>
+              <h3 style={{ fontWeight: 300 }}>
+                Making quality pairings accessible
+              </h3>
             </div>
-          }
-          <Logo />
-        </Nav>
-      </Navbar>
-
-      {
-        true ? <Offcanvas style={{
-          // marginTop: '80px',
-          width: isDesktop ? '42%' : '100%',
-          backgroundColor: '#1f202b',
-          borderColor: '#393b4d',
-          borderRightStyle: 'solid',
-          borderWidth: '1px',
-          zIndex: 5,
-          color: 'white',
-          padding: '5px',
-          textAlign: 'left',
-        }}
-          backdrop
-          backdropClassName='custom-backdrop'
-          scroll={true}
-          show={pane}
-          onHide={e => { setPane('') }}>
-          <div style={{ height: '80px' }}></div>
-          <SimpleBar style={{ height: 'calc(100% - 80px)', width: '100%', padding: isDesktop ? '40px' : '20px', }}>
-            <Content />
-          </SimpleBar>
-        </Offcanvas> : null
-      }
-
-      {/* <div id="dropdown-banner" style={{
-        display: pane ? '' : 'none',
-        position: 'absolute',
-        top: '80px',
-        left: '0%',
-        width: '45%',
-        height: 'calc(100vh - 80px)',
-        backgroundColor: '#1f202b',
-        borderColor: '#12131a',
-        borderTopWidth: '0px',
-        borderRightStyle: 'solid',
-        borderWidth: '1px',
-        zIndex: 5,
-        color: 'white',
-        padding: '40px',
-        textAlign: 'left',
-        overflowY: 'auto'
-      }}>
-        <Content />
-      </div> */}
-      {/* {
-        isDesktop ? null : <Navbar variant="dark" style={{ fontSize: '12px', height: '24px', backgroundColor: '#171717', justifyContent: 'center' }}>
-          <Nav>
-            <Nav.Link active={pane === 'ABOUT US'}
-              onClick={e => { handleNavClick('ABOUT US') }}
-              style={{
-                width: '100px',
-                alignItems: 'center',
-              }}>ABOUT US</Nav.Link>
-            <Nav.Link active={pane === 'DEMO GUIDE'}
-              onClick={e => { handleNavClick('DEMO GUIDE') }}
-              style={{
-                // borderLeftWidth:'2px',
-                // borderLeftStyle:'solid',
-                // borderLeftColor:'white',
-                width: '100px',
-                alignItems: 'center',
-              }}>DEMO GUIDE</Nav.Link>
-          </Nav>
-        </Navbar>
-      } */}
-      <Router>
-        <Routes>
-          <Route path="/pairing" element={
-            <PairingTool />
-          }>
-          </Route>
-
-          <Route path="/" element={
-            isDesktop ? <div style={{ height: 'calc(100vh - 80px)', width: '100%' }}>
-              <div style={{ position: 'relative' }}>
-                <Card
-                  className="mainBody"
-                  style={{
-                    marginTop: isMobile ? '20px' : '40px',
-                    ...getDeviceStyle()
-                  }}
-                >
-                  <Body isMobile={isMobile || isTablet} screenWidth={width} />
-                </Card>
-                <img
-                  alt="try our demo"
-                  width={200}
-                  src='try_our_demo.png'
-                  style={{ position: 'absolute', zIndex: 5, marginLeft: '580px', marginTop: '30px' }}></img>
+          </div>
+          <div className='d-flex flex-column' style={{ height: '100%' }}>
+            <div
+              style={{ flex: 1 }}
+              className='d-flex justify-content-center align-items-center'
+            >
+              <div
+                style={{
+                  width: '450px',
+                  background: 'white',
+                  borderRadius: '20px',
+                  padding: '20px',
+                  boxShadow: '20px 20px 40px -5px #00000025',
+                  color: '#202020',
+                }}
+              >
+                <Widget />
               </div>
-              <Carousel fade interval={8500} indicatorLabels={[1, 2, 3]} style={{ width: '100%', height: 'calc(100vh - 80px)' }}>
-                {
-                  CarouselItems.map((item, i) =>
-                    <Carousel.Item key={`bg_carousel_${i}`}>
-                      <div style={{
-                        background: `linear-gradient(to top, rgba(59,62,79,0.8), rgba(59,62,79,0.8)), url(${item.img}) no-repeat top center`,
-                        // backgroundImage: `url(${item.img})`,
-                        backgroundSize: 'cover',
-                        width: '100%',
-                        height: 'calc(100vh - 80px)'
-                      }}>
-
-                      </div>
-                      {/* <img
-                        style={{
-                          objectFit: 'cover',
-                          width: '100%',
-                          height: 'calc(100vh - 80px)'
-                        }}
-                        // className="w-100 h-100"
-                        src={item.img}
-                        alt={`Slide ${i}`}
-                      /> */}
-                      <Carousel.Caption style={captionStyle}>
-                        <h3>{item.title}</h3>
-                        <p style={{ fontStyle: 'italic' }}>{item.text}</p>
-                      </Carousel.Caption>
-                    </Carousel.Item>
-                  )
+            </div>
+          </div>
+        </div>
+        <div
+          className='d-flex justify-content-center align-items-center'
+          style={{
+            padding: '25px 200px 200px 200px',
+            width: '100%',
+            color: '#f0f0f0',
+          }}
+        >
+          <div
+            className='text-start overflow-hidden'
+            style={{
+              width: '100%',
+              background: colors.primary,
+              color: colors.primaryLight,
+              borderRadius: '20px',
+              padding: 100,
+            }}
+          >
+            <h1 className='my-5' style={{ fontWeight: 700 }}>
+              Get to know us
+            </h1>
+            <div className='w-100 mb-5 mt-2 d-flex justify-content-center align-items-center'>
+              <ContactRow
+                title={'Email us at:'}
+                content={'jacob@sommify.ai'}
+                icon={<SiMinutemailer size={30} />}
+              />
+              <ContactRow
+                title={
+                  <span>
+                    Check out our{' '}
+                    <a
+                      className='clickable'
+                      onClick={() => {
+                        window.open(
+                          'https://www.linkedin.com/company/sommifyai'
+                        );
+                      }}
+                    >
+                      Linkedin.
+                    </a>
+                  </span>
                 }
-              </Carousel>
-            </div> : <Card
-              className="mainBody"
+                // content={'partner@sommify.ai'}
+                icon={<SiLinkedin size={30} />}
+              />
+              <ContactRow
+                title={
+                  <span>
+                    Check out our{' '}
+                    <a
+                      className='clickable'
+                      onClick={() => {
+                        window.open(
+                          'https://www.crunchbase.com/organization/sommifyai'
+                        );
+                      }}
+                    >
+                      Crunchbase.
+                    </a>
+                  </span>
+                }
+                // content={'partner@sommify.ai'}
+                icon={<SiCrunchbase size={30} />}
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          className='d-flex flex-column justify-content-center align-items-center'
+          style={{
+            padding: '25px 200px 200px 200px',
+            width: '100%',
+          }}
+        >
+          <h1 className='mb-5' style={{ fontSize: '50px' }}>
+            What we do
+          </h1>
+          <p style={{ fontSize: '24px', lineHeight: '40px' }}>
+            We are creating an <b>artificial intelligence sommelier</b> making
+            quality pairings accessible. The AI somm is built on the world-class
+            wine knowledge of Julie Dupouy and it will be packaged as an API.
+            The API will be able to populate meals on apps and websites with the
+            right wines or their silhouettes. To find out how we can{' '}
+            <b>sommify</b> your digital wine experience, download our deck.
+          </p>
+          <div className='py-5'>
+            <Button
+              size='lg'
+              variant='secondary'
+              onClick={() => {
+                window.open(
+                  'https://drive.google.com/file/d/1kFP_qyReKTbxi7sNvFlfTNxcD0pVrvPu/view?usp=sharing'
+                );
+              }}
               style={{
-                marginTop: isMobile ? '20px' : '40px',
-                ...getDeviceStyle()
+                letterSpacing: 5,
+                fontWeight: 600,
+                padding: '20px 40px',
+                color: '#f0f0f0',
               }}
             >
-              <Body isMobile={isMobile || isTablet} screenWidth={width} />
-            </Card>
-          } />
-        </Routes>
-      </Router>
+              <span style={{ fontWeight: 300 }}>GO TO</span> DECK
+            </Button>
+          </div>
+        </div>
+      </div>
+      <div
+        className='d-flex p-5'
+        style={{
+          width: '100%',
+          background: '#252525',
+          color: 'white',
+        }}
+      >
+        <Team />
+      </div>
+      <div
+        className='d-flex justify-content-center align-items-center text-center flex-column'
+        style={{
+          background: 'black',
+          width: '100%',
+          height: '300px',
+          color: '#707070',
+        }}
+      >
+        <span className='d-block'>Design by tomas@sommify.ai </span>
+        <span className='d-block' style={{ fontWeight: 600, fontSize: 20 }}>
+          {' '}
+          [ACTUAL DESIGN PENDING]
+        </span>
+      </div>
     </div>
   );
 }
