@@ -1,7 +1,8 @@
-body {
+:root {
   font-family: 'Inter', sans-serif !important;
+  font-family: 'Pacifico', cursive !important;
 
-  // font-size: 16px;
+  font-size: 1vw;
   // line-height: 24px;
   font-weight: 400;
 
@@ -12,10 +13,57 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
+body {
+  overflow-x: hidden;
+  width: 100%
+}
+
+@media screen and (max-width: 760px) {
+  :root {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 760px) and (max-width: 1300px) {
+  :root {
+    font-size: 20px;
+  }
+}
+
+@media screen and (min-width: 1300px) and (max-width: 2400px) {
+  :root {
+    font-size: 16px
+  }
+}
+
+@media screen and (min-width: 2400px) {
+  :root {
+    font-size: 35px
+  }
+}
+
 .clickable:hover {
   cursor: pointer;
 }
 
+.rounded-half {
+  border-radius: 9999px;
+}
+
 a {
-  color: white !important
+  color: white !important;
+}
+
+.font-cursive {
+  font-family: 'Pacifico', cursive;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

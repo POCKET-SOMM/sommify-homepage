@@ -3,6 +3,7 @@ import { Image } from 'react-bootstrap';
 import { CircleFlag } from 'react-circle-flags';
 import countries from '../data/countries';
 import colors from '../data/colors';
+import { isBrowser } from 'react-device-detect';
 
 const tastes = ['acidic', 'bodied', 'sweet', 'tannic'];
 
@@ -46,8 +47,7 @@ const wineOrigin = (wine) => {
     <span>
       <CircleFlag
         countryCode={countries[wine['country']]?.toLowerCase()}
-        height='11'
-        style={{ marginRight: '5px' }}
+        style={{ marginRight: '5px', height: '1em' }}
       />
       {reg_list.join(', ')} {wine['year'] ? wine['year'] : ''}
     </span>
@@ -74,15 +74,16 @@ const wineQualsCollapsed = (wine) => {
 const Row = ({ children }) => (
   <div
     style={{
-      flex: 1,
+      // flex: 1,
       textAlign: 'start',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
-      display: 'flex',
+      // display: 'flex',
       alignItems: 'center',
-      fontSize: '10px',
       color: '#202020',
+      fontSize: '0.8em',
+      lineHeight: '1.1em'
     }}
   >
     {children}
@@ -95,35 +96,33 @@ export default function WineContent({ wine, hovered = false, ...props }) {
       {...props}
       id='wine-content'
       className='d-flex'
-      style={{ maxWidth: '300px', height: '100%' }}
+      style={{ height: '100%', fontSize: '0.9em' }}
     >
       <div className='center-content'>
         <Image
           alt='wine-img'
-          className='nodrag py-2'
+          className='nodrag mx-2'
           style={{
-            float: 'left',
             transform: hovered ? 'scale(1.1)' : '',
             transition: 'transform 0.3s',
             display: 'inline-block',
-            paddingRight: '6px',
+            height: 'calc(4em)',
           }}
-          height='100%'
           src={imageLink(wine.link)}
         />
       </div>
       <div
-        className='text-xxs text-truncate'
+        className='text-truncate'
         style={{
           display: 'flex',
           flexDirection: 'column',
         }}
       >
         <span
-          style={{ maxWidth: '300px', fontSize: '12px' }}
+          style={{ maxWidth: isBrowser ? '300px' : '50vw', fontSize: '0.9em' }}
           className='d-block w-100 text-start hover-underline clickable text-truncate'
           onClick={() => {
-            window.open(wine.url, '_blank');
+            window.open(wine.link, '_blank');
           }}
         >
           <b>{wine.name.replaceAll('-', ' ')}</b>
