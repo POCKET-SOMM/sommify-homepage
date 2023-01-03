@@ -84,14 +84,12 @@ const GetToKnowUs = ({ ...props }) => {
     >
       <div className={`w-100 mb-5 mt-2 d-flex justify-content-center`}>
         <ContactRow
-          title={'Email us at:'}
           content={'jacob@sommify.ai'}
           icon={<SiMinutemailer size='60%' />}
         />
         <ContactRow
           title={
             <span>
-              Check out our{' '}
               <a
                 className='clickable'
                 onClick={() => {
@@ -100,7 +98,6 @@ const GetToKnowUs = ({ ...props }) => {
               >
                 Linkedin
               </a>
-              .
             </span>
           }
           // content={'partner@sommify.ai'}
@@ -109,7 +106,6 @@ const GetToKnowUs = ({ ...props }) => {
         <ContactRow
           title={
             <span>
-              Check out our{' '}
               <a
                 className='clickable'
                 onClick={() => {
@@ -120,7 +116,6 @@ const GetToKnowUs = ({ ...props }) => {
               >
                 Crunchbase
               </a>
-              .
             </span>
           }
           icon={<SiCrunchbase size='60%' />}
@@ -158,9 +153,9 @@ const MemberCard = ({ member, ...props }) => (
         verticalAlign: 'text-center',
       }}
     >
-      <b>{member.name}</b>
+      <span style={{ fontWeight: 500 }}>{member.name}</span>
       <br />
-      <span>{member.title}</span> <br />
+      <span style={{ fontSize: '0.7em' }}>{member.title}</span> <br />
       <SiLinkedin
         onClick={(e) => {
           window.open(member.linked);
@@ -180,24 +175,26 @@ const MemberCard = ({ member, ...props }) => (
   </div>
 );
 
+const TeamHeading = () => (
+  <div
+    className='d-flex flex-column justify-content-center align-items-center text-center'
+    style={{ flex: 1, float: 'left', paddingBlock: '10vh' }}
+  >
+    <div className='d-flex flex-column px-5'>
+      <h1 className='d-block'>Meet the team</h1>
+      <h4 style={{ fontWeight: '100 !important' }}>
+        Our core team is <b>made-for-measure</b> for this project with strong
+        investor backing.
+      </h4>
+    </div>
+    {!isMobile && <GetToKnowUs />}
+  </div>
+);
+
 export default function Team({ ...props }) {
   return (
     <div className={isMobile ? 'd-flex flex-column' : 'd-flex'}>
-      {isMobile && (
-        <div
-          className='d-flex flex-column justify-content-center align-items-center text-center'
-          style={{ flex: 1, float: 'left', paddingBlock: '10vh' }}
-        >
-          <h1 className='d-block' style={{ fontWeight: 700 }}>
-            Meet the team
-          </h1>
-          <h3 style={{ fontWeight: 300 }}>
-            Our core team is <b>made-for-measure</b> for this project with
-            strong investor backing.
-          </h3>
-          {/* <GetToKnowUs /> */}
-        </div>
-      )}
+      {isMobile && <TeamHeading />}
 
       <div style={{ flex: 1, float: 'left' }}>
         {teamMembers.map((member) => (
@@ -214,22 +211,7 @@ export default function Team({ ...props }) {
         ))}
       </div>
 
-      {!isMobile && (
-        <div style={{ flex: 1, float: 'left', padding: '10vh 5vw' }}>
-          <h1 className='d-block' style={{ fontWeight: 700 }}>
-            Meet the team
-          </h1>
-          <h4 style={{ fontWeight: 300 }}>
-            Our core team is{' '}
-            <b style={{ color: colors.primaryLight, fontSize: 'italic' }}>
-              made-for-measure
-            </b>{' '}
-            for this project with strong investor backing.
-          </h4>
-
-          <GetToKnowUs />
-        </div>
-      )}
+      {!isMobile && <TeamHeading />}
     </div>
   );
 }

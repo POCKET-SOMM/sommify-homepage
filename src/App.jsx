@@ -3,24 +3,30 @@ import Team from './components/Team';
 import Widget from './components/Widget';
 import colors from './data/colors';
 import { Button } from 'react-bootstrap';
-import { isMobile, MobileView, BrowserView } from 'react-device-detect';
+import {
+  isMobile,
+  MobileView,
+  BrowserView,
+  isBrowser,
+} from 'react-device-detect';
 import wave from './assets/wave.svg';
 import waveTop from './assets/wave_top.svg';
 import wall from './assets/wall_bg.jpg';
 
 import kitchen from './assets/background/kitchen.jpg';
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import { SiCrunchbase, SiLinkedin, SiMinutemailer } from 'react-icons/si';
 import useWindowDimensions from './hooks';
 import logo from './assets/logo/logo_white.svg';
+import { rgb } from './assets/helpers';
 
 const MARGIN = '10vh';
 const NAV_HEIGHT = '10vh';
 
 export const Logo = ({ ...props }) => (
   <div
-    style={{ fontSize: '2.4rem' }}
+    style={{ fontSize: '2.4rem', zIndex: 4 }}
     className='d-flex px-2 font-cursive user-select-none'
   >
     <div className='h-100'>sommify</div>
@@ -46,11 +52,70 @@ const Section = ({ children, style, className, ...props }) => (
   </div>
 );
 
+const NavButton = ({ nav, ...props }) => {
+  const { width, height } = useWindowDimensions();
+  const [active, setActive] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const { scrollY } = useScroll();
+
+  useEffect(() => {
+    return scrollY.onChange((latest) => {
+      if (
+        latest >= nav.scroll - 0.1 * height &&
+        latest < nav.scroll + 0.9 * height
+      )
+        setActive(true);
+      else setActive(false);
+    });
+  }, []);
+
+  return (
+    <motion.div
+      {...props}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      animate={{
+        color: hovered || active ? rgb(colors.primary) : 'rgb(0,0,0)',
+      }}
+      className={`d-flex justify-content-${
+        isBrowser ? 'start' : 'center'
+      } align-items-center clickable text-center`}
+      onClick={() => window.scrollTo(0, nav.scroll - 0.1 * height, 'smooth')}
+      style={{
+        marginLeft: isBrowser ? '4em' : '',
+        height: '100%',
+        fontWeight: 500,
+        letterSpacing: '.2em',
+        fontSize: isBrowser ? '.8em' : '.65em',
+        color: active ? colors.primary : 'black',
+        position: 'relative',
+        flex: isBrowser ? '' : 1,
+      }}
+    >
+      {nav.title}
+      {active && (
+        <motion.div
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '1px',
+            background: colors.primary,
+          }}
+          layoutId='underline_nav'
+        />
+      )}
+    </motion.div>
+  );
+};
+
 const Navigation = ({ ...props }) => {
+  const { width, height } = useWindowDimensions();
   const [headerScrolled, setHeaderScrolled] = useState(false);
 
   const listenScrollEvent = () => {
-    if (window.scrollY > 300 || (isMobile && window.scrollY > 50)) {
+    if (window.scrollY > 0.8 * height || (isMobile && window.scrollY > 50)) {
       setHeaderScrolled(true);
     } else {
       setHeaderScrolled(false);
@@ -62,29 +127,94 @@ const Navigation = ({ ...props }) => {
   }, []);
 
   return (
-    <motion.div
-      className='d-flex justify-content-center align-items-center header'
-      animate={{
-        background: headerScrolled
-          ? 'rgba(256,256,256,0.95)'
-          : 'rgba(256,256,256,0)',
-        color: headerScrolled ? 'rgb(0,0,0)' : 'rgb(256,256,256)',
-      }}
-      style={{
-        width: '100vw',
-        height: NAV_HEIGHT,
-        position: 'fixed',
-        top: 0,
-        zIndex: 9999,
-      }}
-    >
-      <Logo />
-    </motion.div>
+    <>
+      <MobileView>
+        <motion.div
+          animate={{
+            background: headerScrolled ? 'rgb(256,256,256)' : rgb(colors.beige),
+            color: headerScrolled ? 'rgb(0,0,0)' : 'rgb(256,256,256)',
+          }}
+          className='d-flex flex-column w-100 position-fixed py-2'
+          style={{ backgroundColor: colors.beige, zIndex: 9999 }}
+        >
+          <div className='d-flex justify-content-center'>
+            <Logo />
+          </div>
+        </motion.div>
+      </MobileView>
+      <BrowserView>
+        <div
+          className='d-flex justify-content-center align-items-center header text-black'
+          transition={{ delay: 0.3 }}
+          style={{
+            width: '100vw',
+            height: NAV_HEIGHT,
+            position: 'fixed',
+            top: 0,
+            zIndex: 2,
+          }}
+        >
+          <AnimatePresence>
+            {!headerScrolled && (
+              <motion.img
+                key='top-wave'
+                src={waveTop}
+                initial={{ opacity: 1, height: 0 }}
+                animate={{ opacity: 1, height: '14vh' }}
+                exit={{ opacity: 1, height: 0 }}
+                transition={{ duration: 0.3 }}
+                style={{
+                  position: 'fixed',
+                  transform: 'rotate(180deg)',
+                  top: '9vh',
+                  left: 0,
+                  width: '100vw',
+                  height: '14vh',
+                  zIndex: 0,
+                }}
+              />
+            )}
+          </AnimatePresence>
+
+          <motion.div
+            key='top-bar'
+            style={{
+              width: '100vw',
+              height: '10vh',
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              zIndex: 0,
+              background: colors.beige,
+            }}
+            className='px-4'
+          >
+            <div className='d-flex align-items-center h-100' style={{ width: '60%' }}>
+              <div style={{ color: 'white' }}>
+                <Logo />
+              </div>
+              <AnimatePresence>
+                <div className='d-flex flex-grow-1 justify-content-start align-items-center'>
+                  {[
+                    { title: 'DEMO', scroll: 0 },
+                    { title: 'OUR OFFERING', scroll: height },
+                    { title: 'WHAT WE DO', scroll: height * 2 },
+                    { title: 'TEAM', scroll: height * 3 },
+                  ].map((nav) => (
+                    <NavButton key={'nav_' + nav.title} nav={nav} />
+                  ))}
+                </div>
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        </div>
+      </BrowserView>
+    </>
   );
 };
 
-const TitleHeading = () => (
-  <div className='d-flex justify-content-center align-items-center'>
+const TitleHeading = ({ ...props }) => (
+  <div {...props} className='d-flex justify-content-center align-items-center'>
     <div>
       <h1 style={{ fontWeight: 700 }}>
         The <span className='text-primary'>AI</span> sommelier.
@@ -103,13 +233,16 @@ const Footer = () => (
       width: '100%',
       height: '50vh',
       color: 'white',
-      fontSize: '1.5rem'
+      fontSize: '1.5rem',
     }}
   >
     <div className='flex-grow-1 d-flex h-100 justify-content-center align-items-center'>
-      <img src={logo} style={{width:'8vw', opacity: 0.4}} />
+      <img src={logo} style={{ width: '8vw', opacity: 0.4 }} />
     </div>
-    <div className='flex-grow-1 d-flex flex-column h-100 justify-content-center' style={{opacity: 0.4}}>
+    <div
+      className='flex-grow-1 d-flex flex-column h-100 justify-content-center'
+      style={{ opacity: 0.4 }}
+    >
       <span className='d-block' style={{ fontWeight: 600 }}>
         <SiCrunchbase />{' '}
         <span
@@ -175,12 +308,16 @@ const WhatWeDo = () => (
 function App() {
   const { width, height } = useWindowDimensions();
 
+  useEffect(() => {
+    console.log(rgb(colors.beige));
+  }, []);
+
   return (
     <div className='d-flex flex-column'>
       <MobileView>
         <div
           style={{
-            background: '#fae5d7',
+            background: colors.beige,
           }}
         >
           <Navigation />
@@ -211,7 +348,7 @@ function App() {
             className='flex-column text-center position-relative'
             style={{
               background:
-                'linear-gradient(#fae5d7, rgba(0,0,0,0) 25%), url(' +
+                `linear-gradient(${colors.beige}, rgba(0,0,0,0) 25%), url(` +
                 wall +
                 ')',
               backgroundSize: 'cover',
@@ -249,87 +386,90 @@ function App() {
         <Footer />
       </MobileView>
       <BrowserView>
-        <Navigation />
-        <div>
-          <Section
-            style={{
-              // marginTop: NAV_HEIGHT,
-              color: '#f0f0f0',
-              background:
-                'linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(' +
-                kitchen +
-                ')',
-              backgroundSize: 'cover',
-              // filter: 'brightness(0.5)',
-            }}
-            className='d-flex justify-content-between position-relative'
-          >
-            <img
-              src={waveTop}
+        <div className='position-relative'>
+          <Navigation />
+          <div>
+            <Section
               style={{
-                transform: 'rotate(180deg)',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                zIndex: 1,
+                // marginTop: NAV_HEIGHT,
+                color: 'white',
+                background:
+                  'linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(' +
+                  kitchen +
+                  ')',
+                backgroundSize: 'cover',
+                // filter: 'brightness(0.5)',
               }}
-            />
-            <TitleHeading />
-            <Widget />
-          </Section>
+              className='d-flex justify-content-between position-relative'
+            >
+              {/* <img
+                src={waveTop}
+                style={{
+                  transform: 'rotate(180deg)',
+                  position: 'fixed',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  zIndex: 1,
+                }}
+              /> */}
+              <TitleHeading style={{ zIndex: 1 }} />
+              <Widget />
+            </Section>
 
-          <div
-            className='w-100 d-flex'
-            style={{
-              background: '#f0f0f0',
-              height: '70vh',
-              // borderBottom: '20px solid #252525',
-              // borderTop: '20px solid #252525',
-            }}
-          >
-            {['Epic', 'Awesome', 'Fast'].map((emblem) => (
-              <div className='d-flex justify-content-center align-items-center flex-grow-1'>
-                {emblem}
-              </div>
-            ))}
+            <Section
+              className='w-100 d-flex'
+              style={{
+                background: '#f0f0f0',
+                zIndex: '3 !important',
+                // borderBottom: '20px solid #252525',
+                // borderTop: '20px solid #252525',
+              }}
+            >
+              {['Epic', 'Awesome', 'Fast'].map((emblem) => (
+                <div className='d-flex justify-content-center align-items-center flex-grow-1'>
+                  {emblem}
+                </div>
+              ))}
+            </Section>
+
+            <Section
+              className='flex-column text-center position-relative'
+              style={{
+                background: 'url(' + wall + ')',
+                backgroundSize: 'contain',
+              }}
+            >
+              <WhatWeDo />
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: -2,
+                  width: '100%',
+                  height: '20vh',
+                  background: `url(${wave})`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: '100% 100%',
+                  backgroundPosition: 'bottom',
+                }}
+              />
+            </Section>
           </div>
 
           <Section
-            className='flex-column text-center position-relative'
             style={{
-              background: 'url(' + wall + ')',
-              backgroundSize: 'contain',
+              background: colors.primaryDark,
+              color: 'white',
+              paddingTop: 0,
+              borderTop: '5px solid ' + colors.primaryDark,
+              paddingInline: '5vw',
             }}
           >
-            <WhatWeDo />
-            <div
-              style={{
-                position: 'absolute',
-                bottom: -2,
-                width: '100%',
-                height: '20vh',
-                background: `url(${wave})`,
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: '100% 100%',
-                backgroundPosition: 'bottom',
-              }}
-            />
+            <Team />
           </Section>
+
+          <Footer />
         </div>
-
-        <Section
-          style={{
-            background: colors.primaryDark,
-            color: 'white',
-            paddingTop: 0,
-            borderTop: '5px solid ' + colors.primaryDark,
-          }}
-        >
-          <Team />
-        </Section>
-
-        <Footer />
       </BrowserView>
     </div>
   );

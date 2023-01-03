@@ -83,7 +83,7 @@ const Row = ({ children }) => (
       alignItems: 'center',
       color: '#202020',
       fontSize: '0.8em',
-      lineHeight: '1.1em'
+      lineHeight: '1.1em',
     }}
   >
     {children}
@@ -120,10 +120,7 @@ export default function WineContent({ wine, hovered = false, ...props }) {
       >
         <span
           style={{ maxWidth: isBrowser ? '300px' : '50vw', fontSize: '0.9em' }}
-          className='d-block w-100 text-start hover-underline clickable text-truncate'
-          onClick={() => {
-            window.open(wine.link, '_blank');
-          }}
+          className='d-block w-100 text-start hover-underline text-truncate'
         >
           <b>{wine.name.replaceAll('-', ' ')}</b>
         </span>

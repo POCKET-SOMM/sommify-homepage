@@ -13,6 +13,7 @@ import wines from '../data/wines';
 import { AnimatePresence, motion } from 'framer-motion';
 import useWindowDimensions from '../hooks';
 import { isBrowser } from 'react-device-detect';
+import logo from '../assets/logo/logo_white.svg';
 
 export const winePlateHeight = 90;
 const SERVER_URL = 'https://pocketsommapi.azurewebsites.net';
@@ -277,6 +278,11 @@ function Widget({ isMobile, screenWidth }) {
         }}
       >
         <div id='body-header'>
+          <div className='w-100 d-flex justify-content-center'>
+            <div className='rounded-circle d-flex justify-content-center align-items-center' style={{ width: '2.4em', height: '2.4em', marginBottom: '1.4em', background: colors.primary }}>
+              <img src={logo} style={{ height: '80%' }} />
+            </div>
+          </div>
           <div
             id='body-query'
             style={{
@@ -353,7 +359,7 @@ function Widget({ isMobile, screenWidth }) {
                       ...css,
                       border: '1px solid #f5f5f5',
                       backgroundColor: '#f5f5f5',
-                      //   height: '50px',
+                      minHeight: '3.2em',
                       padding: '1% 3%',
                       borderRadius: '2em',
                       boxShadow: state.isFocused
@@ -372,7 +378,7 @@ function Widget({ isMobile, screenWidth }) {
                       borderRadius: '9999px',
                       color: 'white',
                       background: '#1f202b',
-                      padding: '1% 4%',
+                      padding: '0.1em 0.3em',
                       // fontSize: '16px',
                     }),
                     multiValueRemove: (css) => ({
@@ -411,7 +417,7 @@ function Widget({ isMobile, screenWidth }) {
           </div>
         </div>
         <AnimatePresence>
-          {(wining || wines) ? null : (
+          {wining || allWines.flat().length === 0 ? null : (
             <motion.div
               animate={{ opacity: !wining && !searchErr ? 1 : 0 }}
               className='mt-2'
@@ -485,7 +491,7 @@ function Widget({ isMobile, screenWidth }) {
             overflowY: 'auto',
             overflowX: 'hidden',
             height:
-              displayedWines.length && !wining ? `calc(4 * 5.3em)` : '0px',
+              displayedWines.length && !wining ? `calc(4 * 5.5em)` : '0px',
             overscrollBehavior: 'contain',
           }}
         >
