@@ -17,13 +17,16 @@ export default function WinePlate({ wine, disabled, height }) {
       }}
       transition={{ ease: 'easeOut', duration: 0.3 }}
       exit={{ height: 0, opacity: 0 }}
-      className='overflow-hidden position-relative py-2 mb-1 w-100 rounded'
-      style={{ border: '1px solid' }}
+      className='overflow-hidden position-relative mb-1 w-100 rounded clickable'
+      style={{ border: '1px solid', paddingBlock: '.4em' }}
       onMouseEnter={() => {
         setHovered(true);
       }}
       onMouseLeave={() => {
         setHovered(false);
+      }}
+      onClick={() => {
+        window.open(wine.link, '_blank');
       }}
     >
       <motion.div
@@ -32,7 +35,7 @@ export default function WinePlate({ wine, disabled, height }) {
           color: hovered ? 'rgb(256,256,256)' : 'rgb(50,50,50)',
         }}
         transition={{ ease: 'easeOut', duration: 0.3 }}
-        className='px-2 py-1'
+        className='px-2'
         style={{
           fontWeight: 600,
           fontSize: '0.9em',
