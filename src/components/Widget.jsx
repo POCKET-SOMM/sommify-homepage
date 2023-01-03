@@ -7,21 +7,45 @@ import { createFilter } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import CustomOption from './CustomOption';
 import CustomMenuList from './CustomMenuList';
-import WinePlate from './WinePlate2';
+import WinePlate from './WinePlate';
 import colors from '../data/colors';
+import wines from '../data/wines';
+import { AnimatePresence, motion } from 'framer-motion';
+import useWindowDimensions from '../hooks';
+import { isBrowser } from 'react-device-detect';
 
 export const winePlateHeight = 90;
 const SERVER_URL = 'https://pocketsommapi.azurewebsites.net';
 
+const initialWines = [[], [], []];
+const initialPriceRange = 1;
+
+function WineDisplay({ wines }) {
+  return (
+    <div id='wine-display' style={{ width: '100%' }}>
+      {wines ? (
+        wines.map((wine, i) => (
+          <WinePlate key={`wine_display_${i}`} wine={wine} />
+        ))
+      ) : (
+        <span>No recommendations in this price range.</span>
+      )}
+    </div>
+  );
+}
+
 function Widget({ isMobile, screenWidth }) {
+  const { width, height } = useWindowDimensions();
   const [meal] = useState('');
   const [pair, setPair] = useState('');
   const [recipe, setRecipe] = useState({});
   const [wining, setWining] = useState(false);
-  const [allWines, setAllWines] = useState([]);
-  const [displayedWines, setDisplayedWines] = useState([]);
-  const [searchErr, setSearchErr] = useState('');
-  const [priceRange, setPriceRange] = useState(1);
+  const [allWines, setAllWines] = useState(initialWines);
+  const [displayedWines, setDisplayedWines] = useState(
+    initialWines[initialPriceRange]
+  );
+  const [searchErr, setSearchErr] = useState(false);
+  const [priceRange, setPriceRange] = useState(initialPriceRange);
   const [searchVisible, setSearchVisible] = useState(true);
 
   const [selectedTags, setSelectedTags] = useState([]);
@@ -31,6 +55,8 @@ function Widget({ isMobile, screenWidth }) {
   const [inputText, setInputText] = useState('');
 
   const wineMeRef = React.createRef();
+
+  const WIDGET_WIDTH = width <= 1920 ? '450px' : '900px';
 
   const optionObject = (option, index, type) => {
     return {
@@ -50,25 +76,13 @@ function Widget({ isMobile, screenWidth }) {
     axios
       .request(options)
       .then(function (response) {
-        setTags(response.data.tags.map((e, i) => optionObject(e, i, 'ingredient')));
+        setTags(
+          response.data.tags.map((e, i) => optionObject(e, i, 'ingredient'))
+        );
       })
       .catch(function (error) {
         console.error(error);
       });
-
-    // readFile('TAGS', (text) => {
-    //   let meals = text
-    //     .split('\n')
-    //     .filter(onlyUnique)
-    //     .map((e, i) => optionObject(e, i, 'meal'));
-    //   readFile('INGS', (text) => {
-    //     let ings = text
-    //       .split('\n')
-    //       .filter(onlyUnique)
-    //       .map((e, i) => optionObject(e, i, 'ingredient'));
-    //     setTags(meals.concat(ings));
-    //   });
-    // });
   }, []);
 
   const loadWines = (data) => {
@@ -133,41 +147,6 @@ function Widget({ isMobile, screenWidth }) {
       loadImg.onerror = (err) => reject(err);
     });
   };
-
-  function onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
-  }
-
-  function readFile(file, cb) {
-    fetch(`data/${file}.txt`)
-      .then((response) => response.text())
-      .then(cb);
-  }
-
-  function WineDisplay() {
-    return (
-      <div className='no-scrollbar' id='wine-display' style={{ width: '100%' }}>
-        {displayedWines ? (
-          displayedWines.map((wine, i) => (
-            <div
-              key={`wine_display_${i}`}
-              style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'start',
-                paddingBottom: i === displayedWines.length - 1 ? '' : '4px',
-              }}
-            >
-              <WinePlate wine={wine} />
-            </div>
-          ))
-        ) : (
-          <span>No recommendations in this price range.</span>
-        )}
-      </div>
-    );
-  }
 
   const wineMeEnabled = () => {
     return !!selectedTags.length || (!!inputText && isLink(inputText));
@@ -270,7 +249,6 @@ function Widget({ isMobile, screenWidth }) {
 
   const inputWidth = () => {
     if (isMobile) {
-      // border +
       return (screenWidth - 4) * 0.95 - 10 - 36 - 16;
     } else {
       return 313.39;
@@ -278,41 +256,44 @@ function Widget({ isMobile, screenWidth }) {
   };
 
   return (
-    <>
+    <div
+      style={{
+        width: isBrowser ? WIDGET_WIDTH : '85vw',
+        background: 'white',
+        borderRadius: isBrowser ? '2vw' : '4vw',
+        padding: isBrowser ? '2%' : '5vw',
+        boxShadow: '1vw 1vw 2vw -1vw #00000085',
+        color: '#202020',
+        zIndex: 2,
+      }}
+    >
       <div
         style={{
           height: '100%',
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
+          fontSize: isBrowser ? '' : '13px',
         }}
       >
-        <div
-          id='body-header'
-          style={{ minHeight: `${searchErr ? '88' : '68'}px` }}
-        >
+        <div id='body-header'>
           <div
             id='body-query'
             style={{
-              minHeight: '68px',
-              width: isMobile ? '95%' : '95%',
-              margin: 'auto',
+              width: '100%',
               textAlign: 'start',
             }}
           >
-            <Form.Label
+            <h5
               style={{
                 textAlign: 'start',
-                // fontSize: '14px',
                 fontWeight: 600,
-                // marginBottom: '0px',
                 opacity: 0.8,
-                marginLeft: '5px',
-                paddingLeft: '6px',
+                fontSize: '1.1em',
               }}
             >
               Let us recommend you a bottle
-            </Form.Label>
+            </h5>
 
             <Fade in={!searchVisible}>
               <div
@@ -322,11 +303,9 @@ function Widget({ isMobile, screenWidth }) {
                   alignItems: 'center',
                 }}
               >
-                <Form.Label
+                <span
                   style={{
                     textAlign: 'start',
-                    fontSize: '16px',
-                    width: 'calc(100% - 25px)',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
@@ -334,13 +313,13 @@ function Widget({ isMobile, screenWidth }) {
                   }}
                 >
                   <b>{recipe['title'] ? recipe['title'].toUpperCase() : ''}</b>
-                </Form.Label>
+                </span>
                 <CgClose
                   className='clickable nodrag'
                   style={{ marginLeft: '5px' }}
                   size={20}
                   color='gray'
-                  onClick={(e) => {
+                  onClick={() => {
                     setSearchVisible(true);
                   }}
                 />
@@ -351,10 +330,8 @@ function Widget({ isMobile, screenWidth }) {
               <div
                 style={{
                   display: searchVisible ? '' : 'none',
-                  padding: '5px',
-                  paddingTop: '0px',
-                  zIndex: 2,
                   position: 'relative',
+                  fontSize: '1rem',
                 }}
               >
                 <CreatableSelect
@@ -370,15 +347,21 @@ function Widget({ isMobile, screenWidth }) {
                   filterOption={createFilter({ ignoreAccents: false })}
                   openMenuOnClick={false}
                   isMulti={isMulti}
-                  placeholder='search meal or paste recipe link'
+                  placeholder='search meals'
                   styles={{
-                    control: (css) => ({
+                    control: (css, state) => ({
                       ...css,
                       border: '1px solid #f5f5f5',
                       backgroundColor: '#f5f5f5',
                       //   height: '50px',
-                      paddingBlock: '5px',
-                      borderRadius: '25px',
+                      padding: '1% 3%',
+                      borderRadius: '2em',
+                      boxShadow: state.isFocused
+                        ? '0 0 0 1px ' + colors.primary
+                        : 0,
+                      ':active, :hover': {
+                        borderColor: colors.primary,
+                      },
                     }),
                     multiValueLabel: (css) => ({
                       ...css,
@@ -386,11 +369,11 @@ function Widget({ isMobile, screenWidth }) {
                     }),
                     multiValue: (css) => ({
                       ...css,
-                      borderRadius: '50px',
+                      borderRadius: '9999px',
                       color: 'white',
                       background: '#1f202b',
-                      padding: '1px 4px',
-                      fontSize: '16px',
+                      padding: '1% 4%',
+                      // fontSize: '16px',
                     }),
                     multiValueRemove: (css) => ({
                       ...css,
@@ -425,85 +408,85 @@ function Widget({ isMobile, screenWidth }) {
                 />
               </div>
             </Fade>
-            {isLink(meal) && meal ? (
-              <div style={{ width: '80%', margin: 'auto' }}>
-                <span
-                  style={{
-                    color: 'darkred',
-                    float: 'left',
-                    fontSize: '12px',
-                    margin: '2px',
-                  }}
-                >
-                  * corked link
-                </span>
-              </div>
-            ) : null}
-            <div
-              id='error-message'
-              style={{
-                height: '24px',
-                display: !!searchErr && !wining ? '' : 'none',
-              }}
-            >
-              <span style={{ fontSize: '13px', color: 'red' }}>
-                {searchErr}
-              </span>
-            </div>
           </div>
         </div>
-
-        <Fade id='body-winelist-$-levels' in={!wining && !!pair && !searchErr}>
-          <div
-            style={{
-              display: !wining && !!pair && !searchErr ? 'flex' : 'none',
-              height: '30px',
-              paddingBlock: '20px',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            {[0, 1, 2].map((level) => (
-              <div
-                key={level}
-                disabled={allWines.length === 0}
-                onClick={() => {
-                  setPriceRange(level);
-                  setDisplayedWines(allWines[level]);
-                }}
-                size='sm'
-                variant='outline-danger'
-                style={{
-                  opacity: allWines.length === 0 ? 0 : 1,
-                  padding: '0px',
-                  width: '50px',
-                  marginInline: '15px',
-                  height: '20px',
-                  color: priceRange === level ? colors.primary : '#afafaf',
-                  borderBottom: `2px solid ${
-                    priceRange === level ? colors.primary : 'rgba(0,0,0,0)'
-                  }`,
-                }}
-                className='d-flex justify-content-center align-items-center clickable'
-              >
-                <BiDollar size={13} />
-                <BiDollar size={13} style={{ opacity: level < 1 ? 0.35 : 1 }} />
-                <BiDollar size={13} style={{ opacity: level < 2 ? 0.35 : 1 }} />
-              </div>
-            ))}
-          </div>
-        </Fade>
+        <AnimatePresence>
+          {(wining || wines) ? null : (
+            <motion.div
+              animate={{ opacity: !wining && !searchErr ? 1 : 0 }}
+              className='mt-2'
+              style={{
+                display: !wining && !searchErr ? 'flex' : 'none',
+                width: '90%',
+                margin: 'auto',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '2.4em',
+              }}
+            >
+              {[0, 1, 2].map((level) => (
+                <motion.div
+                  animate={{
+                    opacity: allWines.length === 0 ? 0 : 1,
+                    color:
+                      priceRange === level
+                        ? colors.primaryRgb
+                        : 'rgb(200,200,200)',
+                    background: priceRange === level ? 'rgb(250,250,250)' : '',
+                  }}
+                  whileHover={{ background: 'rgb(250,250,250)' }}
+                  key={level}
+                  disabled={allWines.length === 0}
+                  onClick={() => {
+                    setPriceRange(level);
+                    setDisplayedWines(allWines[level]);
+                  }}
+                  size='sm'
+                  variant='outline-danger'
+                  style={{
+                    borderRadius: '.5vw .5vw 0 0',
+                  }}
+                  className='d-flex justify-content-center align-items-center clickable flex-grow-1 h-100 position-relative'
+                >
+                  <BiDollar style={{ height: '1.6em' }} />
+                  <BiDollar
+                    style={{ height: '1.6em', opacity: level < 1 ? 0.35 : 1 }}
+                  />
+                  <BiDollar
+                    style={{ height: '1.6em', opacity: level < 2 ? 0.35 : 1 }}
+                  />
+                  {priceRange === level && (
+                    <motion.div
+                      style={{
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        height: '1px',
+                        background: colors.primary,
+                      }}
+                      layoutId='underline'
+                    />
+                  )}
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <div
           id='body-winelist'
-          className={`animated winelist ${isMobile ? '' : 'hiddenScroll'}`}
+          className={`no-scrollbar animated winelist ${
+            isMobile ? '' : 'hiddenScroll'
+          }`}
           style={{
             width: '100%',
-            // height: winelistHeight(),
             selfAlign: 'start',
             overflowY: 'auto',
             overflowX: 'hidden',
-            height: displayedWines.length && !wining ? `${4 * 88}px` : '0px',
+            height:
+              displayedWines.length && !wining ? `calc(4 * 5.3em)` : '0px',
+            overscrollBehavior: 'contain',
           }}
         >
           {[0, 1, 2].map((e) => (
@@ -511,7 +494,7 @@ function Widget({ isMobile, screenWidth }) {
               <div
                 style={{ display: !wining && priceRange === e ? '' : 'none' }}
               >
-                <WineDisplay />
+                <WineDisplay wines={displayedWines} />
               </div>
             </Fade>
           ))}
@@ -521,28 +504,24 @@ function Widget({ isMobile, screenWidth }) {
           id='body-footer'
           style={{
             width: '100%',
-            height: '60px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'end',
-            backgroundColor: 'white',
-            padding: '5px',
-            paddingTop: '10px',
+            paddingTop: '5%',
           }}
         >
           <Button
             type='submit'
+            className='py-3'
             disabled={!wineMeEnabled()}
             onClick={(e) => {
               handleWineMe(selectedTags);
             }}
             ref={wineMeRef}
             style={{
-              width: '95%',
-              height: '45px',
-              zIndex: 0,
+              width: '100%',
               fontWeight: 600,
-              fontSize: '13px',
+              fontSize: '1em',
             }}
           >
             <span>
@@ -558,7 +537,7 @@ function Widget({ isMobile, screenWidth }) {
           </Button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
