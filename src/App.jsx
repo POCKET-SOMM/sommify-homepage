@@ -316,10 +316,6 @@ const WhatWeDo = () => (
 function App() {
   const { width, height } = useWindowDimensions();
 
-  useEffect(() => {
-    console.log(rgb(colors.beige));
-  }, []);
-
   return (
     <div className='d-flex flex-column'>
       <CustomView condition={width < 760}>
@@ -409,7 +405,17 @@ function App() {
                 src={kitchen}
                 alt='title-bg'
                 className='position-absolute w-100 h-100'
-                style={{ top: 0, left: 0, filter: 'brightness(0.75)' }}
+                style={{ top: '10vh', left: 0, filter: 'brightness(0.75)' }}
+              />
+              <div
+                className='w-100 h-100 position-absolute'
+                style={{
+                  top: '10vh',
+                  left: 0,
+                  background: `linear-gradient(rgba(0,0,0,0) 50%, ${rgb(
+                    '#202020'
+                  )})`,
+                }}
               />
               <TitleHeading style={{ zIndex: 1 }} />
               <Widget />
@@ -420,8 +426,6 @@ function App() {
               style={{
                 background: '#f0f0f0',
                 zIndex: '3 !important',
-                // borderBottom: '20px solid #252525',
-                // borderTop: '20px solid #252525',
               }}
             >
               {['World-class', 'Flexible', 'Refreshing'].map((emblem) => (
