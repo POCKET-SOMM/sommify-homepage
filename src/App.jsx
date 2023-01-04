@@ -1,3 +1,4 @@
+import React, { Suspense } from 'react';
 import './App.scss';
 import Team from './components/Team';
 import Widget from './components/Widget';
@@ -7,19 +8,22 @@ import {
   isMobile,
   MobileView,
   BrowserView,
+  CustomView,
   isBrowser,
 } from 'react-device-detect';
 import wave from './assets/wave.svg';
 import waveTop from './assets/wave_top.svg';
 import wall from './assets/wall_bg.jpg';
-
 import kitchen from './assets/background/kitchen.jpg';
+// const kitchen = React.lazy(() => import('./assets/background/kitchen.jpg'));
+
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import { SiCrunchbase, SiLinkedin, SiMinutemailer } from 'react-icons/si';
 import useWindowDimensions from './hooks';
 import logo from './assets/logo/logo_white.svg';
 import { rgb } from './assets/helpers';
+import LoadableImage from './components/Image';
 
 const MARGIN = '10vh';
 const NAV_HEIGHT = '10vh';
@@ -82,6 +86,7 @@ const NavButton = ({ nav, ...props }) => {
       } align-items-center clickable text-center`}
       onClick={() => window.scrollTo(0, nav.scroll - 0.1 * height, 'smooth')}
       style={{
+        // paddingTop: '1em',
         marginLeft: isBrowser ? '4em' : '',
         height: '100%',
         fontWeight: 500,
@@ -97,10 +102,10 @@ const NavButton = ({ nav, ...props }) => {
         <motion.div
           style={{
             position: 'absolute',
-            bottom: 0,
+            bottom: -2,
             left: 0,
             right: 0,
-            height: '1px',
+            height: 2,
             background: colors.primary,
           }}
           layoutId='underline_nav'
@@ -115,7 +120,7 @@ const Navigation = ({ ...props }) => {
   const [headerScrolled, setHeaderScrolled] = useState(false);
 
   const listenScrollEvent = () => {
-    if (window.scrollY > 0.8 * height || (isMobile && window.scrollY > 50)) {
+    if (window.scrollY > 0.8 * height || (width < 760 && window.scrollY > 50)) {
       setHeaderScrolled(true);
     } else {
       setHeaderScrolled(false);
@@ -128,7 +133,7 @@ const Navigation = ({ ...props }) => {
 
   return (
     <>
-      <MobileView>
+      <CustomView condition={width < 1300}>
         <motion.div
           animate={{
             background: headerScrolled ? 'rgb(256,256,256)' : rgb(colors.beige),
@@ -141,8 +146,8 @@ const Navigation = ({ ...props }) => {
             <Logo />
           </div>
         </motion.div>
-      </MobileView>
-      <BrowserView>
+      </CustomView>
+      <CustomView condition={width >= 1300}>
         <div
           className='d-flex justify-content-center align-items-center header text-black'
           transition={{ delay: 0.3 }}
@@ -154,7 +159,7 @@ const Navigation = ({ ...props }) => {
             zIndex: 2,
           }}
         >
-          <AnimatePresence>
+          <AnimatePresence initial={false}>
             {!headerScrolled && (
               <motion.img
                 key='top-wave'
@@ -189,7 +194,10 @@ const Navigation = ({ ...props }) => {
             }}
             className='px-4'
           >
-            <div className='d-flex align-items-center h-100' style={{ width: '60%' }}>
+            <div
+              className='d-flex align-items-center h-100'
+              style={{ width: '60%' }}
+            >
               <div style={{ color: 'white' }}>
                 <Logo />
               </div>
@@ -208,7 +216,7 @@ const Navigation = ({ ...props }) => {
             </div>
           </motion.div>
         </div>
-      </BrowserView>
+      </CustomView>
     </>
   );
 };
@@ -275,7 +283,7 @@ const Footer = () => (
 const WhatWeDo = () => (
   <>
     <h1 className='mb-5'>What we do</h1>
-    <p style={{ fontSize: '1.35rem' }}>
+    <p style={{ fontSize: '1.5rem' }}>
       We are creating an <b>artificial intelligence sommelier</b> making quality
       pairings accessible. The AI somm is built on the world-class wine
       knowledge of Julie Dupouy and it will be packaged as an API. The API will
@@ -314,7 +322,7 @@ function App() {
 
   return (
     <div className='d-flex flex-column'>
-      <MobileView>
+      <CustomView condition={width < 760}>
         <div
           style={{
             background: colors.beige,
@@ -384,8 +392,8 @@ function App() {
         </Section>
 
         <Footer />
-      </MobileView>
-      <BrowserView>
+      </CustomView>
+      <CustomView condition={width >= 760}>
         <div className='position-relative'>
           <Navigation />
           <div>
@@ -393,26 +401,16 @@ function App() {
               style={{
                 // marginTop: NAV_HEIGHT,
                 color: 'white',
-                background:
-                  'linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(' +
-                  kitchen +
-                  ')',
-                backgroundSize: 'cover',
-                // filter: 'brightness(0.5)',
+                background: '#252525',
               }}
               className='d-flex justify-content-between position-relative'
             >
-              {/* <img
-                src={waveTop}
-                style={{
-                  transform: 'rotate(180deg)',
-                  position: 'fixed',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  zIndex: 1,
-                }}
-              /> */}
+              <LoadableImage
+                src={kitchen}
+                alt='title-bg'
+                className='position-absolute w-100 h-100'
+                style={{ top: 0, left: 0, filter: 'brightness(0.75)' }}
+              />
               <TitleHeading style={{ zIndex: 1 }} />
               <Widget />
             </Section>
@@ -426,9 +424,9 @@ function App() {
                 // borderTop: '20px solid #252525',
               }}
             >
-              {['Epic', 'Awesome', 'Fast'].map((emblem) => (
+              {['World-class', 'Flexible', 'Refreshing'].map((emblem) => (
                 <div className='d-flex justify-content-center align-items-center flex-grow-1'>
-                  {emblem}
+                  <h1>{emblem}</h1>
                 </div>
               ))}
             </Section>
@@ -436,7 +434,10 @@ function App() {
             <Section
               className='flex-column text-center position-relative'
               style={{
-                background: 'url(' + wall + ')',
+                background:
+                  `linear-gradient(${rgb('#f0f0f0')}, rgba(0,0,0,0)), url(` +
+                  wall +
+                  ')',
                 backgroundSize: 'contain',
               }}
             >
@@ -470,7 +471,7 @@ function App() {
 
           <Footer />
         </div>
-      </BrowserView>
+      </CustomView>
     </div>
   );
 }

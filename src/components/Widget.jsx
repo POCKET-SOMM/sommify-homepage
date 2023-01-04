@@ -10,7 +10,7 @@ import CustomMenuList from './CustomMenuList';
 import WinePlate from './WinePlate';
 import colors from '../data/colors';
 import wines from '../data/wines';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import useWindowDimensions from '../hooks';
 import { isBrowser } from 'react-device-detect';
 import logo from '../assets/logo/logo_white.svg';
@@ -58,6 +58,7 @@ function Widget({ isMobile, screenWidth }) {
   const wineMeRef = React.createRef();
 
   const WIDGET_WIDTH = width <= 1920 ? '450px' : '900px';
+  const controls = useAnimationControls();
 
   const optionObject = (option, index, type) => {
     return {
@@ -154,6 +155,14 @@ function Widget({ isMobile, screenWidth }) {
   };
 
   const handleWineMe = (payload) => {
+    if (!payload.length) {
+      setSearchErr('Please enter a meal...');
+      controls.start({ x: [-3, 3, -3, 0], transition: {type:'spring', duration: 0.2} });
+      return;
+    } else {
+      setSearchErr(false);
+    }
+
     setWining(true);
     var data, endpoint;
 
@@ -249,7 +258,7 @@ function Widget({ isMobile, screenWidth }) {
   };
 
   const inputWidth = () => {
-    if (isMobile) {
+    if (width < 760) {
       return (screenWidth - 4) * 0.95 - 10 - 36 - 16;
     } else {
       return 313.39;
@@ -264,6 +273,10 @@ function Widget({ isMobile, screenWidth }) {
         borderRadius: isBrowser ? '2vw' : '4vw',
         padding: isBrowser ? '2%' : '5vw',
         boxShadow: '1vw 1vw 2vw -1vw #00000085',
+
+        // border: '2px solid #d0d0d0',
+        // boxShadow: '0 3px 0 #d0d0d0',
+
         color: '#202020',
         zIndex: 2,
       }}
@@ -279,8 +292,16 @@ function Widget({ isMobile, screenWidth }) {
       >
         <div id='body-header'>
           <div className='w-100 d-flex justify-content-center'>
-            <div className='rounded-circle d-flex justify-content-center align-items-center' style={{ width: '2.4em', height: '2.4em', marginBottom: '1.4em', background: colors.primary }}>
-              <img src={logo} style={{ height: '80%' }} />
+            <div
+              className='rounded-circle d-flex justify-content-center align-items-center user-select-none'
+              style={{
+                width: '2.4em',
+                height: '2.4em',
+                marginBottom: '1.4em',
+                background: colors.primary,
+              }}
+            >
+              <img src={logo} style={{ height: '80%', marginRight: '.3em' }} />
             </div>
           </div>
           <div
@@ -290,16 +311,23 @@ function Widget({ isMobile, screenWidth }) {
               textAlign: 'start',
             }}
           >
-            <h5
-              style={{
-                textAlign: 'start',
-                fontWeight: 600,
-                opacity: 0.8,
-                fontSize: '1.1em',
-              }}
-            >
-              Let us recommend you a bottle
-            </h5>
+            <motion.div animate={controls}>
+              <h5
+                className='mb-1'
+                style={{
+                  textAlign: 'start',
+                  fontWeight: 600,
+                  fontSize: '.9em',
+                  color: '#909090',
+                }}
+              >
+                {searchErr ? (
+                  <span style={{ color: 'purple' }}>{searchErr}</span>
+                ) : (
+                  'Wines that go well with...'
+                )}
+              </h5>
+            </motion.div>
 
             <Fade in={!searchVisible}>
               <div
@@ -353,7 +381,7 @@ function Widget({ isMobile, screenWidth }) {
                   filterOption={createFilter({ ignoreAccents: false })}
                   openMenuOnClick={false}
                   isMulti={isMulti}
-                  placeholder='search meals'
+                  placeholder="Type in what you're eating"
                   styles={{
                     control: (css, state) => ({
                       ...css,
@@ -365,6 +393,7 @@ function Widget({ isMobile, screenWidth }) {
                       boxShadow: state.isFocused
                         ? '0 0 0 1px ' + colors.primary
                         : 0,
+                      fontSize: '1.1em',
                       ':active, :hover': {
                         borderColor: colors.primary,
                       },
@@ -377,8 +406,10 @@ function Widget({ isMobile, screenWidth }) {
                       ...css,
                       borderRadius: '9999px',
                       color: 'white',
-                      background: '#1f202b',
+                      background: '#3b3d52',
                       padding: '0.1em 0.3em',
+                      // boxShadow: '0 2px 0 black',
+                      // border: '2px solid black',
                       // fontSize: '16px',
                     }),
                     multiValueRemove: (css) => ({
@@ -483,7 +514,7 @@ function Widget({ isMobile, screenWidth }) {
         <div
           id='body-winelist'
           className={`no-scrollbar animated winelist ${
-            isMobile ? '' : 'hiddenScroll'
+            width < 760 ? '' : 'hiddenScroll'
           }`}
           style={{
             width: '100%',
@@ -519,15 +550,18 @@ function Widget({ isMobile, screenWidth }) {
           <Button
             type='submit'
             className='py-3'
-            disabled={!wineMeEnabled()}
+            // disabled={!wineMeEnabled()}
             onClick={(e) => {
               handleWineMe(selectedTags);
             }}
             ref={wineMeRef}
             style={{
               width: '100%',
-              fontWeight: 600,
+              fontWeight: 700,
               fontSize: '1em',
+              borderRadius: '1vw',
+              // boxShadow: '0 3px 0 ' + colors.primaryDark,
+              // border: '2px solid ' + colors.primaryDark,
             }}
           >
             <span>
