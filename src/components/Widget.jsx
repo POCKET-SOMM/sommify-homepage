@@ -10,7 +10,7 @@ import CustomMenuList from './CustomMenuList';
 import WinePlate from './WinePlate';
 import colors from '../data/colors';
 import wines from '../data/wines';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import useWindowDimensions from '../hooks';
 import { isBrowser } from 'react-device-detect';
 import logo from '../assets/logo/logo_white.svg';
@@ -58,6 +58,7 @@ function Widget({ isMobile, screenWidth }) {
   const wineMeRef = React.createRef();
 
   const WIDGET_WIDTH = width <= 1920 ? '450px' : '900px';
+  const controls = useAnimationControls();
 
   const optionObject = (option, index, type) => {
     return {
@@ -154,6 +155,14 @@ function Widget({ isMobile, screenWidth }) {
   };
 
   const handleWineMe = (payload) => {
+    if (!payload.length) {
+      setSearchErr('Please enter a meal...');
+      controls.start({ x: [-3, 3, -3, 0], transition: {type:'spring', duration: 0.2} });
+      return;
+    } else {
+      setSearchErr(false);
+    }
+
     setWining(true);
     var data, endpoint;
 
@@ -249,7 +258,7 @@ function Widget({ isMobile, screenWidth }) {
   };
 
   const inputWidth = () => {
-    if (width<760) {
+    if (width < 760) {
       return (screenWidth - 4) * 0.95 - 10 - 36 - 16;
     } else {
       return 313.39;
@@ -302,18 +311,23 @@ function Widget({ isMobile, screenWidth }) {
               textAlign: 'start',
             }}
           >
-            <h5
-              className='mb-1'
-              style={{
-                textAlign: 'start',
-                fontWeight: 600,
-                opacity: 0.8,
-                fontSize: '.9em',
-                opacity: 0.6,
-              }}
-            >
-              Wines that go well with...
-            </h5>
+            <motion.div animate={controls}>
+              <h5
+                className='mb-1'
+                style={{
+                  textAlign: 'start',
+                  fontWeight: 600,
+                  fontSize: '.9em',
+                  color: '#909090',
+                }}
+              >
+                {searchErr ? (
+                  <span style={{ color: 'purple' }}>{searchErr}</span>
+                ) : (
+                  'Wines that go well with...'
+                )}
+              </h5>
+            </motion.div>
 
             <Fade in={!searchVisible}>
               <div
@@ -546,7 +560,6 @@ function Widget({ isMobile, screenWidth }) {
               fontWeight: 700,
               fontSize: '1em',
               borderRadius: '1vw',
-              letterSpacing: '.2em',
               // boxShadow: '0 3px 0 ' + colors.primaryDark,
               // border: '2px solid ' + colors.primaryDark,
             }}
