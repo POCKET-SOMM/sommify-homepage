@@ -9,40 +9,47 @@ import jurajImg from '../assets/team/Juraj Cropped-min.png';
 import colors from '../data/colors';
 import { CircleFlag } from 'react-circle-flags';
 import { isMobile } from 'react-device-detect';
+import LoadableImage from './Image';
+import useWindowDimensions from '../hooks';
 
 const teamMembers = [
   {
-    image: jacobImg,
+    image: 'https://pocketsommstorage.blob.core.windows.net/images/Jacob.png',
     name: 'Jacob Pichna',
+    bg: colors.secondaryLight,
     title: 'Co-founder, CEO',
     linked: 'https://www.linkedin.com/in/pichna/',
     countries: ['fi'],
   },
   {
-    image: tomasImg,
+    image: 'https://pocketsommstorage.blob.core.windows.net/images/Tomas.png',
     name: 'Tomas Bedej',
+    bg: colors.primaryLight,
     title: 'Co-Founder, UX & AI',
     linked: 'https://www.linkedin.com/in/bedej/',
     countries: ['sk'],
   },
   {
-    image: julieImg,
+    image: 'https://pocketsommstorage.blob.core.windows.net/images/Julie.png',
     name: 'Julie Dupouy',
+    bg: colors.secondaryLight,
     title: 'Wine Expert',
     linked: 'https://www.linkedin.com/in/julie-dupouy-50305925/',
     website: 'https://www.juliedupouy.com/',
     countries: ['fr'],
   },
   {
-    image: williamImg,
+    image: 'https://pocketsommstorage.blob.core.windows.net/images/William.png',
     name: 'William Brach',
+    bg: colors.primaryLight,
     title: 'Co-founder, AI',
     linked: 'https://www.linkedin.com/in/william-brach-4a20b6213/',
     countries: ['sk'],
   },
   {
-    image: jurajImg,
+    image: 'https://pocketsommstorage.blob.core.windows.net/images/Juraj.png',
     name: 'Juraj Bedej',
+    bg: colors.secondaryLight,
     title: 'Full-stack & Cloud',
     linked: 'https://www.linkedin.com/in/jbedej',
     countries: ['sk'],
@@ -127,7 +134,7 @@ const GetToKnowUs = ({ ...props }) => {
 
 const MemberCard = ({ member, ...props }) => (
   <div
-    className='d-flex flex-column'
+    className='d-flex flex-column w-100'
     style={{
       backgroundColor: 'white',
       borderRadius: '2vh',
@@ -138,13 +145,17 @@ const MemberCard = ({ member, ...props }) => (
       // border: '1px solid #a51c5e50'
     }}
   >
-    <Fade appear in={!props.loading}>
-      <img
-        style={{ width: '100%' }}
+    <div
+      className='w-100 position-relative'
+      style={{ background: member.bg, height: '' }}
+    >
+      <div style={{ marginTop: '100%', float: 'left' }}></div>
+      <LoadableImage
+        style={{ width: '100%', float: 'left' }}
         alt={`${member.image}`}
         src={member.image}
       />
-    </Fade>
+    </div>
     <span
       className='text-center py-2'
       style={{
@@ -175,33 +186,37 @@ const MemberCard = ({ member, ...props }) => (
   </div>
 );
 
-const TeamHeading = () => (
-  <div
-    className='d-flex flex-column justify-content-center align-items-center text-center'
-    style={{ flex: 1, float: 'left', paddingBlock: '10vh' }}
-  >
-    <div className='d-flex flex-column px-5'>
-      <h1 className='d-block'>Meet the team</h1>
-      <h4 style={{ fontWeight: '100 !important' }}>
-        Our core team is <b>made-for-measure</b> for this project with strong
-        investor backing.
-      </h4>
+const TeamHeading = () => {
+  const { width, height } = useWindowDimensions();
+  return (
+    <div
+      className='d-flex flex-column justify-content-center align-items-center text-center'
+      style={{ flex: 1, float: 'left', paddingBlock: '10vh' }}
+    >
+      <div className='d-flex flex-column px-5'>
+        <h1 className='d-block'>Meet the team</h1>
+        <h4 style={{ fontWeight: '100 !important' }}>
+          Our core team is <b>made-for-measure</b> for this project with strong
+          investor backing.
+        </h4>
+      </div>
+      {!(width < 760) && <GetToKnowUs />}
     </div>
-    {!isMobile && <GetToKnowUs />}
-  </div>
-);
+  );
+};
 
 export default function Team({ ...props }) {
+  const { width, height } = useWindowDimensions();
   return (
-    <div className={isMobile ? 'd-flex flex-column' : 'd-flex'}>
-      {isMobile && <TeamHeading />}
+    <div className={width < 760 ? 'd-flex flex-column' : 'd-flex'}>
+      {width < 760 && <TeamHeading />}
 
       <div style={{ flex: 1, float: 'left' }}>
         {teamMembers.map((member) => (
           <div
             key={member.name}
             style={{
-              width: isMobile ? '50%' : '33%',
+              width: width < 760 ? '50%' : '33%',
               display: 'inline-block',
               padding: '1%',
             }}
@@ -211,7 +226,7 @@ export default function Team({ ...props }) {
         ))}
       </div>
 
-      {!isMobile && <TeamHeading />}
+      {!(width < 760) && <TeamHeading />}
     </div>
   );
 }
