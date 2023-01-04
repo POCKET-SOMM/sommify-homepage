@@ -284,7 +284,7 @@ function Widget({ isMobile, screenWidth }) {
         <div id='body-header'>
           <div className='w-100 d-flex justify-content-center'>
             <div
-              className='rounded-circle d-flex justify-content-center align-items-center'
+              className='rounded-circle d-flex justify-content-center align-items-center user-select-none'
               style={{
                 width: '2.4em',
                 height: '2.4em',
