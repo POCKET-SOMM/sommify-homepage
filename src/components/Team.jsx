@@ -194,8 +194,8 @@ const TeamHeading = () => {
       style={{ flex: 1, float: 'left', paddingBlock: '10vh' }}
     >
       <div className='d-flex flex-column px-5'>
-        <h1 className='d-block'>Meet the team</h1>
-        <h4 style={{ fontWeight: '100 !important' }}>
+        <h1 className='d-block font-smooth'>Meet the team</h1>
+        <h4 style={{ fontWeight: 200 }}>
           Our core team is <b>made-for-measure</b> for this project with strong
           investor backing.
         </h4>
