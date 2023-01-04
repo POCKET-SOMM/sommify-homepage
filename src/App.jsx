@@ -81,7 +81,7 @@ const NavButton = ({ nav, ...props }) => {
       animate={{
         color: hovered || active ? rgb(colors.primary) : 'rgb(0,0,0)',
       }}
-      className={`d-flex justify-content-${
+      className={`font-smooth d-flex justify-content-${
         isBrowser ? 'start' : 'center'
       } align-items-center clickable text-center`}
       onClick={() => window.scrollTo(0, nav.scroll - 0.1 * height, 'smooth')}
@@ -224,10 +224,10 @@ const Navigation = ({ ...props }) => {
 const TitleHeading = ({ ...props }) => (
   <div {...props} className='d-flex justify-content-center align-items-center'>
     <div>
-      <h1 style={{ fontWeight: 700 }}>
+      <h1>
         The <span className='text-primary'>AI</span> sommelier.
       </h1>
-      <h3 style={{ fontWeight: 300 }}>Making quality pairings accessible</h3>
+      <h3 style={{fontWeight: 300}}>Making quality pairings accessible</h3>
     </div>
   </div>
 );
@@ -282,13 +282,13 @@ const Footer = () => (
 
 const WhatWeDo = () => (
   <>
-    <h1 className='mb-5'>What we do</h1>
-    <p style={{ fontSize: '1.5rem' }}>
-      We are creating an <b>artificial intelligence sommelier</b> making quality
+    <h1 className='mb-5 font-smooth'>What we do</h1>
+    <p style={{ fontSize: '1.5rem', fontWeight: 300}}>
+      We are creating an <b style={{fontWeight: 600}}>artificial intelligence sommelier</b> making quality
       pairings accessible. The AI somm is built on the world-class wine
       knowledge of Julie Dupouy and it will be packaged as an API. The API will
       be able to populate meals on apps and websites with the right wines or
-      their silhouettes. To find out how we can <b>sommify</b> your digital wine
+      their silhouettes. To find out how we can <b style={{fontWeight: 600}}>sommify</b> your digital wine
       experience, download our deck.
     </p>
     <div className='py-5'>
@@ -315,10 +315,6 @@ const WhatWeDo = () => (
 
 function App() {
   const { width, height } = useWindowDimensions();
-
-  useEffect(() => {
-    console.log(rgb(colors.beige));
-  }, []);
 
   return (
     <div className='d-flex flex-column'>
@@ -409,7 +405,17 @@ function App() {
                 src={kitchen}
                 alt='title-bg'
                 className='position-absolute w-100 h-100'
-                style={{ top: 0, left: 0, filter: 'brightness(0.75)' }}
+                style={{ top: '10vh', left: 0, filter: 'brightness(0.75)' }}
+              />
+              <div
+                className='w-100 h-100 position-absolute'
+                style={{
+                  top: '10vh',
+                  left: 0,
+                  background: `linear-gradient(rgba(0,0,0,0) 50%, ${rgb(
+                    '#202020'
+                  )})`,
+                }}
               />
               <TitleHeading style={{ zIndex: 1 }} />
               <Widget />
@@ -420,12 +426,10 @@ function App() {
               style={{
                 background: '#f0f0f0',
                 zIndex: '3 !important',
-                // borderBottom: '20px solid #252525',
-                // borderTop: '20px solid #252525',
               }}
             >
               {['World-class', 'Flexible', 'Refreshing'].map((emblem) => (
-                <div className='d-flex justify-content-center align-items-center flex-grow-1'>
+                <div className='font-smooth d-flex justify-content-center align-items-center flex-grow-1'>
                   <h1>{emblem}</h1>
                 </div>
               ))}

@@ -1,5 +1,5 @@
 :root {
-  font-family: 'Fredoka', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
   font-family: 'Pacifico', cursive !important;
 
   font-size: 1vw;
@@ -56,6 +56,10 @@ a {
 
 .font-cursive {
   font-family: 'Pacifico', cursive;
+}
+
+.font-smooth {
+  font-family: 'Fredoka', sans-serif !important;
 }
 
 .no-scrollbar::-webkit-scrollbar {
