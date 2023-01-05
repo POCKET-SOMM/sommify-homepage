@@ -224,10 +224,10 @@ const Navigation = ({ ...props }) => {
 const TitleHeading = ({ ...props }) => (
   <div {...props} className='d-flex justify-content-center align-items-center'>
     <div>
-      <h1 style={{textShadow: '.1em .1em .1em #00000025'}}>
+      <h1>
         The <span className='text-primary'>AI</span> sommelier.
       </h1>
-      <h3 style={{fontWeight: 300, textShadow: '.1em .1em .1em #00000025'}}>Making quality pairings accessible</h3>
+      <h3 style={{ fontWeight: 300 }}>Making quality pairings accessible</h3>
     </div>
   </div>
 );
@@ -283,13 +283,15 @@ const Footer = () => (
 const WhatWeDo = () => (
   <>
     <h1 className='mb-5 font-smooth'>What we do</h1>
-    <p style={{ fontSize: '1.5rem', fontWeight: 300}}>
-      We are creating an <b style={{fontWeight: 600}}>artificial intelligence sommelier</b> making quality
-      pairings accessible. The AI somm is built on the world-class wine
-      knowledge of Julie Dupouy and it will be packaged as an API. The API will
-      be able to populate meals on apps and websites with the right wines or
-      their silhouettes. To find out how we can <b style={{fontWeight: 600}}>sommify</b> your digital wine
-      experience, download our deck.
+    <p style={{ fontSize: '1.5rem', fontWeight: 300 }}>
+      We are creating an{' '}
+      <b style={{ fontWeight: 600 }}>artificial intelligence sommelier</b>{' '}
+      making quality pairings accessible. The AI somm is built on the
+      world-class wine knowledge of Julie Dupouy and it will be packaged as an
+      API. The API will be able to populate meals on apps and websites with the
+      right wines or their silhouettes. To find out how we can{' '}
+      <b style={{ fontWeight: 600 }}>sommify</b> your digital wine experience,
+      download our deck.
     </p>
     <div className='py-5'>
       <Button
