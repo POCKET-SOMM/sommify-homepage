@@ -30,13 +30,19 @@ body {
   }
 }
 
-@media screen and (min-width: 1300px) and (max-width: 2400px) {
+@media screen and (min-width: 1300px) and (max-width: 2560px) {
   :root {
     font-size: 16px;
   }
 }
 
-@media screen and (min-width: 2400px) {
+@media screen and (min-width: 2560px) {
+  :root {
+    font-size: 24px;
+  }
+}
+
+@media screen and (min-width: 3200px) {
   :root {
     font-size: 35px;
   }

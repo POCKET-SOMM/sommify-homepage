@@ -224,10 +224,10 @@ const Navigation = ({ ...props }) => {
 const TitleHeading = ({ ...props }) => (
   <div {...props} className='d-flex justify-content-center align-items-center'>
     <div>
-      <h1>
+      <h1 style={{textShadow: '.1em .1em .1em #00000025'}}>
         The <span className='text-primary'>AI</span> sommelier.
       </h1>
-      <h3 style={{fontWeight: 300}}>Making quality pairings accessible</h3>
+      <h3 style={{fontWeight: 300, textShadow: '.1em .1em .1em #00000025'}}>Making quality pairings accessible</h3>
     </div>
   </div>
 );

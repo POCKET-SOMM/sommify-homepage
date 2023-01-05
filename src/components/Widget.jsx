@@ -57,7 +57,7 @@ function Widget({ isMobile, screenWidth }) {
 
   const wineMeRef = React.createRef();
 
-  const WIDGET_WIDTH = width <= 1920 ? '450px' : '900px';
+  const WIDGET_WIDTH = width <= 1920 ? '450px' : width <= 2560 ? '750px' : '900px';
   const controls = useAnimationControls();
 
   const optionObject = (option, index, type) => {
