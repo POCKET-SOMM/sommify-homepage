@@ -21,7 +21,8 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import { SiCrunchbase, SiLinkedin, SiMinutemailer } from 'react-icons/si';
 import useWindowDimensions from './hooks';
-import logo from './assets/logo/logo_white.svg';
+import logo from './assets/logo/icon_white.svg';
+import fullLogo from './assets/logo/full_maroon.svg'
 import { rgb } from './assets/helpers';
 import LoadableImage from './components/Image';
 
@@ -33,10 +34,11 @@ export const Logo = ({ ...props }) => (
     style={{ fontSize: '2.4rem', zIndex: 4 }}
     className='d-flex px-2 font-cursive user-select-none'
   >
-    <div className='h-100'>sommify</div>
+    <img src={fullLogo} />
+    {/* <div className='h-100'>sommify</div>
     <div className='h-100' style={{ color: colors.primary }}>
       .ai
-    </div>
+    </div> */}
   </div>
 );
 
@@ -159,7 +161,7 @@ const Navigation = ({ ...props }) => {
             zIndex: 2,
           }}
         >
-          <AnimatePresence initial={false}>
+          {/* <AnimatePresence initial={false}>
             {!headerScrolled && (
               <motion.img
                 key='top-wave'
@@ -179,7 +181,7 @@ const Navigation = ({ ...props }) => {
                 }}
               />
             )}
-          </AnimatePresence>
+          </AnimatePresence> */}
 
           <motion.div
             key='top-bar'
@@ -224,10 +226,10 @@ const Navigation = ({ ...props }) => {
 const TitleHeading = ({ ...props }) => (
   <div {...props} className='d-flex justify-content-center align-items-center'>
     <div>
-      <h1>
+      <h1 style={{fontSize: '3.2em'}}>
         The <span className='text-primary'>AI</span> sommelier.
       </h1>
-      <h3 style={{ fontWeight: 300 }}>Making quality pairings accessible</h3>
+      <h3 style={{ fontSize: '2.2em', fontWeight: 300 }}>Making quality pairings accessible</h3>
     </div>
   </div>
 );
