@@ -13,7 +13,8 @@ import wines from '../data/wines';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import useWindowDimensions from '../hooks';
 import { isBrowser } from 'react-device-detect';
-import logo from '../assets/logo/logo_white.svg';
+// import logo from '../assets/logo/icon_white.svg';
+import logo from '../assets/logo/socials_maroon.svg';
 
 export const winePlateHeight = 90;
 const SERVER_URL = 'https://pocketsommapi.azurewebsites.net';
@@ -57,7 +58,8 @@ function Widget({ isMobile, screenWidth }) {
 
   const wineMeRef = React.createRef();
 
-  const WIDGET_WIDTH = width <= 1920 ? '450px' : width <= 2560 ? '750px' : '900px';
+  const WIDGET_WIDTH =
+    width <= 1920 ? '450px' : width <= 2560 ? '750px' : '900px';
   const controls = useAnimationControls();
 
   const optionObject = (option, index, type) => {
@@ -157,7 +159,10 @@ function Widget({ isMobile, screenWidth }) {
   const handleWineMe = (payload) => {
     if (!payload.length) {
       setSearchErr('Please enter a meal...');
-      controls.start({ x: [-3, 3, -3, 0], transition: {type:'spring', duration: 0.2} });
+      controls.start({
+        x: [-3, 3, -3, 0],
+        transition: { type: 'spring', duration: 0.2 },
+      });
       return;
     } else {
       setSearchErr(false);
@@ -291,8 +296,14 @@ function Widget({ isMobile, screenWidth }) {
         }}
       >
         <div id='body-header'>
-          <div className='w-100 d-flex justify-content-center'>
-            <div
+          <div className='pb-4 w-100 d-flex justify-content-center'>
+            <img
+              src={logo}
+              style={{
+                height: '3em',
+              }}
+            />
+            {/* <div
               className='rounded-circle d-flex justify-content-center align-items-center user-select-none'
               style={{
                 width: '2.4em',
@@ -302,7 +313,7 @@ function Widget({ isMobile, screenWidth }) {
               }}
             >
               <img src={logo} style={{ height: '80%', marginRight: '.3em' }} />
-            </div>
+            </div> */}
           </div>
           <div
             id='body-query'
