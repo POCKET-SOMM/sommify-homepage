@@ -393,13 +393,13 @@ function Widget({ isMobile, screenWidth }) {
                       ...css,
                       border: '1px solid #f5f5f5',
                       backgroundColor: '#f5f5f5',
-                      minHeight: '3.2em',
+                      minHeight: '3.2rem',
                       padding: '1% 3%',
                       borderRadius: '2em',
                       boxShadow: state.isFocused
                         ? '0 0 0 1px ' + colors.primary
                         : 0,
-                      fontSize: '1.1em',
+                      fontSize: '.8em',
                       ':active, :hover': {
                         borderColor: colors.primary,
                       },
@@ -407,6 +407,7 @@ function Widget({ isMobile, screenWidth }) {
                     multiValueLabel: (css) => ({
                       ...css,
                       color: 'white',
+                      fontSize:'1.1em'
                     }),
                     multiValue: (css) => ({
                       ...css,
@@ -564,8 +565,8 @@ function Widget({ isMobile, screenWidth }) {
             style={{
               width: '100%',
               fontWeight: 700,
-              fontSize: '1em',
-              borderRadius: '1vw',
+              fontSize: '.9em',
+              borderRadius: '1em',
               // boxShadow: '0 3px 0 ' + colors.primaryDark,
               // border: '2px solid ' + colors.primaryDark,
             }}

@@ -203,7 +203,7 @@ const Navigation = ({ ...props }) => {
               <AnimatePresence>
                 <img
                   style={{
-                    height: '3vh',
+                    height: '2em',
                     paddingLeft: '4vw',
                     paddingRight: '1vw',
                     position: 'absolute',
@@ -301,8 +301,8 @@ const TitleHeading = ({ ...props }) => {
         {/* <img style={{ height: '8vh' }} src={Logo.FullWhite} /> */}
         {/* <img src={Icon.Sommelier} style={{width:'300px'}} /> */}
         <h1
-          className='font-weight-700'
-          style={{ fontSize: '3.7em', lineHeight: '1.2em' }}
+          className='font-weight-700 mb-0'
+          style={{ fontSize: '3.2em', lineHeight: '1.2em' }}
         >
           the{' '}
           <span className='text-primary' style={{ fontSize: '1.4em' }}>
@@ -312,7 +312,7 @@ const TitleHeading = ({ ...props }) => {
           sommelier.
         </h1>
         <br />
-        <h3 style={{ fontSize: '1.6em', fontWeight: 300 }}>
+        <h3 style={{ fontSize: '1.2em', fontWeight: 300 }}>
           making quality wine-food <br /> the standard
         </h3>
         <div
@@ -321,8 +321,6 @@ const TitleHeading = ({ ...props }) => {
           }`}
         >
           <ExtendingButton
-            bg={isMobile ? '#111' : colors.blue}
-            className={'' + isMobile && 'w-100'}
             onClick={() => {
               document.getElementById('contact-us').scrollIntoView();
             }}
@@ -330,7 +328,7 @@ const TitleHeading = ({ ...props }) => {
             CONTACT US
           </ExtendingButton>
         </div>
-        {isMobile && (
+        {/* {isMobile && (
           <div
             className={`w-100 d-flex justify-content-${
               isMobile ? 'start' : 'end'
@@ -363,7 +361,7 @@ const TitleHeading = ({ ...props }) => {
               GET AI SOMM
             </SpecialButton>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
@@ -837,7 +835,6 @@ function App() {
                           style={{ marginBottom: '13vh' }}
                         >
                           <h3>
-                            {/* <span style={{ opacity: 0.4 }}>step </span> */}
                             <span
                               className='text-primary position-absolute'
                               style={{
