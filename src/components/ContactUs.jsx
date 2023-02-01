@@ -110,6 +110,7 @@ export default function ContactUs({ ...props }) {
                 </div>
                 <div className='p-2 d-flex justify-content-center'>
                   <Button
+                    disabled={!subject || !message || !contact}
                     variant='secondary'
                     onClick={handleSendMessage}
                     className='p-3 font-weight-600 text-white'
