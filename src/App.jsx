@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react';
 import './App.scss';
-import Team from './components/Team';
+import Team, { GetToKnowUs } from './components/Team';
 import Widget from './components/Widget';
 import colors from './data/colors';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import {
   isMobile,
   MobileView,
@@ -11,8 +11,6 @@ import {
   CustomView,
   isBrowser,
 } from 'react-device-detect';
-import wave from './assets/wave.svg';
-import waveTop from './assets/wave_top.svg';
 import wall from './assets/wall_bg.jpg';
 import kitchen from './assets/background/kitchen.jpg';
 // const kitchen = React.lazy(() => import('./assets/background/kitchen.jpg'));
@@ -21,44 +19,34 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import { SiCrunchbase, SiLinkedin, SiMinutemailer } from 'react-icons/si';
 import useWindowDimensions from './hooks';
-import logo from './assets/logo/icon_white.svg';
-import fullLogo from './assets/logo/full_maroon.svg'
-import { rgb } from './assets/helpers';
+import { rgb } from './helpers';
 import LoadableImage from './components/Image';
+import { Icon, Image, Logo } from './assets';
+import { GoArrowDown } from 'react-icons/go';
+import ContactUs from './components/ContactUs';
+import { CgArrowRight, CgChevronRight } from 'react-icons/cg';
+// import { staticFile, Video } from 'remotion';
 
-const MARGIN = '10vh';
+const MARGIN = '20vh';
 const NAV_HEIGHT = '10vh';
-
-export const Logo = ({ ...props }) => (
-  <div
-    style={{ fontSize: '2.4rem', zIndex: 4 }}
-    className='d-flex px-2 font-cursive user-select-none'
-  >
-    <img src={fullLogo} />
-    {/* <div className='h-100'>sommify</div>
-    <div className='h-100' style={{ color: colors.primary }}>
-      .ai
-    </div> */}
-  </div>
-);
 
 const Section = ({ children, style, className, ...props }) => (
   <div
     {...props}
     style={{
       width: '100%',
-      paddingBottom: MARGIN,
+      paddingBlock: MARGIN,
       paddingInline: '10vw',
       minHeight: `calc(100vh)`,
       ...style,
     }}
-    className={'d-flex justify-content-center align-items-center ' + className}
+    className={'d-flex justify-content-center ' + className}
   >
     {children}
   </div>
 );
 
-const NavButton = ({ nav, ...props }) => {
+const NavButton = ({ nav, nextScroll, ...props }) => {
   const { width, height } = useWindowDimensions();
   const [active, setActive] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -68,7 +56,7 @@ const NavButton = ({ nav, ...props }) => {
     return scrollY.onChange((latest) => {
       if (
         latest >= nav.scroll - 0.1 * height &&
-        latest < nav.scroll + 0.9 * height
+        (latest < nextScroll - 0.1 * height || nextScroll === undefined)
       )
         setActive(true);
       else setActive(false);
@@ -81,26 +69,21 @@ const NavButton = ({ nav, ...props }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       animate={{
-        color: hovered || active ? rgb(colors.primary) : 'rgb(0,0,0)',
+        color: hovered || active ? 'rgb(0,0,0)' : 'rgba(0,0,0, 0.35)',
       }}
-      className={`font-smooth d-flex justify-content-${
-        isBrowser ? 'start' : 'center'
-      } align-items-center clickable text-center`}
+      className={`d-flex justify-content-center align-items-center clickable text-center mx-4 `}
       onClick={() => window.scrollTo(0, nav.scroll - 0.1 * height, 'smooth')}
       style={{
-        // paddingTop: '1em',
-        marginLeft: isBrowser ? '4em' : '',
         height: '100%',
-        fontWeight: 500,
-        letterSpacing: '.2em',
-        fontSize: isBrowser ? '.8em' : '.65em',
+        fontWeight: 400,
+        fontSize: isBrowser ? '1em' : '.65em',
         color: active ? colors.primary : 'black',
         position: 'relative',
         flex: isBrowser ? '' : 1,
       }}
     >
       {nav.title}
-      {active && (
+      {/* {active && (
         <motion.div
           style={{
             position: 'absolute',
@@ -112,8 +95,37 @@ const NavButton = ({ nav, ...props }) => {
           }}
           layoutId='underline_nav'
         />
-      )}
+      )} */}
     </motion.div>
+  );
+};
+
+const SpecialButton = ({ children, style, className, ...props }) => {
+  const [hover, setHover] = useState(false);
+
+  return (
+    <div
+      {...props}
+      className={'clickable position-relative ' + className}
+      style={{
+        color: 'white',
+        background: colors.blue,
+        paddingBlock: '.7em',
+        paddingInline: '2.4em',
+        borderRadius: 999,
+        ...style,
+      }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
+      {children}
+      {hover && (
+        <CgChevronRight
+          size='1.5em'
+          style={{ position: 'absolute', right: 13 }}
+        />
+      )}
+    </div>
   );
 };
 
@@ -122,7 +134,7 @@ const Navigation = ({ ...props }) => {
   const [headerScrolled, setHeaderScrolled] = useState(false);
 
   const listenScrollEvent = () => {
-    if (window.scrollY > 0.8 * height || (width < 760 && window.scrollY > 50)) {
+    if (window.scrollY > 0.1 * height) {
       setHeaderScrolled(true);
     } else {
       setHeaderScrolled(false);
@@ -141,48 +153,37 @@ const Navigation = ({ ...props }) => {
             background: headerScrolled ? 'rgb(256,256,256)' : rgb(colors.beige),
             color: headerScrolled ? 'rgb(0,0,0)' : 'rgb(256,256,256)',
           }}
-          className='d-flex flex-column w-100 position-fixed py-2'
-          style={{ backgroundColor: colors.beige, zIndex: 9999 }}
+          className={
+            'd-flex flex-column w-100 position-fixed justify-content-center ' +
+            (headerScrolled && 'shaded')
+          }
+          style={{
+            backgroundColor: colors.beige,
+            zIndex: 9999,
+            height: NAV_HEIGHT,
+          }}
         >
           <div className='d-flex justify-content-center'>
-            <Logo />
+            <img
+              style={{ height: '3vh', paddingLeft: '4vw', paddingRight: '1vw' }}
+              src={Logo.FullMaroon}
+            />
           </div>
         </motion.div>
       </CustomView>
       <CustomView condition={width >= 1300}>
         <div
-          className='d-flex justify-content-center align-items-center header text-black'
+          className='d-flex justify-content-center align-items-center'
           transition={{ delay: 0.3 }}
           style={{
             width: '100vw',
             height: NAV_HEIGHT,
             position: 'fixed',
             top: 0,
-            zIndex: 2,
+            zIndex: 5,
+            background: 'white',
           }}
         >
-          {/* <AnimatePresence initial={false}>
-            {!headerScrolled && (
-              <motion.img
-                key='top-wave'
-                src={waveTop}
-                initial={{ opacity: 1, height: 0 }}
-                animate={{ opacity: 1, height: '14vh' }}
-                exit={{ opacity: 1, height: 0 }}
-                transition={{ duration: 0.3 }}
-                style={{
-                  position: 'fixed',
-                  transform: 'rotate(180deg)',
-                  top: '9vh',
-                  left: 0,
-                  width: '100vw',
-                  height: '14vh',
-                  zIndex: 0,
-                }}
-              />
-            )}
-          </AnimatePresence> */}
-
           <motion.div
             key='top-bar'
             style={{
@@ -192,28 +193,50 @@ const Navigation = ({ ...props }) => {
               top: 0,
               left: 0,
               zIndex: 0,
-              background: colors.beige,
             }}
-            className='px-4'
+            className={'px-4 ' + (headerScrolled && 'shaded')}
           >
             <div
-              className='d-flex align-items-center h-100'
-              style={{ width: '60%' }}
+              className='d-flex align-items-center h-100 position-relative'
+              style={{ maxWidth: '1920px', margin: 'auto' }}
             >
-              <div style={{ color: 'white' }}>
-                <Logo />
-              </div>
               <AnimatePresence>
-                <div className='d-flex flex-grow-1 justify-content-start align-items-center'>
+                <img
+                  style={{
+                    height: '3vh',
+                    paddingLeft: '4vw',
+                    paddingRight: '1vw',
+                    position: 'absolute',
+                  }}
+                  src={Logo.FullMaroon}
+                />
+                <div className='d-flex flex-grow-1 justify-content-center align-items-center'>
                   {[
-                    { title: 'DEMO', scroll: 0 },
-                    { title: 'OUR OFFERING', scroll: height },
-                    { title: 'WHAT WE DO', scroll: height * 2 },
-                    { title: 'TEAM', scroll: height * 3 },
-                  ].map((nav) => (
-                    <NavButton key={'nav_' + nav.title} nav={nav} />
+                    { title: 'demo', scroll: 0 },
+                    { title: 'product', scroll: 1.1 * height },
+                    { title: 'how', scroll: height * 2.5 },
+                    { title: 'team', scroll: height * 4.2 },
+                    { title: 'contact', scroll: height * 4.95 },
+                  ].map((nav, i, navs) => (
+                    <NavButton
+                      key={'nav_' + nav.title}
+                      nav={nav}
+                      nextScroll={navs?.[i + 1]?.scroll}
+                    />
                   ))}
                 </div>
+                <SpecialButton
+                  variant='secondary'
+                  className='text-white position-absolute'
+                  style={{
+                    right: '4vw',
+                  }}
+                  onClick={() => {
+                    window.open('https://portal.sommify.ai/auth/login');
+                  }}
+                >
+                  GET AI SOMM
+                </SpecialButton>
               </AnimatePresence>
             </div>
           </motion.div>
@@ -223,99 +246,425 @@ const Navigation = ({ ...props }) => {
   );
 };
 
-const TitleHeading = ({ ...props }) => (
-  <div {...props} className='d-flex justify-content-center align-items-center'>
-    <div>
-      <h1 style={{fontSize: '3.2em'}}>
-        The <span className='text-primary'>AI</span> sommelier.
-      </h1>
-      <h3 style={{ fontSize: '2.2em', fontWeight: 300 }}>Making quality pairings accessible</h3>
+const ExtendingButton = ({ children, bg = '#027dff', ...props }) => {
+  const DIM = 60;
+  const [hover, setHover] = useState(false);
+  return (
+    <div
+      className='clickable'
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      {...props}
+    >
+      <motion.div
+        key='button-text'
+        className='d-flex justify-content-center align-items-center position-relative'
+        animate={{
+          color: hover ? 'rgb(256,256,256)' : 'rgb(0,0,0)',
+        }}
+        style={{ marginLeft: DIM + 10, left: 0, height: DIM }}
+      >
+        <motion.div
+          className='border shaded position-absolute d-flex justify-content-center align-items-center'
+          animate={{ width: hover ? `calc(${DIM}px + 100%)` : DIM }}
+          transition={{ type: 'tween' }}
+          initial={{ width: DIM }}
+          style={{
+            left: -DIM - 10,
+            height: DIM,
+            background: bg,
+            borderRadius: DIM / 2,
+            zIndex: 1,
+          }}
+        >
+          <CgChevronRight
+            style={{ position: 'absolute', left: 9 }}
+            className='text-white'
+            size={DIM * 0.6}
+          />
+        </motion.div>
+        <span style={{ zIndex: 2, paddingRight: '40px' }}>{children}</span>
+      </motion.div>
     </div>
-  </div>
-);
+  );
+};
+
+const TitleHeading = ({ ...props }) => {
+  const { width } = useWindowDimensions();
+  const isMobile = width <= 760;
+  return (
+    <div
+      {...props}
+      className='d-flex justify-content-center align-items-center'
+    >
+      <div>
+        {/* <img style={{ height: '8vh' }} src={Logo.FullWhite} /> */}
+        {/* <img src={Icon.Sommelier} style={{width:'300px'}} /> */}
+        <h1
+          className='font-weight-700'
+          style={{ fontSize: '3.7em', lineHeight: '1.2em' }}
+        >
+          the{' '}
+          <span className='text-primary' style={{ fontSize: '1.4em' }}>
+            AI
+          </span>{' '}
+          <br />
+          sommelier.
+        </h1>
+        <br />
+        <h3 style={{ fontSize: '1.6em', fontWeight: 300 }}>
+          making quality wine-food <br /> the standard
+        </h3>
+        <div
+          className={`w-100 py-4 d-flex justify-content-${
+            isMobile ? 'start' : 'end'
+          }`}
+        >
+          <ExtendingButton
+            bg={isMobile ? '#111' : colors.blue}
+            className={'' + isMobile && 'w-100'}
+            onClick={() => {
+              document.getElementById('contact-us').scrollIntoView();
+            }}
+          >
+            CONTACT US
+          </ExtendingButton>
+        </div>
+        {isMobile && (
+          <div
+            className={`w-100 d-flex justify-content-${
+              isMobile ? 'start' : 'end'
+            }`}
+          >
+            <ExtendingButton
+              bg={'#111'}
+              className='w-100'
+              onClick={() => {
+                document.getElementById('widget-screen').scrollIntoView();
+              }}
+            >
+              TRY DEMO
+            </ExtendingButton>
+          </div>
+        )}
+        {isMobile && (
+          <div
+            className={`w-100 py-4 d-flex justify-content-${
+              isMobile ? 'start' : 'end'
+            }`}
+          >
+            <SpecialButton
+              style={{ height: 60 }}
+              className='d-flex justify-content-center align-items-center w-100'
+              onClick={() => {
+                document.getElementById('widget-screen').scrollIntoView();
+              }}
+            >
+              GET AI SOMM
+            </SpecialButton>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 const Footer = () => (
   <div
     id='footer'
-    className='d-flex justify-content-center align-items-start text-start'
+    // className='bg-secondary'
     style={{
-      background: '#202020',
+      background: '#151518',
       width: '100%',
-      height: '50vh',
       color: 'white',
-      fontSize: '1.5rem',
+      fontSize: '0.9rem',
     }}
   >
-    <div className='flex-grow-1 d-flex h-100 justify-content-center align-items-center'>
-      <img src={logo} style={{ width: '8vw', opacity: 0.4 }} />
-    </div>
     <div
-      className='flex-grow-1 d-flex flex-column h-100 justify-content-center'
-      style={{ opacity: 0.4 }}
+      className='d-flex flex-column justify-content-center align-items-start'
+      style={{ width: '100%', maxWidth: '1620px', margin: 'auto' }}
     >
-      <span className='d-block' style={{ fontWeight: 600 }}>
-        <SiCrunchbase />{' '}
+      <div className='d-flex justify-content-center align-items-start w-100 py-5'>
+        <div className='d-flex flex-column mx-4'>
+          <h6>Company</h6>
+          <span className='d-block'>
+            <span
+              className='clickable'
+              onClick={() => {
+                window.open(
+                  'https://drive.google.com/file/d/1kFP_qyReKTbxi7sNvFlfTNxcD0pVrvPu/view'
+                );
+              }}
+            >
+              Deck
+            </span>
+          </span>
+        </div>
+        <div className='d-flex flex-column mx-4'>
+          <h6>Products</h6>
+          <span className='d-block'>
+            <span
+              className='clickable'
+              onClick={() => {
+                // window.open(
+                // 'https://www.crunchbase.com/organization/sommifyai'
+                // );
+              }}
+            >
+              Dashboard
+            </span>
+          </span>
+        </div>
+        <div className='d-flex flex-column mx-4'>
+          <h6>Socials</h6>
+          <span className='d-block'>
+            <SiCrunchbase />{' '}
+            <span
+              className='clickable'
+              onClick={() => {
+                window.open(
+                  'https://www.crunchbase.com/organization/sommifyai'
+                );
+              }}
+            >
+              Crunchbase
+            </span>
+          </span>
+          <span className='d-block'>
+            <SiLinkedin />{' '}
+            <span
+              className='clickable'
+              onClick={() => {
+                window.open('https://www.linkedin.com/company/sommifyai');
+              }}
+            >
+              Linkedin
+            </span>
+          </span>
+        </div>
+      </div>
+      <div
+        style={{ fontSize: '.9em' }}
+        className='w-100 py-4 d-flex justify-content-center'
+      >
+        <b>PocketSomm Oy 2021-2023</b>&nbsp;•&nbsp;
         <span
-          className='clickable'
           onClick={() => {
-            window.open('https://www.crunchbase.com/organization/sommifyai');
+            window.open(
+              'https://drive.google.com/file/d/1ANL8N4lXOqdFQbZ8Mc1J4Q2OTL6LnTBI/view?usp=sharing',
+              '_blank'
+            );
           }}
-        >
-          Crunchbase
-        </span>
-      </span>
-      <span className='d-block' style={{ fontWeight: 600 }}>
-        <SiLinkedin />{' '}
-        <span
           className='clickable'
-          onClick={() => {
-            window.open('https://www.linkedin.com/company/sommifyai');
-          }}
         >
-          Linkedin
+          Privacy policy
         </span>
-      </span>
-      <span className='d-block' style={{ fontWeight: 600 }}>
-        <SiMinutemailer /> jacob@sommify.ai
-      </span>
+      </div>
     </div>
   </div>
 );
 
 const WhatWeDo = () => (
   <>
-    <h1 className='mb-5 font-smooth'>What we do</h1>
-    <p style={{ fontSize: '1.5rem', fontWeight: 300 }}>
-      We are creating an{' '}
-      <b style={{ fontWeight: 600 }}>artificial intelligence sommelier</b>{' '}
-      making quality pairings accessible. The AI somm is built on the
-      world-class wine knowledge of Julie Dupouy and it will be packaged as an
-      API. The API will be able to populate meals on apps and websites with the
-      right wines or their silhouettes. To find out how we can{' '}
-      <b style={{ fontWeight: 600 }}>sommify</b> your digital wine experience,
-      download our deck.
-    </p>
-    <div className='py-5'>
-      <Button
-        size='lg'
-        variant='primary'
-        onClick={() => {
-          window.open(
-            'https://drive.google.com/file/d/1kFP_qyReKTbxi7sNvFlfTNxcD0pVrvPu/view?usp=sharing'
-          );
-        }}
-        className='px-5 py-4'
-        style={{
-          letterSpacing: '0.5vw',
-          fontWeight: 600,
-          color: '#f0f0f0',
-        }}
-      >
-        <span style={{ fontWeight: 300 }}>GO TO</span> DECK
-      </Button>
+    <div
+      className='d-flex flex-column'
+      style={{
+        paddingInline: '6vw',
+        paddingBlock: '8vh',
+        borderRadius: '3em',
+        marginBottom: 'auto',
+        maxWidth: '1920px',
+        width: '80%',
+        margin: 'auto',
+      }}
+    >
+      <div className='d-flex align-items-start'>
+        {[
+          {
+            label: 'accessible',
+            icon: Icon.Accessible,
+            subtitle: 'quality pairings made accessible for anyone anywhere',
+          },
+          {
+            label: 'world-class',
+            icon: Icon.WorldClass,
+            subtitle:
+              'tailored to make world-class pairings by a world-class sommelier',
+          },
+          {
+            label: 'refreshing',
+            icon: Icon.Refreshing,
+            subtitle:
+              'bringing a new approach for the digitally native younger consumer',
+          },
+        ].map((emblem) => (
+          <div
+            key={emblem.label}
+            style={{ flex: 1 }}
+            className='d-flex justify-content-center'
+          >
+            <img src={emblem.icon} width={'140px'} />
+            <div style={{ paddingTop: '20px' }} className='text-start'>
+              <h4 className='mb-2 font-weight-400'>{emblem.label}</h4>
+              <h5 className='font-weight-300'>{emblem.subtitle}</h5>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   </>
 );
+
+const ProductHeader = ({ title, className, children, ...props }) => (
+  <>
+    <div className={className} style={{ marginTop: 70 }}>
+      <h4 className='text-primary font-weight-600'>PRODUCT</h4>
+      <h1 className='font-weight-700' style={{ fontSize: '3.6em' }}>
+        {title} <span style={{ fontSize: '0.85em' }}>SOMM</span>
+      </h1>
+      <p
+        className={'py-4 ' + className}
+        style={{
+          width: '100%',
+          fontSize: '1.1em',
+        }}
+      >
+        {children}
+      </p>
+    </div>
+  </>
+);
+
+const StaticSommColumn = ({ className }) => (
+  <div className={'d-flex flex-column h-100 ' + className} style={{ flex: 1 }}>
+    <ProductHeader className='text-end' title='Static'>
+      Our static SOMM populates the website or app with the correct wines that
+      match the meal. The SOMM gives a traditional, premium and adventurous
+      pairing. The customer is then able to click the wine he likes out of the
+      three and it redirects them to the URL where they can purchase the wine.
+    </ProductHeader>
+    <div
+      className='d-flex justify-content-center align-items-center position-relative'
+      style={{ flex: 1 }}
+    >
+      <div
+        className='position-absolute'
+        style={{
+          width: '140%',
+          maxWidth: '1920px',
+          right: 0,
+          top: 0,
+          background:
+            'linear-gradient(90deg, rgba(129,129,228,1) 0%, rgba(242,189,249,1) 100%)',
+          borderRadius: '3em',
+          zIndex: 1,
+        }}
+      >
+        <motion.img
+          className='shaded'
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: 1,
+            x: 'calc(-1 * min(8vw, 40px))',
+            y: 'calc(min(8vw, 40px))',
+          }}
+          transition={{ duration: 0.3 }}
+          src={Image.StaticSomm}
+          style={{
+            width: '100%',
+            borderRadius: '3em',
+            zIndex: 2,
+          }}
+        />
+      </div>
+    </div>
+  </div>
+);
+
+const InteractiveSommColumn = ({ className }) => (
+  <div className={'d-flex flex-column h-100 ' + className} style={{ flex: 1 }}>
+    <div
+      className='d-flex justify-content-start align-items-start'
+      style={{ flex: 1 }}
+    >
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '420px',
+          background:
+            'linear-gradient(90deg, rgba(242,189,249,1) 0%, rgba(129,129,228,1) 100%)',
+          borderRadius: '3em',
+          zIndex: 1,
+        }}
+      >
+        <motion.img
+          className='shaded'
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: 1,
+            x: 'calc(min(8vw, 40px))',
+            y: 'calc(min(8vw, 40px))',
+          }}
+          transition={{ duration: 0.3 }}
+          src={Image.InteractiveSomm}
+          style={{
+            width: '100%',
+            borderRadius: '3em',
+            zIndex: 2,
+          }}
+        />
+      </div>
+    </div>
+    <ProductHeader className='text-start' title='Interactive'>
+      <span>
+        The consumer is able to type in what they are eating, either using
+        ingredients or typing in the recipe name. Using the tags or recipe the
+        SOMM gives a number of wines that pair well with the meal. By clicking
+        the wines it redirects the consumer to the URL where they are able to
+        purchase the wine.
+      </span>
+    </ProductHeader>
+  </div>
+);
+
+const Product = ({ ...props }) => {
+  const { width } = useWindowDimensions();
+
+  return (
+    <>
+      <CustomView condition={width < 760}>
+        <div className='d-flex flex-column'>
+          <InteractiveSommColumn className='flex-column-reverse' />
+          <StaticSommColumn />
+        </div>
+      </CustomView>
+      <CustomView condition={width >= 760}>
+        <div
+          className='d-flex h-100 w-100'
+          style={{ maxWidth: '2440px', margin: 'auto' }}
+        >
+          <StaticSommColumn />
+          <div
+            className='d-flex justify-content-center align-items-center'
+            style={{ width: '4%' }}
+          />
+          <div
+            style={{
+              borderRadius: '10px',
+              width: '8px',
+              background: '#000000aa',
+            }}
+          />
+          <div
+            className='d-flex justify-content-center align-items-center'
+            style={{ width: '4%' }}
+          />
+          <InteractiveSommColumn />
+        </div>
+      </CustomView>
+    </>
+  );
+};
 
 function App() {
   const { width, height } = useWindowDimensions();
@@ -329,19 +678,7 @@ function App() {
           }}
         >
           <Navigation />
-          <Section className='position-relative'>
-            <TitleHeading />
-            <Button
-              onClick={() => {
-                window.scrollTo(0, height * 0.9);
-              }}
-              style={{ position: 'absolute', bottom: '10vh' }}
-            >
-              VIEW DEMO
-            </Button>
-          </Section>
-
-          <Section id='widget-screen'>
+          <Section id='widget-screen' style={{ minHeight: '' }}>
             <div className='d-flex flex-column' style={{ height: '100%' }}>
               <div
                 style={{ flex: 1 }}
@@ -351,47 +688,17 @@ function App() {
               </div>
             </div>
           </Section>
-
-          <Section
-            className='flex-column text-center position-relative'
-            style={{
-              background:
-                `linear-gradient(${colors.beige}, rgba(0,0,0,0) 25%), url(` +
-                wall +
-                ')',
-              backgroundSize: 'cover',
-              paddingTop: '10vh',
-            }}
-          >
-            <WhatWeDo />
-            <div
-              style={{
-                position: 'absolute',
-                bottom: -2,
-                width: '100%',
-                height: '10vh',
-                background: `url(${wave})`,
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: '100% 100%',
-                backgroundPosition: 'bottom',
-              }}
-            />
+          <Section className='py-3'>
+            <InteractiveSommColumn className='flex-column-reverse' />
           </Section>
+          <Section className='py-3' style={{ minHeight: '90vh' }}>
+            <StaticSommColumn />
+          </Section>
+          <Section style={{ paddingBlock: 0, minHeight: '' }} className='py-0'>
+            <ContactUs />
+          </Section>
+          <Footer />
         </div>
-
-        <Section
-          style={{
-            background: colors.primaryDark,
-            color: 'white',
-            paddingTop: 0,
-            paddingInline: '0',
-            borderTop: '5px solid ' + colors.primaryDark,
-          }}
-        >
-          <Team />
-        </Section>
-
-        <Footer />
       </CustomView>
       <CustomView condition={width >= 760}>
         <div className='position-relative'>
@@ -400,81 +707,256 @@ function App() {
             <Section
               style={{
                 // marginTop: NAV_HEIGHT,
-                color: 'white',
-                background: '#252525',
+                color: 'black',
+                background: colors.beige,
+                minHeight: '80vh',
+                paddingInline: '15vw',
               }}
-              className='d-flex justify-content-between position-relative'
+              className='d-flex justify-content-center align-items-center position-relative text-end'
             >
-              <LoadableImage
-                src={kitchen}
-                alt='title-bg'
-                className='position-absolute w-100 h-100'
-                style={{ top: '10vh', left: 0, filter: 'brightness(0.75)' }}
-              />
-              <div
-                className='w-100 h-100 position-absolute'
-                style={{
-                  top: '10vh',
-                  left: 0,
-                  background: `linear-gradient(rgba(0,0,0,0) 50%, ${rgb(
-                    '#202020'
-                  )})`,
-                }}
-              />
               <TitleHeading style={{ zIndex: 1 }} />
+              <div style={{ width: '6vw' }}></div>
               <Widget />
+
+              {/* <img
+                style={{
+                  opacity: .95,
+                  position: 'absolute',
+                  left: 0,
+                  right: 0,
+                  width: '1620px',
+                  height: '50vh',
+                  objectFit: 'cover',
+                  margin: 'auto',
+                  borderRadius: '4em',
+                }}
+                src={Image.Vineyard}
+              /> */}
             </Section>
 
             <Section
-              className='w-100 d-flex'
+              className='d-flex flex-column py-4'
               style={{
-                background: '#f0f0f0',
-                zIndex: '3 !important',
+                background: '#ffe6cc',
+                // 'linear-gradient(90deg, rgba(129,129,228,1) 0%, rgba(104,104,193,1) 50%, rgba(129,129,228,1) 100%)',
+                minHeight: '20vh',
               }}
             >
-              {['World-class', 'Flexible', 'Refreshing'].map((emblem) => (
-                <div className='font-smooth d-flex justify-content-center align-items-center flex-grow-1'>
-                  <h1>{emblem}</h1>
-                </div>
-              ))}
+              <h5 className='d-flex justify-content-center align-items-center font-weight-400 mb-5'>
+                SUPPORTED BY
+              </h5>
+              <div
+                className='d-flex justify-content-center align-items-center'
+                // style={{ flex: 1 }}
+              >
+                {[
+                  { pLogo: Logo.Heino, height: '27px' },
+                  { pLogo: Logo.Gorilla, height: '40px' },
+                  { pLogo: Logo.Silta, height: '42px' },
+                  { pLogo: Logo.MFS, height: '43px' },
+                  { pLogo: Logo.inQb, height: '38px' },
+                  { pLogo: Logo.Boost, height: '38px' },
+                  { pLogo: Logo.NewCo, height: '44px' },
+                ].map(({ pLogo, height }) => (
+                  <div style={{ flex: 1 }}>
+                    <img
+                      className='mx-5'
+                      src={pLogo}
+                      style={{
+                        height: `calc(${height} * 0.8)`,
+                        filter: 'brightness(0)',
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
             </Section>
 
             <Section
-              className='flex-column text-center position-relative'
+              className='text-center position-relative'
+              style={{ background: '#fff9f2', minHeight: '60vh' }}
+            >
+              <Product />
+            </Section>
+
+            <Section>
+              <div
+                style={{ maxWidth: '1920px' }}
+                id='yoyo'
+                className='w-100 h-100 d-flex flex-column justify-content-start align-items-center'
+              >
+                <h1 className='font-weight-700' style={{ fontSize: '3em' }}>
+                  Control it all using our{' '}
+                  <span style={{ fontSize: '0.85em' }} className='text-primary'>
+                    PORTAL
+                  </span>
+                </h1>
+                <div className='w-100 p-5 d-flex justify-content-center'>
+                  <div
+                    className='d-flex flex-column px-5'
+                    style={{ width: '600px' }}
+                  >
+                    <div style={{ width: '80%' }}>
+                      {[
+                        {
+                          title: 'Create an account',
+                          text: (
+                            <span>
+                              Go to our portal and become a member. Once you
+                              activate your account and pay for your
+                              subscription you are able to login using your
+                              email and set password.
+                              <br />
+                            </span>
+                          ),
+                        },
+                        {
+                          title: 'Upload your wines',
+                          text: (
+                            <span>
+                              Upload your wines into our digital wine cellar
+                              using an excel, CSV or JSON file. You are able to
+                              use a template we provide or a freeform upload.
+                            </span>
+                          ),
+                        },
+                        {
+                          title: 'Start using the API',
+                          text: (
+                            <span>
+                              Once the wines have been processed you receive an
+                              email and you can go to the settings page to
+                              retrieve your API to populate your website or app.
+                              Simple.
+                            </span>
+                          ),
+                        },
+                      ].map(({ title, text }, i) => (
+                        <div
+                          className='position-relative'
+                          style={{ marginBottom: '13vh' }}
+                        >
+                          <h3>
+                            {/* <span style={{ opacity: 0.4 }}>step </span> */}
+                            <span
+                              className='text-primary position-absolute'
+                              style={{
+                                fontSize: '6em',
+                                opacity: 0.1,
+                                top: -80,
+                                left: -50,
+                              }}
+                            >
+                              {i + 1}
+                            </span>
+                            &nbsp;{title}
+                          </h3>
+                          <p>{text}</p>
+                        </div>
+                      ))}
+                      <div className='w-100 d-flex justify-content-center'>
+                        <SpecialButton
+                          className='my-2 p-3 px-5 font-weight-600 text-white'
+                          style={{ fontSize: '1.2em', borderRadius: 999 }}
+                          onClick={() =>
+                            window.open(
+                              'https://portal.sommify.ai/auth/login',
+                              '_blank'
+                            )
+                          }
+                        >
+                          TRY IT OUT
+                        </SpecialButton>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className='position-relative'
+                    style={{
+                      flex: 1,
+                    }}
+                  >
+                    <div
+                      className='position-absolute'
+                      style={{
+                        borderRadius: '3em',
+                        height: '918px',
+                        width: '1620px',
+                        background:
+                          'linear-gradient(90deg, rgba(255,250,252,1) 0%, rgba(255,212,223,1) 100%)',
+                      }}
+                    ></div>
+                    {[Image.SS2, Image.SS3].map((ss, i) => (
+                      <img
+                        style={{
+                          width: '1620px',
+                          borderRadius: '3em',
+                          maxWidth: '1620px',
+                          top: 40 * i + 40,
+                          left: 75 * i + 75,
+                        }}
+                        src={ss}
+                        className='shaded position-absolute'
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Section>
+
+            <Section
+              className='flex-column text-center position-relative p-0'
               style={{
-                background:
-                  `linear-gradient(${rgb('#f0f0f0')}, rgba(0,0,0,0)), url(` +
-                  wall +
-                  ')',
-                backgroundSize: 'contain',
+                background: '#ffffff',
+                minHeight: '40vh',
+                marginBottom: '5vh',
               }}
             >
               <WhatWeDo />
-              <div
+              <img
+                src={Image.WaveBeige}
                 style={{
-                  position: 'absolute',
-                  bottom: -2,
                   width: '100%',
-                  height: '20vh',
-                  background: `url(${wave})`,
-                  backgroundRepeat: 'no-repeat',
-                  backgroundSize: '100% 100%',
-                  backgroundPosition: 'bottom',
+                  position: 'absolute',
+                  bottom: '-5vh',
+                  left: 0,
                 }}
               />
             </Section>
           </div>
 
           <Section
+            className='position-relative py-0'
             style={{
-              background: colors.primaryDark,
-              color: 'white',
+              background: '#fff9f2',
+              color: 'black',
               paddingTop: 0,
-              borderTop: '5px solid ' + colors.primaryDark,
               paddingInline: '5vw',
+              minHeight: '',
             }}
           >
             <Team />
+          </Section>
+
+          <Section
+            className='position-relative flex-column p-0'
+            style={{ minHeight: '', background: '#ffffff' }}
+          >
+            <img
+              src={Image.WaveBlack}
+              style={{
+                width: '100vw',
+                position: 'absolute',
+                // height: '10vh',
+                top: -1,
+                transform: 'rotate(180deg)',
+                left: 0,
+              }}
+            />
+            <div style={{ flex: 1, background: colors.primary }} />
+            {/* <img className='w-100 position-absolute' src={Image.WaveBlack} /> */}
+            {/* <div style={{ flex: 0.4, background: '#151518' }} /> */}
+            <ContactUs />
           </Section>
 
           <Footer />

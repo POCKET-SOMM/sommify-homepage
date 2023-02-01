@@ -1,5 +1,10 @@
 import { CgGlobeAlt, CgMail } from 'react-icons/cg';
-import { SiCrunchbase, SiLinkedin, SiMinutemailer } from 'react-icons/si';
+import {
+  SiCrunchbase,
+  SiLinkedin,
+  SiMinutemailer,
+  SiTwitter,
+} from 'react-icons/si';
 import { Fade } from 'react-bootstrap';
 import tomasImg from '../assets/team/Tomas Cropped-min.png';
 import jacobImg from '../assets/team/Jacob Cropped-min.png';
@@ -56,18 +61,13 @@ const teamMembers = [
   },
 ];
 
-const GetToKnowUs = ({ ...props }) => {
+export const GetToKnowUs = ({ ...props }) => {
   const ContactRow = ({ icon, title, content }) => (
     <div
       className='d-flex flex-column text-center justify-content-center align-items-center my-4'
       style={{ flex: 1, fontSize: '1.1rem' }}
     >
-      <div
-        className='d-flex justify-content-center align-items-center rounded-circle'
-        style={{
-          color: '#e5e5e5',
-        }}
-      >
+      <div className='d-flex justify-content-center align-items-center rounded-circle'>
         {icon}
       </div>
       <div className='d-flex flex-column mx-3'>
@@ -84,15 +84,15 @@ const GetToKnowUs = ({ ...props }) => {
 
   return (
     <div
-      className='text-center overflow-hidden my-5 py-5'
+      className='text-center overflow-hidden'
       style={{
         width: '100%',
       }}
     >
-      <div className={`w-100 mb-5 mt-2 d-flex justify-content-center`}>
+      <div className={`w-100 d-flex justify-content-center`}>
         <ContactRow
-          content={'jacob@sommify.ai'}
-          icon={<SiMinutemailer size='60%' />}
+          // content={'jacob@sommify.ai'}
+          icon={<SiTwitter size='60%' />}
         />
         <ContactRow
           title={
@@ -134,21 +134,19 @@ const GetToKnowUs = ({ ...props }) => {
 
 const MemberCard = ({ member, ...props }) => (
   <div
-    className='d-flex flex-column w-100'
+    className='d-flex flex-column shaded'
     style={{
+      // border: '1px solid black',
       backgroundColor: 'white',
-      borderRadius: '2vh',
-      float: 'left',
+      borderRadius: '.5em',
+      float: 'right',
       color: '#202020',
       overflow: 'hidden',
-      boxShadow: '0.5vw 0.5vw 1vw 0 #00000025',
-      // border: '1px solid #a51c5e50'
+      width: '320px',
+      marginInline: '10px',
     }}
   >
-    <div
-      className='w-100 position-relative'
-      style={{ background: member.bg, height: '' }}
-    >
+    <div className='w-100 h-100' style={{ background: member.bg, height: '' }}>
       <div style={{ marginTop: '100%', float: 'left' }}></div>
       <LoadableImage
         style={{ width: '100%', float: 'left' }}
@@ -190,17 +188,19 @@ const TeamHeading = () => {
   const { width, height } = useWindowDimensions();
   return (
     <div
-      className='d-flex flex-column justify-content-center align-items-center text-center'
+      className='d-flex flex-column justify-content-center align-items-center text-start'
       style={{ flex: 1, float: 'left', paddingBlock: '10vh' }}
     >
       <div className='d-flex flex-column px-5'>
-        <h1 className='d-block font-smooth'>Meet the team</h1>
+        <h1 style={{ fontSize: '3.2em' }} className='d-block font-weight-700'>
+          Meet the team
+        </h1>
         <h4 style={{ fontWeight: 200 }}>
-          Our core team is <b>made-for-measure</b> for this project with strong
-          investor backing.
+          Our core team is made-for-measure to change the wine industry with
+          strong investor backing.
         </h4>
       </div>
-      {!(width < 760) && <GetToKnowUs />}
+      {/* {!(width < 760) && <GetToKnowUs />} */}
     </div>
   );
 };
@@ -208,25 +208,41 @@ const TeamHeading = () => {
 export default function Team({ ...props }) {
   const { width, height } = useWindowDimensions();
   return (
-    <div className={width < 760 ? 'd-flex flex-column' : 'd-flex'}>
+    <div
+      className={width < 760 ? 'd-flex flex-column' : 'd-flex py-5'}
+      style={{ width: '100%' }}
+    >
       {width < 760 && <TeamHeading />}
 
-      <div style={{ flex: 1, float: 'left' }}>
-        {teamMembers.map((member) => (
-          <div
-            key={member.name}
-            style={{
-              width: width < 760 ? '50%' : '33%',
-              display: 'inline-block',
-              padding: '1%',
-            }}
-          >
+      <div
+        className='p-5'
+        style={{
+          flex: 1,
+          overflow: 'auto',
+          overflowY: 'hidden',
+          direction: 'rtl',
+          // boxShadow: 'inset 5px 5px 5px black'
+        }}
+      >
+        <div
+          style={{
+            width: 5 * 340 + 'px',
+            boxShadow: '0 8px 6px -6px black',
+          }}
+        >
+          {teamMembers.map((member) => (
             <MemberCard member={member} />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      {!(width < 760) && <TeamHeading />}
+      {!(width < 760) && (
+        <div className='d-flex align-items-center' style={{ flex: 1 }}>
+          <div style={{ maxWidth: '800px' }}>
+            <TeamHeading />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
