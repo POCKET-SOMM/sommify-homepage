@@ -565,8 +565,8 @@ const StaticSommColumn = ({ className }) => (
           initial={{ opacity: 0 }}
           animate={{
             opacity: 1,
-            x: '-8vw',
-            y: '8vw',
+            x: 'calc(-1 * min(8vw, 40px))',
+            y: 'calc(min(8vw, 40px))',
           }}
           transition={{ duration: 0.3 }}
           src={Image.StaticSomm}
@@ -590,7 +590,7 @@ const InteractiveSommColumn = ({ className }) => (
       <div
         style={{
           width: '100%',
-          maxWidth: '1920px',
+          maxWidth: '420px',
           background:
             'linear-gradient(90deg, rgba(242,189,249,1) 0%, rgba(129,129,228,1) 100%)',
           borderRadius: '3em',
@@ -602,16 +602,13 @@ const InteractiveSommColumn = ({ className }) => (
           initial={{ opacity: 0 }}
           animate={{
             opacity: 1,
-            x: '8vw',
-            y: '8vw',
+            x: 'calc(min(8vw, 40px))',
+            y: 'calc(min(8vw, 40px))',
           }}
           transition={{ duration: 0.3 }}
           src={Image.InteractiveSomm}
           style={{
-            // left: 40,
-            // top: 40,
             width: '100%',
-            maxWidth: '1920px',
             borderRadius: '3em',
             zIndex: 2,
           }}
@@ -681,10 +678,6 @@ function App() {
           }}
         >
           <Navigation />
-          {/* <Section className='position-relative text-start'>
-            <TitleHeading />
-          </Section> */}
-
           <Section id='widget-screen' style={{ minHeight: '' }}>
             <div className='d-flex flex-column' style={{ height: '100%' }}>
               <div
