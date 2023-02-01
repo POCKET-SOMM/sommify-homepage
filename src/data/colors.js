@@ -8,5 +8,5 @@ export default {
   warningRgb: 'rgb(242, 41, 91)',
   secondary: '#ff5330',
   secondaryLight: '#ffd498',
-  blue: '#027dff'
+  blue: 'rgb(129,129,228)'
 };

@@ -23,7 +23,7 @@ import MFS from './partners/mfs.png';
 import inQb from './partners/inqb.png';
 import Boost from './partners/boost.png';
 import NewCo from './partners/newco.png';
-import StaticSomm from './static_somm.png';
+import StaticSomm from './static_somm_2.png';
 import InteractiveSomm from './interactive_somm.png';
 import SS1 from './screenshots/SS1.png';
 import SS2 from './screenshots/SS2.png';
