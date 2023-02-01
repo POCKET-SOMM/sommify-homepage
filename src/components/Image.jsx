@@ -16,7 +16,7 @@ export default function LoadableImage({ src, alt, ...props }) {
     loadImage(src)
       .then((img) => {
         setLoaded(true);
-        console.log('loaded');
+        // console.log('loaded');
       })
       .catch((err) => console.error(err));
   }, []);

@@ -1,0 +1,49 @@
+"filename", "language", "JavaScript", "XML", "SCSS", "JSON", "JavaScript React", "HTML", "YAML", "CSS", "comment", "blank", "total"
+"/Users/thombedej/Code/homepage/.github/workflows/azure-static-web-apps-thankful-meadow-01bced203.yml", "YAML", 0, 0, 0, 0, 0, 0, 37, 0, 3, 4, 44
+"/Users/thombedej/Code/homepage/dist/assets/index-1167e91d.js", "JavaScript", 17, 0, 0, 0, 0, 0, 0, 0, 41, 1, 59
+"/Users/thombedej/Code/homepage/dist/assets/index-2f9071ef.css", "CSS", 0, 0, 0, 0, 0, 0, 0, 2, 4, 1, 7
+"/Users/thombedej/Code/homepage/dist/index.html", "HTML", 0, 0, 0, 0, 0, 14, 0, 0, 0, 2, 16
+"/Users/thombedej/Code/homepage/dist/vite.svg", "XML", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Users/thombedej/Code/homepage/index.html", "HTML", 0, 0, 0, 0, 0, 13, 0, 0, 0, 1, 14
+"/Users/thombedej/Code/homepage/package-lock.json", "JSON", 0, 0, 0, 4074, 0, 0, 0, 0, 0, 1, 4075
+"/Users/thombedej/Code/homepage/package.json", "JSON", 0, 0, 0, 32, 0, 0, 0, 0, 0, 1, 33
+"/Users/thombedej/Code/homepage/public/logo_maroon.svg", "XML", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Users/thombedej/Code/homepage/public/vite.svg", "XML", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Users/thombedej/Code/homepage/src/App.jsx", "JavaScript React", 0, 0, 0, 0, 433, 0, 0, 0, 28, 27, 488
+"/Users/thombedej/Code/homepage/src/App.scss", "SCSS", 0, 0, 69, 0, 0, 0, 0, 0, 2, 18, 89
+"/Users/thombedej/Code/homepage/src/api/client.js", "JavaScript", 6, 0, 0, 0, 0, 0, 0, 0, 1, 3, 10
+"/Users/thombedej/Code/homepage/src/assets/helpers/index.js", "JavaScript", 9, 0, 0, 0, 0, 0, 0, 0, 0, 1, 10
+"/Users/thombedej/Code/homepage/src/assets/logo/full_maroon.svg", "XML", 0, 82, 0, 0, 0, 0, 0, 0, 1, 2, 85
+"/Users/thombedej/Code/homepage/src/assets/logo/full_rose.svg", "XML", 0, 51, 0, 0, 0, 0, 0, 0, 1, 2, 54
+"/Users/thombedej/Code/homepage/src/assets/logo/full_white.svg", "XML", 0, 51, 0, 0, 0, 0, 0, 0, 1, 2, 54
+"/Users/thombedej/Code/homepage/src/assets/logo/icon_maroon.svg", "XML", 0, 24, 0, 0, 0, 0, 0, 0, 1, 2, 27
+"/Users/thombedej/Code/homepage/src/assets/logo/icon_white.svg", "XML", 0, 24, 0, 0, 0, 0, 0, 0, 1, 2, 27
+"/Users/thombedej/Code/homepage/src/assets/logo/inscape_progress.svg", "XML", 0, 614, 0, 0, 0, 0, 0, 0, 1, 2, 617
+"/Users/thombedej/Code/homepage/src/assets/logo/old/logo_black.svg", "XML", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Users/thombedej/Code/homepage/src/assets/logo/old/logo_black_stroke.svg", "XML", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Users/thombedej/Code/homepage/src/assets/logo/old/logo_maroon.svg", "XML", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Users/thombedej/Code/homepage/src/assets/logo/old/logo_maroon_stroke.svg", "XML", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Users/thombedej/Code/homepage/src/assets/logo/old/logo_white.svg", "XML", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Users/thombedej/Code/homepage/src/assets/logo/socials.svg", "XML", 0, 499, 0, 0, 0, 0, 0, 0, 1, 2, 502
+"/Users/thombedej/Code/homepage/src/assets/logo/socials_maroon.svg", "XML", 0, 83, 0, 0, 0, 0, 0, 0, 1, 2, 86
+"/Users/thombedej/Code/homepage/src/assets/logo/socials_white.svg", "XML", 0, 31, 0, 0, 0, 0, 0, 0, 1, 2, 34
+"/Users/thombedej/Code/homepage/src/assets/react.svg", "XML", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Users/thombedej/Code/homepage/src/assets/wave.svg", "XML", 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4
+"/Users/thombedej/Code/homepage/src/assets/wave_top.svg", "XML", 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4
+"/Users/thombedej/Code/homepage/src/assets/wave_top_2.svg", "XML", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Users/thombedej/Code/homepage/src/assets/wave_top_3.svg", "XML", 0, 74, 0, 0, 0, 0, 0, 0, 0, 1, 75
+"/Users/thombedej/Code/homepage/src/components/CustomMenuList.jsx", "JavaScript React", 0, 0, 0, 0, 27, 0, 0, 0, 0, 5, 32
+"/Users/thombedej/Code/homepage/src/components/CustomOption.jsx", "JavaScript React", 0, 0, 0, 0, 12, 0, 0, 0, 1, 4, 17
+"/Users/thombedej/Code/homepage/src/components/Image.jsx", "JavaScript React", 0, 0, 0, 0, 36, 0, 0, 0, 0, 5, 41
+"/Users/thombedej/Code/homepage/src/components/Team.jsx", "JavaScript React", 0, 0, 0, 0, 222, 0, 0, 0, 2, 9, 233
+"/Users/thombedej/Code/homepage/src/components/Widget.jsx", "JavaScript React", 0, 0, 0, 0, 530, 0, 0, 0, 23, 43, 596
+"/Users/thombedej/Code/homepage/src/components/WineContent.jsx", "JavaScript React", 0, 0, 0, 0, 120, 0, 0, 0, 2, 12, 134
+"/Users/thombedej/Code/homepage/src/components/WinePlate.jsx", "JavaScript React", 0, 0, 0, 0, 65, 0, 0, 0, 1, 3, 69
+"/Users/thombedej/Code/homepage/src/data/colors.js", "JavaScript", 11, 0, 0, 0, 0, 0, 0, 0, 0, 1, 12
+"/Users/thombedej/Code/homepage/src/data/countries.js", "JavaScript", 257, 0, 0, 0, 0, 0, 0, 0, 0, 1, 258
+"/Users/thombedej/Code/homepage/src/data/wines.js", "JavaScript", 1106, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1107
+"/Users/thombedej/Code/homepage/src/hooks/index.js", "JavaScript", 21, 0, 0, 0, 0, 0, 0, 0, 0, 6, 27
+"/Users/thombedej/Code/homepage/src/index.scss", "SCSS", 0, 0, 7, 0, 0, 0, 0, 0, 0, 3, 10
+"/Users/thombedej/Code/homepage/src/main.jsx", "JavaScript React", 0, 0, 0, 0, 9, 0, 0, 0, 0, 2, 11
+"/Users/thombedej/Code/homepage/vite.config.js", "JavaScript", 5, 0, 0, 0, 0, 0, 0, 0, 1, 2, 8
+"Total", "-", 1432, 1551, 76, 4106, 1454, 27, 37, 2, 118, 176, 8979

@@ -58,8 +58,7 @@ function Widget({ isMobile, screenWidth }) {
 
   const wineMeRef = React.createRef();
 
-  const WIDGET_WIDTH =
-    width <= 1920 ? '450px' : width <= 2560 ? '750px' : '900px';
+  const WIDGET_WIDTH = width <= 1920 ? '450px' : '600px';
   const controls = useAnimationControls();
 
   const optionObject = (option, index, type) => {
@@ -101,7 +100,7 @@ function Widget({ isMobile, screenWidth }) {
     }
 
     if (wines.length === 3) {
-      console.log(wines);
+      // console.log(wines);
       wines = wines.map((wine) =>
         wine.filter((w) => !w.PACKAGING.includes('box'))
       );
@@ -191,7 +190,7 @@ function Widget({ isMobile, screenWidth }) {
       data: data,
     };
 
-    console.log(data);
+    // console.log(data);
 
     axios
       .request(options)
@@ -207,7 +206,7 @@ function Widget({ isMobile, screenWidth }) {
             : error.message
         );
         if (error.response) {
-          console.log(error.response.data);
+          // console.log(error.response.data);
           loadWines(error.response.data);
         } else {
           setWining(false);
@@ -272,16 +271,12 @@ function Widget({ isMobile, screenWidth }) {
 
   return (
     <div
+      className='shaded'
       style={{
         width: isBrowser ? WIDGET_WIDTH : '85vw',
         background: 'white',
         borderRadius: isBrowser ? '2vw' : '4vw',
-        padding: isBrowser ? '2%' : '5vw',
-        boxShadow: '1vw 1vw 2vw -1vw #00000085',
-
-        // border: '2px solid #d0d0d0',
-        // boxShadow: '0 3px 0 #d0d0d0',
-
+        padding: isBrowser ? '30px' : '5vw',
         color: '#202020',
         zIndex: 2,
       }}

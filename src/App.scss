@@ -1,10 +1,13 @@
-:root {
+body {
   font-family: 'Inter', sans-serif !important;
-  font-family: 'Pacifico', cursive !important;
+  // font-family: 'Pacifico', cursive !important;
 
   font-size: 1vw;
   // line-height: 24px;
   font-weight: 400;
+
+  overflow-x: hidden;
+  width: 100%;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,37 +16,73 @@
   -webkit-text-size-adjust: 100%;
 }
 
-body {
-  overflow-x: hidden;
-  width: 100%;
+.shaded {
+  box-shadow: 0em 0em 4em -0.4em #0000001a;
 }
 
+textarea.form-control,
+input.form-control {
+  height: 3.5em;
+  padding-inline: 1.4em;
+  border: none;
+  border-radius: 1.4em;
+  background: rgb(0, 0, 0, 0.05);
+  font-size: 13px;
+}
+
+form label.form-label {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+form span {
+  font-size: 12px;
+  color: rgb(97, 97, 97);
+}
+
+.text-fancy {
+  // background: #a51c5e;
+  background: linear-gradient(
+    90deg,
+    rgba(129, 129, 228, 1) 0%,
+    rgba(242, 189, 249, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// body {
+//   overflow-x: hidden;
+//   width: 100%;
+// }
+
 @media screen and (max-width: 760px) {
-  :root {
-    font-size: 14px;
+  body {
+    font-size: 14px !important;
   }
 }
 
 @media screen and (min-width: 760px) and (max-width: 1300px) {
-  :root {
-    font-size: 16px;
+  body {
+    font-size: 16px !important;
   }
 }
 
 @media screen and (min-width: 1300px) and (max-width: 2560px) {
-  :root {
-    font-size: 16px;
+  body {
+    font-size: 16px !important;
   }
 }
 
 @media screen and (min-width: 2560px) {
-  :root {
+  body {
     font-size: 24px;
   }
 }
 
 @media screen and (min-width: 3200px) {
-  :root {
+  body {
     font-size: 35px;
   }
 }
@@ -85,4 +124,38 @@ a {
 
 .nav:hover {
   color: #a51c5e;
+}
+
+.font-weight-300 {
+  font-weight: 300 !important;
+}
+.font-weight-400 {
+  font-weight: 400 !important;
+}
+.font-weight-500 {
+  font-weight: 500 !important;
+}
+.font-weight-600 {
+  font-weight: 600 !important;
+}
+.font-weight-700 {
+  font-weight: 700 !important;
+}
+
+#footer span,
+#footer b {
+  color: rgb(256, 256, 256, 0.6);
+}
+
+#footer h6 {
+  color: rgb(256, 256, 256, 0.8);
+  font-weight: 600;
+}
+
+#footer .clickable {
+  transition: ease-in-out 0.3s;
+}
+
+#footer .clickable:hover {
+  color: white;
 }
