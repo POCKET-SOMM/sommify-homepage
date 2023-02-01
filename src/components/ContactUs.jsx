@@ -83,7 +83,7 @@ export default function ContactUs({ ...props }) {
                   <Form.Control
                     value={subject}
                     onChange={handleSubjectChange}
-                    placeholder='...'
+                    placeholder='What is this message about?'
                     className='w-100'
                   />
                 </div>
@@ -94,8 +94,8 @@ export default function ContactUs({ ...props }) {
                     onChange={handleMessageChange}
                     as='textarea'
                     rows={3}
-                    className='w-100'
-                    placeholder='...'
+                    className='w-100 py-3'
+                    placeholder='Your message...'
                     style={{ resize: 'none', height: '8em' }}
                   />
                 </div>

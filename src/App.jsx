@@ -3,7 +3,6 @@ import './App.scss';
 import Team, { GetToKnowUs } from './components/Team';
 import Widget from './components/Widget';
 import colors from './data/colors';
-import { Button, Form } from 'react-bootstrap';
 import {
   isMobile,
   MobileView,
@@ -25,6 +24,7 @@ import { Icon, Image, Logo } from './assets';
 import { GoArrowDown } from 'react-icons/go';
 import ContactUs from './components/ContactUs';
 import { CgArrowRight, CgChevronRight } from 'react-icons/cg';
+import Button from './components/Button';
 // import { staticFile, Video } from 'remotion';
 
 const MARGIN = '20vh';
@@ -97,35 +97,6 @@ const NavButton = ({ nav, nextScroll, ...props }) => {
         />
       )} */}
     </motion.div>
-  );
-};
-
-const SpecialButton = ({ children, style, className, ...props }) => {
-  const [hover, setHover] = useState(false);
-
-  return (
-    <div
-      {...props}
-      className={'clickable position-relative ' + className}
-      style={{
-        color: 'white',
-        background: colors.blue,
-        paddingBlock: '.7em',
-        paddingInline: '2.4em',
-        borderRadius: 999,
-        ...style,
-      }}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-    >
-      {children}
-      {hover && (
-        <CgChevronRight
-          size='1.5em'
-          style={{ position: 'absolute', right: 13 }}
-        />
-      )}
-    </div>
   );
 };
 
@@ -215,8 +186,8 @@ const Navigation = ({ ...props }) => {
                     { title: 'demo', scroll: 0 },
                     { title: 'product', scroll: 1.1 * height },
                     { title: 'how', scroll: height * 2.5 },
-                    { title: 'team', scroll: height * 4.2 },
-                    { title: 'contact', scroll: height * 4.95 },
+                    { title: 'team', scroll: height * 4.1 },
+                    { title: 'contact', scroll: height * 4.7 },
                   ].map((nav, i, navs) => (
                     <NavButton
                       key={'nav_' + nav.title}
@@ -225,7 +196,7 @@ const Navigation = ({ ...props }) => {
                     />
                   ))}
                 </div>
-                <SpecialButton
+                <Button
                   variant='secondary'
                   className='text-white position-absolute'
                   style={{
@@ -236,7 +207,7 @@ const Navigation = ({ ...props }) => {
                   }}
                 >
                   GET AI SOMM
-                </SpecialButton>
+                </Button>
               </AnimatePresence>
             </div>
           </motion.div>
@@ -246,7 +217,7 @@ const Navigation = ({ ...props }) => {
   );
 };
 
-const ExtendingButton = ({ children, bg = '#027dff', ...props }) => {
+const ExtendingButton = ({ children, bg = colors.blue, ...props }) => {
   const DIM = 60;
   const [hover, setHover] = useState(false);
   return (
@@ -313,7 +284,7 @@ const TitleHeading = ({ ...props }) => {
         </h1>
         <br />
         <h3 style={{ fontSize: '1.2em', fontWeight: 300 }}>
-          making quality wine-food <br /> the standard
+          making quality wine-food pairing <br /> the standard
         </h3>
         <div
           className={`w-100 py-4 d-flex justify-content-${
@@ -351,7 +322,7 @@ const TitleHeading = ({ ...props }) => {
               isMobile ? 'start' : 'end'
             }`}
           >
-            <SpecialButton
+            <Button
               style={{ height: 60 }}
               className='d-flex justify-content-center align-items-center w-100'
               onClick={() => {
@@ -359,7 +330,7 @@ const TitleHeading = ({ ...props }) => {
               }}
             >
               GET AI SOMM
-            </SpecialButton>
+            </Button>
           </div>
         )} */}
       </div>
@@ -748,21 +719,57 @@ function App() {
                 // style={{ flex: 1 }}
               >
                 {[
-                  { pLogo: Logo.Heino, height: '27px' },
-                  { pLogo: Logo.Gorilla, height: '40px' },
-                  { pLogo: Logo.Silta, height: '42px' },
-                  { pLogo: Logo.MFS, height: '43px' },
-                  { pLogo: Logo.inQb, height: '38px' },
-                  { pLogo: Logo.Boost, height: '38px' },
-                  { pLogo: Logo.NewCo, height: '44px' },
-                ].map(({ pLogo, height }) => (
+                  {
+                    pLogo: Logo.Heino,
+                    height: '27px',
+                    link: 'https://heino.fi',
+                  },
+                  {
+                    pLogo: Logo.Gorilla,
+                    height: '40px',
+                    link: 'https://gorillacapital.fi',
+                  },
+                  {
+                    pLogo: Logo.Silta,
+                    height: '42px',
+                    link: 'https://siltahouse.com',
+                  },
+                  {
+                    pLogo: Logo.MFS,
+                    height: '43px',
+                    link: 'https://www.microsoft.com/en-us/startups',
+                  },
+                  {
+                    pLogo: Logo.inQb,
+                    height: '38px',
+                    link: 'https://www.inqb.sk/sk',
+                  },
+                  {
+                    pLogo: Logo.Boost,
+                    height: '38px',
+                    link: 'https://boostturku.com',
+                  },
+                  {
+                    pLogo: Logo.NewCo,
+                    height: '44px',
+                    link: 'https://newcohelsinki.fi',
+                  },
+                ].map(({ pLogo, height, link }) => (
                   <div style={{ flex: 1 }}>
-                    <img
-                      className='mx-5'
+                    <motion.img
+                      className='mx-5 clickable'
                       src={pLogo}
+                      onClick={() => window.open(link, '_blank')}
+                      animate={{
+                        filter: 'brightness(0)',
+                      }}
+                      whileHover={{
+                        filter: 'brightness(1)',
+                        scale: 1.02,
+                      }}
                       style={{
                         height: `calc(${height} * 0.8)`,
-                        filter: 'brightness(0)',
+                        // filter: 'brightness(0)',
                       }}
                     />
                   </div>
@@ -785,7 +792,13 @@ function App() {
               >
                 <h1 className='font-weight-700' style={{ fontSize: '3em' }}>
                   Control it all using our{' '}
-                  <span style={{ fontSize: '0.85em' }} className='text-primary'>
+                  <span
+                    style={{ fontSize: '0.85em' }}
+                    className='text-primary clickable'
+                    onClick={() =>
+                      window.open('https://portal.sommify.ai/auth/login')
+                    }
+                  >
                     PORTAL
                   </span>
                 </h1>
@@ -852,7 +865,7 @@ function App() {
                         </div>
                       ))}
                       <div className='w-100 d-flex justify-content-center'>
-                        <SpecialButton
+                        <Button
                           className='my-2 p-3 px-5 font-weight-600 text-white'
                           style={{ fontSize: '1.2em', borderRadius: 999 }}
                           onClick={() =>
@@ -863,7 +876,7 @@ function App() {
                           }
                         >
                           TRY IT OUT
-                        </SpecialButton>
+                        </Button>
                       </div>
                     </div>
                   </div>

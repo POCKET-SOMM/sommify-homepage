@@ -132,7 +132,7 @@ export const GetToKnowUs = ({ ...props }) => {
   );
 };
 
-const MemberCard = ({ member, ...props }) => (
+const MemberCard = ({ member, width, ...props }) => (
   <div
     className='d-flex flex-column shaded'
     style={{
@@ -142,7 +142,7 @@ const MemberCard = ({ member, ...props }) => (
       float: 'right',
       color: '#202020',
       overflow: 'hidden',
-      width: '320px',
+      width,
       marginInline: '10px',
     }}
   >
@@ -185,7 +185,6 @@ const MemberCard = ({ member, ...props }) => (
 );
 
 const TeamHeading = () => {
-  const { width, height } = useWindowDimensions();
   return (
     <div
       className='d-flex flex-column justify-content-center align-items-center text-start'
@@ -206,7 +205,9 @@ const TeamHeading = () => {
 };
 
 export default function Team({ ...props }) {
-  const { width, height } = useWindowDimensions();
+  const { width } = useWindowDimensions();
+  const MEMBER_WIDTH = width <= 1920 ? 200 : 320;
+
   return (
     <div
       className={width < 760 ? 'd-flex flex-column' : 'd-flex py-5'}
@@ -215,7 +216,7 @@ export default function Team({ ...props }) {
       {width < 760 && <TeamHeading />}
 
       <div
-        className='p-5'
+        className='p-5 no-scrollbar'
         style={{
           flex: 1,
           overflow: 'auto',
@@ -226,12 +227,12 @@ export default function Team({ ...props }) {
       >
         <div
           style={{
-            width: 5 * 340 + 'px',
+            width: 5 * (MEMBER_WIDTH + 20) + 'px',
             boxShadow: '0 8px 6px -6px black',
           }}
         >
           {teamMembers.map((member) => (
-            <MemberCard member={member} />
+            <MemberCard width={MEMBER_WIDTH} member={member} />
           ))}
         </div>
       </div>
