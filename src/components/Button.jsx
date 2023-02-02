@@ -10,6 +10,7 @@ export default function Button({ children, style, className, ...props }) {
       {...props}
       className={'clickable position-relative ' + className}
       style={{
+        // color: colors.primary,
         color: 'white',
         background: colors.blue,
         // boxShadow: hover ? '0px 0px 2px 0px ' + colors.blue : '',

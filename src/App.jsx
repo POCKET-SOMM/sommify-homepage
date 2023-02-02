@@ -206,7 +206,7 @@ const Navigation = ({ ...props }) => {
                 </div>
                 <Button
                   variant='secondary'
-                  className='text-white position-absolute'
+                  className='position-absolute'
                   style={{
                     right: '4vw',
                   }}
@@ -214,7 +214,7 @@ const Navigation = ({ ...props }) => {
                     window.open('https://portal.sommify.ai/auth/login');
                   }}
                 >
-                  GET AI SOMM
+                  Go to portal
                 </Button>
               </AnimatePresence>
             </div>
@@ -244,7 +244,7 @@ const ExtendingButton = ({ children, bg = colors.blue, ...props }) => {
         style={{ marginLeft: DIM + 10, left: 0, height: DIM }}
       >
         <motion.div
-          className='border shaded position-absolute d-flex justify-content-center align-items-center'
+          className='shaded position-absolute d-flex justify-content-center align-items-center'
           animate={{ width: hover ? `calc(${DIM}px + 100%)` : DIM }}
           transition={{ type: 'tween' }}
           initial={{ width: DIM }}
