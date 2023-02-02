@@ -25,14 +25,22 @@ import { GoArrowDown } from 'react-icons/go';
 import ContactUs from './components/ContactUs';
 import { CgArrowRight, CgChevronRight } from 'react-icons/cg';
 import Button from './components/Button';
+import StackedImages from './components/StackedImages';
+import {
+  inView,
+  inViewProps,
+  inViewVariants,
+  inViewVariantsX,
+} from './data/variants';
 // import { staticFile, Video } from 'remotion';
 
 const MARGIN = '20vh';
 const NAV_HEIGHT = '10vh';
 
 const Section = ({ children, style, className, ...props }) => (
-  <div
+  <motion.div
     {...props}
+    {...inViewProps}
     style={{
       width: '100%',
       paddingBlock: MARGIN,
@@ -43,7 +51,7 @@ const Section = ({ children, style, className, ...props }) => (
     className={'d-flex justify-content-center ' + className}
   >
     {children}
-  </div>
+  </motion.div>
 );
 
 const NavButton = ({ nav, nextScroll, ...props }) => {
@@ -264,8 +272,9 @@ const TitleHeading = ({ ...props }) => {
   const { width } = useWindowDimensions();
   const isMobile = width <= 760;
   return (
-    <div
+    <motion.div
       {...props}
+      variants={inViewVariantsX}
       className='d-flex justify-content-center align-items-center'
     >
       <div>
@@ -299,42 +308,8 @@ const TitleHeading = ({ ...props }) => {
             CONTACT US
           </ExtendingButton>
         </div>
-        {/* {isMobile && (
-          <div
-            className={`w-100 d-flex justify-content-${
-              isMobile ? 'start' : 'end'
-            }`}
-          >
-            <ExtendingButton
-              bg={'#111'}
-              className='w-100'
-              onClick={() => {
-                document.getElementById('widget-screen').scrollIntoView();
-              }}
-            >
-              TRY DEMO
-            </ExtendingButton>
-          </div>
-        )}
-        {isMobile && (
-          <div
-            className={`w-100 py-4 d-flex justify-content-${
-              isMobile ? 'start' : 'end'
-            }`}
-          >
-            <Button
-              style={{ height: 60 }}
-              className='d-flex justify-content-center align-items-center w-100'
-              onClick={() => {
-                document.getElementById('widget-screen').scrollIntoView();
-              }}
-            >
-              GET AI SOMM
-            </Button>
-          </div>
-        )} */}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -484,9 +459,14 @@ const WhatWeDo = () => (
   </>
 );
 
-const ProductHeader = ({ title, className, children, ...props }) => (
-  <>
-    <div className={className} style={{ marginTop: 70 }}>
+const ProductHeader = ({ title, className, children, ...props }) => {
+  return (
+    <motion.div
+      className={className}
+      {...inViewProps}
+      variants={inViewVariants}
+      style={{ marginTop: 70 }}
+    >
       <h4 className='text-primary font-weight-600'>PRODUCT</h4>
       <h1 className='font-weight-700' style={{ fontSize: '3.6em' }}>
         {title} <span style={{ fontSize: '0.85em' }}>SOMM</span>
@@ -500,9 +480,9 @@ const ProductHeader = ({ title, className, children, ...props }) => (
       >
         {children}
       </p>
-    </div>
-  </>
-);
+    </motion.div>
+  );
+};
 
 const StaticSommColumn = ({ className }) => (
   <div className={'d-flex flex-column h-100 ' + className} style={{ flex: 1 }}>
@@ -516,36 +496,14 @@ const StaticSommColumn = ({ className }) => (
       className='d-flex justify-content-center align-items-center position-relative'
       style={{ flex: 1 }}
     >
-      <div
-        className='position-absolute'
-        style={{
-          width: '140%',
-          maxWidth: '1920px',
-          right: 0,
-          top: 0,
-          background:
-            'linear-gradient(90deg, rgba(129,129,228,1) 0%, rgba(242,189,249,1) 100%)',
-          borderRadius: '3em',
-          zIndex: 1,
-        }}
-      >
-        <motion.img
-          className='shaded'
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            x: 'calc(-1 * min(8vw, 40px))',
-            y: 'calc(min(8vw, 40px))',
-          }}
-          transition={{ duration: 0.3 }}
-          src={Image.StaticSomm}
-          style={{
-            width: '100%',
-            borderRadius: '3em',
-            zIndex: 2,
-          }}
-        />
-      </div>
+      <StackedImages
+        absolute
+        style={{ width: '140%', maxWidth: '1920px', right: 0, top: 0 }}
+        direction='bottom-left'
+        xMargin='calc(-1 * min(8vw, 40px))'
+        yMargin='calc(min(8vw, 40px))'
+        images={[Image.StaticSomm]}
+      />
     </div>
   </div>
 );
@@ -556,33 +514,18 @@ const InteractiveSommColumn = ({ className }) => (
       className='d-flex justify-content-start align-items-start'
       style={{ flex: 1 }}
     >
-      <div
+      <StackedImages
         style={{
           width: '100%',
           maxWidth: '420px',
           background:
             'linear-gradient(90deg, rgba(242,189,249,1) 0%, rgba(129,129,228,1) 100%)',
-          borderRadius: '3em',
           zIndex: 1,
         }}
-      >
-        <motion.img
-          className='shaded'
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            x: 'calc(min(8vw, 40px))',
-            y: 'calc(min(8vw, 40px))',
-          }}
-          transition={{ duration: 0.3 }}
-          src={Image.InteractiveSomm}
-          style={{
-            width: '100%',
-            borderRadius: '3em',
-            zIndex: 2,
-          }}
-        />
-      </div>
+        xMargin='calc(min(8vw, 40px))'
+        yMargin='calc(min(8vw, 40px))'
+        images={[Image.InteractiveSomm]}
+      />
     </div>
     <ProductHeader className='text-start' title='Interactive'>
       <span>
@@ -685,7 +628,9 @@ function App() {
             >
               <TitleHeading style={{ zIndex: 1 }} />
               <div style={{ width: '6vw' }}></div>
-              <Widget />
+              <motion.div variants={inViewVariants}>
+                <Widget />
+              </motion.div>
 
               {/* <img
                 style={{
@@ -754,9 +699,21 @@ function App() {
                     height: '44px',
                     link: 'https://newcohelsinki.fi',
                   },
-                ].map(({ pLogo, height, link }) => (
+                ].map(({ pLogo, height, link }, i) => (
                   <div style={{ flex: 1 }}>
                     <motion.img
+                      variants={{
+                        offscreen: { y: '10vh', opacity: 0 },
+                        onscreen: {
+                          y: 0,
+                          opacity: 1,
+                          transition: {
+                            duration: 0.5,
+                            delay: 0.3 + i * 0.05,
+                            type: 'tween',
+                          },
+                        },
+                      }}
                       className='mx-5 clickable'
                       src={pLogo}
                       onClick={() => window.open(link, '_blank')}
@@ -847,7 +804,7 @@ function App() {
                           className='position-relative'
                           style={{ marginBottom: '13vh' }}
                         >
-                          <h3>
+                          <h3 variants={inView({ i })}>
                             <span
                               className='text-primary position-absolute'
                               style={{
@@ -886,29 +843,19 @@ function App() {
                       flex: 1,
                     }}
                   >
-                    <div
-                      className='position-absolute'
+                    <StackedImages
                       style={{
-                        borderRadius: '3em',
                         height: '918px',
                         width: '1620px',
                         background:
                           'linear-gradient(90deg, rgba(255,250,252,1) 0%, rgba(255,212,223,1) 100%)',
                       }}
-                    ></div>
-                    {[Image.SS2, Image.SS3].map((ss, i) => (
-                      <img
-                        style={{
-                          width: '1620px',
-                          borderRadius: '3em',
-                          maxWidth: '1620px',
-                          top: 40 * i + 40,
-                          left: 75 * i + 75,
-                        }}
-                        src={ss}
-                        className='shaded position-absolute'
-                      />
-                    ))}
+                      absolute
+                      direction='bottom-right'
+                      yMargin='40px'
+                      xMargin='75px'
+                      images={[Image.SS2, Image.SS3]}
+                    />
                   </div>
                 </div>
               </div>
