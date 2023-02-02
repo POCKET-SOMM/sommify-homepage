@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import { useAnimation, motion, AnimatePresence } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { useEffect, useState } from 'react';
 import { Form, Button, Spinner } from 'react-bootstrap';
 import { CgCheckO } from 'react-icons/cg';
 import colors from '../data/colors';
@@ -15,6 +16,19 @@ export default function ContactUs({ ...props }) {
   const handleContactChange = (e) => setContact(e.target.value);
 
   const [status, setStatus] = useState('IDLE');
+  const controls = useAnimation();
+  const [ref, inView] = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [controls, inView]);
+
+  const variants = {
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.3 } },
+    hidden: { opacity: 0, y: '5vh' },
+  };
 
   const handleSendMessage = () => {
     setStatus('PENDING');
@@ -33,9 +47,13 @@ export default function ContactUs({ ...props }) {
   };
 
   return (
-    <div
+    <motion.div
       id='contact-us'
       className='px-5 d-flex flex-column'
+      ref={ref}
+      animate={controls}
+      initial='hidden'
+      variants={variants}
       style={{
         width: '40%',
         maxWidth: '1240px',
@@ -128,6 +146,6 @@ export default function ContactUs({ ...props }) {
           </AnimatePresence>
         </Form>
       </div>
-    </div>
+    </motion.div>
   );
 }

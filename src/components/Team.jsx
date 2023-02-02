@@ -1,21 +1,10 @@
-import { CgGlobeAlt, CgMail } from 'react-icons/cg';
-import {
-  SiCrunchbase,
-  SiLinkedin,
-  SiMinutemailer,
-  SiTwitter,
-} from 'react-icons/si';
-import { Fade } from 'react-bootstrap';
-import tomasImg from '../assets/team/Tomas Cropped-min.png';
-import jacobImg from '../assets/team/Jacob Cropped-min.png';
-import julieImg from '../assets/team/Julie Cropped-min.png';
-import williamImg from '../assets/team/William Cropped-min.png';
-import jurajImg from '../assets/team/Juraj Cropped-min.png';
+import { CgGlobeAlt } from 'react-icons/cg';
+import { SiCrunchbase, SiLinkedin, SiTwitter } from 'react-icons/si';
 import colors from '../data/colors';
-import { CircleFlag } from 'react-circle-flags';
-import { isMobile } from 'react-device-detect';
 import LoadableImage from './Image';
 import useWindowDimensions from '../hooks';
+import { inViewVariants } from '../data/variants';
+import { motion } from 'framer-motion';
 
 const teamMembers = [
   {
@@ -132,8 +121,20 @@ export const GetToKnowUs = ({ ...props }) => {
   );
 };
 
-const MemberCard = ({ member, width, ...props }) => (
-  <div
+const MemberCard = ({ member, width, i, ...props }) => (
+  <motion.div
+    variants={{
+      offscreen: { y: '10vh', opacity: 0 },
+      onscreen: {
+        y: 0,
+        opacity: 1,
+        transition: {
+          duration: 0.5,
+          delay: 0.3 + i * 0.05,
+          type: 'tween',
+        },
+      },
+    }}
     className='d-flex flex-column shaded'
     style={{
       // border: '1px solid black',
@@ -181,12 +182,14 @@ const MemberCard = ({ member, width, ...props }) => (
         />
       ) : null}
     </span>
-  </div>
+  </motion.div>
 );
 
 const TeamHeading = () => {
   return (
-    <div
+    <motion.div
+      key='team_heading'
+      variants={inViewVariants}
       className='d-flex flex-column justify-content-center align-items-center text-start'
       style={{ flex: 1, float: 'left', paddingBlock: '10vh' }}
     >
@@ -200,7 +203,7 @@ const TeamHeading = () => {
         </h4>
       </div>
       {/* {!(width < 760) && <GetToKnowUs />} */}
-    </div>
+    </motion.div>
   );
 };
 
@@ -231,18 +234,18 @@ export default function Team({ ...props }) {
             boxShadow: '0 8px 6px -6px black',
           }}
         >
-          {teamMembers.map((member) => (
-            <MemberCard width={MEMBER_WIDTH} member={member} />
+          {teamMembers.map((member, i) => (
+            <MemberCard width={MEMBER_WIDTH} member={member} i={i} />
           ))}
         </div>
       </div>
 
       {!(width < 760) && (
-        <div className='d-flex align-items-center' style={{ flex: 1 }}>
+        <motion.div className='d-flex align-items-center' style={{ flex: 1 }}>
           <div style={{ maxWidth: '800px' }}>
             <TeamHeading />
           </div>
-        </div>
+        </motion.div>
       )}
     </div>
   );
