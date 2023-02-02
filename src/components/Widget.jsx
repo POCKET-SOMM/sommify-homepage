@@ -15,6 +15,7 @@ import useWindowDimensions from '../hooks';
 import { isBrowser } from 'react-device-detect';
 // import logo from '../assets/logo/icon_white.svg';
 import logo from '../assets/logo/socials_maroon.svg';
+import { CircleFlag } from 'react-circle-flags';
 
 export const winePlateHeight = 90;
 const SERVER_URL = 'https://pocketsommapi.azurewebsites.net';
@@ -387,7 +388,24 @@ function Widget({ isMobile, screenWidth }) {
                   filterOption={createFilter({ ignoreAccents: false })}
                   openMenuOnClick={false}
                   isMulti={isMulti}
-                  placeholder="Type in what you're eating"
+                  placeholder={
+                    <span
+                      className='position-relative'
+                      style={{ paddingLeft: '1.5em' }}
+                    >
+                      <CircleFlag
+                        style={{
+                          height: '1.2em',
+                          position: 'absolute',
+                          left: 0,
+                          top: 0,
+                          bottom: 0,
+                        }}
+                        countryCode='us'
+                      />{' '}
+                      Type in what you're eating
+                    </span>
+                  }
                   styles={{
                     control: (css, state) => ({
                       ...css,
@@ -399,7 +417,7 @@ function Widget({ isMobile, screenWidth }) {
                       boxShadow: state.isFocused
                         ? '0 0 0 1px ' + colors.primary
                         : 0,
-                      fontSize: '.8em',
+                      fontSize: '.85em',
                       ':active, :hover': {
                         borderColor: colors.primary,
                       },
@@ -407,7 +425,7 @@ function Widget({ isMobile, screenWidth }) {
                     multiValueLabel: (css) => ({
                       ...css,
                       color: 'white',
-                      fontSize:'1.1em'
+                      fontSize: '1.1em',
                     }),
                     multiValue: (css) => ({
                       ...css,
@@ -430,6 +448,7 @@ function Widget({ isMobile, screenWidth }) {
                       return {
                         ...css,
                         flex: '1 1 auto',
+                        // marginLeft: '1.35em',
                         '> div': {
                           width: '100% !important',
                         },
