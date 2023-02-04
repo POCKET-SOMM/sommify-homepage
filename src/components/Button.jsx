@@ -8,7 +8,7 @@ export default function Button({ children, style, className, ...props }) {
   return (
     <div
       {...props}
-      className={'clickable position-relative ' + className}
+      className={'clickable position-relative font-weight-600 ' + className}
       style={{
         // color: colors.primary,
         color: 'white',

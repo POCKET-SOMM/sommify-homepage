@@ -197,7 +197,7 @@ const TeamHeading = () => {
         <h1 style={{ fontSize: '3.2em' }} className='d-block font-weight-700'>
           Meet the team
         </h1>
-        <h4 style={{ fontWeight: 200 }}>
+        <h4 style={{ fontWeight: 500 }}>
           Our core team is made-for-measure to change the wine industry with
           strong investor backing.
         </h4>

@@ -272,7 +272,7 @@ function Widget({ isMobile, screenWidth }) {
 
   return (
     <div
-      className='shaded'
+      className='shaded position-relative'
       style={{
         width: isBrowser ? WIDGET_WIDTH : '85vw',
         background: 'white',
