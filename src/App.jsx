@@ -32,6 +32,7 @@ import {
   inViewVariants,
   inViewVariantsX,
 } from './data/variants';
+import ScrollBadge from './components/ScrollBadge';
 // import { staticFile, Video } from 'remotion';
 
 const MARGIN = '20vh';
@@ -83,7 +84,7 @@ const NavButton = ({ nav, nextScroll, ...props }) => {
       onClick={() => window.scrollTo(0, nav.scroll - 0.1 * height, 'smooth')}
       style={{
         height: '100%',
-        fontWeight: 400,
+        fontWeight: 600,
         fontSize: isBrowser ? '1em' : '.65em',
         color: active ? colors.primary : 'black',
         position: 'relative',
@@ -129,7 +130,9 @@ const Navigation = ({ ...props }) => {
       <CustomView condition={width < 1300}>
         <motion.div
           animate={{
-            background: headerScrolled ? 'rgb(256,256,256)' : rgb(colors.beige),
+            background: headerScrolled
+              ? 'rgb(256,256,256)'
+              : 'rgba(0, 0, 0, 0)',
             color: headerScrolled ? 'rgb(0,0,0)' : 'rgb(256,256,256)',
           }}
           className={
@@ -151,16 +154,22 @@ const Navigation = ({ ...props }) => {
         </motion.div>
       </CustomView>
       <CustomView condition={width >= 1300}>
-        <div
+        <motion.div
           className='d-flex justify-content-center align-items-center'
           transition={{ delay: 0.3 }}
+          animate={{
+            background: headerScrolled
+              ? 'rgba(256,256,256, 1)'
+              : 'rgba(256,256,256, 0)',
+            transition: { type: 'tween' },
+            // color: headerScrolled ? 'rgb(0,0,0)' : 'rgb(256,256,256)',
+          }}
           style={{
             width: '100vw',
             height: NAV_HEIGHT,
             position: 'fixed',
             top: 0,
             zIndex: 5,
-            background: 'white',
           }}
         >
           <motion.div
@@ -182,7 +191,7 @@ const Navigation = ({ ...props }) => {
               <AnimatePresence>
                 <img
                   style={{
-                    height: '2em',
+                    height: '1.5em',
                     paddingLeft: '4vw',
                     paddingRight: '1vw',
                     position: 'absolute',
@@ -219,7 +228,7 @@ const Navigation = ({ ...props }) => {
               </AnimatePresence>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       </CustomView>
     </>
   );
@@ -275,12 +284,12 @@ const TitleHeading = ({ ...props }) => {
     <motion.div
       {...props}
       variants={inViewVariantsX}
-      className='d-flex justify-content-center align-items-center'
+      className='d-flex justify-content-end align-items-center'
     >
       <div>
         {/* <img style={{ height: '8vh' }} src={Logo.FullWhite} /> */}
         {/* <img src={Icon.Sommelier} style={{width:'300px'}} /> */}
-        <h1
+        {/* <h1
           className='font-weight-700 mb-0'
           style={{ fontSize: '3.2em', lineHeight: '1.2em' }}
         >
@@ -290,10 +299,21 @@ const TitleHeading = ({ ...props }) => {
           </span>{' '}
           <br />
           sommelier.
-        </h1>
+        </h1> */}
         <br />
-        <h3 style={{ fontSize: '1.2em', fontWeight: 300 }}>
-          making quality wine-food pairing <br /> the standard
+        <h6
+          className='font-weight-300'
+          style={{
+            fontSize: '1em',
+            letterSpacing: '.025em',
+          }}
+        >
+          THE ARTIFICIAL INTELLIGENCE SOMMELIER
+        </h6>
+        <h3 style={{ fontSize: '3.4em', fontWeight: 700 }}>
+          making <span className=''>pairing</span>
+          <br />
+          the <span className='text-fancy'>standard.</span>
         </h3>
         <div
           className={`w-100 py-4 d-flex justify-content-${
@@ -594,8 +614,9 @@ function App() {
             <div className='d-flex flex-column' style={{ height: '100%' }}>
               <div
                 style={{ flex: 1 }}
-                className='d-flex justify-content-center align-items-center'
+                className='d-flex justify-content-center align-items-center position-relative'
               >
+                <ScrollBadge top={25} popUpDisabled />
                 <Widget />
               </div>
             </div>
@@ -620,43 +641,37 @@ function App() {
               style={{
                 // marginTop: NAV_HEIGHT,
                 color: 'black',
-                background: colors.beige,
+                // background: colors.beige,
                 minHeight: '80vh',
-                paddingInline: '15vw',
+                paddingInline: '0vw',
+                background:
+                  'linear-gradient(253deg, rgba(240,240,240,1) 0%, rgba(255,255,255,1) 41%, rgba(248,248,248,1) 100%)',
               }}
               className='d-flex justify-content-center align-items-center position-relative text-end'
             >
-              <TitleHeading style={{ zIndex: 1 }} />
-              <div style={{ width: '6vw' }}></div>
-              <motion.div variants={inViewVariants}>
+              <div style={{ flex: 1 }}>
+                <TitleHeading style={{ zIndex: 1 }} />
+              </div>
+              <div style={{ width: '6vw' }} />
+              <motion.div
+                {...inViewProps}
+                style={{ flex: 1 }}
+                variants={inViewVariants}
+                className='position-relative'
+              >
+                <ScrollBadge />
                 <Widget />
               </motion.div>
-
-              {/* <img
-                style={{
-                  opacity: .95,
-                  position: 'absolute',
-                  left: 0,
-                  right: 0,
-                  width: '1620px',
-                  height: '50vh',
-                  objectFit: 'cover',
-                  margin: 'auto',
-                  borderRadius: '4em',
-                }}
-                src={Image.Vineyard}
-              /> */}
             </Section>
 
             <Section
               className='d-flex flex-column py-4'
               style={{
-                background: '#ffe6cc',
-                // 'linear-gradient(90deg, rgba(129,129,228,1) 0%, rgba(104,104,193,1) 50%, rgba(129,129,228,1) 100%)',
+                background: '#e8e5e2',
                 minHeight: '20vh',
               }}
             >
-              <h5 className='d-flex justify-content-center align-items-center font-weight-400 mb-5'>
+              <h5 className='d-flex justify-content-center align-items-center font-weight-600 mb-5'>
                 SUPPORTED BY
               </h5>
               <div
@@ -736,7 +751,12 @@ function App() {
 
             <Section
               className='text-center position-relative'
-              style={{ background: '#fff9f2', minHeight: '60vh' }}
+              style={{
+                // background: '#fff9f2',
+                background:
+                  'linear-gradient(120deg, rgba(237,233,227,1) 0%, rgba(255,253,250,1) 65%, rgba(246,239,231,1) 100%)',
+                minHeight: '60vh',
+              }}
             >
               <Product />
             </Section>

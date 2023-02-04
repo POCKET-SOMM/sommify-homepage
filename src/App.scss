@@ -16,6 +16,14 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
+.popover-arrow::after {
+  border: none;
+}
+
+.popover-arrow::before {
+  opacity: 0;
+}
+
 .shaded {
   box-shadow: 0em 0em 4em -0.4em #0000001a;
 }
