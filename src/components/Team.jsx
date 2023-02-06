@@ -5,6 +5,7 @@ import LoadableImage from './Image';
 import useWindowDimensions from '../hooks';
 import { inViewVariants } from '../data/variants';
 import { motion } from 'framer-motion';
+import SimpleBar from 'simplebar-react';
 
 const teamMembers = [
   {
@@ -50,77 +51,6 @@ const teamMembers = [
   },
 ];
 
-export const GetToKnowUs = ({ ...props }) => {
-  const ContactRow = ({ icon, title, content }) => (
-    <div
-      className='d-flex flex-column text-center justify-content-center align-items-center my-4'
-      style={{ flex: 1, fontSize: '1.1rem' }}
-    >
-      <div className='d-flex justify-content-center align-items-center rounded-circle'>
-        {icon}
-      </div>
-      <div className='d-flex flex-column mx-3'>
-        <div
-          className='d-flex align-items-center'
-          style={{ fontWeight: 600, flex: 1 }}
-        >
-          {title}
-        </div>
-        {content && <div style={{ flex: 1 }}>{content}</div>}
-      </div>
-    </div>
-  );
-
-  return (
-    <div
-      className='text-center overflow-hidden'
-      style={{
-        width: '100%',
-      }}
-    >
-      <div className={`w-100 d-flex justify-content-center`}>
-        <ContactRow
-          // content={'jacob@sommify.ai'}
-          icon={<SiTwitter size='60%' />}
-        />
-        <ContactRow
-          title={
-            <span>
-              <a
-                className='clickable'
-                onClick={() => {
-                  window.open('https://www.linkedin.com/company/sommifyai');
-                }}
-              >
-                Linkedin
-              </a>
-            </span>
-          }
-          // content={'partner@sommify.ai'}
-          icon={<SiLinkedin size='60%' />}
-        />
-        <ContactRow
-          title={
-            <span>
-              <a
-                className='clickable'
-                onClick={() => {
-                  window.open(
-                    'https://www.crunchbase.com/organization/sommifyai'
-                  );
-                }}
-              >
-                Crunchbase
-              </a>
-            </span>
-          }
-          icon={<SiCrunchbase size='60%' />}
-        />
-      </div>
-    </div>
-  );
-};
-
 const MemberCard = ({ member, width, i, ...props }) => (
   <motion.div
     variants={{
@@ -135,7 +65,7 @@ const MemberCard = ({ member, width, i, ...props }) => (
         },
       },
     }}
-    className='d-flex flex-column shaded'
+    className='d-flex flex-column'
     style={{
       // border: '1px solid black',
       backgroundColor: 'white',
@@ -145,13 +75,17 @@ const MemberCard = ({ member, width, i, ...props }) => (
       overflow: 'hidden',
       width,
       marginInline: '10px',
+      boxShadow: '2px 2px 5px -2px #00000020',
     }}
   >
-    <div className='w-100 h-100' style={{ background: member.bg, height: '' }}>
+    <div
+      className='w-100 h-100 user-select-none'
+      style={{ background: member.bg, height: '' }}
+    >
       <div style={{ marginTop: '100%', float: 'left' }}></div>
       <LoadableImage
         style={{ width: '100%', float: 'left' }}
-        alt={`${member.image}`}
+        alt={`${member.name}_photo`}
         src={member.image}
       />
     </div>
@@ -218,12 +152,12 @@ export default function Team({ ...props }) {
     >
       {width < 760 && <TeamHeading />}
 
-      <div
-        className='p-5 no-scrollbar'
+      {/* <div
+        className='p-5'
         style={{
           flex: 1,
           overflow: 'auto',
-          overflowY: 'hidden',
+          overflowY: 'scroll',
           direction: 'rtl',
           // boxShadow: 'inset 5px 5px 5px black'
         }}
@@ -238,7 +172,30 @@ export default function Team({ ...props }) {
             <MemberCard width={MEMBER_WIDTH} member={member} i={i} />
           ))}
         </div>
-      </div>
+      </div> */}
+
+      <SimpleBar
+        style={{
+          flex: 1,
+          direction: 'rtl',
+        }}
+        autoHide={false}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'nowrap',
+            padding: '20px 0',
+            overflowX: 'auto',
+            // webkitOverflowScrolling: 'touch',
+            width: 5 * (MEMBER_WIDTH + 20) + 'px',
+          }}
+        >
+          {teamMembers.map((member, i) => (
+            <MemberCard width={MEMBER_WIDTH} member={member} i={i} />
+          ))}
+        </div>
+      </SimpleBar>
 
       {!(width < 760) && (
         <motion.div className='d-flex align-items-center' style={{ flex: 1 }}>

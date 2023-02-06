@@ -1,18 +1,9 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import './App.scss';
-import Team, { GetToKnowUs } from './components/Team';
+import Team from './components/Team';
 import Widget from './components/Widget';
 import colors from './data/colors';
-import {
-  isMobile,
-  MobileView,
-  BrowserView,
-  CustomView,
-  isBrowser,
-} from 'react-device-detect';
-import wall from './assets/wall_bg.jpg';
-import kitchen from './assets/background/kitchen.jpg';
-// const kitchen = React.lazy(() => import('./assets/background/kitchen.jpg'));
+import { CustomView, isBrowser } from 'react-device-detect';
 
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
@@ -33,6 +24,7 @@ import {
   inViewVariantsX,
 } from './data/variants';
 import ScrollBadge from './components/ScrollBadge';
+import JumpCard from './components/JumpCard';
 // import { staticFile, Video } from 'remotion';
 
 const MARGIN = '20vh';
@@ -433,46 +425,31 @@ const WhatWeDo = () => (
     <div
       className='d-flex flex-column'
       style={{
-        paddingInline: '6vw',
-        paddingBlock: '8vh',
-        borderRadius: '3em',
         marginBottom: 'auto',
         maxWidth: '1920px',
-        width: '80%',
+        width: '90%',
         margin: 'auto',
       }}
     >
       <div className='d-flex align-items-start'>
         {[
           {
-            label: 'accessible',
+            title: 'accessible',
             icon: Icon.Accessible,
-            subtitle: 'quality pairings made accessible for anyone anywhere',
+            text: 'quality pairings made accessible for anyone anywhere',
           },
           {
-            label: 'world-class',
+            title: 'world-class',
             icon: Icon.WorldClass,
-            subtitle:
-              'tailored to make world-class pairings by a world-class sommelier',
+            text: 'tailored to make world-class pairings by a world-class sommelier',
           },
           {
-            label: 'refreshing',
+            title: 'refreshing',
             icon: Icon.Refreshing,
-            subtitle:
-              'bringing a new approach for the digitally native younger consumer',
+            text: 'bringing a new approach for the digitally native younger consumer',
           },
-        ].map((emblem) => (
-          <div
-            key={emblem.label}
-            style={{ flex: 1 }}
-            className='d-flex justify-content-center'
-          >
-            <img src={emblem.icon} width={'140px'} />
-            <div style={{ paddingTop: '20px' }} className='text-start'>
-              <h4 className='mb-2 font-weight-400'>{emblem.label}</h4>
-              <h5 className='font-weight-300'>{emblem.subtitle}</h5>
-            </div>
-          </div>
+        ].map((jcProps) => (
+          <JumpCard {...jcProps} />
         ))}
       </div>
     </div>
