@@ -20,7 +20,7 @@ export default function ScrollBadge({
           width: 120,
         }}
       ></div>
-      <OverlayTrigger
+      {/* <OverlayTrigger
         overlay={
           popUpDisabled ? (
             <></>
@@ -35,32 +35,31 @@ export default function ScrollBadge({
               }}
             >
               <span>
-                Simple algorithm for the purpose of this demo, not the AI we use
-                for the product.
+                Try a BETA version of our AI used for our product.
               </span>
             </Popover>
           )
         }
+      > */}
+      <div
+        className='user-select-none d-inline-flex justify-content-center align-items-center shaded position-absolute font-weight-500'
+        style={{
+          top,
+          left: -10,
+          borderBottomRightRadius: 20,
+          borderTopRightRadius: 20,
+          borderBottomLeftRadius: 10,
+          background: colors.blue,
+          color: 'white',
+          fontSize: '0.8em',
+          height: 35,
+          width: 120,
+          zIndex: 3,
+        }}
       >
-        <div
-          className='user-select-none clickable d-inline-flex justify-content-center align-items-center shaded position-absolute font-weight-500'
-          style={{
-            top,
-            left: -10,
-            borderBottomRightRadius: 20,
-            borderTopRightRadius: 20,
-            borderBottomLeftRadius: 10,
-            background: colors.blue,
-            color: 'white',
-            fontSize: '0.8em',
-            height: 35,
-            width: 120,
-            zIndex: 3,
-          }}
-        >
-          <b>Try</b>&nbsp;the AI
-        </div>
-      </OverlayTrigger>
+        <b>AI</b>&nbsp;in beta
+      </div>
+      {/* </OverlayTrigger> */}
     </>
   );
 }
