@@ -58,7 +58,7 @@ export default function ScrollBadge({
             zIndex: 3,
           }}
         >
-          <b>Demo</b>&nbsp;not AI
+          <b>Try</b>&nbsp;the AI
         </div>
       </OverlayTrigger>
     </>

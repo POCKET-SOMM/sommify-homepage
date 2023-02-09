@@ -423,7 +423,7 @@ const Footer = () => (
 const WhatWeDo = () => (
   <>
     <div
-      className='d-flex flex-column'
+      className='d-flex flex-column py-4 pb-5'
       style={{
         marginBottom: 'auto',
         maxWidth: '1920px',

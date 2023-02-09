@@ -4,22 +4,9 @@ import { CircleFlag } from 'react-circle-flags';
 import countries from '../data/countries';
 import colors from '../data/colors';
 import { isBrowser } from 'react-device-detect';
+import placeholder from '../assets/bottle.png';
 
 const tastes = ['acidic', 'bodied', 'sweet', 'tannic'];
-
-const qualities = {
-  bodied: 'Bodied',
-  tannic: 'Tannic',
-  sweet: 'Sweet',
-  acid: 'Crisp',
-};
-
-const qualitiesB = {
-  bodied: 'Light',
-  tannic: 'Smooth',
-  sweet: 'Dry',
-  acid: 'Soft',
-};
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -38,36 +25,35 @@ const imageLink = (link) => {
 };
 
 const wineOrigin = (wine) => {
-  let reg_list = stringToList(wine['region']);
-  let index = reg_list.indexOf(wine['country']);
-  if (index > -1) {
-    reg_list.splice(index, 1);
-  }
   return (
-    <span>
+    <>
       <CircleFlag
-        countryCode={countries[wine['country']]?.toLowerCase()}
-        style={{ marginRight: '5px', height: '1em' }}
+        countryCode={countries[wine.country]?.toLowerCase()}
+        height='11'
+        style={{ marginRight: '4px' }}
       />
-      {reg_list.join(', ')} {wine['year'] ? wine['year'] : ''}
-    </span>
+      {wine.region}
+      {wine.subregion ? ', ' + wine.subregion : ''} {wine.year ? wine.year : ''}
+    </>
   );
 };
 
 const wineTypeRow = (wine) => {
-  return capitalizeFirstLetter(wine['type']);
+  return wine?.type;
+
+  // if (wine.typeL1 !== undefined) {
+  //   return ['typeL1', 'typeL2', 'typeL3']
+  //     .filter((t) => wine[t])
+  //     .map((type) => capitalizeFirstLetter(wine[type]))
+  //     .join(' • ');
+  // }
+  // return capitalizeFirstLetter(wine.type);
 };
 
 const wineQualsCollapsed = (wine) => {
-  return Object.keys(qualities)
-    .map((qual) =>
-      wine[qual] >= 3
-        ? `${qualities[qual]}`
-        : wine[qual] === 0
-        ? `${qualitiesB[qual]}`
-        : ''
-    )
-    .filter((e) => e)
+  return tastes
+    .map((taste) => wine[taste + 'Taste'])
+    .filter((taste) => taste)
     .join(' • ');
 };
 
@@ -81,8 +67,8 @@ const Row = ({ children }) => (
       textOverflow: 'ellipsis',
       // display: 'flex',
       alignItems: 'center',
-      color: '#202020',
-      fontSize: '0.8em',
+      color: '#707070',
+      fontSize: '0.75em',
       lineHeight: '1.1em',
     }}
   >
@@ -101,14 +87,21 @@ export default function WineContent({ wine, hovered = false, ...props }) {
       <div className='center-content'>
         <Image
           alt='wine-img'
-          className='nodrag mx-2'
+          className='nodrag py-2'
           style={{
-            transform: hovered ? 'scale(1.1)' : '',
-            transition: 'transform 0.3s',
+            float: 'left',
             display: 'inline-block',
-            height: 'calc(4em)',
+            paddingRight: '6px',
+            transform: hovered ? 'scale(1.05)' : '',
+            transition: 'transform 0.3s',
+            height: 'calc(4.3em)',
           }}
-          src={imageLink(wine.link)}
+          height='100%'
+          src={imageLink(wine.url)}
+          onError={(e) => {
+            e.target.onError = null;
+            e.target.src = '';
+          }}
         />
       </div>
       <div
@@ -122,7 +115,7 @@ export default function WineContent({ wine, hovered = false, ...props }) {
           style={{ maxWidth: isBrowser ? '300px' : '50vw', fontSize: '0.9em' }}
           className='d-block w-100 text-start hover-underline text-truncate'
         >
-          <b>{wine.name.replaceAll('-', ' ')}</b>
+          <b>{wine.title.replaceAll('-', ' ')}</b>
         </span>
         <Row>{wineOrigin(wine)}</Row>
         <Row>{wineTypeRow(wine)}</Row>

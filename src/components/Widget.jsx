@@ -16,17 +16,15 @@ import { isBrowser } from 'react-device-detect';
 // import logo from '../assets/logo/icon_white.svg';
 import logo from '../assets/logo/socials_maroon.svg';
 import { CircleFlag } from 'react-circle-flags';
+import _ from 'lodash';
 
-export const winePlateHeight = 90;
+// export const winePlateHeight = 200;
 const SERVER_URL = 'https://pocketsommapi.azurewebsites.net';
-
-const initialWines = [[], [], []];
-const initialPriceRange = 1;
 
 function WineDisplay({ wines }) {
   return (
     <div id='wine-display' style={{ width: '100%' }}>
-      {wines ? (
+      {wines?.length ? (
         wines.map((wine, i) => (
           <WinePlate key={`wine_display_${i}`} wine={wine} />
         ))
@@ -43,12 +41,10 @@ function Widget({ isMobile, screenWidth }) {
   const [pair, setPair] = useState('');
   const [recipe, setRecipe] = useState({});
   const [wining, setWining] = useState(false);
-  const [allWines, setAllWines] = useState(initialWines);
-  const [displayedWines, setDisplayedWines] = useState(
-    initialWines[initialPriceRange]
-  );
+  const [allWines, setAllWines] = useState(null);
+  const [displayedWines, setDisplayedWines] = useState(null);
   const [searchErr, setSearchErr] = useState(false);
-  const [priceRange, setPriceRange] = useState(initialPriceRange);
+  const [pairingType, setPairingType] = useState('traditional');
   const [searchVisible, setSearchVisible] = useState(true);
 
   const [selectedTags, setSelectedTags] = useState([]);
@@ -89,37 +85,29 @@ function Widget({ isMobile, screenWidth }) {
       });
   }, []);
 
-  const loadWines = (data) => {
-    let wines = data.wines;
+  const loadWines = (wines) => {
+    setRecipe({
+      title: selectedTags.map((m) => m.label).join(', '),
+    });
 
-    if (data.recipe) {
-      setRecipe(data.recipe);
-    } else {
-      setRecipe({
-        title: selectedTags.map((m) => m.label).join(', '),
-      });
-    }
+    setAllWines(wines);
+    setDisplayedWines(wines[pairingType]);
 
-    if (wines.length === 3) {
-      // console.log(wines);
-      wines = wines.map((wine) =>
-        wine.filter((w) => !w.PACKAGING.includes('box'))
-      );
-      setAllWines(wines);
-      setDisplayedWines(wines[priceRange]);
-    } else {
-      setAllWines([]);
-      setDisplayedWines(wines);
-    }
-
-    const IMAGES = wines.flat().map((w) => imageLink(w.link));
+    let IMAGES = wines['traditional'].concat(
+      wines['premium'],
+      wines['adventurous']
+    );
+    IMAGES = IMAGES.map((w) => imageLink(w.url));
     Promise.all(IMAGES.map((image) => (image ? loadImage(image) : null)))
       .then(() => {
         setWining(false);
-        // data.recipe && setSearchVisible(false)
         setSearchVisible(false);
       })
-      .catch((err) => console.log('Failed to load images', err));
+      .catch((err) => {
+        console.log('Failed to load images', err);
+        setWining(false);
+        setSearchVisible(false);
+      });
   };
 
   const imageLink = (link) => {
@@ -169,29 +157,31 @@ function Widget({ isMobile, screenWidth }) {
     }
 
     setWining(true);
-    var data, endpoint;
+    let tags = payload.map((p) => p.value);
+    setPair(tags);
 
-    if (isLink(payload[0].value)) {
-      let link = payload[0].value;
-      setSelectedTags([{ value: link, label: link }]);
-      setPair(link);
-      data = { link: link };
-      endpoint = 'link2wine';
-    } else {
-      let tags = payload.map((p) => p.value);
-      setPair(tags);
-      data = { tags: tags };
-      endpoint = 'tags2wine';
-    }
+    // if (isLink(payload[0].value)) {
+    //   let link = payload[0].value;
+    //   setSelectedTags([{ value: link, label: link }]);
+    //   setPair(link);
+    //   data = { link: link };
+    //   endpoint = 'link2wine';
+    // } else {
+    // let tags = payload.map((p) => p.value);
+    // setPair(tags);
+    // data = { tags: tags };
+    // endpoint = 'tags2wine';
+    // }
 
     const options = {
       method: 'POST',
-      url: `${SERVER_URL}/api/v1/${endpoint}`,
-      headers: { 'Content-Type': 'application/json' },
-      data: data,
+      url: `https://api.sommify.ai/a/sommelier/v1/tag/categorized-matches`,
+      headers: {
+        'Content-Type': 'application/json',
+        'x-user-role': 'sommelier',
+      },
+      data: { tags, limitPerCategory: 3 },
     };
-
-    // console.log(data);
 
     axios
       .request(options)
@@ -206,12 +196,7 @@ function Widget({ isMobile, screenWidth }) {
             ? ''
             : error.message
         );
-        if (error.response) {
-          // console.log(error.response.data);
-          loadWines(error.response.data);
-        } else {
-          setWining(false);
-        }
+        setWining(false);
       });
   };
 
@@ -299,17 +284,6 @@ function Widget({ isMobile, screenWidth }) {
                 height: '3em',
               }}
             />
-            {/* <div
-              className='rounded-circle d-flex justify-content-center align-items-center user-select-none'
-              style={{
-                width: '2.4em',
-                height: '2.4em',
-                marginBottom: '1.4em',
-                background: colors.primary,
-              }}
-            >
-              <img src={logo} style={{ height: '80%', marginRight: '.3em' }} />
-            </div> */}
           </div>
           <div
             id='body-query'
@@ -474,7 +448,7 @@ function Widget({ isMobile, screenWidth }) {
           </div>
         </div>
         <AnimatePresence>
-          {wining || allWines.flat().length === 0 ? null : (
+          {wining || allWines === null ? null : (
             <motion.div
               animate={{ opacity: !wining && !searchErr ? 1 : 0 }}
               className='mt-2'
@@ -485,23 +459,65 @@ function Widget({ isMobile, screenWidth }) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 height: '2.4em',
+                fontSize: '0.8em',
               }}
             >
-              {[0, 1, 2].map((level) => (
+              {['traditional', 'premium', 'adventurous'].map((type) => (
+                <motion.div
+                  animate={{
+                    opacity: allWines === null ? 0 : 1,
+                    color:
+                      type === pairingType
+                        ? colors.primaryRgb
+                        : 'rgb(200,200,200)',
+                    background: type === pairingType ? 'rgb(250,250,250)' : '',
+                  }}
+                  onClick={() => {
+                    setPairingType(type);
+                    console.log(displayedWines);
+                    setDisplayedWines(allWines[type]);
+                  }}
+                  whileHover={{ background: 'rgb(250,250,250)' }}
+                  key={type + '_button'}
+                  disabled={allWines === null}
+                  size='sm'
+                  variant='outline-danger'
+                  style={{
+                    borderRadius: '.5vw .5vw 0 0',
+                  }}
+                  className='d-flex justify-content-center align-items-center clickable flex-grow-1 h-100 position-relative'
+                >
+                  {type}
+                  {type === pairingType && (
+                    <motion.div
+                      style={{
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        height: '1px',
+                        background: colors.primary,
+                      }}
+                      layoutId='underline'
+                    />
+                  )}
+                </motion.div>
+              ))}
+              {/* {[0, 1, 2].map((level) => (
                 <motion.div
                   animate={{
                     opacity: allWines.length === 0 ? 0 : 1,
                     color:
-                      priceRange === level
+                      pairingType === level
                         ? colors.primaryRgb
                         : 'rgb(200,200,200)',
-                    background: priceRange === level ? 'rgb(250,250,250)' : '',
+                    background: pairingType === level ? 'rgb(250,250,250)' : '',
                   }}
                   whileHover={{ background: 'rgb(250,250,250)' }}
                   key={level}
                   disabled={allWines.length === 0}
                   onClick={() => {
-                    setPriceRange(level);
+                    setPairingType(level);
                     setDisplayedWines(allWines[level]);
                   }}
                   size='sm'
@@ -518,7 +534,7 @@ function Widget({ isMobile, screenWidth }) {
                   <BiDollar
                     style={{ height: '1.6em', opacity: level < 2 ? 0.35 : 1 }}
                   />
-                  {priceRange === level && (
+                  {pairingType === level && (
                     <motion.div
                       style={{
                         position: 'absolute',
@@ -532,7 +548,7 @@ function Widget({ isMobile, screenWidth }) {
                     />
                   )}
                 </motion.div>
-              ))}
+              ))} */}
             </motion.div>
           )}
         </AnimatePresence>
@@ -548,14 +564,16 @@ function Widget({ isMobile, screenWidth }) {
             overflowY: 'auto',
             overflowX: 'hidden',
             height:
-              displayedWines.length && !wining ? `calc(4 * 5.5em)` : '0px',
+              displayedWines?.length && !wining ? `calc(3 * 6.25em)` : '0px',
             overscrollBehavior: 'contain',
           }}
         >
-          {[0, 1, 2].map((e) => (
-            <Fade key={`${e}_display`} in={!wining && priceRange === e}>
+          {['traditional', 'premium', 'adventurous'].map((type, i) => (
+            <Fade key={`${i}_display`} in={!wining && pairingType === type}>
               <div
-                style={{ display: !wining && priceRange === e ? '' : 'none' }}
+                style={{
+                  display: !wining && pairingType === type ? '' : 'none',
+                }}
               >
                 <WineDisplay wines={displayedWines} />
               </div>
