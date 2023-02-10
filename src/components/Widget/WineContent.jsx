@@ -41,7 +41,10 @@ const wineOrigin = (wine) => {
 };
 
 const wineTypeRow = (wine) => {
-  return capitalizeFirstLetter(wine?.type);
+  return [
+    capitalizeFirstLetter(wine?.type),
+    ...wine.grapes?.map((grape) => capitalizeFirstLetter(grape)),
+  ].join(', ');
 
   // if (wine.typeL1 !== undefined) {
   //   return ['typeL1', 'typeL2', 'typeL3']
