@@ -1,14 +1,16 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
 import { CircleFlag } from 'react-circle-flags';
-import countries from '../data/countries';
-import colors from '../data/colors';
+import countries from '../../data/countries';
 import { isBrowser } from 'react-device-detect';
-import placeholder from '../assets/bottle.png';
+import placeholder from '../../assets/bottle.png';
 
 const tastes = ['acidic', 'bodied', 'sweet', 'tannic'];
 
 function capitalizeFirstLetter(string) {
+  if (!string) {
+    return string;
+  }
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
@@ -39,7 +41,7 @@ const wineOrigin = (wine) => {
 };
 
 const wineTypeRow = (wine) => {
-  return wine?.type;
+  return capitalizeFirstLetter(wine?.type);
 
   // if (wine.typeL1 !== undefined) {
   //   return ['typeL1', 'typeL2', 'typeL3']
@@ -94,13 +96,13 @@ export default function WineContent({ wine, hovered = false, ...props }) {
             paddingRight: '6px',
             transform: hovered ? 'scale(1.05)' : '',
             transition: 'transform 0.3s',
-            height: 'calc(4.3em)',
+            maxHeight: 'calc(4.3em)',
           }}
-          height='100%'
+          // height='100%'
           src={imageLink(wine.url)}
           onError={(e) => {
             e.target.onError = null;
-            e.target.src = '';
+            e.target.src = placeholder;
           }}
         />
       </div>
@@ -112,10 +114,10 @@ export default function WineContent({ wine, hovered = false, ...props }) {
         }}
       >
         <span
-          style={{ maxWidth: isBrowser ? '300px' : '50vw', fontSize: '0.9em' }}
-          className='d-block w-100 text-start hover-underline text-truncate'
+          style={{ maxWidth: isBrowser ? '300px' : '50vw', fontSize: '0.8em' }}
+          className='d-block w-100 text-start hover-underline text-truncate font-weight-600'
         >
-          <b>{wine.title.replaceAll('-', ' ')}</b>
+          {wine.title.replaceAll('-', ' ')}
         </span>
         <Row>{wineOrigin(wine)}</Row>
         <Row>{wineTypeRow(wine)}</Row>

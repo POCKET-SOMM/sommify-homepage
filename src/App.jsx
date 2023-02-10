@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import Team from './components/Team';
-import Widget from './components/Widget';
+import Widget from './components/Widget/Widget';
 import colors from './data/colors';
 import { CustomView, isBrowser } from 'react-device-detect';
 

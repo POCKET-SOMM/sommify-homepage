@@ -1,39 +1,27 @@
 import { Button, Fade, ButtonGroup, Form, Spinner } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { CgClose } from 'react-icons/cg';
+import { CgArrowLeft, CgClose } from 'react-icons/cg';
 import { BiDollar } from 'react-icons/bi';
 import { createFilter } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import CustomOption from './CustomOption';
 import CustomMenuList from './CustomMenuList';
 import WinePlate from './WinePlate';
-import colors from '../data/colors';
-import wines from '../data/wines';
+import colors from '../../data/colors';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
-import useWindowDimensions from '../hooks';
+import useWindowDimensions from '../../hooks';
 import { isBrowser } from 'react-device-detect';
-// import logo from '../assets/logo/icon_white.svg';
-import logo from '../assets/logo/socials_maroon.svg';
+import logo from '../../assets/logo/socials_maroon.svg';
 import { CircleFlag } from 'react-circle-flags';
 import _ from 'lodash';
+import CustomPlaceholder from './CustomPlaceholder';
+import CustomValueContainer from './CustomValueContainer';
+import CustomInput from './CustomInput';
 
-// export const winePlateHeight = 200;
-const SERVER_URL = 'https://pocketsommapi.azurewebsites.net';
-
-function WineDisplay({ wines }) {
-  return (
-    <div id='wine-display' style={{ width: '100%' }}>
-      {wines?.length ? (
-        wines.map((wine, i) => (
-          <WinePlate key={`wine_display_${i}`} wine={wine} />
-        ))
-      ) : (
-        <span>No recommendations in this price range.</span>
-      )}
-    </div>
-  );
-}
+import AdventurousIcon from '../../assets/icons/adventurous.png';
+import PremiumIcon from '../../assets/icons/premium.png';
+// import TraditionalIcon from '../../assets/icons/wine.png';
 
 function Widget({ isMobile, screenWidth }) {
   const { width, height } = useWindowDimensions();
@@ -309,15 +297,27 @@ function Widget({ isMobile, screenWidth }) {
                 )}
               </h5>
             </motion.div>
-
-            <Fade in={!searchVisible}>
-              <div
+            {!searchVisible && (
+              <motion.div
+                key='recipe-title'
+                className='d-flex align-items-center'
                 style={{
-                  display: !searchVisible ? 'flex' : 'none',
-                  height: '53px',
-                  alignItems: 'center',
+                  height: '3.2rem',
                 }}
               >
+                <motion.div
+                  className='rounded-circle p-2 d-flex justify-content-center align-items-center shaded clickable'
+                  style={{ marginRight: '10px', background: '#f8f8f8' }}
+                  animate={{ background: '#fafafa', color: '#aaa' }}
+                  whileHover={{ background: '#fff', color: '#111' }}
+                  onClick={() => {
+                    setSearchVisible(true);
+                    setAllWines(null);
+                    setDisplayedWines(null);
+                  }}
+                >
+                  <CgClose />
+                </motion.div>
                 <span
                   style={{
                     textAlign: 'start',
@@ -327,9 +327,9 @@ function Widget({ isMobile, screenWidth }) {
                     float: 'left',
                   }}
                 >
-                  <b>{recipe['title'] ? recipe['title'].toUpperCase() : ''}</b>
+                  <b>{recipe['title']?.toUpperCase()}</b>
                 </span>
-                <CgClose
+                {/* <CgClose
                   className='clickable nodrag'
                   style={{ marginLeft: '5px' }}
                   size={20}
@@ -337,14 +337,14 @@ function Widget({ isMobile, screenWidth }) {
                   onClick={() => {
                     setSearchVisible(true);
                   }}
-                />
-              </div>
-            </Fade>
+                /> */}
+              </motion.div>
+            )}
 
-            <Fade in={searchVisible}>
-              <div
+            {searchVisible && (
+              <motion.div
+                key='recipe-select'
                 style={{
-                  display: searchVisible ? '' : 'none',
                   position: 'relative',
                   fontSize: '1rem',
                 }}
@@ -361,7 +361,7 @@ function Widget({ isMobile, screenWidth }) {
                   classNamePrefix={`clickable custom-select`}
                   filterOption={createFilter({ ignoreAccents: false })}
                   openMenuOnClick={false}
-                  isMulti={isMulti}
+                  isMulti={true}
                   placeholder={
                     <span
                       className='position-relative'
@@ -386,7 +386,7 @@ function Widget({ isMobile, screenWidth }) {
                       border: '1px solid #f5f5f5',
                       backgroundColor: '#f5f5f5',
                       minHeight: '3.2rem',
-                      padding: '1% 3%',
+                      padding: '0px 5px',
                       borderRadius: '2em',
                       boxShadow: state.isFocused
                         ? '0 0 0 1px ' + colors.primary
@@ -403,11 +403,11 @@ function Widget({ isMobile, screenWidth }) {
                     }),
                     multiValue: (css) => ({
                       ...css,
-                      borderRadius: '9999px',
+                      borderRadius: 999,
                       color: 'white',
                       background: '#3b3d52',
                       padding: '0.1em 0.3em',
-                      // boxShadow: '0 2px 0 black',
+                      // boxShadow: '0 2px 6px -5px black',
                       // border: '2px solid black',
                       // fontSize: '16px',
                     }),
@@ -418,33 +418,19 @@ function Widget({ isMobile, screenWidth }) {
                         color: '#b5b5b5',
                       },
                     }),
-                    input: (css) => {
-                      return {
-                        ...css,
-                        flex: '1 1 auto',
-                        // marginLeft: '1.35em',
-                        '> div': {
-                          width: '100% !important',
-                        },
-                        input: {
-                          width:
-                            !selectedTags || !selectedTags.length
-                              ? `${inputWidth()}px !important`
-                              : '',
-                          textAlign: 'left !important',
-                        },
-                      };
-                    },
                   }}
                   components={{
                     Option: CustomOption,
                     MenuList: CustomMenuList,
+                    // Input: CustomInput,
+                    // ValueContainer: CustomValueContainer,
+                    // Placeholder: CustomPlaceholder,
                   }}
                   options={tags}
                   isClearable
                 />
-              </div>
-            </Fade>
+              </motion.div>
+            )}
           </div>
         </div>
         <AnimatePresence>
@@ -462,15 +448,20 @@ function Widget({ isMobile, screenWidth }) {
                 fontSize: '0.8em',
               }}
             >
-              {['traditional', 'premium', 'adventurous'].map((type) => (
+              {[
+                { type: 'traditional' },
+                { type: 'premium', icon: PremiumIcon },
+                { type: 'adventurous', icon: AdventurousIcon },
+              ].map(({ type, icon }) => (
                 <motion.div
                   animate={{
                     opacity: allWines === null ? 0 : 1,
                     color:
+                      type === pairingType ? 'rgb(0,0,0)' : 'rgb(200,200,200)',
+                    background:
                       type === pairingType
-                        ? colors.primaryRgb
-                        : 'rgb(200,200,200)',
-                    background: type === pairingType ? 'rgb(250,250,250)' : '',
+                        ? 'rgb(250,250,250)'
+                        : 'rgba(256,256,256,0)',
                   }}
                   onClick={() => {
                     setPairingType(type);
@@ -484,9 +475,20 @@ function Widget({ isMobile, screenWidth }) {
                   variant='outline-danger'
                   style={{
                     borderRadius: '.5vw .5vw 0 0',
+                    background: 'rgb(256,256,256)',
+                    fontSize: '0.9em',
+                    flex: 1,
                   }}
-                  className='d-flex justify-content-center align-items-center clickable flex-grow-1 h-100 position-relative'
+                  className='d-flex justify-content-center align-items-center clickable h-100 position-relative font-weight-600'
                 >
+                  {/* <img
+                    src={icon}
+                    style={{
+                      height: '18px',
+                      marginRight: '3px',
+                      filter: pairingType === type ? '' : 'grayscale(100)',
+                    }}
+                  /> */}
                   {type}
                   {type === pairingType && (
                     <motion.div
@@ -503,83 +505,34 @@ function Widget({ isMobile, screenWidth }) {
                   )}
                 </motion.div>
               ))}
-              {/* {[0, 1, 2].map((level) => (
-                <motion.div
-                  animate={{
-                    opacity: allWines.length === 0 ? 0 : 1,
-                    color:
-                      pairingType === level
-                        ? colors.primaryRgb
-                        : 'rgb(200,200,200)',
-                    background: pairingType === level ? 'rgb(250,250,250)' : '',
-                  }}
-                  whileHover={{ background: 'rgb(250,250,250)' }}
-                  key={level}
-                  disabled={allWines.length === 0}
-                  onClick={() => {
-                    setPairingType(level);
-                    setDisplayedWines(allWines[level]);
-                  }}
-                  size='sm'
-                  variant='outline-danger'
-                  style={{
-                    borderRadius: '.5vw .5vw 0 0',
-                  }}
-                  className='d-flex justify-content-center align-items-center clickable flex-grow-1 h-100 position-relative'
-                >
-                  <BiDollar style={{ height: '1.6em' }} />
-                  <BiDollar
-                    style={{ height: '1.6em', opacity: level < 1 ? 0.35 : 1 }}
-                  />
-                  <BiDollar
-                    style={{ height: '1.6em', opacity: level < 2 ? 0.35 : 1 }}
-                  />
-                  {pairingType === level && (
-                    <motion.div
-                      style={{
-                        position: 'absolute',
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        height: '1px',
-                        background: colors.primary,
-                      }}
-                      layoutId='underline'
-                    />
-                  )}
-                </motion.div>
-              ))} */}
             </motion.div>
           )}
         </AnimatePresence>
 
-        <div
+        <motion.div
           id='body-winelist'
-          className={`no-scrollbar animated winelist ${
-            width < 760 ? '' : 'hiddenScroll'
-          }`}
+          className='no-scrollbar'
+          animate={{ height: 'auto' }}
           style={{
             width: '100%',
             selfAlign: 'start',
             overflowY: 'auto',
             overflowX: 'hidden',
-            height:
-              displayedWines?.length && !wining ? `calc(3 * 6.25em)` : '0px',
+            // height:
+            //   displayedWines?.length && !wining ? `calc(3 * 6.25em)` : '0px',
             overscrollBehavior: 'contain',
           }}
         >
-          {['traditional', 'premium', 'adventurous'].map((type, i) => (
-            <Fade key={`${i}_display`} in={!wining && pairingType === type}>
-              <div
-                style={{
-                  display: !wining && pairingType === type ? '' : 'none',
-                }}
-              >
-                <WineDisplay wines={displayedWines} />
-              </div>
-            </Fade>
-          ))}
-        </div>
+          <AnimatePresence>
+            {displayedWines?.length &&
+              !wining &&
+              displayedWines
+                .slice(0, 3)
+                .map((wine, i) => (
+                  <WinePlate key={`wine_display_${i}`} wine={wine} />
+                ))}
+          </AnimatePresence>
+        </motion.div>
 
         <div
           id='body-footer'

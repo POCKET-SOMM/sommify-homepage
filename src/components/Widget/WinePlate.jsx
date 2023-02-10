@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import colors from '../data/colors';
+import colors from '../../data/colors';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { motion } from 'framer-motion';
 import WineContent from './WineContent';
@@ -10,15 +10,26 @@ export default function WinePlate({ wine, disabled, height }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
+      initial={{ opacity: 0, height: 0 }}
       animate={{
         opacity: 1,
+        height: 'auto',
         borderColor: hovered ? 'rgb(220,220,220)' : 'rgb(256,256,256)',
       }}
-      transition={{ ease: 'easeOut', duration: 0.3 }}
+      transition={{
+        height: {
+          ease: 'easeInOut',
+          duration: 0.3,
+        },
+        opacity: { ease: 'easeInOut', delay: 0.05, duration: 0.25 },
+      }}
       exit={{ height: 0, opacity: 0 }}
-      className='overflow-hidden position-relative mb-1 w-100 rounded clickable'
-      style={{ border: '1px solid', paddingBlock: '.4em', fontSize: '1.1em' }}
+      className='overflow-hidden position-relative w-100 rounded clickable'
+      style={{
+        border: '1px solid',
+        fontSize: '1.1em',
+        overflow: 'hidden',
+      }}
       onMouseEnter={() => {
         setHovered(true);
       }}
