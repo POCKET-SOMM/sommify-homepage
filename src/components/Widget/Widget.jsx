@@ -306,17 +306,18 @@ function Widget({ isMobile, screenWidth }) {
                 }}
               >
                 <motion.div
-                  className='rounded-circle p-2 d-flex justify-content-center align-items-center shaded clickable'
+                  className='rounded-circle p-1 d-flex justify-content-center align-items-center shaded clickable'
                   style={{ marginRight: '10px', background: '#f8f8f8' }}
-                  animate={{ background: '#fafafa', color: '#aaa' }}
+                  animate={{ background: '#f0f0f0', color: '#999' }}
                   whileHover={{ background: '#fff', color: '#111' }}
                   onClick={() => {
                     setSearchVisible(true);
                     setAllWines(null);
                     setDisplayedWines(null);
+                    setSelectedTags([]);
                   }}
                 >
-                  <CgClose />
+                  <CgArrowLeft size='1.5em' />
                 </motion.div>
                 <span
                   style={{
@@ -362,6 +363,7 @@ function Widget({ isMobile, screenWidth }) {
                   filterOption={createFilter({ ignoreAccents: false })}
                   openMenuOnClick={false}
                   isMulti={true}
+                  // isSearchable={selectedTags.length < 5}
                   placeholder={
                     <span
                       className='position-relative'
@@ -422,13 +424,33 @@ function Widget({ isMobile, screenWidth }) {
                   components={{
                     Option: CustomOption,
                     MenuList: CustomMenuList,
-                    // Input: CustomInput,
                     // ValueContainer: CustomValueContainer,
                     // Placeholder: CustomPlaceholder,
                   }}
                   options={tags}
                   isClearable
                 />
+                <div
+                  className='w-100 px-3 py-1'
+                  style={{ height: '.7em', fontSize: '.6em' }}
+                >
+                  <AnimatePresence>
+                    {selectedTags?.length && !wining && (
+                      <motion.span
+                        initial={{ opacity: 0 }}
+                        animate={{
+                          opacity: 1,
+                          color: selectedTags.length == 5 ? '#f44' : '#777',
+                        }}
+                        exit={{ opacity: 0 }}
+                      >
+                        {/* <b>{selectedTags?.length}/100</b> */}
+                        {/* &nbsp; */}
+                        <span>Feel free to add more tags...</span>
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </div>
               </motion.div>
             )}
           </div>
@@ -436,12 +458,14 @@ function Widget({ isMobile, screenWidth }) {
         <AnimatePresence>
           {wining || allWines === null ? null : (
             <motion.div
+              key='pairing-type-select'
               animate={{ opacity: !wining && !searchErr ? 1 : 0 }}
-              className='mt-2'
+              exit={{ opacity: 0, height: 0, overflow: 'hidden' }}
+              transition={{ opacity: { duration: 0.05 } }}
               style={{
                 display: !wining && !searchErr ? 'flex' : 'none',
                 width: '90%',
-                margin: 'auto',
+                marginInline: 'auto',
                 alignItems: 'center',
                 justifyContent: 'center',
                 height: '2.4em',
@@ -465,7 +489,6 @@ function Widget({ isMobile, screenWidth }) {
                   }}
                   onClick={() => {
                     setPairingType(type);
-                    console.log(displayedWines);
                     setDisplayedWines(allWines[type]);
                   }}
                   whileHover={{ background: 'rgb(250,250,250)' }}
@@ -534,45 +557,50 @@ function Widget({ isMobile, screenWidth }) {
           </AnimatePresence>
         </motion.div>
 
-        <div
-          id='body-footer'
-          style={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'end',
-            paddingTop: '5%',
-          }}
-        >
-          <Button
-            type='submit'
-            className='py-3'
-            // disabled={!wineMeEnabled()}
-            onClick={(e) => {
-              handleWineMe(selectedTags);
-            }}
-            ref={wineMeRef}
+        {(allWines === null || wining) && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            id='body-footer'
             style={{
               width: '100%',
-              fontWeight: 700,
-              fontSize: '.9em',
-              borderRadius: '1em',
-              // boxShadow: '0 3px 0 ' + colors.primaryDark,
-              // border: '2px solid ' + colors.primaryDark,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'end',
+              paddingTop: '5%',
             }}
           >
-            <span>
-              {wining ? (
-                <div className='d-flex justify-content-center align-items-center'>
-                  <Spinner animation='border' size='sm' className='mx-2' />
-                  <span>PAIRING...</span>
-                </div>
-              ) : (
-                'WINE ME'
-              )}
-            </span>
-          </Button>
-        </div>
+            <Button
+              type='submit'
+              className='py-3'
+              // disabled={!wineMeEnabled()}
+              onClick={(e) => {
+                handleWineMe(selectedTags);
+              }}
+              ref={wineMeRef}
+              style={{
+                width: '100%',
+                fontWeight: 700,
+                fontSize: '.9em',
+                borderRadius: '1em',
+                // boxShadow: '0 3px 0 ' + colors.primaryDark,
+                // border: '2px solid ' + colors.primaryDark,
+              }}
+            >
+              <span>
+                {wining ? (
+                  <div className='d-flex justify-content-center align-items-center'>
+                    <Spinner animation='border' size='sm' className='mx-2' />
+                    <span>PAIRING...</span>
+                  </div>
+                ) : (
+                  'WINE ME'
+                )}
+              </span>
+            </Button>
+          </motion.div>
+        )}
       </div>
     </div>
   );

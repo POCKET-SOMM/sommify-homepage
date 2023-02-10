@@ -619,12 +619,14 @@ function App() {
                 // marginTop: NAV_HEIGHT,
                 color: 'black',
                 // background: colors.beige,
-                minHeight: '80vh',
+                minHeight: '85vh',
                 paddingInline: '0vw',
+                paddingTop: '25vh',
+                paddingBottom: '0',
                 background:
                   'linear-gradient(253deg, rgba(240,240,240,1) 0%, rgba(255,255,255,1) 41%, rgba(248,248,248,1) 100%)',
               }}
-              className='d-flex justify-content-center align-items-center position-relative text-end'
+              className='d-flex justify-content-center align-items-start position-relative text-end'
             >
               <div style={{ flex: 1 }}>
                 <TitleHeading style={{ zIndex: 1 }} />
