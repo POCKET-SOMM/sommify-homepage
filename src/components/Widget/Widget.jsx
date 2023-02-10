@@ -446,7 +446,7 @@ function Widget({ isMobile, screenWidth }) {
                       >
                         {/* <b>{selectedTags?.length}/100</b> */}
                         {/* &nbsp; */}
-                        <span>Feel free to add more tags...</span>
+                        <span>Add more tags for better pairings</span>
                       </motion.span>
                     )}
                   </AnimatePresence>
