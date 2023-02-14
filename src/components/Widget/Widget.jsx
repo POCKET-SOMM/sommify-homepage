@@ -168,7 +168,7 @@ function Widget({ isMobile, screenWidth }) {
         'Content-Type': 'application/json',
         'x-user-role': 'sommelier',
       },
-      data: { tags, limitPerCategory: 3 },
+      data: { tags, limit: 3 },
     };
 
     axios
