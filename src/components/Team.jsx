@@ -192,7 +192,12 @@ export default function Team({ ...props }) {
           }}
         >
           {teamMembers.map((member, i) => (
-            <MemberCard width={MEMBER_WIDTH} member={member} i={i} />
+            <MemberCard
+              key={'member_' + i}
+              width={MEMBER_WIDTH}
+              member={member}
+              i={i}
+            />
           ))}
         </div>
       </SimpleBar>
