@@ -276,23 +276,9 @@ const TitleHeading = ({ ...props }) => {
     <motion.div
       {...props}
       variants={inViewVariantsX}
-      className='d-flex justify-content-end align-items-center'
+      className='d-flex justify-content-end align-items-start'
     >
-      <div>
-        {/* <img style={{ height: '8vh' }} src={Logo.FullWhite} /> */}
-        {/* <img src={Icon.Sommelier} style={{width:'300px'}} /> */}
-        {/* <h1
-          className='font-weight-700 mb-0'
-          style={{ fontSize: '3.2em', lineHeight: '1.2em' }}
-        >
-          the{' '}
-          <span className='text-primary' style={{ fontSize: '1.4em' }}>
-            AI
-          </span>{' '}
-          <br />
-          sommelier.
-        </h1> */}
-        <br />
+      <div className='pt-1'>
         <h6
           className='font-weight-300'
           style={{
@@ -448,8 +434,8 @@ const WhatWeDo = () => (
             icon: Icon.Refreshing,
             text: 'bringing a new approach for the digitally native younger consumer',
           },
-        ].map((jcProps) => (
-          <JumpCard {...jcProps} />
+        ].map((jcProps, i) => (
+          <JumpCard key={'jc_' + i} {...jcProps} />
         ))}
       </div>
     </div>
@@ -694,7 +680,7 @@ function App() {
                     link: 'https://newcohelsinki.fi',
                   },
                 ].map(({ pLogo, height, link }, i) => (
-                  <div style={{ flex: 1 }}>
+                  <div key={'partner_' + i} style={{ flex: 1 }}>
                     <motion.img
                       variants={{
                         offscreen: { y: '10vh', opacity: 0 },
@@ -800,6 +786,7 @@ function App() {
                         },
                       ].map(({ title, text }, i) => (
                         <div
+                          key={'step_' + i}
                           className='position-relative'
                           style={{ marginBottom: '13vh' }}
                         >

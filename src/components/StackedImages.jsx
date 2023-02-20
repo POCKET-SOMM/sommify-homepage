@@ -37,6 +37,7 @@ export default function StackedImages({
     >
       {images?.map((image, i) => (
         <motion.img
+          key={String(image) + '_' + i}
           className={
             `w-100 shaded ` +
             (absolute && images.length > 1 ? 'position-absolute' : '')

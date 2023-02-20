@@ -5,7 +5,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import { motion } from 'framer-motion';
 import WineContent from './WineContent';
 
-export default function WinePlate({ wine, disabled, height }) {
+export default function WinePlate({ wine, loading }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -26,7 +26,7 @@ export default function WinePlate({ wine, disabled, height }) {
       exit={{ height: 0, opacity: 0 }}
       className='overflow-hidden position-relative w-100 rounded clickable'
       style={{
-        border: '1px solid',
+        // border: '1px solid',
         fontSize: '1.1em',
         overflow: 'hidden',
       }}
@@ -40,29 +40,34 @@ export default function WinePlate({ wine, disabled, height }) {
         window.open(wine.url, '_blank');
       }}
     >
-      <motion.div
-        animate={{
-          backgroundColor: hovered ? 'rgb(220,220,220)' : 'rgb(245,245,245)',
-          color: 'rgb(50,50,50)',
-        }}
-        transition={{ ease: 'easeOut', duration: 0.3 }}
-        className='px-2'
-        style={{
-          fontWeight: 600,
-          fontSize: '0.8em',
-          borderRadius: '3px 0px 0px 0px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'absolute',
-          bottom: '0px',
-          right: '0px',
-        }}
-      >
-        <div>
-          <span style={{ display: 'block' }}>€{wine['price'].toFixed(2)}</span>
-        </div>
-      </motion.div>
+      {!loading && (
+        <motion.div
+          initial={{ background: '#ffffff00' }}
+          animate={{
+            background: hovered ? 'rgb(220,220,220)' : 'rgb(245,245,245)',
+            color: 'rgb(50,50,50)',
+          }}
+          transition={{ ease: 'easeOut', duration: 0.3 }}
+          className='px-2'
+          style={{
+            fontWeight: 600,
+            fontSize: '0.8em',
+            borderRadius: '3px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'absolute',
+            top: '5px',
+            right: '5px',
+          }}
+        >
+          <div>
+            <span style={{ display: 'block' }}>
+              €{wine['price'].toFixed(2)}
+            </span>
+          </div>
+        </motion.div>
+      )}
       <div
         id='wine-basics'
         style={{
@@ -71,7 +76,7 @@ export default function WinePlate({ wine, disabled, height }) {
           display: 'flex',
         }}
       >
-        <WineContent hovered={hovered} wine={wine} />
+        <WineContent hovered={hovered} wine={wine} loading={loading} />
         <div style={{ flex: 1 }}></div>
       </div>
     </motion.div>

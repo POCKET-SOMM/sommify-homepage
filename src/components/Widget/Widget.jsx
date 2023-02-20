@@ -25,10 +25,9 @@ import PremiumIcon from '../../assets/icons/premium.png';
 
 function Widget({ isMobile, screenWidth }) {
   const { width, height } = useWindowDimensions();
-  const [meal] = useState('');
-  const [pair, setPair] = useState('');
   const [recipe, setRecipe] = useState({});
   const [wining, setWining] = useState(false);
+  const [loadingImages, setLoadingImages] = useState(false);
   const [allWines, setAllWines] = useState(null);
   const [displayedWines, setDisplayedWines] = useState(null);
   const [searchErr, setSearchErr] = useState(false);
@@ -37,8 +36,6 @@ function Widget({ isMobile, screenWidth }) {
 
   const [selectedTags, setSelectedTags] = useState([]);
   const [tags, setTags] = useState([]);
-
-  const [isMulti, setIsMulti] = useState(true);
   const [inputText, setInputText] = useState('');
 
   const wineMeRef = React.createRef();
@@ -74,6 +71,7 @@ function Widget({ isMobile, screenWidth }) {
   }, []);
 
   const loadWines = (wines) => {
+    setLoadingImages(true);
     setRecipe({
       title: selectedTags.map((m) => m.label).join(', '),
     });
@@ -88,14 +86,15 @@ function Widget({ isMobile, screenWidth }) {
     IMAGES = IMAGES.map((w) => imageLink(w.url));
     Promise.all(IMAGES.map((image) => (image ? loadImage(image) : null)))
       .then(() => {
-        setWining(false);
-        setSearchVisible(false);
+        setLoadingImages(false);
       })
       .catch((err) => {
         console.log('Failed to load images', err);
-        setWining(false);
-        setSearchVisible(false);
+        setLoadingImages(false);
       });
+
+    setWining(false);
+    setSearchVisible(false);
   };
 
   const imageLink = (link) => {
@@ -128,10 +127,6 @@ function Widget({ isMobile, screenWidth }) {
     });
   };
 
-  const wineMeEnabled = () => {
-    return !!selectedTags.length || (!!inputText && isLink(inputText));
-  };
-
   const handleWineMe = (payload) => {
     if (!payload.length) {
       setSearchErr('Please enter a meal...');
@@ -146,20 +141,6 @@ function Widget({ isMobile, screenWidth }) {
 
     setWining(true);
     let tags = payload.map((p) => p.value);
-    setPair(tags);
-
-    // if (isLink(payload[0].value)) {
-    //   let link = payload[0].value;
-    //   setSelectedTags([{ value: link, label: link }]);
-    //   setPair(link);
-    //   data = { link: link };
-    //   endpoint = 'link2wine';
-    // } else {
-    // let tags = payload.map((p) => p.value);
-    // setPair(tags);
-    // data = { tags: tags };
-    // endpoint = 'tags2wine';
-    // }
 
     const options = {
       method: 'POST',
@@ -202,45 +183,14 @@ function Widget({ isMobile, screenWidth }) {
     setTags(newTags);
   };
 
-  const toLinkMode = (input) => {
-    setSelectedTags(
-      (!Array.isArray(input) && input) || input[input.length - 1]
-    );
-    setIsMulti(false);
-    handleWineMe(input);
-  };
-
-  const toTagMode = (input) => {
-    setSelectedTags(input);
-    setIsMulti(true);
-  };
-
   const handleTagChange = (tags, action) => {
     // console.log(tags, action)
     if (!tags || !tags.length) {
       setSelectedTags([]);
-      setIsMulti(true);
       return;
     }
 
-    let isObject = !Array.isArray(tags);
-
-    if (
-      (isObject && isLink(tags.value)) ||
-      isLink(tags[tags.length - 1].value)
-    ) {
-      toLinkMode(tags);
-    } else {
-      toTagMode(tags);
-    }
-  };
-
-  const inputWidth = () => {
-    if (width < 760) {
-      return (screenWidth - 4) * 0.95 - 10 - 36 - 16;
-    } else {
-      return 313.39;
-    }
+    setSelectedTags(tags);
   };
 
   return (
@@ -250,7 +200,7 @@ function Widget({ isMobile, screenWidth }) {
         width: isBrowser ? WIDGET_WIDTH : '85vw',
         background: 'white',
         borderRadius: isBrowser ? '2vw' : '4vw',
-        padding: isBrowser ? '30px' : '5vw',
+        // padding: isBrowser ? '30px' : '5vw',
         color: '#202020',
         zIndex: 2,
       }}
@@ -264,7 +214,7 @@ function Widget({ isMobile, screenWidth }) {
           fontSize: isBrowser ? '' : '13px',
         }}
       >
-        <div id='body-header'>
+        <div id='body-header' className='p-4 pb-0'>
           <div className='pb-4 w-100 d-flex justify-content-center'>
             <img
               src={logo}
@@ -330,15 +280,6 @@ function Widget({ isMobile, screenWidth }) {
                 >
                   <b>{recipe['title']?.toUpperCase()}</b>
                 </span>
-                {/* <CgClose
-                  className='clickable nodrag'
-                  style={{ marginLeft: '5px' }}
-                  size={20}
-                  color='gray'
-                  onClick={() => {
-                    setSearchVisible(true);
-                  }}
-                /> */}
               </motion.div>
             )}
 
@@ -413,6 +354,11 @@ function Widget({ isMobile, screenWidth }) {
                       // border: '2px solid black',
                       // fontSize: '16px',
                     }),
+                    placeholder: (css, state) => ({
+                      ...css,
+                      transition: 'ease-in-out 0.2s',
+                      opacity: state.isFocused ? 0.4 : 1,
+                    }),
                     multiValueRemove: (css) => ({
                       ...css,
                       ':hover': {
@@ -458,53 +404,58 @@ function Widget({ isMobile, screenWidth }) {
         <AnimatePresence>
           {wining || allWines === null ? null : (
             <motion.div
-              key='pairing-type-select'
               animate={{ opacity: !wining && !searchErr ? 1 : 0 }}
               exit={{ opacity: 0, height: 0, overflow: 'hidden' }}
               transition={{ opacity: { duration: 0.05 } }}
-              style={{
-                display: !wining && !searchErr ? 'flex' : 'none',
-                width: '90%',
-                marginInline: 'auto',
-                alignItems: 'center',
-                justifyContent: 'center',
-                height: '2.4em',
-                fontSize: '0.8em',
-              }}
+              style={{ borderBottom: '1px solid #f0f0f0' }}
             >
-              {[
-                { type: 'traditional' },
-                { type: 'premium', icon: PremiumIcon },
-                { type: 'adventurous', icon: AdventurousIcon },
-              ].map(({ type, icon }) => (
-                <motion.div
-                  animate={{
-                    opacity: allWines === null ? 0 : 1,
-                    color:
-                      type === pairingType ? 'rgb(0,0,0)' : 'rgb(200,200,200)',
-                    background:
-                      type === pairingType
-                        ? 'rgb(250,250,250)'
-                        : 'rgba(256,256,256,0)',
-                  }}
-                  onClick={() => {
-                    setPairingType(type);
-                    setDisplayedWines(allWines[type]);
-                  }}
-                  whileHover={{ background: 'rgb(250,250,250)' }}
-                  key={type + '_button'}
-                  disabled={allWines === null}
-                  size='sm'
-                  variant='outline-danger'
-                  style={{
-                    borderRadius: '.5vw .5vw 0 0',
-                    background: 'rgb(256,256,256)',
-                    fontSize: '0.9em',
-                    flex: 1,
-                  }}
-                  className='d-flex justify-content-center align-items-center clickable h-100 position-relative font-weight-600'
-                >
-                  {/* <img
+              <motion.div
+                key='pairing-type-select'
+                style={{
+                  display: !wining && !searchErr ? 'flex' : 'none',
+                  width: '90%',
+                  marginInline: 'auto',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  height: '2.4em',
+                  fontSize: '0.8em',
+                }}
+              >
+                {[
+                  { type: 'traditional' },
+                  { type: 'premium', icon: PremiumIcon },
+                  { type: 'adventurous', icon: AdventurousIcon },
+                ].map(({ type, icon }) => (
+                  <motion.div
+                    animate={{
+                      opacity: allWines === null ? 0 : 1,
+                      color:
+                        type === pairingType
+                          ? 'rgb(0,0,0)'
+                          : 'rgb(200,200,200)',
+                      background:
+                        type === pairingType
+                          ? 'rgb(250,250,250)'
+                          : 'rgba(256,256,256,0)',
+                    }}
+                    onClick={() => {
+                      setPairingType(type);
+                      setDisplayedWines(allWines[type]);
+                    }}
+                    whileHover={{ background: 'rgb(250,250,250)' }}
+                    key={type + '_button'}
+                    disabled={allWines === null}
+                    size='sm'
+                    variant='outline-danger'
+                    style={{
+                      borderRadius: '.5vw .5vw 0 0',
+                      background: 'rgb(256,256,256)',
+                      fontSize: '0.9em',
+                      flex: 1,
+                    }}
+                    className='d-flex justify-content-center align-items-center clickable h-100 position-relative font-weight-600'
+                  >
+                    {/* <img
                     src={icon}
                     style={{
                       height: '18px',
@@ -512,22 +463,23 @@ function Widget({ isMobile, screenWidth }) {
                       filter: pairingType === type ? '' : 'grayscale(100)',
                     }}
                   /> */}
-                  {type}
-                  {type === pairingType && (
-                    <motion.div
-                      style={{
-                        position: 'absolute',
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        height: '1px',
-                        background: colors.primary,
-                      }}
-                      layoutId='underline'
-                    />
-                  )}
-                </motion.div>
-              ))}
+                    {type}
+                    {type === pairingType && (
+                      <motion.div
+                        style={{
+                          position: 'absolute',
+                          bottom: -1,
+                          left: 0,
+                          right: 0,
+                          height: '1px',
+                          background: colors.primary,
+                        }}
+                        layoutId='underline'
+                      />
+                    )}
+                  </motion.div>
+                ))}
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -535,14 +487,15 @@ function Widget({ isMobile, screenWidth }) {
         <motion.div
           id='body-winelist'
           className='no-scrollbar'
-          animate={{ height: 'auto' }}
+          animate={{
+            height: 'auto',
+            paddingBottom: displayedWines?.length && !wining ? '.5em' : 0,
+          }}
           style={{
             width: '100%',
             selfAlign: 'start',
             overflowY: 'auto',
             overflowX: 'hidden',
-            // height:
-            //   displayedWines?.length && !wining ? `calc(3 * 6.25em)` : '0px',
             overscrollBehavior: 'contain',
           }}
         >
@@ -552,7 +505,11 @@ function Widget({ isMobile, screenWidth }) {
               displayedWines
                 .slice(0, 3)
                 .map((wine, i) => (
-                  <WinePlate key={`wine_display_${i}`} wine={wine} />
+                  <WinePlate
+                    key={`wine_display_${i}`}
+                    wine={wine}
+                    loading={loadingImages}
+                  />
                 ))}
           </AnimatePresence>
         </motion.div>
@@ -563,12 +520,12 @@ function Widget({ isMobile, screenWidth }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             id='body-footer'
+            className='p-4 pt-3'
             style={{
               width: '100%',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'end',
-              paddingTop: '5%',
             }}
           >
             <Button
