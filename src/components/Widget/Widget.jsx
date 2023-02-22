@@ -149,7 +149,20 @@ function Widget({ isMobile, screenWidth }) {
         'Content-Type': 'application/json',
         'x-user-role': 'sommelier',
       },
-      data: { tags, limit: 3 },
+      data: {
+        tags,
+        model: 'julie',
+        traditional: true,
+        adventurous: true,
+        premium: true,
+        limit: 3,
+        minTraditionalPrice: 1,
+        maxTraditionalPrice: -1,
+        minPremiumPrice: 1,
+        maxPremiumPrice: -1,
+        minAdventurousPrice: 1,
+        maxAdventurousPrice: -1,
+      },
     };
 
     axios
@@ -278,7 +291,7 @@ function Widget({ isMobile, screenWidth }) {
                     float: 'left',
                   }}
                 >
-                  <b>{recipe['title']?.toUpperCase()}</b>
+                  <b>{recipe['title']}</b>
                 </span>
               </motion.div>
             )}
@@ -413,7 +426,7 @@ function Widget({ isMobile, screenWidth }) {
                 key='pairing-type-select'
                 style={{
                   display: !wining && !searchErr ? 'flex' : 'none',
-                  width: '90%',
+                  width: '100%',
                   marginInline: 'auto',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -448,21 +461,13 @@ function Widget({ isMobile, screenWidth }) {
                     size='sm'
                     variant='outline-danger'
                     style={{
-                      borderRadius: '.5vw .5vw 0 0',
+                      // borderRadius: '.5vw .5vw 0 0',
                       background: 'rgb(256,256,256)',
-                      fontSize: '0.9em',
+                      fontSize: '1.1em',
                       flex: 1,
                     }}
-                    className='d-flex justify-content-center align-items-center clickable h-100 position-relative font-weight-600'
+                    className='d-flex justify-content-center align-items-center clickable h-100 position-relative font-weight-500'
                   >
-                    {/* <img
-                    src={icon}
-                    style={{
-                      height: '18px',
-                      marginRight: '3px',
-                      filter: pairingType === type ? '' : 'grayscale(100)',
-                    }}
-                  /> */}
                     {type}
                     {type === pairingType && (
                       <motion.div

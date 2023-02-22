@@ -1,7 +1,7 @@
 export const inViewProps = {
   initial: 'offscreen',
   whileInView: 'onscreen',
-  viewport: { once: true, amount: 0.8 },
+  viewport: { once: true, amount: 0.3 },
 };
 
 export const inViewVariants = {
@@ -17,7 +17,7 @@ export const inViewVariants = {
         duration: 0.2,
       },
       y: {
-        duration: 0.5,
+        duration: 0.3,
       },
       type: 'tween',
     },
@@ -37,7 +37,7 @@ export const inViewVariantsX = {
         duration: 0.2,
       },
       x: {
-        duration: 0.5,
+        duration: 0.3,
       },
       type: 'tween',
     },
@@ -50,7 +50,7 @@ export const inView = ({ direction = 'x', i = 0 }) => ({
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.3,
       delay: 0.2 + i * 0.05,
       type: 'tween',
     },

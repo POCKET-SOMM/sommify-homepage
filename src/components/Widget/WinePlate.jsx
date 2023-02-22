@@ -12,9 +12,9 @@ export default function WinePlate({ wine, loading }) {
     <motion.div
       initial={{ opacity: 0, height: 0 }}
       animate={{
-        opacity: 1,
+        opacity: hovered ? 1 : 0.5,
         height: 'auto',
-        borderColor: hovered ? 'rgb(220,220,220)' : 'rgb(256,256,256)',
+        // borderColor: hovered ? 'rgb(220,220,220)' : 'rgb(256,256,256)',
       }}
       transition={{
         height: {
