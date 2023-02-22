@@ -157,11 +157,11 @@ function Widget({ isMobile, screenWidth }) {
         premium: true,
         limit: 3,
         minTraditionalPrice: 1,
-        maxTraditionalPrice: -1,
-        minPremiumPrice: 1,
+        maxTraditionalPrice: 30,
+        minPremiumPrice: 50,
         maxPremiumPrice: -1,
         minAdventurousPrice: 1,
-        maxAdventurousPrice: -1,
+        maxAdventurousPrice: 30,
       },
     };
 
