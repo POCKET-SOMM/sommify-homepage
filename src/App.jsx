@@ -851,7 +851,7 @@ function App() {
               className='flex-column text-center position-relative p-0'
               style={{
                 background: '#ffffff',
-                minHeight: '40vh',
+                minHeight: '60vh',
                 marginBottom: '5vh',
               }}
             >
