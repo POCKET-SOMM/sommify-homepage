@@ -37,7 +37,7 @@ export default function WinePlate({ wine, loading }) {
         setHovered(false);
       }}
       onClick={() => {
-        window.open(wine.url, '_blank');
+        window.open(`https://drizly.com/search?q=${wine.title}`, '_blank');
       }}
     >
       {!loading && (

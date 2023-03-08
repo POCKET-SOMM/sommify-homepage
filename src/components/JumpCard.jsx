@@ -11,7 +11,7 @@ export default function JumpCard({ icon, title, text, ...props }) {
       key={title}
       style={{
         flex: 1,
-        background: 'white',
+        // background: 'white',
         borderRadius: '2em',
         height: '25vh',
         background:
