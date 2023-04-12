@@ -3,7 +3,6 @@ import WaveDouble from './waves/doubleWave.svg';
 import WaveDoubleRose from './waves/doubleWaveRose.svg';
 import WaveBeige from './waves/waveBeige.svg';
 import WaveBlack from './waves/waveBlack.svg';
-import Sommelier from './icons/Sommify_ai_icons-robot-sommelier.svg';
 import Accessible from './icons/Sommify_ai_icons-accessible.svg';
 import Refreshing from './icons/Sommify_ai_icons-refreshing.svg';
 import WorldClass from './icons/Sommify_ai_icons-worldwide.svg';
@@ -67,5 +66,4 @@ export const Icon = {
   Accessible,
   Refreshing,
   WorldClass,
-  Sommelier,
 };

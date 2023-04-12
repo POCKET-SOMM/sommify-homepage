@@ -26,12 +26,12 @@ export default function StackedImages({
     <div
       {...props}
       ref={ref}
-      className={absolute ? 'position-absolute' : 'position-relative'}
+      className={(absolute ? 'position-absolute' : 'position-relative') + ' funky-bg'}
       style={{
-        borderRadius: '2.5em',
+        borderRadius: '1.7em',
         zIndex: 3,
-        background:
-          'linear-gradient(90deg, rgba(129,129,228,1) 0%, rgba(242,189,249,1) 100%)',
+        // background:
+        //   'linear-gradient(90deg, rgba(129,129,228,1) 0%, rgba(242,189,249,1) 100%)',
         ...style,
       }}
     >
@@ -43,7 +43,7 @@ export default function StackedImages({
             (absolute && images.length > 1 ? 'position-absolute' : '')
           }
           src={image}
-          style={{ borderRadius: '2.5em', zIndex: 4 + i }}
+          style={{ borderRadius: '1.7em', zIndex: 4 + i }}
           animate={controls}
           initial='hidden'
           variants={{

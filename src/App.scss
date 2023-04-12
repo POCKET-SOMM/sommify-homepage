@@ -2,7 +2,7 @@ body {
   font-family: 'Inter', sans-serif !important;
   // font-family: 'Pacifico', cursive !important;
 
-  font-size: 1vw;
+  font-size: 16px;
   // line-height: 24px;
   font-weight: 400;
 
@@ -14,6 +14,24 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  scroll-behavior: smooth;
+  background-color: #ffffff !important;
+}
+
+.font-mono {
+  font-family: 'Roboto Mono', monospace !important;
+}
+
+h1 {
+  font-size: 3rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 3rem !important;
+}
+
+h2 {
+  font-weight: 700 !important;
+  margin-bottom: 2rem !important;
 }
 
 .popover-arrow::after {
@@ -24,13 +42,24 @@ body {
   opacity: 0;
 }
 
+.section {
+  &--bg-block {
+    position: absolute;
+    width: 1600px;
+    transform: rotate(-45deg);
+    margin: auto;
+    height: 1600px;
+    background: #fbfbfb;
+  }
+}
+
 // .custom-select__input-container {
 //   background-color: red;
 //   position: relative;
 // }
 
 .shaded {
-  box-shadow: 0em 0em 4em -0.4em #0000001a;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 8%);
 }
 
 textarea.form-control,
@@ -54,12 +83,21 @@ form span {
   color: rgb(97, 97, 97);
 }
 
+.funky-bg {
+  background: linear-gradient(
+    342deg,
+    rgba(25, 42, 81, 1) 0%,
+    rgba(91, 99, 156, 1) 100%
+  );
+}
+
 .text-fancy {
   // background: #a51c5e;
   background: linear-gradient(
     90deg,
-    rgba(129, 129, 228, 1) 0%,
-    rgba(242, 189, 249, 1) 100%
+    rgba(69, 74, 91, 1) 0%,
+    rgba(25, 42, 81, 1) 50%,
+    rgba(87, 75, 126, 1) 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -153,6 +191,12 @@ a {
 }
 .font-weight-700 {
   font-weight: 700 !important;
+}
+.font-weight-800 {
+  font-weight: 800 !important;
+}
+.font-weight-900 {
+  font-weight: 900 !important;
 }
 
 #footer span,

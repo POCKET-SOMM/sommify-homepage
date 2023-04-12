@@ -1,22 +1,34 @@
 import { useState } from 'react';
 import { CgChevronRight } from 'react-icons/cg';
 import colors from '../data/colors';
+import { motion } from 'framer-motion';
 
-export default function Button({ children, style, className, ...props }) {
+export default function Button({
+  children,
+  animate = {},
+  style,
+  className,
+  border,
+  borderless,
+  ...props
+}) {
   const [hover, setHover] = useState(false);
 
   return (
-    <div
+    <motion.div
       {...props}
-      className={'clickable position-relative font-weight-600 ' + className}
+      initial={false}
+      className={'clickable position-relative font-weight-600 d-inline ' + className}
+      animate={{
+        border: borderless ? 'none' : `2px solid #000000`,
+        color: border ? '#000000' : '#ffffff',
+        background: border ? 'none' : '#000000',
+        ...animate,
+      }}
       style={{
-        // color: colors.primary,
-        color: 'white',
-        background: colors.blue,
-        // boxShadow: hover ? '0px 0px 2px 0px ' + colors.blue : '',
         paddingBlock: '.7em',
         paddingInline: '2.4em',
-        borderRadius: 999,
+        borderRadius: 10,
         ...style,
       }}
       onMouseEnter={() => setHover(true)}
@@ -29,6 +41,6 @@ export default function Button({ children, style, className, ...props }) {
           style={{ position: 'absolute', right: 13 }}
         />
       )}
-    </div>
+    </motion.div>
   );
 }
