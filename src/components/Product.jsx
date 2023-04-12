@@ -13,7 +13,10 @@ export default function Product({ className }) {
   const isMobile = window.innerWidth <= 760;
 
   return (
-    <Section className={'text-start position-relative ' + className}>
+    <Section
+      id='product'
+      className={'text-start position-relative ' + className}
+    >
       <div style={{ display: 'flex' }}>
         <ProductHeader
           style={{
