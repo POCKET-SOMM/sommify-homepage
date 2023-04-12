@@ -4,6 +4,7 @@ import Button from './Button';
 import { useState } from 'react';
 import { CgCheck } from 'react-icons/cg';
 import { inViewProps, inViewVariants } from '../data/variants';
+import colors from '../data/colors';
 
 export default function Pricing({ className }) {
   const [selected, setSelected] = useState(-1);
@@ -78,8 +79,8 @@ export default function Pricing({ className }) {
             >
               <div className='w-100 py-1 pt-5 text-center'>
                 <h4
-                  className='font-weight-600 mb-0 text-primary'
-                  style={{ fontSize: '1.05rem' }}
+                  className='font-weight-600 mb-0'
+                  style={{ fontSize: '1.05rem', color: colors.primary }}
                 >
                   {title}
                 </h4>
