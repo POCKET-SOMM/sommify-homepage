@@ -88,10 +88,10 @@ const Footer = () => (
   >
     <div
       className='d-flex flex-column justify-content-center align-items-start'
-      style={{ width: '100%', maxWidth: '1620px', margin: 'auto' }}
+      style={{ width: '100%', maxWidth: 1200, margin: 'auto' }}
     >
       <div className='d-flex justify-content-center align-items-start w-100 py-5'>
-        <div className='d-flex flex-column mx-4'>
+        {/* <div className='d-flex flex-column mx-4'>
           <h6>Company</h6>
           <span className='d-block'>
             <span
@@ -105,16 +105,14 @@ const Footer = () => (
               Deck
             </span>
           </span>
-        </div>
+        </div> */}
         <div className='d-flex flex-column mx-4'>
           <h6>Products</h6>
           <span className='d-block'>
             <span
               className='clickable'
               onClick={() => {
-                // window.open(
-                // 'https://www.crunchbase.com/organization/sommifyai'
-                // );
+                window.open('https://portal.sommify.ai', '_blank');
               }}
             >
               Dashboard
@@ -164,6 +162,15 @@ const Footer = () => (
           className='clickable'
         >
           Privacy policy
+        </span>
+        &nbsp;•&nbsp;
+        <span
+          onClick={() => {
+            window.open('https://icons8.com', '_blank');
+          }}
+          className='clickable'
+        >
+          Icons8
         </span>
       </div>
     </div>
@@ -246,7 +253,13 @@ function App() {
               </Button>
             </div>
             <div className='pt-5 w-100 d-flex justify-content-center'>
-              <Widget />
+              <motion.div
+                style={{ borderRadius: 18 }}
+                variants={inViewVariants}
+                className='shaded'
+              >
+                <Widget theme='flat' />
+              </motion.div>
             </div>
             {/* <div className='position-relative'>
               <img
@@ -289,8 +302,12 @@ function App() {
             style={{ paddingTop: '30vh' }}
           >
             <TitleHeading style={{ width: '45vw' }} />
-            <motion.div variants={inViewVariants}>
-              <Widget />
+            <motion.div
+              style={{ borderRadius: 18 }}
+              variants={inViewVariants}
+              className='shaded'
+            >
+              <Widget theme='flat' />
             </motion.div>
           </Section>
 
