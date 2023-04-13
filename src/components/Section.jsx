@@ -9,7 +9,11 @@ export default function Section({ children, style, className, ...props }) {
   const paddingBottom = width <= 760 ? '5vh' : '7vh';
 
   return (
-    <motion.div {...props} {...inViewProps} className='w-100 position-relative section px-5'>
+    <motion.div
+      {...props}
+      {...inViewProps}
+      className='w-100 position-relative section'
+    >
       {/* <img
         className='position-absolute'
         src={pattern}
@@ -20,6 +24,7 @@ export default function Section({ children, style, className, ...props }) {
         style={{
           paddingTop,
           paddingBottom,
+          paddingInline: 24,
           maxWidth: 1200,
           // minHeight: width > 760 ? `calc(100vh)` : '',
           margin: 'auto',

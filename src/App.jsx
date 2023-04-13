@@ -15,8 +15,6 @@ import Section from './components/Section';
 import partners from './data/partners';
 import Navigation from './components/Navigation';
 import Pricing from './components/Pricing';
-import Iphone from './assets/iphone14.png';
-import ProductHeader from './components/ProductHeader';
 import Product from './components/Product';
 import Integrate from './components/Integrate';
 
@@ -54,22 +52,52 @@ const TitleHeading = ({ ...props }) => {
             // letterSpacing: '.025em',
           }}
         >
-          Drive sales using the interactive AI sommelier
+          Drive retail wine sales using the AI sommelier
         </h6>
-        {!isMobile && (
-          <div className='d-flex pt-5 justify-space-between align-items-center'>
-            <Button style={{ marginRight: 20 }}>Register</Button>
-            <Button
-              border
-              onClick={() => {
-                const target = document.getElementById('contact');
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }}
-            >
-              Contact Us
-            </Button>
-          </div>
-        )}
+        <h6
+          className='font-weight-400 mb-0'
+          style={{
+            fontSize: '1.1em',
+            color: '#4b5563',
+            opacity: 0.45,
+            maxWidth: 500
+            // width: '80%',
+            // letterSpacing: '.025em',
+          }}
+        >
+          Built on the wine knowledge of Julie Dupouy, world-class sommelier
+          with 20+ years of experience.
+        </h6>
+        <div
+          className={`d-flex pt-5 justify-space-between align-items-center ${
+            isMobile && 'flex-column'
+          }`}
+        >
+          <Button
+            style={{
+              width: isMobile ? 160 : 180,
+              marginRight: isMobile ? 0 : 15,
+              marginBottom: isMobile ? 10 : 0,
+            }}
+            onClick={() => {
+              window.open('https://portal.sommify.ai', '_blank');
+            }}
+          >
+            Register
+          </Button>
+          <Button
+            border
+            style={{
+              width: isMobile ? 160 : 180,
+            }}
+            onClick={() => {
+              const target = document.getElementById('contact');
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }}
+          >
+            Contact Us
+          </Button>
+        </div>
       </div>
     </motion.div>
   );
@@ -230,15 +258,16 @@ function App() {
             background: '#fbfbfb',
           }}
         />
-        <div style={{ paddingInline: 24, overflowX: 'hidden' }}>
+        <div style={{ overflowX: 'hidden' }}>
           <Section id='widget-screen' className='text-center position-relative'>
             <TitleHeading />
-            <div className='d-flex flex-column p-4 mb-4 justify-space-between align-items-center'>
+            {/* <div className='d-flex flex-column p-4 mb-4 justify-space-between align-items-center'>
               <Button
                 onClick={() => {
                   window.open('https://portal.sommify.ai', '_blank');
                 }}
                 className='mb-3'
+                style={{ width: 150 }}
               >
                 Register
               </Button>
@@ -248,46 +277,26 @@ function App() {
                   target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }}
                 border
+                style={{ width: 150 }}
               >
                 Contact Us
               </Button>
-            </div>
+            </div> */}
             <div className='pt-5 w-100 d-flex justify-content-center'>
               <motion.div
-                style={{ borderRadius: 18 }}
+                style={{ borderRadius: 18, background: '#ffffff' }}
                 variants={inViewVariants}
                 className='shaded'
               >
-                <Widget theme='flat' />
+                <Widget theme='flat' size='mobile' />
               </motion.div>
             </div>
-            {/* <div className='position-relative'>
-              <img
-                src={Iphone}
-                width='100%'
-                style={{ margin: 'auto', maxWidth: 420 }}
-              />
-              <div
-                className='d-flex justify-content-center align-items-center'
-                style={{
-                  position: 'absolute',
-                  left: 0,
-                  right: 0,
-                  top: 80,
-                  margin: 'auto',
-                  width: '86%',
-                }}
-              >
-                <Widget size='mobile' theme='flat' />
-              </div>
-            </div> */}
           </Section>
           <Product className='text-center' />
 
           <Pricing className='text-center' />
-          <Section>
-            <ContactUs />
-          </Section>
+
+          <ContactUs />
         </div>
         <Footer />
       </CustomView>
@@ -303,7 +312,7 @@ function App() {
           >
             <TitleHeading style={{ width: '45vw' }} />
             <motion.div
-              style={{ borderRadius: 18 }}
+              style={{ borderRadius: 18, background: '#ffffff' }}
               variants={inViewVariants}
               className='shaded'
             >

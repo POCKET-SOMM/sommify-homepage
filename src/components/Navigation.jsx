@@ -40,10 +40,8 @@ const NavButton = ({ nav, nextScroll, ...props }) => {
       }}
       className={`d-flex justify-content-center align-items-center clickable text-center mx-4 `}
       onClick={() => {
-        const target = document.getElementById(nav.title);
+        const target = document.getElementById(nav.id);
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-        // window.scrollTo(0, nav.scroll - 0.1 * height, 'smooth')
       }}
       style={{
         height: '100%',
@@ -124,7 +122,8 @@ export default function Navigation({ ...props }) {
             display: 'flex',
             width: '100vw',
             margin: 'auto',
-            maxWidth: 1200,
+            // maxWidth: 1200,
+            paddingInline: 64,
             height: '100%',
             justifyContent: 'center',
             alignItems: 'center',
@@ -142,11 +141,11 @@ export default function Navigation({ ...props }) {
           </div>
           <div className='d-flex justify-content-center align-items-center'>
             {[
-              { title: 'demo', scroll: 0 },
-              { title: 'product', scroll: 0.9 * height },
-              { title: 'how', scroll: height * 1.8 },
-              { title: 'pricing', scroll: height * 3.1 },
-              { title: 'contact', scroll: height * 4.1 },
+              { title: 'try us', id: 'demo', scroll: 0 },
+              { title: 'product', id: 'product', scroll: 0.9 * height },
+              { title: 'integration', id: 'how', scroll: height * 1.8 },
+              { title: 'pricing', id: 'pricing', scroll: height * 3.1 },
+              { title: 'contact', id: 'contact', scroll: height * 4.1 },
             ].map((nav, i, navs) => (
               <NavButton
                 key={'nav_' + nav.title}

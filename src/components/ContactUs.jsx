@@ -50,15 +50,14 @@ export default function ContactUs({ ...props }) {
   return (
     <Section id='contact'>
       <motion.div
-        className='d-flex flex-column mb-5 px-4'
+        className='d-flex flex-column mb-5'
         ref={ref}
         animate={controls}
         initial='hidden'
         variants={variants}
         style={{
           width: '100%',
-          maxWidth: '700px',
-          minWidth: '300px',
+          maxWidth: '600px',
           // paddingBlock: '14vh 10vh',
           borderRadius: '2em',
           left: 0,
@@ -71,7 +70,7 @@ export default function ContactUs({ ...props }) {
           <h1>Open a dialogue</h1>
         </div>
         <div className='d-flex w-100 flex-grow-1'>
-          <Form className='p-2' style={{ flex: 1 }}>
+          <Form style={{ flex: 1 }}>
             <AnimatePresence>
               <div
                 key='contact-us-form'

@@ -10,6 +10,7 @@ import { CgLink } from 'react-icons/cg';
 import { inViewProps, inViewVariants } from '../data/variants';
 import Highlight from 'react-highlight';
 import colors from '../data/colors';
+import CodePane from './CodePane';
 
 const codeBlock = `<head>
   <-- Import minified react -->
@@ -22,6 +23,14 @@ const codeBlock = `<head>
   <-- Create a div with an id -->
   <div id="widget-element"></div>
 </body>`;
+
+const jsCodeBlock = `// Mount the widget using the Sommify.mount function
+Sommify.mount("widget-element",  // id of the div in your html.index file
+{ 
+  url: "https://your-backend-call", // call to your backend serving as a proxy to the Sommify API
+  theme: "original", // "minimal" | "night" | "flat" | "sharp" | ... or pass custom options via an object
+  size: "desktop", // "mobile"
+});`;
 
 export default function Integrate({ ...props }) {
   const Step = ({ title, children, rightAlign, style, img, i }) => (
@@ -82,6 +91,7 @@ export default function Integrate({ ...props }) {
               <div
                 style={{
                   transform: 'rotate(-45deg)',
+                  color: '#fffffff0'
                 }}
               >
                 {i}
@@ -93,7 +103,10 @@ export default function Integrate({ ...props }) {
           )}
         </div>
       )}
-      <motion.div variants={inViewVariants} style={{ flex: 1, minHeight: 350 }}>
+      <motion.div
+        variants={inViewVariants}
+        style={{ flex: 1, paddingBottom: 50 }}
+      >
         <h2>{title}</h2>
         {children}
       </motion.div>
@@ -116,85 +129,70 @@ export default function Integrate({ ...props }) {
     <Section id='how'>
       <motion.div {...inViewProps} variants={inViewVariants}>
         <h4 className='font-weight-600 mb-2' style={{ color: colors.primary }}>
-          Guide
+          Integration
         </h4>
-        <h1>Integrate in 30 minutes</h1>
+        <h1>Implement in under an hour</h1>
       </motion.div>
       <br />
       <br />
       <Step i={1} img={icon1} title='Create an account'>
         <p className='mb-5'>
-          Go to our portal and become a member. Once you activate your account
-          and pay for your subscription you are able to login using your email
-          and set password. Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Laborum perspiciatis perferendis aut voluptate doloribus, cum
-          sapiente ipsa porro quibusdam alias deleniti ex dolores, deserunt eum
-          eius nam iusto et delectus!
+          Go to our{' '}
+          <a
+            href='https://portal.sommify.ai'
+            className='clickable'
+            onClick
+            style={{ color: colors.primary, textDecoration: 'none' }}
+          >
+            portal
+          </a>{' '}
+          and register as a member. Once you activate your account you are able
+          to login using your email and password.
         </p>
-        <Button
+        {/* <Button
           border
           onClick={() => window.open('https://portal.sommify.ai', '_blank')}
         >
           Register
-        </Button>
+        </Button> */}
       </Step>
       <Step i={2} img={icon2} title='Upload your wines'>
         <p className='mb-5'>
           Upload your wines into our digital wine cellar using an excel, CSV or
-          JSON file. You are able to use a template we provide or a freeform
-          upload. We will process your wines and you will receive an email
-          notification once they are ready.
+          JSON file. We provide templates or you can opt for a freeform upload.
+          We will process your wines and you will receive an email notification
+          once they are ready.
         </p>
       </Step>
       <Step i={3} img={icon3} title='Start using our widget'>
         <p className='mb-5'>
           Once the wines have been processed you receive an email and you can go
-          to the settings page to retrieve your API to populate your website or
-          app. Simple. Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          Perspiciatis cumque quae adipisci non? Beatae in amet itaque quam,
-          aliquam natus molestias a. Eius ex fuga molestiae, perferendis dolorem
-          assumenda officia.
+          to the settings page to retrieve your API key to populate your website
+          or app. Simple.
         </p>
 
         <br />
 
-        <div
-          className='d-flex flex-column position-relative'
-          style={{
-            width: '100vh',
-            background: '#282c34',
-            borderRadius: 12,
-            marginBottom: 120,
-          }}
-        >
-          <div
-            className='w-100 d-flex'
-            style={{ borderBottom: '1px solid #ffffff20', padding: 10 }}
-          >
-            {[1, 2, 3].map(() => (
-              <div
-                style={{
-                  width: 10,
-                  height: 10,
-                  borderRadius: 5,
-                  background: '#ffffff4a',
-                  marginRight: 5,
-                }}
-              />
-            ))}
-          </div>
-
-          <div className='px-4 font-mono'>
-            <Highlight className='html'>{codeBlock}</Highlight>
-          </div>
-        </div>
+        <CodePane
+          examples={[
+            {
+              language: 'html',
+              title: 'index.html',
+              code: codeBlock,
+            },
+            {
+              language: 'js',
+              title: 'script.js',
+              code: jsCodeBlock,
+            },
+          ]}
+        />
       </Step>
       <Step img={icon4} i={4} title='Customize'>
         <p className='mb-5'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-          dolor quisquam modi non nobis praesentium neque, quae ullam magnam
-          repudiandae debitis, rem fuga vitae quia accusamus, iure repellendus
-          vero rerum.
+          You are able to customize the widget to match your brand identity and
+          add language support to the languages you need to serve your customers
+          best.
         </p>
         <Button
           onClick={() => {

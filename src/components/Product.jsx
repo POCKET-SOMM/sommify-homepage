@@ -27,11 +27,11 @@ export default function Product({ className }) {
           title='Interactive Sommelier'
         >
           <span>
-            The consumer is able to type in what they are eating, either using
-            ingredients or typing in the recipe name. Using the tags or recipe
-            the SOMM gives a number of wines that pair well with the meal. By
-            clicking the wines it redirects the consumer to the URL where they
-            are able to purchase the wine.
+            A window on your site into which your customer is able to type in
+            the meal they are going to eat either using the ingredients or the
+            recipe title. Using this input the sommelier offers wines to pair
+            with the meal right from your wine portfolio. The customer clicks
+            the wine they like and get redirected to buy it.
           </span>
         </ProductHeader>
       </div>
