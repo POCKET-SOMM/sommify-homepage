@@ -16,11 +16,13 @@ export default function Pricing({ className }) {
         variants={inViewVariants}
         className='w-100 d-flex flex-column justify-content-center text-center'
       >
-        <h1>Plans & pricing</h1>
-        <p className='mb-5'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet optio
-          nesciunt molestias rerum iure magnam autem, quia nulla. Fugiat quae
-          officiis harum quia tempora minus id dignissimos sunt pariatur ipsam!
+        <h1>Pricing</h1>
+        <p className='mb-5 m-auto'>
+          We offer three different plans depending on your need and size. The
+          first two are simply tied to the amount of customers you have but in
+          the third one let’s get creative together and figure out how we can
+          use our AI sommelier to help you create accessibility for your
+          customers and drive sales for yourself.
         </p>
       </motion.div>
       <div
@@ -38,9 +40,9 @@ export default function Pricing({ className }) {
             value: 300,
             text: 'Our interactive sommelier for 1,000s of customers.',
             traits: [
-              'Widget access',
-              'Dashboard access',
-              '1,000s of customers',
+              'Widget & API access',
+              'Portal access',
+              'For 1,000s of monthly users',
             ],
           },
           {
@@ -48,20 +50,16 @@ export default function Pricing({ className }) {
             value: 900,
             text: 'Our interactive sommelier for 10,000s of customers.',
             traits: [
-              'Widget access',
-              'Dashboard access',
-              '10,000s of customers',
+              'Widget & API access',
+              'Portal access',
+              'For 10,000s of monthly users',
             ],
           },
           {
             title: 'Enterprise',
             value: "Let's talk",
             text: 'A custom solution using our artificial intelligence sommelier.',
-            traits: [
-              'Widget access',
-              'Dashboard access',
-              'Unlimited customers',
-            ],
+            traits: ['Widget & API access', 'Portal access', 'Unlimited'],
           },
         ].map(({ title, value, text, traits }, i) => (
           <div style={{ padding: 18, flexBasis: '33%' }}>
