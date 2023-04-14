@@ -54,8 +54,8 @@ export default function Integrate({ ...props }) {
             style={{
               width: 100,
               height: 100,
-              background: '#fafafa',
-              border: '2px solid #f0f0f0',
+              background: '#fafbfc',
+              border: '2px solid #f0f2f4',
               borderRadius: '50%',
               // fontSize: '3rem',
               position: 'relative',

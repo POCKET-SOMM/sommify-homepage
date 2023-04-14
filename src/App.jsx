@@ -308,7 +308,7 @@ function App() {
             background='linear-gradient(253deg, rgba(240,240,240,1) 0%, rgba(255,255,255,1) 41%, rgba(248,248,248,1) 100%)'
             className='d-flex align-items-start justify-content-between position-relative'
             id='demo'
-            style={{ paddingTop: '30vh' }}
+            style={{ paddingTop: '26vh' }}
           >
             <TitleHeading style={{ width: '45vw' }} />
             <WidgetShowcase />
@@ -321,7 +321,7 @@ function App() {
 
           <div
             className='d-flex justify-content-center align-items-center py-5'
-            style={{ background: '#f0f0f0', paddingInline: '25%' }}
+            style={{ background: '#f0f2f4', paddingInline: '25%' }}
           >
             {partners.map(({ pLogo, height, link }, i) => (
               <div key={'partner_' + i} style={{ flex: 1 }}>

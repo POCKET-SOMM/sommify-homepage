@@ -5,7 +5,7 @@ import useWindowDimensions from '../hooks';
 export default function Section({ children, style, className, ...props }) {
   const { width, height } = useWindowDimensions();
 
-  const paddingTop = width <= 760 ? '20vh' : '13vh';
+  const paddingTop = width <= 760 ? '17vh' : '13vh';
   const paddingBottom = width <= 760 ? '5vh' : '7vh';
 
   return (
