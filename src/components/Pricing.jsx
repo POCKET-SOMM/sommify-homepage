@@ -101,6 +101,18 @@ export default function Pricing({ className }) {
                 <span style={{ fontSize: title === 'Enterprise' && '0.6em' }}>
                   {value}
                 </span>
+                {title !== 'Enterprise' && (
+                  <span
+                    style={{
+                      fontSize: '0.35em',
+                      alignSelf: 'end',
+                      paddingBottom: '.5em',
+                      fontWeight: 500,
+                    }}
+                  >
+                    /mo
+                  </span>
+                )}
               </div>
               <div className='m-auto' />
 
