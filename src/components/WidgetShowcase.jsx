@@ -50,11 +50,11 @@ export default function WidgetShowcase({ ...props }) {
           index = (index + 1) % languages.length;
           setSelected(index);
         }
-      }, 3000);
+      }, 3500);
 
       setTimeout(() => {
         clearInterval(interval);
-      }, 3000 * 7);
+      }, 3500 * 7);
     } else {
       return () => clearInterval(interval);
     }
@@ -129,11 +129,7 @@ export default function WidgetShowcase({ ...props }) {
           setInteracted(true);
         }}
       >
-        <AnimatePresence>
-          <motion.div {...anim} key={`widget_${selected}`}>
-            <Widget theme='flat' localization={languages[selected]} />
-          </motion.div>
-        </AnimatePresence>
+        <Widget theme='flat' localization={languages[selected]} />
       </div>
     </motion.div>
   );
