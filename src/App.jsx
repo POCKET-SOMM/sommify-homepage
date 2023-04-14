@@ -17,6 +17,8 @@ import Navigation from './components/Navigation';
 import Pricing from './components/Pricing';
 import Product from './components/Product';
 import Integrate from './components/Integrate';
+import { CircleFlag } from 'react-circle-flags';
+import WidgetShowcase from './components/WidgetShowcase';
 
 const TitleHeading = ({ ...props }) => {
   const { width } = useWindowDimensions();
@@ -33,7 +35,7 @@ const TitleHeading = ({ ...props }) => {
         <h4
           className='mb-5'
           style={{
-            color: '#1F2937',
+            color: colors.black,
             fontSize: isMobile ? '3.65em' : '4.5em',
             fontWeight: 700,
           }}
@@ -60,9 +62,7 @@ const TitleHeading = ({ ...props }) => {
             fontSize: '1.1em',
             color: '#4b5563',
             opacity: 0.45,
-            maxWidth: 500
-            // width: '80%',
-            // letterSpacing: '.025em',
+            maxWidth: 500,
           }}
         >
           Built on the wine knowledge of Julie Dupouy, world-class sommelier
@@ -108,7 +108,7 @@ const Footer = () => (
     id='footer'
     // className='bg-secondary'
     style={{
-      background: '#151518',
+      background: '#131921',
       width: '100%',
       color: 'white',
       fontSize: '0.9rem',
@@ -311,13 +311,7 @@ function App() {
             style={{ paddingTop: '30vh' }}
           >
             <TitleHeading style={{ width: '45vw' }} />
-            <motion.div
-              style={{ borderRadius: 18, background: '#ffffff' }}
-              variants={inViewVariants}
-              className='shaded'
-            >
-              <Widget theme='flat' />
-            </motion.div>
+            <WidgetShowcase />
           </Section>
 
           <Product />

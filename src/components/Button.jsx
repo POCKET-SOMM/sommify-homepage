@@ -18,11 +18,14 @@ export default function Button({
     <motion.div
       {...props}
       initial={false}
-      className={'clickable position-relative font-weight-600 d-inline text-center ' + className}
+      className={
+        'clickable position-relative font-weight-600 d-inline text-center ' +
+        className
+      }
       animate={{
-        border: borderless ? 'none' : `2px solid #000000`,
-        color: border ? '#000000' : '#ffffff',
-        background: border ? 'none' : '#000000',
+        border: borderless ? 'none' : `2px solid ${colors.black}`,
+        color: border ? colors.black : '#ffffff',
+        background: border ? 'none' : colors.black,
         ...animate,
       }}
       style={{

@@ -91,7 +91,7 @@ export default function Integrate({ ...props }) {
               <div
                 style={{
                   transform: 'rotate(-45deg)',
-                  color: '#fffffff0'
+                  color: '#fffffff0',
                 }}
               >
                 {i}
@@ -192,7 +192,8 @@ export default function Integrate({ ...props }) {
         <p className='mb-5'>
           You are able to customize the widget to match your brand identity and
           add language support to the languages you need to serve your customers
-          best.
+          best. Additionally, you can create custom categories for the sommelier
+          to generate like local or seasonal wines.
         </p>
         <Button
           onClick={() => {
