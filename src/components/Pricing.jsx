@@ -69,10 +69,10 @@ export default function Pricing({ className }) {
               variants={inViewVariants}
               style={{
                 borderRadius: '1.5em',
-                border: '2px solid #f0f0f0',
+                background: '#fafbfc',
+                border: '2px solid #f0f2f4',
                 minWidth: 325,
-                background: '#fafafa',
-                color: '#555',
+                color: colors.black,
               }}
             >
               <div className='w-100 py-1 pt-5 text-center'>
@@ -147,7 +147,7 @@ export default function Pricing({ className }) {
                   animate={
                     i == selected
                       ? { color: '#555', background: '#eee' }
-                      : { color: '#333', background: '#f0f0f0' }
+                      : { color: '#333', background: '#f0f2f4' }
                   }
                   style={{
                     borderRadius: 10,
