@@ -33,6 +33,8 @@ export default function WidgetShowcase({ ...props }) {
     transition: { duration: 0.5, ease: 'easeInOut', type: 'tween' },
   };
 
+  const isMobile = window.innerWidth <= 768;
+
   // get n languages in original order, with the middle one being the one on index i
   const getLanguages = (i, n = N_LANG) => {
     return _.range(i - ~~(n / 2), i + ~~(n / 2) + 1).map(
@@ -129,7 +131,11 @@ export default function WidgetShowcase({ ...props }) {
           setInteracted(true);
         }}
       >
-        <Widget theme='flat' localization={languages[selected]} />
+        <Widget
+          size={isMobile ? 'mobile' : 'desktop'}
+          theme='flat'
+          localization={languages[selected]}
+        />
       </div>
     </motion.div>
   );

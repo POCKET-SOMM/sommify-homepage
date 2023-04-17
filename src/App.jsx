@@ -283,13 +283,14 @@ function App() {
               </Button>
             </div> */}
             <div className='pt-5 w-100 d-flex justify-content-center'>
-              <motion.div
+              <WidgetShowcase />
+              {/* <motion.div
                 style={{ borderRadius: 18, background: '#ffffff' }}
                 variants={inViewVariants}
                 className='shaded'
               >
                 <Widget theme='flat' size='mobile' />
-              </motion.div>
+              </motion.div> */}
             </div>
           </Section>
           <Product className='text-center' />
