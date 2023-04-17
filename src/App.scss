@@ -25,7 +25,7 @@ body {
 
 p {
   font-size: 17.6px;
-  color: #525359;
+  color: #686970;
 }
 
 h1,
@@ -48,6 +48,12 @@ h2 {
   color: #1f2937 !important;
   font-weight: 700 !important;
   margin-bottom: 2rem !important;
+}
+
+h4 {
+  // color: #1f2937 !important;
+  font-weight: 700 !important;
+  margin-bottom: 1.3rem !important;
 }
 
 .popover-arrow::after {
