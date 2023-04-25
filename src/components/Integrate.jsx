@@ -107,7 +107,7 @@ export default function Integrate({ ...props }) {
         variants={inViewVariants}
         style={{ flex: 1, paddingBottom: 50 }}
       >
-        <h2>{title}</h2>
+        <h4>{title}</h4>
         {children}
       </motion.div>
       {rightAlign && (

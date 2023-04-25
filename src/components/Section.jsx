@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { inViewProps } from '../data/variants';
 import useWindowDimensions from '../hooks';
+import bglines from '../assets/bglines.svg';
 
 export default function Section({ children, style, className, ...props }) {
   const { width, height } = useWindowDimensions();
@@ -28,6 +29,7 @@ export default function Section({ children, style, className, ...props }) {
           maxWidth: 1200,
           // minHeight: width > 760 ? `calc(100vh)` : '',
           margin: 'auto',
+          // background: `url(${bglines})`,
           ...style,
         }}
         className={className}

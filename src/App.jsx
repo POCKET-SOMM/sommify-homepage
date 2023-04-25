@@ -10,7 +10,6 @@ import ContactUs from './components/ContactUs';
 import Button from './components/Button';
 import { inViewVariants, inViewVariantsX } from './data/variants';
 import JumpCard from './components/JumpCard';
-import { Widget } from 'react-sommify-widget';
 import Section from './components/Section';
 import partners from './data/partners';
 import Navigation from './components/Navigation';
@@ -241,11 +240,19 @@ const WhatWeDo = () => (
   </>
 );
 
+import bglines from './assets/bglines.svg';
+
 function App() {
   const { width, height } = useWindowDimensions();
 
   return (
-    <div style={{ overflowX: 'hidden', width: '100vw', position: 'relative' }}>
+    <div
+      style={{
+        overflowX: 'hidden',
+        width: '100vw',
+        position: 'relative',
+      }}
+    >
       <CustomView id='mobile-view' condition={width < 760}>
         <Navigation />
         <div
@@ -283,13 +290,14 @@ function App() {
               </Button>
             </div> */}
             <div className='pt-5 w-100 d-flex justify-content-center'>
-              <motion.div
+              <WidgetShowcase />
+              {/* <motion.div
                 style={{ borderRadius: 18, background: '#ffffff' }}
                 variants={inViewVariants}
                 className='shaded'
               >
                 <Widget theme='flat' size='mobile' />
-              </motion.div>
+              </motion.div> */}
             </div>
           </Section>
           <Product className='text-center' />

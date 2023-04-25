@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { inViewVariants } from '../data/variants';
-import { Widget } from 'react-sommify-widget';
+import { TagWidget } from 'react-sommify-widget';
 import { CircleFlag } from 'react-circle-flags';
 import _ from 'lodash';
 
@@ -32,6 +32,8 @@ export default function WidgetShowcase({ ...props }) {
     exit: { opacity: 0, position: 'absolute', transition: { duration: 0 } },
     transition: { duration: 0.5, ease: 'easeInOut', type: 'tween' },
   };
+
+  const isMobile = window.innerWidth <= 768;
 
   // get n languages in original order, with the middle one being the one on index i
   const getLanguages = (i, n = N_LANG) => {
@@ -129,7 +131,12 @@ export default function WidgetShowcase({ ...props }) {
           setInteracted(true);
         }}
       >
-        <Widget theme='flat' localization={languages[selected]} />
+        <TagWidget
+          size={isMobile ? 'mobile' : 'desktop'}
+          theme='flat'
+          localization={languages[selected]}
+          withButton
+        />
       </div>
     </motion.div>
   );

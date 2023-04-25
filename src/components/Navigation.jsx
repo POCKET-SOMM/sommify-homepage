@@ -120,7 +120,7 @@ export default function Navigation({ ...props }) {
         <div
           style={{
             display: 'flex',
-            width: '100vw',
+            width: 1300,
             margin: 'auto',
             // maxWidth: 1200,
             paddingInline: 64,
