@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { inViewVariants } from '../data/variants';
-import { Widget } from 'react-sommify-widget';
+import { TagWidget } from 'react-sommify-widget';
 import { CircleFlag } from 'react-circle-flags';
 import _ from 'lodash';
 
@@ -131,10 +131,11 @@ export default function WidgetShowcase({ ...props }) {
           setInteracted(true);
         }}
       >
-        <Widget
+        <TagWidget
           size={isMobile ? 'mobile' : 'desktop'}
           theme='flat'
           localization={languages[selected]}
+          withButton
         />
       </div>
     </motion.div>

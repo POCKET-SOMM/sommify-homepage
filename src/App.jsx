@@ -10,7 +10,6 @@ import ContactUs from './components/ContactUs';
 import Button from './components/Button';
 import { inViewVariants, inViewVariantsX } from './data/variants';
 import JumpCard from './components/JumpCard';
-import { Widget } from 'react-sommify-widget';
 import Section from './components/Section';
 import partners from './data/partners';
 import Navigation from './components/Navigation';
@@ -241,11 +240,19 @@ const WhatWeDo = () => (
   </>
 );
 
+import bglines from './assets/bglines.svg';
+
 function App() {
   const { width, height } = useWindowDimensions();
 
   return (
-    <div style={{ overflowX: 'hidden', width: '100vw', position: 'relative' }}>
+    <div
+      style={{
+        overflowX: 'hidden',
+        width: '100vw',
+        position: 'relative',
+      }}
+    >
       <CustomView id='mobile-view' condition={width < 760}>
         <Navigation />
         <div
