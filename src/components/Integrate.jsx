@@ -1,10 +1,10 @@
 import Button from './Button';
 import Section from './Section';
 
-import icon1 from '../assets/isometric_icons/iso_user.png';
-import icon2 from '../assets/isometric_icons/iso_upload.png';
-import icon3 from '../assets/isometric_icons/iso_widget.png';
-import icon4 from '../assets/isometric_icons/iso_setting.png';
+import icon1 from '../assets/isometric_icons/iso_user.svg';
+import icon2 from '../assets/isometric_icons/iso_upload.svg';
+import icon3 from '../assets/isometric_icons/iso_widget.svg';
+import icon4 from '../assets/isometric_icons/iso_setting.svg';
 import { motion } from 'framer-motion';
 import { CgLink } from 'react-icons/cg';
 import { inViewProps, inViewVariants } from '../data/variants';
@@ -99,7 +99,7 @@ export default function Integrate({ ...props }) {
             </div>
           </div>
           {i <= 3 && (
-            <div style={{ width: 2, flex: 1, background: '#f0f0f0' }}></div>
+            <div style={{ width: 2, flex: 1, background: '#f0f2f4' }}></div>
           )}
         </div>
       )}
