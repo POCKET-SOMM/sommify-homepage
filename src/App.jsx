@@ -30,20 +30,17 @@ const TitleHeading = ({ ...props }) => {
         isMobile ? 'justify-content-center' : ''
       }`}
     >
-      <div className='pt-1'>
+      <div style={{ paddingTop: isMobile ? 12 : 60 }}>
         <h4
           className='mb-5'
           style={{
             color: colors.black,
-            fontSize: isMobile ? '3.65em' : '4.5em',
-            fontWeight: 700,
+            fontSize: isMobile ? '3.65em' : '5.2em',
           }}
         >
-          Making
+          Making&nbsp;<span style={{ color: colors.primary }}>wine</span>
           <br />
-          <span style={{ color: colors.primary }}>wine</span>-food
-          <br />
-          pairing easy.
+          easy.
         </h4>
         <h6
           className='font-weight-500 mb-4'
@@ -64,7 +61,7 @@ const TitleHeading = ({ ...props }) => {
             maxWidth: 500,
           }}
         >
-          Built on the wine knowledge of Julie Dupouy, world-class sommelier
+          Built on the wine knowledge of Julie Dupouy, a world-class sommelier
           with 20+ years of experience.
         </h6>
         <div

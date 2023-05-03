@@ -8,7 +8,6 @@ import icon4 from '../assets/isometric_icons/iso_setting.svg';
 import { motion } from 'framer-motion';
 import { CgLink } from 'react-icons/cg';
 import { inViewProps, inViewVariants } from '../data/variants';
-import Highlight from 'react-highlight';
 import colors from '../data/colors';
 import CodePane from './CodePane';
 
@@ -128,9 +127,9 @@ export default function Integrate({ ...props }) {
   return (
     <Section id='how'>
       <motion.div {...inViewProps} variants={inViewVariants}>
-        <h4 className='font-weight-600 mb-2' style={{ color: colors.primary }}>
-          Integration
-        </h4>
+        <h6 className='font-weight-500 mb-2' style={{ color: colors.primary }}>
+          INTEGRATION
+        </h6>
         <h1>Implement in under an hour</h1>
       </motion.div>
       <br />

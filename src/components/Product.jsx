@@ -27,11 +27,12 @@ export default function Product({ className }) {
           title='Interactive Sommelier'
         >
           <p>
-            A window on your site into which your customer is able to type in
-            the meal they are going to eat either using the ingredients or the
-            recipe title. Using this input the sommelier offers wines to pair
-            with the meal right from your wine portfolio. The customer clicks
-            the wine they like and get redirected to buy it.
+            A window that can be embedded into an app or website to guide
+            customers in making the right wine purchase. Customers can ask
+            questions to find the right wine to pair with a meal or for a
+            particular occasion. The suggested wines are from the retailer's
+            portfolio, so in addition to its accessibility, the AI sommelier is
+            the perfect sales driver.
           </p>
         </ProductHeader>
       </div>
