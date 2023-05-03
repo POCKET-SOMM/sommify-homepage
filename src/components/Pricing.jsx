@@ -141,8 +141,12 @@ export default function Pricing({ className }) {
                 <Button
                   borderless
                   onClick={() => {
-                    const target = document.getElementById('contact');
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    // const target = document.getElementById('contact');
+                    // target.scrollIntoView({ behavior: 'smooth' });
+                    window.open(
+                      'https://sommify.notion.site/Drive-sales-through-accessibility-w-sommifyAI-1ddeab3ad8d847a1a3b21683ad254941',
+                      '_blank'
+                    );
                   }}
                   animate={
                     i == selected

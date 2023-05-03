@@ -14,9 +14,9 @@ const ProductHeader = ({ title, className, style, children, ...props }) => {
       variants={inViewVariants}
       style={{ marginTop: 70, ...style }}
     >
-      <h4 style={{ color: colors.primary }} className='font-weight-600 mb-2'>
-        Product
-      </h4>
+      <h6 className='font-weight-500 mb-2' style={{ color: colors.primary }}>
+        PRODUCT
+      </h6>
       <h1>{title}</h1>
       <p
         className={'py-4 mb-4 w-100 ' + className}
