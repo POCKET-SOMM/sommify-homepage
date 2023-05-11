@@ -5,23 +5,8 @@ import { TagWidget } from 'react-sommify-widget';
 import { CircleFlag } from 'react-circle-flags';
 import _ from 'lodash';
 
-const languages = [
-  'en',
-  'fr',
-  'de',
-  'it',
-  'es',
-  'nl',
-  'fi',
-  'en',
-  'fr',
-  'de',
-  'it',
-  'es',
-  'nl',
-  'fi',
-];
-const N_LANG = 5;
+const languages = ['en', 'fr', 'de', 'it', 'es', 'nl', 'fi', 'ja', 'da'];
+const N_LANG = 9;
 
 export default function WidgetShowcase({ ...props }) {
   const [selected, setSelected] = React.useState(0);
@@ -56,7 +41,7 @@ export default function WidgetShowcase({ ...props }) {
 
       setTimeout(() => {
         clearInterval(interval);
-      }, 3500 * 7);
+      }, 3500 * languages.length);
     } else {
       return () => clearInterval(interval);
     }
@@ -72,7 +57,7 @@ export default function WidgetShowcase({ ...props }) {
             initial={false}
             animate={{
               opacity:
-                i <= 0 || i >= N_LANG - 1
+                i <= 1 || i >= N_LANG - 2
                   ? 0
                   : languages[selected] === lang
                   ? 1
@@ -84,7 +69,7 @@ export default function WidgetShowcase({ ...props }) {
             layout
             key={lang}
             whileHover={
-              i <= 0 || i >= N_LANG - 1
+              i <= 1 || i >= N_LANG - 2
                 ? {}
                 : {
                     opacity: languages[selected] === lang ? 0.85 : 0.5,
@@ -100,7 +85,7 @@ export default function WidgetShowcase({ ...props }) {
               //   display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              cursor: i <= 0 || i >= N_LANG - 1 ? 'default' : 'pointer',
+              cursor: i <= 1 || i >= N_LANG - 2 ? 'default' : 'pointer',
             }}
             transition={{
               type: 'spring',
@@ -112,14 +97,22 @@ export default function WidgetShowcase({ ...props }) {
               style={{ width: 20, height: 20 }}
               className='mx-2'
               onClick={() => {
-                if (i <= 0 || i >= N_LANG - 1) return;
+                if (i <= 1 || i >= N_LANG - 2) return;
                 setSelected(
                   (selected + i - ~~(N_LANG / 2) + languages.length) %
                     languages.length
                 );
                 setInteracted(true);
               }}
-              countryCode={lang === 'en' ? 'uk' : lang}
+              countryCode={
+                lang === 'en'
+                  ? 'uk'
+                  : lang === 'ja'
+                  ? 'jp'
+                  : lang === 'da'
+                  ? 'dk'
+                  : lang
+              }
             />
           </motion.div>
         ))}
