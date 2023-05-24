@@ -5,6 +5,7 @@ import icon1 from '../assets/isometric_icons/iso_user.svg';
 import icon2 from '../assets/isometric_icons/iso_upload.svg';
 import icon3 from '../assets/isometric_icons/iso_widget.svg';
 import icon4 from '../assets/isometric_icons/iso_setting.svg';
+import { Icon3d } from '../assets';
 import { motion } from 'framer-motion';
 import { CgLink } from 'react-icons/cg';
 import { inViewProps, inViewVariants } from '../data/variants';
@@ -51,10 +52,10 @@ export default function Integrate({ ...props }) {
         >
           <div
             style={{
-              width: 100,
-              height: 100,
-              background: '#fafbfc',
-              border: '2px solid #f0f2f4',
+              width: 110,
+              height: 110,
+              // background: '#f8fafc',
+              // border: '2px solid #f8fafc',
               borderRadius: '50%',
               // fontSize: '3rem',
               position: 'relative',
@@ -65,8 +66,8 @@ export default function Integrate({ ...props }) {
           >
             <motion.img
               src={img}
-              style={{ filter: 'brightness(0)' }}
-              width={60}
+              // style={{ filter: 'brightness(0)' }}
+              width={70}
               variants={inViewVariants}
             />
             <div
@@ -134,7 +135,7 @@ export default function Integrate({ ...props }) {
       </motion.div>
       <br />
       <br />
-      <Step i={1} img={icon1} title='Create an account'>
+      <Step i={1} img={Icon3d.User} title='Create an account'>
         <p className='mb-5'>
           Go to our{' '}
           <a
@@ -155,7 +156,7 @@ export default function Integrate({ ...props }) {
           Register
         </Button> */}
       </Step>
-      <Step i={2} img={icon2} title='Upload your wines'>
+      <Step i={2} img={Icon3d.Box} title='Upload your wines'>
         <p className='mb-5'>
           Upload your wines into our digital wine cellar using an excel, CSV or
           JSON file. We provide templates or you can opt for a freeform upload.
@@ -163,7 +164,7 @@ export default function Integrate({ ...props }) {
           once they are ready.
         </p>
       </Step>
-      <Step i={3} img={icon3} title='Start using our widget'>
+      <Step i={3} img={Icon3d.Twinkle} title='Start using our widget'>
         <p className='mb-5'>
           Once the wines have been processed you receive an email and you can go
           to the settings page to retrieve your API key to populate your website
@@ -187,7 +188,7 @@ export default function Integrate({ ...props }) {
           ]}
         />
       </Step>
-      <Step img={icon4} i={4} title='Customize'>
+      <Step img={Icon3d.Customize} i={4} title='Customize'>
         <p className='mb-5'>
           You are able to customize the widget to match your brand identity and
           add language support to the languages you need to serve your customers

@@ -29,6 +29,11 @@ import SS2 from './screenshots/SS2.png';
 import SS3 from './screenshots/SS3.png';
 import MacBook from './macbook.png';
 
+import Box from './3d_icons/wine_box.png';
+import Twinkle from './3d_icons/twinkle.png';
+import Customize from './3d_icons/customize.png';
+import User from './3d_icons/user.png';
+
 export const Image = {
   Wave,
   WaveDouble,
@@ -66,4 +71,11 @@ export const Icon = {
   Accessible,
   Refreshing,
   WorldClass,
+};
+
+export const Icon3d = {
+  User,
+  Box,
+  Twinkle,
+  Customize,
 };
