@@ -70,7 +70,7 @@ export default function Pricing({ className }) {
               style={{
                 borderRadius: '1.5em',
                 background: '#fafbfc',
-                border: '2px solid #f0f2f4',
+                // border: '2px solid #f0f2f4',
                 minWidth: 325,
                 color: colors.black,
               }}

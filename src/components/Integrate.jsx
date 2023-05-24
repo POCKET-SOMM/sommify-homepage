@@ -54,8 +54,8 @@ export default function Integrate({ ...props }) {
             style={{
               width: 110,
               height: 110,
-              // background: '#f8fafc',
-              // border: '2px solid #f8fafc',
+              background: '#f8fafc',
+              border: '2px solid #f8fafc',
               borderRadius: '50%',
               // fontSize: '3rem',
               position: 'relative',
@@ -66,8 +66,8 @@ export default function Integrate({ ...props }) {
           >
             <motion.img
               src={img}
-              // style={{ filter: 'brightness(0)' }}
-              width={70}
+              style={{ filter: 'brightness(0)' }}
+              width={60}
               variants={inViewVariants}
             />
             <div
@@ -79,7 +79,7 @@ export default function Integrate({ ...props }) {
                 fontWeight: 600,
                 background: '#282c34',
                 color: 'white',
-                top: 30,
+                top: 40,
                 left: -23,
                 fontSize: '1.05rem',
                 transform: 'rotate(45deg)',
@@ -135,7 +135,7 @@ export default function Integrate({ ...props }) {
       </motion.div>
       <br />
       <br />
-      <Step i={1} img={Icon3d.User} title='Create an account'>
+      <Step i={1} img={icon1} title='Create an account'>
         <p className='mb-5'>
           Go to our{' '}
           <a
@@ -156,7 +156,7 @@ export default function Integrate({ ...props }) {
           Register
         </Button> */}
       </Step>
-      <Step i={2} img={Icon3d.Box} title='Upload your wines'>
+      <Step i={2} img={icon2} title='Upload your wines'>
         <p className='mb-5'>
           Upload your wines into our digital wine cellar using an excel, CSV or
           JSON file. We provide templates or you can opt for a freeform upload.
@@ -164,7 +164,7 @@ export default function Integrate({ ...props }) {
           once they are ready.
         </p>
       </Step>
-      <Step i={3} img={Icon3d.Twinkle} title='Start using our widget'>
+      <Step i={3} img={icon3} title='Start using our widget'>
         <p className='mb-5'>
           Once the wines have been processed you receive an email and you can go
           to the settings page to retrieve your API key to populate your website
@@ -188,7 +188,7 @@ export default function Integrate({ ...props }) {
           ]}
         />
       </Step>
-      <Step img={Icon3d.Customize} i={4} title='Customize'>
+      <Step img={icon4} i={4} title='Customize'>
         <p className='mb-5'>
           You are able to customize the widget to match your brand identity and
           add language support to the languages you need to serve your customers
