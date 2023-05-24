@@ -5,6 +5,7 @@ import icon1 from '../assets/isometric_icons/iso_user.svg';
 import icon2 from '../assets/isometric_icons/iso_upload.svg';
 import icon3 from '../assets/isometric_icons/iso_widget.svg';
 import icon4 from '../assets/isometric_icons/iso_setting.svg';
+import { Icon3d } from '../assets';
 import { motion } from 'framer-motion';
 import { CgLink } from 'react-icons/cg';
 import { inViewProps, inViewVariants } from '../data/variants';
@@ -51,10 +52,10 @@ export default function Integrate({ ...props }) {
         >
           <div
             style={{
-              width: 100,
-              height: 100,
-              background: '#fafbfc',
-              border: '2px solid #f0f2f4',
+              width: 110,
+              height: 110,
+              background: '#f8fafc',
+              border: '2px solid #f8fafc',
               borderRadius: '50%',
               // fontSize: '3rem',
               position: 'relative',
@@ -78,7 +79,7 @@ export default function Integrate({ ...props }) {
                 fontWeight: 600,
                 background: '#282c34',
                 color: 'white',
-                top: 30,
+                top: 40,
                 left: -23,
                 fontSize: '1.05rem',
                 transform: 'rotate(45deg)',
