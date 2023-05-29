@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 import colors from './data/colors';
 import { CustomView } from 'react-device-detect';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { SiCrunchbase, SiLinkedin } from 'react-icons/si';
 import useWindowDimensions from './hooks';
-import { Icon } from './assets';
+import { Icon, Logo } from './assets';
 import ContactUs from './components/ContactUs';
 import Button from './components/Button';
 import { inViewVariants, inViewVariantsX } from './data/variants';
@@ -18,6 +18,8 @@ import Product from './components/Product';
 import Integrate from './components/Integrate';
 import { CircleFlag } from 'react-circle-flags';
 import WidgetShowcase from './components/WidgetShowcase';
+import { ChatWidget } from 'react-sommify-widget';
+import { CgClose } from 'react-icons/cg';
 
 const TitleHeading = ({ ...props }) => {
   const { width } = useWindowDimensions();
@@ -237,10 +239,9 @@ const WhatWeDo = () => (
   </>
 );
 
-import bglines from './assets/bglines.svg';
-
 function App() {
   const { width, height } = useWindowDimensions();
+  const [widgetOpen, setWidgetOpen] = useState(false);
 
   return (
     <div
@@ -307,6 +308,56 @@ function App() {
       </CustomView>
       <CustomView id='desktop-view' condition={width >= 760}>
         <div className='position-relative w-100'>
+          {/* <motion.div
+            className='clickable'
+            style={{
+              position: 'fixed',
+              bottom: 30,
+              right: 30,
+              height: 50,
+              width: 50,
+              borderRadius: '50%',
+              backgroundColor: colors.primary,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              zIndex: 9999,
+              color: 'white',
+            }}
+            whileHover={{ scale: 0.98 }}
+            onClick={() => setWidgetOpen(!widgetOpen)}
+          >
+            {widgetOpen ? (
+              <CgClose size={24} />
+            ) : (
+              <img
+                style={{ width: '90%', height: '90%' }}
+                src={Logo.SocialsWhite}
+              />
+            )}
+          </motion.div>
+
+          <AnimatePresence>
+            {widgetOpen && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ ease: 'easeInOut', duration: 0.1 }}
+                style={{
+                  position: 'fixed',
+                  bottom: 110,
+                  right: 30,
+                  zIndex: 9999,
+                }}
+                key='popupsomm'
+                id='popupsomm'
+              >
+                <ChatWidget upwards />
+              </motion.div>
+            )}
+          </AnimatePresence> */}
+
           <Navigation />
 
           <Section
