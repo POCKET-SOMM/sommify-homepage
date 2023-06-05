@@ -32,99 +32,102 @@ Sommify.mount("widget-element",  // id of the div in your html.index file
   size: "desktop", // "mobile"
 });`;
 
-export default function Integrate({ ...props }) {
-  const Step = ({ title, children, rightAlign, style, img, i }) => (
-    <motion.div
-      {...inViewProps}
-      style={{
-        display: 'flex',
-        width: '80%',
-        // float: rightAlign ? 'right' : 'left',
-        marginLeft: rightAlign ? 'auto' : 0,
-        textAlign: rightAlign ? 'end' : 'start',
-        ...style,
-      }}
-    >
-      {!rightAlign && (
+const Step = ({ title, children, rightAlign, style, img, i }) => (
+  <motion.div
+    {...inViewProps}
+    key={'integration_step_' + i}
+    style={{
+      display: 'flex',
+      width: '80%',
+      // float: rightAlign ? 'right' : 'left',
+      marginLeft: rightAlign ? 'auto' : 0,
+      textAlign: rightAlign ? 'end' : 'start',
+      ...style,
+    }}
+  >
+    {!rightAlign && (
+      <div
+        className='d-flex flex-column align-items-center'
+        style={{ paddingRight: 50 }}
+      >
         <div
-          className='d-flex flex-column align-items-center'
-          style={{ paddingRight: 50 }}
+          style={{
+            width: 110,
+            height: 110,
+            background: '#f8fafc',
+            border: '2px solid #f8fafc',
+            borderRadius: '50%',
+            // fontSize: '3rem',
+            position: 'relative',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
         >
+          <motion.img
+            src={img}
+            style={{ filter: 'brightness(0)' }}
+            width={60}
+            variants={inViewVariants}
+            key={'integration_step_img_' + i}
+          />
           <div
             style={{
-              width: 110,
-              height: 110,
-              background: '#f8fafc',
-              border: '2px solid #f8fafc',
-              borderRadius: '50%',
-              // fontSize: '3rem',
-              position: 'relative',
+              position: 'absolute',
+              width: 30,
+              height: 30,
+              borderRadius: 4,
+              fontWeight: 600,
+              background: '#282c34',
+              color: 'white',
+              top: 40,
+              left: -23,
+              fontSize: '1.05rem',
+              transform: 'rotate(45deg)',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
             }}
           >
-            <motion.img
-              src={img}
-              style={{ filter: 'brightness(0)' }}
-              width={60}
-              variants={inViewVariants}
-            />
             <div
               style={{
-                position: 'absolute',
-                width: 30,
-                height: 30,
-                borderRadius: 4,
-                fontWeight: 600,
-                background: '#282c34',
-                color: 'white',
-                top: 40,
-                left: -23,
-                fontSize: '1.05rem',
-                transform: 'rotate(45deg)',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+                transform: 'rotate(-45deg)',
+                color: '#fffffff0',
               }}
             >
-              <div
-                style={{
-                  transform: 'rotate(-45deg)',
-                  color: '#fffffff0',
-                }}
-              >
-                {i}
-              </div>
+              {i}
             </div>
           </div>
-          {i <= 3 && (
-            <div style={{ width: 2, flex: 1, background: '#f0f2f4' }}></div>
-          )}
         </div>
-      )}
-      <motion.div
-        variants={inViewVariants}
-        style={{ flex: 1, paddingBottom: 50 }}
-      >
-        <h4>{title}</h4>
-        {children}
-      </motion.div>
-      {rightAlign && (
-        <div style={{ paddingLeft: 50 }}>
-          <div
-            style={{
-              width: 100,
-              height: 100,
-              background: '#bbb',
-              borderRadius: 10,
-            }}
-          ></div>
-        </div>
-      )}
+        {i <= 3 && (
+          <div style={{ width: 2, flex: 1, background: '#f0f2f4' }}></div>
+        )}
+      </div>
+    )}
+    <motion.div
+      variants={inViewVariants}
+      key={'integration_step_text_' + i}
+      style={{ flex: 1, paddingBottom: 50 }}
+    >
+      <h4>{title}</h4>
+      {children}
     </motion.div>
-  );
+    {rightAlign && (
+      <div style={{ paddingLeft: 50 }}>
+        <div
+          style={{
+            width: 100,
+            height: 100,
+            background: '#bbb',
+            borderRadius: 10,
+          }}
+        ></div>
+      </div>
+    )}
+  </motion.div>
+);
 
+export default function Integrate({ ...props }) {
   return (
     <Section id='how'>
       <motion.div {...inViewProps} variants={inViewVariants}>

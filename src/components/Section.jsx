@@ -13,6 +13,7 @@ export default function Section({ children, style, className, ...props }) {
     <motion.div
       {...props}
       {...inViewProps}
+      initial={false}
       className='w-100 position-relative section'
     >
       {/* <img
