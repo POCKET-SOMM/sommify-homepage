@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.scss';
 import colors from './data/colors';
 import { CustomView } from 'react-device-detect';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import { SiCrunchbase, SiLinkedin } from 'react-icons/si';
 import useWindowDimensions from './hooks';
 import { Icon, Logo } from './assets';
@@ -20,6 +20,7 @@ import { CircleFlag } from 'react-circle-flags';
 import WidgetShowcase from './components/WidgetShowcase';
 import { ChatWidget } from 'react-sommify-widget';
 import { CgClose } from 'react-icons/cg';
+import { HiCursorClick } from 'react-icons/hi';
 
 const TitleHeading = ({ ...props }) => {
   const { width } = useWindowDimensions();
@@ -242,6 +243,21 @@ const WhatWeDo = () => (
 function App() {
   const { width, height } = useWindowDimensions();
   const [widgetOpen, setWidgetOpen] = useState(false);
+  const [widgetVisible, setWidgetVisible] = useState(true);
+
+  // track scroll position
+  const { scrollY } = useScroll();
+
+  useEffect(() => {
+    return scrollY.onChange((latest) => {
+      if (latest === 0 || latest <= 0.9 * height) {
+        {
+          setWidgetVisible(true);
+          setWidgetOpen(false);
+        }
+      } else setWidgetVisible(false);
+    });
+  }, []);
 
   return (
     <div
@@ -308,37 +324,71 @@ function App() {
       </CustomView>
       <CustomView id='desktop-view' condition={width >= 760}>
         <div className='position-relative w-100'>
-          {/* <motion.div
-            className='clickable'
-            style={{
-              position: 'fixed',
-              bottom: 30,
-              right: 30,
-              height: 50,
-              width: 50,
-              borderRadius: '50%',
-              backgroundColor: colors.primary,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              zIndex: 9999,
-              color: 'white',
-            }}
-            whileHover={{ scale: 0.98 }}
-            onClick={() => setWidgetOpen(!widgetOpen)}
-          >
-            {widgetOpen ? (
-              <CgClose size={24} />
-            ) : (
-              <img
-                style={{ width: '90%', height: '90%' }}
-                src={Logo.SocialsWhite}
-              />
-            )}
-          </motion.div>
-
           <AnimatePresence>
-            {widgetOpen && (
+            {widgetVisible || (
+              <motion.div
+                key='chat-bot-button'
+                className='clickable'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 0.1,
+                }}
+                style={{
+                  position: 'fixed',
+                  bottom: 30,
+                  right: 30,
+                  height: 50,
+                  width: 50,
+                  borderRadius: '50%',
+                  backgroundColor: colors.primary,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  zIndex: 9999,
+                  color: 'white',
+                }}
+                whileHover={{ scale: 0.98 }}
+                onClick={() => setWidgetOpen(!widgetOpen)}
+              >
+                {widgetOpen ? (
+                  <CgClose size={24} />
+                ) : (
+                  <img
+                    style={{ width: '90%', height: '90%' }}
+                    src={Logo.SocialsWhite}
+                  />
+                )}
+                {/* {widgetOpen || (
+                  <motion.div
+                    style={{
+                      position: 'absolute',
+                      right: '100%',
+                      top: '70%',
+                      color: colors.black,
+                      display: 'flex',
+                      alignItems: 'end',
+                      padding: '5px 8px',
+                      borderRadius: 6,
+                      background: 'white',
+                      border: '2px solid ' + colors.black,
+                    }}
+                  >
+                    <span style={{ lineHeight: 1, fontWeight: 600 }}>
+                      Click
+                    </span>
+                    &nbsp;
+                    <HiCursorClick
+                      size={26}
+                      style={{ transform: 'rotate(90deg)' }}
+                    />
+                  </motion.div>
+                )} */}
+              </motion.div>
+            )}
+
+            {widgetOpen && !widgetVisible && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -350,13 +400,13 @@ function App() {
                   right: 30,
                   zIndex: 9999,
                 }}
-                key='popupsomm'
-                id='popupsomm'
+                key='chat-bot-widget'
+                id='chat-bot-widget'
               >
-                <ChatWidget upwards />
+                <ChatWidget key='chat-bot' upwards />
               </motion.div>
             )}
-          </AnimatePresence> */}
+          </AnimatePresence>
 
           <Navigation />
 
@@ -367,7 +417,7 @@ function App() {
             style={{ paddingTop: '26vh' }}
           >
             <TitleHeading style={{ width: '45vw' }} />
-            <WidgetShowcase />
+            {widgetVisible && <WidgetShowcase />}
           </Section>
 
           <Product />
