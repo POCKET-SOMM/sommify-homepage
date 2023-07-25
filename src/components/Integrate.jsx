@@ -31,6 +31,10 @@ const widget = Sommify.createWidget({
   },
 });
 
+widget.onAddToCart((wine) => {
+  // add logic to execute when add to cart button is clicked
+});
+
 // mount the widget using the Sommify.mount function
 widget.mount();`;
 
