@@ -16,29 +16,34 @@ import Navigation from './components/Navigation';
 import Pricing from './components/Pricing';
 import Product from './components/Product';
 import Integrate from './components/Integrate';
-import { CircleFlag } from 'react-circle-flags';
 import WidgetShowcase from './components/WidgetShowcase';
 import { ChatWidget } from 'react-sommify-widget';
 import { CgClose } from 'react-icons/cg';
-import { HiCursorClick } from 'react-icons/hi';
+import Partners from './components/Partners';
+import AisleVisual from './components/AisleVisual';
 
 const TitleHeading = ({ ...props }) => {
   const { width } = useWindowDimensions();
+
+  const fontSize = width > 1025 ? 72 : width > 760 ? 62 : 48;
   const isMobile = width <= 760;
+  const isTablet = width <= 1200;
+
   return (
     <motion.div
       {...props}
       variants={inViewVariantsX}
+      style={{ flex: 1 }}
       className={`d-flex align-items-center ${
-        isMobile ? 'justify-content-center' : ''
+        isTablet ? 'justify-content-center text-center' : ''
       }`}
     >
-      <div style={{ paddingTop: isMobile ? 12 : 60 }}>
+      <div style={{ paddingTop: 12 }}>
         <h4
           className='mb-5'
           style={{
             color: colors.black,
-            fontSize: isMobile ? '3.65em' : '5.2em',
+            fontSize,
           }}
         >
           Making&nbsp;<span style={{ color: colors.primary }}>wine</span>
@@ -58,7 +63,7 @@ const TitleHeading = ({ ...props }) => {
         <h6
           className='font-weight-400 mb-0'
           style={{
-            fontSize: '1.1em',
+            fontSize: '1.2em',
             color: '#4b5563',
             opacity: 0.45,
             maxWidth: 500,
@@ -68,9 +73,9 @@ const TitleHeading = ({ ...props }) => {
           with 20+ years of experience.
         </h6>
         <div
-          className={`d-flex pt-5 justify-space-between align-items-center ${
-            isMobile && 'flex-column'
-          }`}
+          className={`d-flex pt-5 ${
+            isTablet ? 'justify-content-center' : 'justify-content-start'
+          } align-items-center ${isMobile && 'flex-column'}`}
         >
           <Button
             style={{
@@ -204,42 +209,6 @@ const Footer = () => (
   </div>
 );
 
-const WhatWeDo = () => (
-  <>
-    <div
-      className='d-flex flex-column py-4 pb-5'
-      style={{
-        marginBottom: 'auto',
-        maxWidth: '1920px',
-        width: '90%',
-        margin: 'auto',
-      }}
-    >
-      <div className='d-flex align-items-start'>
-        {[
-          {
-            title: 'accessible',
-            icon: Icon.Accessible,
-            text: 'quality pairings made accessible for anyone anywhere',
-          },
-          {
-            title: 'world-class',
-            icon: Icon.WorldClass,
-            text: 'tailored to make world-class pairings by a world-class sommelier',
-          },
-          {
-            title: 'refreshing',
-            icon: Icon.Refreshing,
-            text: 'bringing a new approach for the digitally native younger consumer',
-          },
-        ].map((jcProps, i) => (
-          <JumpCard key={'jc_' + i} {...jcProps} />
-        ))}
-      </div>
-    </div>
-  </>
-);
-
 function App() {
   const { width, height } = useWindowDimensions();
   const [widgetOpen, setWidgetOpen] = useState(false);
@@ -258,6 +227,8 @@ function App() {
       } else setWidgetVisible(false);
     });
   }, []);
+
+  const paddingTop = height >= 760 ? 240 : 180;
 
   return (
     <div
@@ -282,37 +253,6 @@ function App() {
         <div style={{ overflowX: 'hidden' }}>
           <Section id='widget-screen' className='text-center position-relative'>
             <TitleHeading />
-            {/* <div className='d-flex flex-column p-4 mb-4 justify-space-between align-items-center'>
-              <Button
-                onClick={() => {
-                  window.open('https://portal.sommify.ai', '_blank');
-                }}
-                className='mb-3'
-                style={{ width: 150 }}
-              >
-                Register
-              </Button>
-              <Button
-                onClick={() => {
-                  const target = document.getElementById('contact');
-                  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }}
-                border
-                style={{ width: 150 }}
-              >
-                Contact Us
-              </Button>
-            </div> */}
-            <div className='pt-5 w-100 d-flex justify-content-center'>
-              <WidgetShowcase />
-              {/* <motion.div
-                style={{ borderRadius: 18, background: '#ffffff' }}
-                variants={inViewVariants}
-                className='shaded'
-              >
-                <Widget theme='flat' size='mobile' />
-              </motion.div> */}
-            </div>
           </Section>
           <Product className='text-center' />
 
@@ -324,7 +264,7 @@ function App() {
       </CustomView>
       <CustomView id='desktop-view' condition={width >= 760}>
         <div className='position-relative w-100'>
-          <AnimatePresence>
+          {/* <AnimatePresence>
             {widgetVisible || (
               <motion.div
                 key='chat-bot-button'
@@ -360,31 +300,6 @@ function App() {
                     src={Logo.SocialsWhite}
                   />
                 )}
-                {/* {widgetOpen || (
-                  <motion.div
-                    style={{
-                      position: 'absolute',
-                      right: '100%',
-                      top: '70%',
-                      color: colors.black,
-                      display: 'flex',
-                      alignItems: 'end',
-                      padding: '5px 8px',
-                      borderRadius: 6,
-                      background: 'white',
-                      border: '2px solid ' + colors.black,
-                    }}
-                  >
-                    <span style={{ lineHeight: 1, fontWeight: 600 }}>
-                      Click
-                    </span>
-                    &nbsp;
-                    <HiCursorClick
-                      size={26}
-                      style={{ transform: 'rotate(90deg)' }}
-                    />
-                  </motion.div>
-                )} */}
               </motion.div>
             )}
 
@@ -406,7 +321,7 @@ function App() {
                 <ChatWidget key='chat-bot' upwards />
               </motion.div>
             )}
-          </AnimatePresence>
+          </AnimatePresence> */}
 
           <Navigation />
 
@@ -414,12 +329,28 @@ function App() {
             background='linear-gradient(253deg, rgba(240,240,240,1) 0%, rgba(255,255,255,1) 41%, rgba(248,248,248,1) 100%)'
             className='d-flex align-items-start justify-content-between position-relative'
             id='demo'
-            style={{ paddingTop: '26vh' }}
+            style={{ paddingTop }}
           >
-            <TitleHeading style={{ width: '45vw' }} />
-            {widgetVisible && <WidgetShowcase />}
+            <TitleHeading />
+            {/* {widgetVisible && <WidgetShowcase />} */}
+            {width > 1200 && (
+              <AisleVisual />
+              // <motion.div
+              //   style={{
+              //     flex: 1,
+              //     display: 'flex',
+              //     justifyContent: 'end',
+              //     alignItems: 'center',
+              //     // paddingTop: 12,
+              //     height: 500,
+              //   }}
+              // >
+              //   <img src={Illustration} style={{ height: 410 }} />
+              // </motion.div>
+            )}
           </Section>
 
+          {/* <Partners /> */}
           <Product />
           <Integrate />
           <Pricing />

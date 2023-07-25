@@ -30,10 +30,29 @@
     <script>
       const global = globalThis;
     </script>
+
+    <script src="https://elements.sommify.ai/js/v1"></script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <script>
+      const widget = Sommify.createWidget({
+        apiKey: 'somm-344b50f9-4acf-46b1-9953-53d60fa51f0e',
+        noRedirects: true,
+        limit: 4,
+        triggerRadius: 50,
+        // widgetPosition: 'center',
+        // fullscreen: true,
+        blockerVisible: true,
+        mobile: {
+          fullscreen: true,
+        },
+      });
+      widget.mount();
+    </script>
+
     <!-- <script type="application/ld+json">
       {
         "@context": "https://schema.org/",

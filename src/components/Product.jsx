@@ -1,9 +1,12 @@
 import Section from './Section';
 import ProductHeader from './ProductHeader';
 import WidgetExample from '../assets/WidgetExample.svg';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { inViewProps, inViewVariants } from '../data/variants';
+import VideoExample from '../assets/videos/example.mp4';
+import VideoExampleMobile from '../assets/videos/example_mobile.mp4';
+import Iphone from '../assets/iphone14.png';
 
 export default function Product({ className }) {
   const ref = useRef(null);
@@ -36,9 +39,28 @@ export default function Product({ className }) {
           </p>
         </ProductHeader>
       </div>
-      <motion.div {...inViewProps} variants={inViewVariants}>
+      {/* <motion.div {...inViewProps} variants={inViewVariants}>
         <img src={WidgetExample} style={{ height: isMobile ? 500 : '' }} />
-      </motion.div>
+      </motion.div> */}
+
+      <video
+        width={isMobile ? '100%' : '1150'}
+        autoPlay={true}
+        muted
+        loop
+        style={{
+          borderRadius: 20,
+          boxShadow: isMobile ? 'none' : '0px 0px 20px #00000025',
+          maxWidth: isMobile ? 470 : 1150,
+          float: isMobile ? '' : 'right',
+          marginBottom: isMobile ? '' : 200,
+        }}
+      >
+        <source
+          src={isMobile ? VideoExampleMobile : VideoExample}
+          type='video/mp4'
+        />
+      </video>
 
       {/* <div className='position-relative' style={{paddingLeft: 550, paddingTop:100}}>
         <img src={WineStoreWF} />

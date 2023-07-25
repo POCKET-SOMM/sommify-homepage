@@ -13,24 +13,26 @@ import colors from '../data/colors';
 import CodePane from './CodePane';
 
 const codeBlock = `<head>
-  <-- Import minified react -->
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <-- Import the sommify script -->
-  <script src="https://pocketsommstorage.blob.core.windows.net/bundles/sommify-v1.js"></script>
-</head>
-<body>
-  <-- Create a div with an id -->
-  <div id="widget-element"></div>
-</body>`;
+  <-- Import the sommify script before the closing tag of the head element -->
+  <script src="https://elements.sommify.ai/js/v1"></script>
+</head>`;
 
-const jsCodeBlock = `// Mount the widget using the Sommify.mount function
-Sommify.mount("widget-element",  // id of the div in your html.index file
-{ 
-  url: "https://your-backend-call", // call to your backend serving as a proxy to the Sommify API
-  theme: "original", // "minimal" | "night" | "flat" | "sharp" | ... or pass custom options via an object
-  size: "desktop", // "mobile"
-});`;
+const jsCodeBlock = `// create a widget instance
+const widget = Sommify.createWidget({
+  apiKey: 'YOUR_API_KEY',             // your API key
+  limit: 4,                           // limit the amount of wines to show
+  triggerRadius: 50,                  // the radius in pixels from the trigger element
+  triggerPosition: 'bottom-rigth',    // the position of the trigger element
+  blockerVisible: true,               // show the blocker element
+
+  // define mobile specific behavior
+  mobile: {
+    fullscreen: true,
+  },
+});
+
+// mount the widget using the Sommify.mount function
+widget.mount();`;
 
 const Step = ({ title, children, rightAlign, style, img, i }) => (
   <motion.div
@@ -52,8 +54,8 @@ const Step = ({ title, children, rightAlign, style, img, i }) => (
       >
         <div
           style={{
-            width: 110,
-            height: 110,
+            width: 90,
+            height: 90,
             background: '#f8fafc',
             border: '2px solid #f8fafc',
             borderRadius: '50%',
@@ -67,22 +69,22 @@ const Step = ({ title, children, rightAlign, style, img, i }) => (
           <motion.img
             src={img}
             style={{ filter: 'brightness(0)' }}
-            width={60}
+            width={55}
             variants={inViewVariants}
             key={'integration_step_img_' + i}
           />
           <div
             style={{
               position: 'absolute',
-              width: 30,
-              height: 30,
+              width: 25,
+              height: 25,
               borderRadius: 4,
               fontWeight: 600,
               background: '#282c34',
               color: 'white',
-              top: 40,
-              left: -23,
-              fontSize: '1.05rem',
+              top: 35,
+              left: -18,
+              fontSize: '0.95rem',
               transform: 'rotate(45deg)',
               display: 'flex',
               justifyContent: 'center',
