@@ -18,7 +18,7 @@ export default [
   },
   {
     pLogo: Logo.MFS,
-    height: '43px',
+    height: '56px',
     link: 'https://www.microsoft.com/en-us/startups',
   },
   {
@@ -33,7 +33,15 @@ export default [
   },
   {
     pLogo: Logo.NewCo,
-    height: '44px',
+    height: '56px',
     link: 'https://newcohelsinki.fi',
+  },
+];
+
+export const earlyAdopters = [
+  {
+    pLogo: Logo.Edamam,
+    height: '56px',
+    link: 'https://www.edamam.com',
   },
 ];

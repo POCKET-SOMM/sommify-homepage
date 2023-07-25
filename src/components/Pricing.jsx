@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { CgCheck } from 'react-icons/cg';
 import { inViewProps, inViewVariants } from '../data/variants';
 import colors from '../data/colors';
+import { HiSparkles } from 'react-icons/hi';
 
 export default function Pricing({ className }) {
   const [selected, setSelected] = useState(-1);
@@ -17,7 +18,7 @@ export default function Pricing({ className }) {
         className='w-100 d-flex flex-column justify-content-center text-center'
       >
         <h1>Pricing</h1>
-        <p className='mb-5 m-auto'>
+        <p className='mb-5 m-auto' style={{ width: '70%', minWidth: 300 }}>
           We offer three different plans depending on your need and size. The
           first two are simply tied to the amount of customers you have but in
           the third one let’s get creative together and figure out how we can
@@ -35,31 +36,39 @@ export default function Pricing({ className }) {
         }}
       >
         {[
+          // {
+          //   title: 'Small early bird',
+          //   value: 300,
+          //   text: 'Our interactive sommelier for 1,000s of customers.',
+          //   traits: [
+          //     'Widget & API access',
+          //     'Portal access',
+          //     'For 1,000s of monthly users',
+          //   ],
+          // },
           {
-            title: 'Small early bird',
-            value: 300,
-            text: 'Our interactive sommelier for 1,000s of customers.',
+            title: 'Early Adopter',
+            value: <span>2 month trial</span>,
+            text: 'Our interactive sommelier for any amount of customers.',
             traits: [
+              'Free!',
+              'Help setting up',
               'Widget & API access',
-              'Portal access',
-              'For 1,000s of monthly users',
-            ],
-          },
-          {
-            title: 'Large early bird',
-            value: 900,
-            text: 'Our interactive sommelier for 10,000s of customers.',
-            traits: [
-              'Widget & API access',
-              'Portal access',
-              'For 10,000s of monthly users',
+              'Unlimited users',
+              'Post-trial pricing based on usage',
             ],
           },
           {
             title: 'Enterprise',
             value: "Let's talk",
             text: 'A custom solution using our artificial intelligence sommelier.',
-            traits: ['Widget & API access', 'Portal access', 'Unlimited'],
+            traits: [
+              'Option for piloting',
+              'Customizing the solution',
+              'Widget & API access',
+              'Unlimited users',
+              'Post-pilot pricing based on usage',
+            ],
           },
         ].map(({ title, value, text, traits }, i) => (
           <div style={{ padding: 18, flexBasis: '33%' }}>
@@ -87,34 +96,8 @@ export default function Pricing({ className }) {
                 className='w-100 text-center mb-4 font-weight-700 d-flex justify-content-center align-items-center'
                 style={{ fontSize: '3.2rem', height: 65, color: '#282c34' }}
               >
-                {title !== 'Enterprise' && (
-                  <span
-                    style={{
-                      fontSize: '0.6em',
-                      fontWeight: 600,
-                      marginRight: '.15em',
-                    }}
-                  >
-                    €
-                  </span>
-                )}
-                <span style={{ fontSize: title === 'Enterprise' && '0.6em' }}>
-                  {value}
-                </span>
-                {title !== 'Enterprise' && (
-                  <span
-                    style={{
-                      fontSize: '0.35em',
-                      alignSelf: 'end',
-                      paddingBottom: '.5em',
-                      fontWeight: 500,
-                    }}
-                  >
-                    /mo
-                  </span>
-                )}
+                <span style={{ fontSize: '0.6em' }}>{value}</span>
               </div>
-              <div className='m-auto' />
 
               <div className='px-4'>
                 {traits.map((text, j) => (
@@ -137,6 +120,7 @@ export default function Pricing({ className }) {
                   </motion.div>
                 ))}
               </div>
+              <div className='m-auto' />
               <div className='py-4 pb-5 d-flex justify-content-center'>
                 <Button
                   borderless

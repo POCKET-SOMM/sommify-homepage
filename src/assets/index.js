@@ -28,6 +28,7 @@ import SS1 from './screenshots/SS1.png';
 import SS2 from './screenshots/SS2.png';
 import SS3 from './screenshots/SS3.png';
 import MacBook from './macbook.png';
+import Edamam from './partners/edamam.png'
 
 import Box from './3d_icons/wine_box.png';
 import Twinkle from './3d_icons/twinkle.png';
@@ -65,6 +66,7 @@ export const Logo = {
   inQb,
   Boost,
   NewCo,
+  Edamam,
 };
 
 export const Icon = {

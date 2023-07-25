@@ -11,7 +11,7 @@ import {
 import { Logo } from '../assets';
 import Button from './Button';
 
-const NAV_HEIGHT = '10vh';
+const NAV_HEIGHT = '100px';
 
 const NavButton = ({ nav, nextScroll, ...props }) => {
   const { width, height } = useWindowDimensions();
@@ -46,7 +46,7 @@ const NavButton = ({ nav, nextScroll, ...props }) => {
       style={{
         height: '100%',
         fontWeight: 600,
-        fontSize: isBrowser ? '1em' : '.65em',
+        fontSize: 16,
         position: 'relative',
         flex: isBrowser ? '' : 1,
       }}
@@ -110,7 +110,7 @@ export default function Navigation({ ...props }) {
         <div className='d-flex justify-conent-center align-items-center'>
           <img
             style={{
-              height: '2.4em',
+              height: '2em',
             }}
             src={Logo.FullMaroon}
           />
