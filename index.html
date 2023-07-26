@@ -32,6 +32,7 @@
     </script>
 
     <script src="https://elements.sommify.ai/js/v1"></script>
+    <!-- <script src="./src/scripts/sommify.js?reload=13"></script> -->
   </head>
   <body>
     <div id="root"></div>
@@ -41,12 +42,8 @@
       const widget = Sommify.createWidget({
         apiKey: 'somm-6fb46e10-e84c-4601-a35f-ce505fcc2410',
         noRedirects: true,
-        limit: 4,
         triggerRadius: 50,
         blockerVisible: true,
-        mobile: {
-          fullscreen: true,
-        },
       });
 
       widget.mount();

@@ -20,6 +20,7 @@ const codeBlock = `<head>
 const jsCodeBlock = `// create a widget instance
 const widget = Sommify.createWidget({
   apiKey: 'YOUR_API_KEY',             // your API key
+  currency: 'EUR',                    // the currency to display prices in
   limit: 4,                           // limit the amount of wines to show
   triggerRadius: 50,                  // the radius in pixels from the trigger element
   triggerPosition: 'bottom-rigth',    // the position of the trigger element
@@ -35,7 +36,7 @@ widget.onAddToCart((wine) => {
   // add logic to execute when add to cart button is clicked
 });
 
-// mount the widget using the Sommify.mount function
+// mount the widget using the mount method
 widget.mount();`;
 
 const Step = ({ title, children, rightAlign, style, img, i }) => (
