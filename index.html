@@ -1,55 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-13W66HCY8Z"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
 
-      gtag('config', 'G-13W66HCY8Z');
-    </script>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo_maroon.svg" />
-    <link
-      rel="stylesheet"
-      href="node_modules/highlight.js/styles/atom-one-dark-reasonable.css"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Sommelier Making Wine Easy | sommifyAI</title>
-    <meta
-      name="description"
-      content="We are making wine easy. Our AI sommelier helps retail customers choose the right wine by asking questions to find the right wine to pair with a meal or for a particular occasion. The suggested wines are from the retailer’s portfolio, so in addition to its accessibility, the AI sommelier is the perfect sales driver. The AI is built on the world-class wine knowledge of Julie Dupouy. Tags: sommify | sommifyAI | sommify.ai | aisomm | winetech | AI sommelier | artificial intelligence sommelier | digital sommelier | online sommelier"
-    />
-    <script>
-      const global = globalThis;
-    </script>
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-13W66HCY8Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
 
-    <script src="https://elements.sommify.ai/js/v1"></script>
-    <!-- <script src="./src/scripts/sommify.js?reload=13"></script> -->
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    gtag('config', 'G-13W66HCY8Z');
+  </script>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/logo_maroon.svg" />
+  <link rel="stylesheet" href="node_modules/highlight.js/styles/atom-one-dark-reasonable.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Sommelier Making Wine Easy | sommifyAI</title>
+  <meta name="description"
+    content="We are making wine easy. Our AI sommelier helps retail customers choose the right wine by asking questions to find the right wine to pair with a meal or for a particular occasion. The suggested wines are from the retailer’s portfolio, so in addition to its accessibility, the AI sommelier is the perfect sales driver. The AI is built on the world-class wine knowledge of Julie Dupouy. Tags: sommify | sommifyAI | sommify.ai | aisomm | winetech | AI sommelier | artificial intelligence sommelier | digital sommelier | online sommelier" />
+  <script>
+    const global = globalThis;
+  </script>
 
-    <script>
-      const widget = Sommify.createWidget({
-        apiKey: 'somm-6fb46e10-e84c-4601-a35f-ce505fcc2410',
-        noRedirects: true,
-        triggerRadius: 50,
-        blockerVisible: true,
-      });
+  <script src="https://elements.sommify.ai/js/v1"></script>
+</head>
 
-      widget.mount();
-    </script>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
 
-    <!-- <script type="application/ld+json">
+  <script>
+    const widget = Sommify.createWidget({
+      apiKey: 'somm-6fb46e10-e84c-4601-a35f-ce505fcc2410',
+      noRedirects: true,
+      blockerVisible: true,
+    });
+
+    widget.mount();
+  </script>
+
+  <!-- <script type="application/ld+json">
       {
         "@context": "https://schema.org/",
         "@type": "Recipe",
@@ -63,5 +55,6 @@
         "prepTime": "PT20M"
       }
     </script> -->
-  </body>
+</body>
+
 </html>
