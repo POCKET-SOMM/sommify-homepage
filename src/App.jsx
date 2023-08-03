@@ -58,7 +58,7 @@ const TitleHeading = ({ ...props }) => {
             // letterSpacing: '.025em',
           }}
         >
-          Drive retail wine sales using the AI sommelier
+          Grow your wine sales using the AI sommelier.
         </h6>
         <h6
           className='font-weight-400 mb-0'

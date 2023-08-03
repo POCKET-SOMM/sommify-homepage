@@ -141,7 +141,7 @@ export default function Navigation({ ...props }) {
           </div>
           <div className='d-flex justify-content-center align-items-center'>
             {[
-              { title: 'try us', id: 'demo', scroll: 0 },
+              { title: 'welcome', id: 'demo', scroll: 0 },
               { title: 'product', id: 'product', scroll: 0.9 * height },
               { title: 'integration', id: 'how', scroll: height * 1.8 },
               { title: 'pricing', id: 'pricing', scroll: height * 3.1 },

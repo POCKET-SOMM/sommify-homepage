@@ -136,12 +136,12 @@ const Step = ({ title, children, rightAlign, style, img, i }) => (
 
 export default function Integrate({ ...props }) {
   return (
-    <Section id='how'>
+    <Section id='integrate'>
       <motion.div {...inViewProps} variants={inViewVariants}>
         <h6 className='font-weight-500 mb-2' style={{ color: colors.primary }}>
           INTEGRATION
         </h6>
-        <h1>Implement in under an hour</h1>
+        <h1 id='how'>Implement in under an hour</h1>
       </motion.div>
       <br />
       <br />
@@ -150,8 +150,6 @@ export default function Integrate({ ...props }) {
           Go to our{' '}
           <a
             href='https://portal.sommify.ai'
-            className='clickable'
-            onClick
             style={{ color: colors.primary, textDecoration: 'none' }}
           >
             portal
@@ -176,9 +174,14 @@ export default function Integrate({ ...props }) {
       </Step>
       <Step i={3} img={icon3} title='Start using our widget'>
         <p className='mb-5'>
-          Once the wines have been processed you receive an email and you can go
-          to the settings page to retrieve your API key to populate your website
-          or app. Simple.
+          Once you receive an email you can go to the settings page of the{' '}
+          <a
+            style={{ color: colors.primary, textDecoration: 'none' }}
+            href='https://portal.sommify.ai/settings/api-key'
+          >
+            portal
+          </a>{' '}
+          to retrieve your API key to populate your website or app. Simple.
         </p>
 
         <br />
@@ -201,9 +204,9 @@ export default function Integrate({ ...props }) {
       <Step img={icon4} i={4} title='Customize'>
         <p className='mb-5'>
           You are able to customize the widget to match your brand identity and
-          add language support to the languages you need to serve your customers
-          best. Additionally, you can create custom categories for the sommelier
-          to generate like local or seasonal wines.
+          change the language to serve your customers how they would be served
+          in a local store. Additionally, you can create a custom category for
+          the sommelier to generate pairings under like local or seasonal wines.
         </p>
         <Button
           onClick={() => {
