@@ -1,343 +1,404 @@
-import './App.scss';
 import React, { useEffect, useState } from 'react';
-import Body from './components/Body';
-import { Card, Carousel, Nav, Navbar, Offcanvas } from 'react-bootstrap';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
-import PairingTool from './components/PairingTool/PairingTool';
-import AboutUs from './components/AboutUs';
-import DemoGuide from './components/DemoGuide';
+import './App.scss';
+import colors from './data/colors';
+import { CustomView } from 'react-device-detect';
+import { AnimatePresence, motion, useScroll } from 'framer-motion';
+import { SiCrunchbase, SiLinkedin } from 'react-icons/si';
+import useWindowDimensions from './hooks';
+import { Icon, Logo } from './assets';
 import ContactUs from './components/ContactUs';
+import Button from './components/Button';
+import { inViewVariants, inViewVariantsX } from './data/variants';
+import JumpCard from './components/JumpCard';
+import Section from './components/Section';
+import partners from './data/partners';
+import Navigation from './components/Navigation';
+import Pricing from './components/Pricing';
+import Product from './components/Product';
+import Integrate from './components/Integrate';
+import WidgetShowcase from './components/WidgetShowcase';
+import { ChatWidget } from 'react-sommify-widget';
+import { CgClose } from 'react-icons/cg';
+import Partners from './components/Partners';
+import AisleVisual from './components/AisleVisual';
 
-import SimpleBar from 'simplebar-react';
-import 'simplebar/dist/simplebar.min.css';
+const TitleHeading = ({ ...props }) => {
+  const { width } = useWindowDimensions();
 
-// const MAIN_COLOR = '#e7154e'
-// const SECONDARY_COLOR = '#fce3ee'
-export const MAIN_COLOR_DEP = '#80183b'
-export const SERVER_URL = 'https://pocketsommapi.azurewebsites.net'
-
-
-const IMAGES = ['team_jp.jpeg', 'team_jd.jpeg', 'team_wb.jpeg', 'team_tb.jpeg']
-
-const loadImage = image => {
-  return new Promise((resolve, reject) => {
-    const loadImg = new Image()
-    loadImg.src = image
-    // wait 2 seconds to simulate loading time
-    loadImg.onload = () =>
-      setTimeout(() => {
-        resolve(image)
-      }, 2000)
-
-    loadImg.onerror = err => reject(err)
-  })
-}
-
-function App() {
-  const [width, setWidth] = useState(window.innerWidth);
-  const [pane, setPane] = useState('')
-  const [loadingPfps, setLoadingPfps] = useState(true)
-
-  useEffect(() => {
-    Promise.all(IMAGES.map(image => loadImage(image)))
-      .then(() => {
-        setLoadingPfps(false)
-      })
-      .catch(err => console.log("Failed to load profile pictures", err))
-
-    window.addEventListener('resize', handleWindowSizeChange);
-    return () => {
-      window.removeEventListener('resize', handleWindowSizeChange);
-    }
-  }, [])
-
-  let isMobile = (width < 768);
-  let isTablet = (width >= 768 && width < 1024)
-  let isDesktop = !isMobile && !isTablet
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-
-  function handleWindowSizeChange() {
-    setWidth(window.innerWidth);
-  }
-
-  let mobileStyle = {
-    width: '100%',
-    height: 'calc(var(--vh, 1vh) * 100 - 100px)',
-    borderWidth: '0px',
-    padding: '2px'
-  }
-  let tabletStyle = {
-    width: '80%',
-    height: 'calc(var(--vh, 1vh) * 100 - 120px)',
-    borderWidth: '0px',
-    padding: '10px'
-  }
-  let desktopStyle = {
-    marginTop: '100px',
-    width: '500px',
-    padding: '10px',
-
-    zIndex: 3,
-    position: 'absolute',
-    left: '0px',
-    right: '0px',
-    marginLeft: '55%',
-    // marginRight: 'auto'
-  }
-
-  const captionStyle = {
-    zIndex: 4,
-    position: 'absolute',
-    width: '400px',
-    height: '300px',
-    top: '300px',
-    left: '300px',
-    textAlign: 'left'
-  }
-
-  const getDeviceStyle = () => {
-    if (isMobile)
-      return mobileStyle
-    if (isTablet)
-      return tabletStyle
-    return desktopStyle
-  }
-
-  function Logo() {
-    return (
-      <img
-        alt="logo"
-        style={{
-          objectFit: 'cover',
-          position: 'absolute',
-          left: '0px',
-          right: '0px',
-          marginLeft: 'auto',
-          marginRight: 'auto'
-        }}
-        onClick={e => { window.location.replace('/') }}
-        className="clickable nodrag"
-        src="PocketSomm.LOGO.svg"
-        width={isDesktop ? '230px' : '150px'}
-        height={isDesktop ? "80px" : '56px'}>
-      </img>
-    )
-  }
-
-  function handleNavClick(l) {
-    pane === l ? setPane('') : setPane(l)
-  }
-
-  function Content() {
-    if (pane === 'ABOUT US') {
-      return (<AboutUs loading={loadingPfps} />)
-    }
-    if (pane === 'DEMO GUIDE') {
-      return (<DemoGuide />)
-    }
-    if (pane === 'CONTACT US') {
-      return (<ContactUs />)
-    }
-    return null
-  }
-
-  const CarouselItems = [
-    { img: 'phone_app.webp', title: 'Phone App', text: 'PocketSomm will be launched as an app for Android and iOS to make quality pairings accessible to anyone anywhere. Stay tuned.' },
-    { img: 'winestore.jpg', title: 'Online Wine Store', text: 'Selling wine online? Let PocketSomm help create the customer experience of a brick-and-mortar location with quality pairing advice.' },
-    { img: 'homecook.jpg', title: 'Smart Home', text: 'Imagine a world in which you have a world-class sommelier at home advising you on which bottle from your wine cooler pairs the best with the meals possible from the ingredients in your refrigerator.' },
-    { img: 'delivery.jpg', title: 'Food Delivery', text: 'Whether you are offering food boxes or delivery from restaurants PocketSomm offers the opportunity to cross-sell wine or just enhance the experience.' },
-    { img: 'retail.webp', title: 'Add-On', text: 'You might already have an app or website that relates to food, like a grocery chain, where you want to enhance the customer experience or drive sales.' },
-    // { img: 'other.jpg', title: 'Other', text: 'The possibilities are endless; the only barriers are your imagination and local alcohol regulation...' }
-  ]
+  const fontSize = width > 1025 ? 72 : width > 760 ? 62 : 48;
+  const isMobile = width <= 760;
+  const isTablet = width <= 1200;
 
   return (
-    <div className="App" style={{ overflow: 'hidden' }}>
-      <Navbar
-        className="nodrag"
-        variant="dark"
-        id="body-logo"
-        style={{
-          display: window.location.href.split("/").pop() === 'pairing' ? 'none' : '',
-          zIndex: 6,
-          // boxShadow: '0px 11px 17px 2px rgba(0,0,0,0.45)',
-          height: isDesktop ? '80px' : '80px',
-          backgroundColor: MAIN_COLOR_DEP,
-        }}
-      >
-        <Nav style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'start',
-          fontSize: '14px',
-          width: '100%'
-        }}>
-          {
-            isDesktop ? ['ABOUT US', 'DEMO GUIDE'].map((l, i) =>
-              <Nav.Item key={`nav_item_${i}`}>
-                <Nav.Link active={pane === l} onClick={e => { handleNavClick(l) }} style={{ width: '130px', alignItems: 'center', display: 'flex', justifyContent: 'center' }}>{l}</Nav.Link>
-              </Nav.Item>
-            ) : <div style={{ fontSize: '10px', width: '100%', height: '100%', display: 'flex', alignItems: 'center' }}>
-              <Nav.Link active={pane === 'ABOUT US'}
-                onClick={e => { handleNavClick('ABOUT US') }}
-                style={{
-                  width: '90px',
-                  alignItems: 'center',
-                  position: 'absolute',
-                  left: '5px',
-                }}>ABOUT US</Nav.Link>
-              <Nav.Link active={pane === 'DEMO GUIDE'}
-                onClick={e => { handleNavClick('DEMO GUIDE') }}
-                style={{
-                  width: '90px',
-                  alignItems: 'center',
-                  position: 'absolute',
-                  right: '5px',
-                }}>DEMO INSTRUCTIONS</Nav.Link>
-            </div>
-          }
-          <Logo />
-        </Nav>
-      </Navbar>
+    <motion.div
+      {...props}
+      variants={inViewVariantsX}
+      style={{ flex: 1 }}
+      className={`d-flex align-items-center ${
+        isTablet ? 'justify-content-center text-center' : ''
+      }`}
+    >
+      <div style={{ paddingTop: 12 }}>
+        <h4
+          className='mb-5'
+          style={{
+            color: colors.black,
+            fontSize,
+          }}
+        >
+          Making&nbsp;<span style={{ color: colors.primary }}>wine</span>
+          <br />
+          easy.
+        </h4>
+        <h6
+          className='font-weight-500 mb-4'
+          style={{
+            fontSize: '1.4em',
+            color: '#4b5563',
+            // letterSpacing: '.025em',
+          }}
+        >
+          Grow your wine sales using the AI sommelier.
+        </h6>
+        <h6
+          className='font-weight-400 mb-0'
+          style={{
+            fontSize: '1.2em',
+            color: '#4b5563',
+            opacity: 0.45,
+            maxWidth: 500,
+          }}
+        >
+          Built on the wine knowledge of Julie Dupouy, a world-class sommelier
+          with 20+ years of experience.
+        </h6>
+        <div
+          className={`d-flex pt-5 ${
+            isTablet ? 'justify-content-center' : 'justify-content-start'
+          } align-items-center ${isMobile && 'flex-column'}`}
+        >
+          <Button
+            style={{
+              width: isMobile ? 160 : 180,
+              marginRight: isMobile ? 0 : 15,
+              marginBottom: isMobile ? 10 : 0,
+            }}
+            onClick={() => {
+              window.open('https://portal.sommify.ai', '_blank');
+            }}
+          >
+            Register
+          </Button>
+          <Button
+            border
+            style={{
+              width: isMobile ? 160 : 180,
+            }}
+            onClick={() => {
+              const target = document.getElementById('contact');
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }}
+          >
+            Contact Us
+          </Button>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
-      {
-        true ? <Offcanvas style={{
-          // marginTop: '80px',
-          width: isDesktop ? '42%' : '100%',
-          backgroundColor: '#1f202b',
-          borderColor: '#393b4d',
-          borderRightStyle: 'solid',
-          borderWidth: '1px',
-          zIndex: 5,
-          color: 'white',
-          padding: '5px',
-          textAlign: 'left',
-        }}
-          backdrop
-          backdropClassName='custom-backdrop'
-          scroll={true}
-          show={pane}
-          onHide={e => { setPane('') }}>
-          <div style={{ height: '80px' }}></div>
-          <SimpleBar style={{ height: 'calc(100% - 80px)', width: '100%', padding: isDesktop ? '40px' : '20px', }}>
-            <Content />
-          </SimpleBar>
-        </Offcanvas> : null
-      }
-
-      {/* <div id="dropdown-banner" style={{
-        display: pane ? '' : 'none',
-        position: 'absolute',
-        top: '80px',
-        left: '0%',
-        width: '45%',
-        height: 'calc(100vh - 80px)',
-        backgroundColor: '#1f202b',
-        borderColor: '#12131a',
-        borderTopWidth: '0px',
-        borderRightStyle: 'solid',
-        borderWidth: '1px',
-        zIndex: 5,
-        color: 'white',
-        padding: '40px',
-        textAlign: 'left',
-        overflowY: 'auto'
-      }}>
-        <Content />
-      </div> */}
-      {/* {
-        isDesktop ? null : <Navbar variant="dark" style={{ fontSize: '12px', height: '24px', backgroundColor: '#171717', justifyContent: 'center' }}>
-          <Nav>
-            <Nav.Link active={pane === 'ABOUT US'}
-              onClick={e => { handleNavClick('ABOUT US') }}
-              style={{
-                width: '100px',
-                alignItems: 'center',
-              }}>ABOUT US</Nav.Link>
-            <Nav.Link active={pane === 'DEMO GUIDE'}
-              onClick={e => { handleNavClick('DEMO GUIDE') }}
-              style={{
-                // borderLeftWidth:'2px',
-                // borderLeftStyle:'solid',
-                // borderLeftColor:'white',
-                width: '100px',
-                alignItems: 'center',
-              }}>DEMO GUIDE</Nav.Link>
-          </Nav>
-        </Navbar>
-      } */}
-      <Router>
-        <Routes>
-          <Route path="/pairing" element={
-            <PairingTool />
-          }>
-          </Route>
-
-          <Route path="/" element={
-            isDesktop ? <div style={{ height: 'calc(100vh - 80px)', width: '100%' }}>
-              <div style={{ position: 'relative' }}>
-                <Card
-                  className="mainBody"
-                  style={{
-                    marginTop: isMobile ? '20px' : '40px',
-                    ...getDeviceStyle()
-                  }}
-                >
-                  <Body isMobile={isMobile || isTablet} screenWidth={width} />
-                </Card>
-                <img
-                  alt="try our demo"
-                  width={200}
-                  src='try_our_demo.png'
-                  style={{ position: 'absolute', zIndex: 5, marginLeft: '580px', marginTop: '30px' }}></img>
-              </div>
-              <Carousel fade interval={8500} indicatorLabels={[1, 2, 3]} style={{ width: '100%', height: 'calc(100vh - 80px)' }}>
-                {
-                  CarouselItems.map((item, i) =>
-                    <Carousel.Item key={`bg_carousel_${i}`}>
-                      <div style={{
-                        background: `linear-gradient(to top, rgba(59,62,79,0.8), rgba(59,62,79,0.8)), url(${item.img}) no-repeat top center`,
-                        // backgroundImage: `url(${item.img})`,
-                        backgroundSize: 'cover',
-                        width: '100%',
-                        height: 'calc(100vh - 80px)'
-                      }}>
-
-                      </div>
-                      {/* <img
-                        style={{
-                          objectFit: 'cover',
-                          width: '100%',
-                          height: 'calc(100vh - 80px)'
-                        }}
-                        // className="w-100 h-100"
-                        src={item.img}
-                        alt={`Slide ${i}`}
-                      /> */}
-                      <Carousel.Caption style={captionStyle}>
-                        <h3>{item.title}</h3>
-                        <p style={{ fontStyle: 'italic' }}>{item.text}</p>
-                      </Carousel.Caption>
-                    </Carousel.Item>
-                  )
-                }
-              </Carousel>
-            </div> : <Card
-              className="mainBody"
-              style={{
-                marginTop: isMobile ? '20px' : '40px',
-                ...getDeviceStyle()
+const Footer = () => (
+  <div
+    id='footer'
+    // className='bg-secondary'
+    style={{
+      background: '#131921',
+      width: '100%',
+      color: 'white',
+      fontSize: '0.9rem',
+    }}
+  >
+    <div
+      className='d-flex flex-column justify-content-center align-items-start'
+      style={{ width: '100%', maxWidth: 1200, margin: 'auto' }}
+    >
+      <div className='d-flex justify-content-center align-items-start w-100 py-5'>
+        {/* <div className='d-flex flex-column mx-4'>
+          <h6>Company</h6>
+          <span className='d-block'>
+            <span
+              className='clickable'
+              onClick={() => {
+                window.open(
+                  'https://drive.google.com/file/d/1kFP_qyReKTbxi7sNvFlfTNxcD0pVrvPu/view'
+                );
               }}
             >
-              <Body isMobile={isMobile || isTablet} screenWidth={width} />
-            </Card>
-          } />
-        </Routes>
-      </Router>
+              Deck
+            </span>
+          </span>
+        </div> */}
+        <div className='d-flex flex-column mx-4'>
+          <h6>Products</h6>
+          <span className='d-block'>
+            <span
+              className='clickable'
+              onClick={() => {
+                window.open('https://portal.sommify.ai', '_blank');
+              }}
+            >
+              Dashboard
+            </span>
+          </span>
+        </div>
+        <div className='d-flex flex-column mx-4'>
+          <h6>Socials</h6>
+          <span className='d-block'>
+            <SiCrunchbase />{' '}
+            <span
+              className='clickable'
+              onClick={() => {
+                window.open(
+                  'https://www.crunchbase.com/organization/sommifyai'
+                );
+              }}
+            >
+              Crunchbase
+            </span>
+          </span>
+          <span className='d-block'>
+            <SiLinkedin />{' '}
+            <span
+              className='clickable'
+              onClick={() => {
+                window.open('https://www.linkedin.com/company/sommifyai');
+              }}
+            >
+              Linkedin
+            </span>
+          </span>
+        </div>
+      </div>
+      <div
+        style={{ fontSize: '.9em' }}
+        className='w-100 py-4 d-flex justify-content-center'
+      >
+        <b>PocketSomm Oy 2021-2023</b>&nbsp;•&nbsp;
+        <span
+          onClick={() => {
+            window.open(
+              'https://drive.google.com/file/d/1ANL8N4lXOqdFQbZ8Mc1J4Q2OTL6LnTBI/view?usp=sharing',
+              '_blank'
+            );
+          }}
+          className='clickable'
+        >
+          Privacy policy
+        </span>
+        &nbsp;•&nbsp;
+        <span
+          onClick={() => {
+            window.open('https://icons8.com', '_blank');
+          }}
+          className='clickable'
+        >
+          Icons8
+        </span>
+      </div>
+    </div>
+  </div>
+);
+
+function App() {
+  const { width, height } = useWindowDimensions();
+  const [widgetOpen, setWidgetOpen] = useState(false);
+  const [widgetVisible, setWidgetVisible] = useState(true);
+
+  // track scroll position
+  const { scrollY } = useScroll();
+
+  useEffect(() => {
+    return scrollY.onChange((latest) => {
+      if (latest === 0 || latest <= 0.9 * height) {
+        {
+          setWidgetVisible(true);
+          setWidgetOpen(false);
+        }
+      } else setWidgetVisible(false);
+    });
+  }, []);
+
+  const paddingTop = height >= 760 ? 240 : 180;
+
+  return (
+    <div
+      style={{
+        overflowX: 'hidden',
+        width: '100vw',
+        position: 'relative',
+      }}
+    >
+      <CustomView id='mobile-view' condition={width < 760}>
+        <Navigation />
+        <div
+          className='position-absolute'
+          style={{
+            width: 1600,
+            transform: 'rotate(-45deg)',
+            margin: 'auto',
+            height: 1600,
+            background: '#fbfbfb',
+          }}
+        />
+        <div style={{ overflowX: 'hidden' }}>
+          <Section id='widget-screen' className='text-center position-relative'>
+            <TitleHeading />
+          </Section>
+          <Product className='text-center' />
+
+          <Pricing className='text-center' />
+
+          <ContactUs />
+        </div>
+        <Footer />
+      </CustomView>
+      <CustomView id='desktop-view' condition={width >= 760}>
+        <div className='position-relative w-100'>
+          {/* <AnimatePresence>
+            {widgetVisible || (
+              <motion.div
+                key='chat-bot-button'
+                className='clickable'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 0.1,
+                }}
+                style={{
+                  position: 'fixed',
+                  bottom: 30,
+                  right: 30,
+                  height: 50,
+                  width: 50,
+                  borderRadius: '50%',
+                  backgroundColor: colors.primary,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  zIndex: 9999,
+                  color: 'white',
+                }}
+                whileHover={{ scale: 0.98 }}
+                onClick={() => setWidgetOpen(!widgetOpen)}
+              >
+                {widgetOpen ? (
+                  <CgClose size={24} />
+                ) : (
+                  <img
+                    style={{ width: '90%', height: '90%' }}
+                    src={Logo.SocialsWhite}
+                  />
+                )}
+              </motion.div>
+            )}
+
+            {widgetOpen && !widgetVisible && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ ease: 'easeInOut', duration: 0.1 }}
+                style={{
+                  position: 'fixed',
+                  bottom: 110,
+                  right: 30,
+                  zIndex: 9999,
+                }}
+                key='chat-bot-widget'
+                id='chat-bot-widget'
+              >
+                <ChatWidget key='chat-bot' upwards />
+              </motion.div>
+            )}
+          </AnimatePresence> */}
+
+          <Navigation />
+
+          <Section
+            background='linear-gradient(253deg, rgba(240,240,240,1) 0%, rgba(255,255,255,1) 41%, rgba(248,248,248,1) 100%)'
+            className='d-flex align-items-start justify-content-between position-relative'
+            id='demo'
+            style={{ paddingTop }}
+          >
+            <TitleHeading />
+            {/* {widgetVisible && <WidgetShowcase />} */}
+            {width > 1200 && (
+              <AisleVisual />
+              // <motion.div
+              //   style={{
+              //     flex: 1,
+              //     display: 'flex',
+              //     justifyContent: 'end',
+              //     alignItems: 'center',
+              //     // paddingTop: 12,
+              //     height: 500,
+              //   }}
+              // >
+              //   <img src={Illustration} style={{ height: 410 }} />
+              // </motion.div>
+            )}
+          </Section>
+
+          {/* <Partners /> */}
+          <Product />
+          <Integrate />
+          <Pricing />
+          <ContactUs />
+
+          <div
+            className='d-flex justify-content-center align-items-center py-5'
+            style={{ background: '#f0f2f4', paddingInline: '25%' }}
+          >
+            {partners.map(({ pLogo, height, link }, i) => (
+              <div key={'partner_' + i} style={{ flex: 1 }}>
+                <motion.img
+                  variants={{
+                    offscreen: { y: '10vh', opacity: 0 },
+                    onscreen: {
+                      y: 0,
+                      opacity: 1,
+                      transition: {
+                        duration: 0.5,
+                        delay: 0.3 + i * 0.05,
+                        type: 'tween',
+                      },
+                    },
+                  }}
+                  className='mx-5 clickable'
+                  src={pLogo}
+                  onClick={() => window.open(link, '_blank')}
+                  animate={{
+                    filter: 'brightness(0)',
+                  }}
+                  whileHover={{
+                    filter: 'brightness(1)',
+                    scale: 1.02,
+                  }}
+                  style={{
+                    maxWidth: '60%',
+                    maxHeight: 35,
+                    // height: `calc(${height} * 0.8)`,
+                    // filter: 'brightness(0)',
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+
+          <Footer />
+        </div>
+      </CustomView>
     </div>
   );
 }

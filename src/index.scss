@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Mono&display=swap');
+
+$theme-colors: (
+  'primary': #c52c76,
+  'dark': #000,
+  'secondary': rgb(0, 0, 0),
+  'light': #f8f8f8,
+);
+
+@import '../node_modules/bootstrap/scss/bootstrap';
