@@ -19,11 +19,9 @@ export default function Pricing({ className }) {
       >
         <h1>Pricing</h1>
         <p className='mb-5 m-auto' style={{ width: '70%', minWidth: 300 }}>
-          We offer three different plans depending on your need and size. The
-          first two are simply tied to the amount of customers you have but in
-          the third one let’s get creative together and figure out how we can
-          use our AI sommelier to help you create accessibility for your
-          customers and drive sales for yourself.
+          We offer two different plans depending on your need and size. We
+          believe in offering a trial period so you can be sure that we impact
+          your business positively.
         </p>
       </motion.div>
       <div
@@ -125,12 +123,12 @@ export default function Pricing({ className }) {
                 <Button
                   borderless
                   onClick={() => {
-                    // const target = document.getElementById('contact');
-                    // target.scrollIntoView({ behavior: 'smooth' });
-                    window.open(
-                      'https://sommify.notion.site/Drive-sales-through-accessibility-w-sommifyAI-1ddeab3ad8d847a1a3b21683ad254941',
-                      '_blank'
-                    );
+                    const target = document.getElementById('contact');
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    // window.open(
+                    //   'https://sommify.notion.site/Drive-sales-through-accessibility-w-sommifyAI-1ddeab3ad8d847a1a3b21683ad254941',
+                    //   '_blank'
+                    // );
                   }}
                   animate={
                     i == selected

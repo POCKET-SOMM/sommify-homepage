@@ -30,12 +30,16 @@ export default function Product({ className }) {
           title='Interactive Sommelier'
         >
           <p>
-            A window that can be embedded into an app or website to guide
-            customers in making the right wine purchase. Customers can ask
-            questions to find the right wine to pair with a meal or for a
-            particular occasion. The suggested wines are from the retailer's
-            portfolio, so in addition to its accessibility, the AI sommelier is
-            the perfect sales driver.
+            A popup chat box that can be embedded into any website or app to
+            make wine choices for your customers easy. Your customers will have
+            the option to ask questions to find the right wine. The suggested
+            wines are from your portfolio. Also available as an API if you want
+            to build your own visuals.
+            <br />
+            <br />
+            <span style={{ color: '#a51c5e', fontWeight: 500 }}>
+              Check out the video below to see how it works.
+            </span>
           </p>
         </ProductHeader>
       </div>
