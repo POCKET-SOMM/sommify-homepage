@@ -10,6 +10,7 @@ export default function Button({
   className,
   border,
   borderless,
+  background = colors.black,
   ...props
 }) {
   const [hover, setHover] = useState(false);
@@ -23,9 +24,9 @@ export default function Button({
         className
       }
       animate={{
-        border: borderless ? 'none' : `2px solid ${colors.black}`,
+        border: borderless ? 'none' : `2px solid ${background}`,
         color: border ? colors.black : '#ffffff',
-        background: border ? 'none' : colors.black,
+        background: border ? 'none' : background,
         ...animate,
       }}
       style={{
