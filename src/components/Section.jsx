@@ -6,8 +6,8 @@ import bglines from '../assets/bglines.svg';
 export default function Section({ children, style, className, ...props }) {
   const { width, height } = useWindowDimensions();
 
-  const paddingTop = width <= 760 ? '17vh' : '13vh';
-  const paddingBottom = width <= 760 ? '5vh' : '7vh';
+  const paddingTop = width <= 760 ? '10vh' : '13vh';
+  const paddingBottom = width <= 760 ? '12vh' : '7vh';
 
   return (
     <motion.div

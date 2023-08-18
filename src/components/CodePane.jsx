@@ -9,7 +9,7 @@ export default function CodePane({ examples, ...props }) {
     <div
       className='d-flex flex-column position-relative'
       style={{
-        width: '100vh',
+        width: '100%',
         background: '#282c34',
         borderRadius: 12,
         marginBottom: 120,
