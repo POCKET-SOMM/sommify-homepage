@@ -45,7 +45,7 @@ const Step = ({ title, children, rightAlign, style, img, i }) => (
     key={'integration_step_' + i}
     style={{
       display: 'flex',
-      width: '80%',
+      width: '100%',
       // float: rightAlign ? 'right' : 'left',
       marginLeft: rightAlign ? 'auto' : 0,
       textAlign: rightAlign ? 'end' : 'start',
@@ -146,7 +146,7 @@ export default function Integrate({ ...props }) {
       <br />
       <br />
       <Step i={1} img={icon1} title='Create an account'>
-        <p className='mb-5'>
+        <p className='mb-5' style={{ width: '80%' }}>
           Go to our{' '}
           <a
             href='https://portal.sommify.ai'
@@ -165,7 +165,7 @@ export default function Integrate({ ...props }) {
         </Button> */}
       </Step>
       <Step i={2} img={icon2} title='Upload your wines'>
-        <p className='mb-5'>
+        <p className='mb-5' style={{ width: '80%' }}>
           Upload your wines into our digital wine cellar using an excel, CSV or
           JSON file. We provide templates or you can opt for a freeform upload.
           We will process your wines and you will receive an email notification
@@ -173,7 +173,7 @@ export default function Integrate({ ...props }) {
         </p>
       </Step>
       <Step i={3} img={icon3} title='Start using our widget'>
-        <p className='mb-5'>
+        <p className='mb-5' style={{ width: '80%' }}>
           Once you receive an email you can go to the settings page of the{' '}
           <a
             style={{ color: colors.primary, textDecoration: 'none' }}
@@ -202,7 +202,7 @@ export default function Integrate({ ...props }) {
         />
       </Step>
       <Step img={icon4} i={4} title='Customize'>
-        <p className='mb-5'>
+        <p className='mb-5' style={{ width: '80%' }}>
           You are able to customize the widget to match your brand identity and
           change the language to serve your customers how they would be served
           in a local store. Additionally, you can create a custom category for

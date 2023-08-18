@@ -107,7 +107,7 @@ export default function Navigation({ ...props }) {
       }}
     >
       <CustomView condition={width < 1300}>
-        <div className='d-flex justify-conent-center align-items-center'>
+        <div className='d-flex justify-conent-center align-items-center' style={{borderBottom: '1px solid'}}>
           <img
             style={{
               height: '2em',

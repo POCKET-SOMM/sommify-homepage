@@ -18,9 +18,14 @@ import Product from './components/Product';
 import Integrate from './components/Integrate';
 import WidgetShowcase from './components/WidgetShowcase';
 import { ChatWidget } from 'react-sommify-widget';
-import { CgClose } from 'react-icons/cg';
+import { CgClose, CgLink } from 'react-icons/cg';
 import Partners from './components/Partners';
 import AisleVisual from './components/AisleVisual';
+import Library from './assets/illustrations/library.svg';
+import CodePane from './components/CodePane';
+import UseCases from './components/UseCases';
+import APIShowcase from './components/APIShowcase';
+import { BsExclamationLg } from 'react-icons/bs';
 
 const TitleHeading = ({ ...props }) => {
   const { width } = useWindowDimensions();
@@ -84,10 +89,11 @@ const TitleHeading = ({ ...props }) => {
               marginBottom: isMobile ? 10 : 0,
             }}
             onClick={() => {
-              window.open('https://portal.sommify.ai', '_blank');
+              // window.open('https://portal.sommify.ai', '_blank');
+              window.Widget.open();
             }}
           >
-            Register
+            Try demo
           </Button>
           <Button
             border
@@ -236,10 +242,25 @@ function App() {
         overflowX: 'hidden',
         width: '100vw',
         position: 'relative',
+        // background: '#fff',
       }}
     >
       <CustomView id='mobile-view' condition={width < 760}>
-        <Navigation />
+        <div
+          className='w-100 d-flex justify-content-center align-items-center'
+          style={{
+            height: 60,
+            // position: 'fixed',
+            // top: 0,
+            // left: 0,
+            zIndex: 999,
+            background: 'white',
+            // boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+          }}
+        >
+          <img src={Logo.FullMaroon} style={{ height: 26, marginTop: 4 }} />
+        </div>
+        {/* <Navigation /> */}
         <div
           className='position-absolute'
           style={{
@@ -353,6 +374,38 @@ function App() {
           {/* <Partners /> */}
           <Product />
           <Integrate />
+          {/* <Section>
+            <div className='w-100 d-flex'>
+              <div
+                className='d-flex justify-content-center align-items-center'
+                style={{ flex: 1 }}
+              >
+                <img src={Library} style={{ width: 450 }} />
+              </div>
+
+              <div className='p-4' style={{ flex: 1 }}>
+                <span
+                  className='mb-2'
+                  style={{
+                    color: '#a0a5aa',
+                    fontSize: '1.8rem',
+                    fontWeight: 600,
+                  }}
+                >
+                  Don't need the visuals?
+                </span>
+                <h1>Get creative with the API</h1>
+                <p>
+                  The basis of our solution is an API of our AI sommelier that
+                  can be used in many many ways and below we highlight a few
+                  possible use cases. There are many ways to make wine easy.
+                </p>
+              </div>
+            </div>
+            <UseCases />
+
+            <APIShowcase />
+          </Section> */}
           <Pricing />
           <ContactUs />
 
