@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 12.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 51448)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+	<!ENTITY ns_flows "http://ns.adobe.com/Flows/1.0/">
+	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
+	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
+	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
+	<!ENTITY ns_svg "http://www.w3.org/2000/svg">
+	<!ENTITY ns_xlink "http://www.w3.org/1999/xlink">
+]>
+<svg  version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+	 xmlns="&ns_svg;" xmlns:xlink="&ns_xlink;" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+	 width="79.546" height="79.869" viewBox="0 0 79.546 79.869" overflow="visible" enable-background="new 0 0 79.546 79.869"
+	 xml:space="preserve">
+<g>
+	<g>
+		<path fill="#D276A6" d="M20.193,62.896h50.533c4.852,0,8.82-3.969,8.82-8.818V42.09c0-4.85-3.969-8.818-8.82-8.818h-25.33
+			c-4.849,0-8.818,3.969-8.818,8.818v4.422L20.193,62.896z"/>
+		<path fill="#C16198" d="M29.272,53.816l-9.079,9.08h50.533c4.852,0,8.82-3.969,8.82-8.818v-4.717
+			C72.833,59.729,29.272,62.896,29.272,53.816z"/>
+	</g>
+	<g>
+		<path fill="#DBD6D5" d="M59.353,42.07H8.819C3.968,42.07,0,38.102,0,33.252V21.264c0-4.85,3.968-8.819,8.819-8.819h25.33
+			c4.85,0,8.819,3.97,8.819,8.819v4.422L59.353,42.07z"/>
+		<path fill="#CEC7C6" d="M50.273,32.99l9.08,9.08H8.819C3.968,42.07,0,38.102,0,33.252v-4.717
+			C6.712,38.903,50.273,42.07,50.273,32.99z"/>
+	</g>
+	<path fill="none" stroke="#1F2937" stroke-linecap="square" stroke-linejoin="bevel" stroke-miterlimit="10" d="M23.364,67.819
+		c4.651,7.136,11.076,11.55,18.174,11.55c7.516,0,14.279-4.951,18.979-12.844"/>
+	<path fill="none" stroke="#1F2937" stroke-linecap="square" stroke-linejoin="bevel" stroke-miterlimit="10" d="M15.837,39.935
+		c0,5.444,0.719,10.632,2.02,15.35"/>
+	<path fill="none" stroke="#1F2937" stroke-linecap="square" stroke-linejoin="bevel" stroke-miterlimit="10" d="M58.828,10.757
+		C54.261,4.384,48.195,0.5,41.539,0.5c-6.502,0-12.441,3.704-16.967,9.813"/>
+	<path fill="none" stroke="#1F2937" stroke-linecap="square" stroke-linejoin="bevel" stroke-miterlimit="10" d="M67.238,39.935
+		c0-6.749-1.105-13.103-3.053-18.657"/>
+	<circle fill="none" stroke="#1F2937" stroke-linejoin="bevel" stroke-miterlimit="10" cx="61.641" cy="16.045" r="2.073"/>
+</g>
+</svg>
