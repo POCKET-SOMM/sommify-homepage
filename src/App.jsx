@@ -27,6 +27,8 @@ import UseCases from './components/UseCases';
 import APIShowcase from './components/APIShowcase';
 import { BsExclamationLg } from 'react-icons/bs';
 
+import Dots from './assets/background/dots.svg';
+
 const TitleHeading = ({ ...props }) => {
   const { width } = useWindowDimensions();
 
@@ -39,7 +41,7 @@ const TitleHeading = ({ ...props }) => {
       {...props}
       variants={inViewVariantsX}
       style={{ flex: 1 }}
-      className={`d-flex align-items-center ${
+      className={`d-flex position-relative align-items-center ${
         isTablet ? 'justify-content-center text-center' : ''
       }`}
     >
@@ -374,7 +376,7 @@ function App() {
           {/* <Partners /> */}
           <Product />
           <Integrate />
-          {/* <Section>
+          <Section>
             <div className='w-100 d-flex'>
               <div
                 className='d-flex justify-content-center align-items-center'
@@ -404,8 +406,8 @@ function App() {
             </div>
             <UseCases />
 
-            <APIShowcase />
-          </Section> */}
+            {/* <APIShowcase /> */}
+          </Section>
           <Pricing />
           <ContactUs />
 
