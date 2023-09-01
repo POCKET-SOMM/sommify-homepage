@@ -107,7 +107,10 @@ export default function Navigation({ ...props }) {
       }}
     >
       <CustomView condition={width < 1300}>
-        <div className='d-flex justify-conent-center align-items-center' style={{borderBottom: '1px solid'}}>
+        <div
+          className='d-flex justify-conent-center align-items-center'
+          style={{ borderBottom: '1px solid' }}
+        >
           <img
             style={{
               height: '2em',
@@ -158,7 +161,7 @@ export default function Navigation({ ...props }) {
             className='d-inline-flex justify-content-end'
             style={{ flex: 1 }}
           >
-            <Button
+            {/* <Button
               border
               borderless
               variant='secondary'
@@ -167,7 +170,7 @@ export default function Navigation({ ...props }) {
               }}
             >
               Go to portal
-            </Button>
+            </Button> */}
           </div>
         </div>
       </CustomView>

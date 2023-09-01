@@ -141,21 +141,24 @@ export default function Integrate({ ...props }) {
         <h6 className='font-weight-500 mb-2' style={{ color: colors.primary }}>
           INTEGRATION
         </h6>
-        <h1 id='how'>Implement in under an hour</h1>
+        <h1 id='how'>Implement under an hour of your time</h1>
       </motion.div>
       <br />
       <br />
-      <Step i={1} img={icon1} title='Create an account'>
+      <Step i={1} img={icon1} title='Contact us'>
         <p className='mb-5' style={{ width: '80%' }}>
-          Go to our{' '}
-          <a
-            href='https://portal.sommify.ai'
-            style={{ color: colors.primary, textDecoration: 'none' }}
+          Send us a{' '}
+          <span
+            style={{ cursor: 'pointer', color: colors.primary }}
+            onClick={() => {
+              const target = document.getElementById('contact');
+              target.scrollIntoView({ behavior: 'smooth' });
+            }}
           >
-            portal
-          </a>{' '}
-          and register as a member. Once you activate your account you are able
-          to login using your email and password.
+            message
+          </span>
+          &nbsp;with the website you would like our solution on. This kickstarts
+          our integration.
         </p>
         {/* <Button
           border
@@ -164,24 +167,16 @@ export default function Integrate({ ...props }) {
           Register
         </Button> */}
       </Step>
-      <Step i={2} img={icon2} title='Upload your wines'>
+      <Step i={2} img={icon2} title='Wine data access'>
         <p className='mb-5' style={{ width: '80%' }}>
-          Upload your wines into our digital wine cellar using an excel, CSV or
-          JSON file. We provide templates or you can opt for a freeform upload.
-          We will process your wines and you will receive an email notification
-          once they are ready.
+          Next give us access to your product feed or we can scrape your site
+          for the wines to offer your customers through our widget.
         </p>
       </Step>
       <Step i={3} img={icon3} title='Start using our widget'>
         <p className='mb-5' style={{ width: '80%' }}>
-          Once you receive an email you can go to the settings page of the{' '}
-          <a
-            style={{ color: colors.primary, textDecoration: 'none' }}
-            href='https://portal.sommify.ai/settings/api-key'
-          >
-            portal
-          </a>{' '}
-          to retrieve your API key to populate your website or app. Simple.
+          We will send you a few lines of code and an API key you can copy into
+          your site. Simple.
         </p>
 
         <br />

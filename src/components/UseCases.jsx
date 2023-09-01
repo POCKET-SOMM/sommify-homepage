@@ -51,7 +51,7 @@ export default function UseCases({ ...props }) {
 
 
   return (
-    <div className='p-5 mt-5'>
+    <div className='p-5'>
       {/* <h5>Get Inspired</h5> */}
       <div
         className='w-100 d-flex justify-content-center'
@@ -122,11 +122,11 @@ export default function UseCases({ ...props }) {
             >
               <img className='w-100 h-100' src={selectedUseCase.iconBig} />
             </div>
-            <div style={{ flex: 1, minHeight: 400 }}>
+            <div style={{ flex: 1, minHeight: 250 }}>
               {/* <h5 style={{ color: '#a51c5e', fontWeight: 600 }}>USE CASE</h5> */}
               <div
                 className='mb-4'
-                style={{ fontWeight: 700, fontSize: '2.3rem' }}
+                style={{ fontWeight: 500, fontSize: '1.8rem' }}
               >
                 {selectedUseCase.title}
               </div>
