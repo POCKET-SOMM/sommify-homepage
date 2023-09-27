@@ -3,7 +3,7 @@ import './App.scss';
 import colors from './data/colors';
 import { CustomView } from 'react-device-detect';
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
-import { SiCrunchbase, SiLinkedin } from 'react-icons/si';
+import { SiCrunchbase, SiInstagram, SiLinkedin } from 'react-icons/si';
 import useWindowDimensions from './hooks';
 import { Icon, Logo } from './assets';
 import ContactUs from './components/ContactUs';
@@ -183,6 +183,17 @@ const Footer = () => (
               }}
             >
               Linkedin
+            </span>
+          </span>
+          <span className='d-block'>
+            <SiInstagram />{' '}
+            <span
+              className='clickable'
+              onClick={() => {
+                window.open('https://www.instagram.com/sommify.ai/');
+              }}
+            >
+              Instagram
             </span>
           </span>
         </div>
@@ -411,44 +422,46 @@ function App() {
           <Pricing />
           <ContactUs />
 
-          <div
-            className='d-flex justify-content-center align-items-center py-5'
-            style={{ background: '#f0f2f4', paddingInline: '25%' }}
-          >
-            {partners.map(({ pLogo, height, link }, i) => (
-              <div key={'partner_' + i} style={{ flex: 1 }}>
-                <motion.img
-                  variants={{
-                    offscreen: { y: '10vh', opacity: 0 },
-                    onscreen: {
-                      y: 0,
-                      opacity: 1,
-                      transition: {
-                        duration: 0.5,
-                        delay: 0.3 + i * 0.05,
-                        type: 'tween',
+          <div className='py-5' style={{ background: '#f0f2f4' }}>
+            <div
+              className='d-flex justify-content-center align-items-center '
+              style={{ maxWidth: 1200, margin: 'auto' }}
+            >
+              {partners.map(({ logo, height, link }, i) => (
+                <div key={'partner_' + i} style={{ flex: 1, minWidth: 0 }}>
+                  <motion.img
+                    variants={{
+                      offscreen: { y: '10vh', opacity: 0 },
+                      onscreen: {
+                        y: 0,
+                        opacity: 1,
+                        transition: {
+                          duration: 0.5,
+                          delay: 0.3 + i * 0.05,
+                          type: 'tween',
+                        },
                       },
-                    },
-                  }}
-                  className='mx-5 clickable'
-                  src={pLogo}
-                  onClick={() => window.open(link, '_blank')}
-                  animate={{
-                    filter: 'brightness(0)',
-                  }}
-                  whileHover={{
-                    filter: 'brightness(1)',
-                    scale: 1.02,
-                  }}
-                  style={{
-                    maxWidth: '60%',
-                    maxHeight: 35,
-                    // height: `calc(${height} * 0.8)`,
-                    // filter: 'brightness(0)',
-                  }}
-                />
-              </div>
-            ))}
+                    }}
+                    className='mx-5 clickable'
+                    src={logo}
+                    onClick={() => window.open(link, '_blank')}
+                    animate={{
+                      filter: 'brightness(0)',
+                    }}
+                    whileHover={{
+                      filter: 'brightness(1)',
+                      scale: 1.02,
+                    }}
+                    style={{
+                      // maxWidth: '60%',
+                      // maxHeight: 35,
+                      height: `calc(${height} * 0.5)`,
+                      // filter: 'brightness(0)',
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
 
           <Footer />
