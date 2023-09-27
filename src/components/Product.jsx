@@ -50,7 +50,7 @@ export default function Product({ className }) {
       <video
         width={isMobile ? '100%' : '1150'}
         autoPlay={true}
-        muted
+        muted={true}
         loop
         style={{
           borderRadius: 20,
