@@ -3,7 +3,12 @@ import './App.scss';
 import colors from './data/colors';
 import { CustomView } from 'react-device-detect';
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
-import { SiCrunchbase, SiInstagram, SiLinkedin } from 'react-icons/si';
+import {
+  SiCrunchbase,
+  SiInstagram,
+  SiLinkedin,
+  SiOpenai,
+} from 'react-icons/si';
 import useWindowDimensions from './hooks';
 import { Icon, Logo } from './assets';
 import ContactUs from './components/ContactUs';
@@ -152,10 +157,13 @@ const Footer = () => (
             <span
               className='clickable'
               onClick={() => {
-                window.open('https://portal.sommify.ai', '_blank');
+                window.open(
+                  'https://chat.openai.com/g/g-auTVns5NJ-elizabeth-master-sommelier',
+                  '_blank'
+                );
               }}
             >
-              Dashboard
+              Elizabeth (GPTs demo)
             </span>
           </span>
         </div>
