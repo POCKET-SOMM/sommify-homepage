@@ -30,8 +30,8 @@
 
   <script src="https://elements.sommify.ai/js/v1"></script>
 
-  <!-- <link rel="stylesheet" href="./src/scripts/sommify.css?reload=176" /> -->
-  <!-- <script src="./src/scripts/sommify.js?reload=176"></script> -->
+  <!-- <link id="sommify-css" rel="stylesheet" href="./src/scripts/sommify.css?reload=194" /> -->
+  <!-- <script src="./src/scripts/sommify.js?reload=196"></script> -->
 </head>
 
 <body>
@@ -45,7 +45,11 @@
       // mobile: { fullscreen: false }
       // position: 'bottom-left',
       // localization: 'cs',
-      overlayOpacity: 0.35
+      // triggerIcon: '/bsbob.png',
+      overlayOpacity: 0.1,
+      chatBubble: true,
+      triggerRadius: 70,
+      // company: 'bs',
     });
 
     window.Widget = widget;
