@@ -46,14 +46,14 @@ export default function Pricing({ className }) {
           // },
           {
             title: 'Early Adopter',
-            value: <span>2 month trial</span>,
+            value: <span>1 month trial</span>,
             text: 'Our interactive sommelier for any amount of customers.',
             traits: [
-              'Free!',
-              'Help setting up',
               'Widget & API access',
               'Unlimited users',
-              'Post-trial pricing based on usage',
+              'Monitoring of success',
+              'Nominal set up fee',
+              'Usage-based pricing post trial',
             ],
           },
           {
