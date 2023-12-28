@@ -311,6 +311,61 @@ function App() {
           <Section id='widget-screen' className='text-center position-relative'>
             <TitleHeading />
           </Section>
+
+          <div style={{ background: '#f5f6f8', marginTop: '20vh' }}>
+            <Section style={{ paddingBottom: '12vh' }}>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ flex: 1 }}>
+                  <h6
+                    style={{
+                      color: colors.primary,
+                    }}
+                  >
+                    B2C PRODUCT
+                  </h6>
+                  <h2>sommifyAI for Chrome</h2>
+                  <p>
+                    Get the sommify extension for any Chrome browser and get
+                    wine recommendations on any recipe page.
+                  </p>
+                  <br />
+                  <br />
+                  <div className='d-flex justify-content-center'>
+                    <Button
+                      onClick={() => {
+                        window.open(
+                          'https://chromewebstore.google.com/detail/sommify-find-the-perfect/omffejpmkjeibjphgccejljppddmplha'
+                        );
+                      }}
+                      style={{ padding: '16px 36px', fontSize: 14 }}
+                    >
+                      Add to Chrome - it's free!
+                    </Button>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    flex: 1,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    position: 'relative',
+                  }}
+                >
+                  <img
+                    src={ChromeScreen}
+                    style={{
+                      width: '95%',
+                      margin: 'auto',
+                      marginTop: 100,
+                      // boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+                      // background: 'white',
+                    }}
+                  />
+                </div>
+              </div>
+            </Section>
+          </div>
+
           <Product className='text-center' />
 
           <Pricing className='text-center' />
@@ -444,40 +499,6 @@ function App() {
                     position: 'relative',
                   }}
                 >
-                  {/* <img
-                    src={RecipeWebsite}
-                    style={{
-                      width: 450,
-                      position: 'absolute',
-                      top: -50,
-                      left: 120,
-                      filter: 'blur(1px)',
-                    }}
-                  />
-                  <div
-                    style={{
-                      width: 100,
-                      height: 100,
-                      position: 'absolute',
-                      left: 270,
-                      top: 170,
-                      borderRadius: 10,
-                      boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      // border: '8px solid #fff',
-                      color: '#1f2937',
-                      background: '#fff',
-                    }}
-                  >
-                    <img
-                      src={
-                        'https://www.google.com/chrome/static/images/chrome-logo.svg'
-                      }
-                      style={{ width: 70 }}
-                    />
-                  </div> */}
                   <img
                     src={ChromeScreen}
                     style={{
