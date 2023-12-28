@@ -15,7 +15,7 @@ const ProductHeader = ({ title, className, style, children, ...props }) => {
       style={{ marginTop: 70, ...style }}
     >
       <h6 className='font-weight-500 mb-2' style={{ color: colors.primary }}>
-        PRODUCT
+        B2B PRODUCT
       </h6>
       <h1>{title}</h1>
       <p
