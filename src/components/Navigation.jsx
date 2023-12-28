@@ -10,6 +10,7 @@ import {
 } from 'framer-motion';
 import { Logo } from '../assets';
 import Button from './Button';
+import { FiChrome } from 'react-icons/fi';
 
 const NAV_HEIGHT = '100px';
 
@@ -161,16 +162,30 @@ export default function Navigation({ ...props }) {
             className='d-inline-flex justify-content-end'
             style={{ flex: 1 }}
           >
-            {/* <Button
+            {/* <motion.div
+              style={{
+                height: '100%',
+                fontWeight: 600,
+                fontSize: 15,
+                position: 'relative',
+                flex: isBrowser ? '' : 1,
+                color: 'black',
+                marginLeft: 20,
+              }}
+            >
+              <FiChrome size={20} /> add to chrome — it's free
+            </motion.div> */}
+            <Button
               border
               borderless
               variant='secondary'
               onClick={() => {
-                window.open('https://portal.sommify.ai/auth/login');
+                window.open('https://chromewebstore.google.com/detail/sommify-find-the-perfect/omffejpmkjeibjphgccejljppddmplha');
               }}
             >
-              Go to portal
-            </Button> */}
+              {/* Go to portal */}
+              <FiChrome size={20} /> add to chrome
+            </Button>
           </div>
         </div>
       </CustomView>

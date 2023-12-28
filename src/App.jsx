@@ -33,6 +33,10 @@ import APIShowcase from './components/APIShowcase';
 import { BsExclamationLg } from 'react-icons/bs';
 
 import Dots from './assets/background/dots.svg';
+import { FiChrome } from 'react-icons/fi';
+import { ImChrome } from 'react-icons/im';
+import ChromeScreen from './assets/chrome1.png';
+import RecipeWebsite from './assets/RecipeWebsite.png';
 
 const TitleHeading = ({ ...props }) => {
   const { width } = useWindowDimensions();
@@ -115,6 +119,17 @@ const TitleHeading = ({ ...props }) => {
             Contact Us
           </Button>
         </div>
+        {/* <div
+          style={{
+            width: '100%',
+            marginTop: 25,
+            display: 'flex',
+          }}
+        >
+          <Button border borderless>
+            <FiChrome size={20} /> Try our chrome extension!
+          </Button>
+        </div> */}
       </div>
     </motion.div>
   );
@@ -296,6 +311,61 @@ function App() {
           <Section id='widget-screen' className='text-center position-relative'>
             <TitleHeading />
           </Section>
+
+          <div style={{ background: '#f5f6f8', marginTop: '20vh' }}>
+            <Section style={{ paddingBottom: '12vh' }}>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ flex: 1 }}>
+                  <h6
+                    style={{
+                      color: colors.primary,
+                    }}
+                  >
+                    B2C PRODUCT
+                  </h6>
+                  <h2>sommifyAI for Chrome</h2>
+                  <p>
+                    Get the sommify extension for any Chrome browser and get
+                    wine recommendations on any recipe page.
+                  </p>
+                  <br />
+                  <br />
+                  <div className='d-flex justify-content-center'>
+                    <Button
+                      onClick={() => {
+                        window.open(
+                          'https://chromewebstore.google.com/detail/sommify-find-the-perfect/omffejpmkjeibjphgccejljppddmplha'
+                        );
+                      }}
+                      style={{ padding: '16px 36px', fontSize: 14 }}
+                    >
+                      Add to Chrome - it's free!
+                    </Button>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    flex: 1,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    position: 'relative',
+                  }}
+                >
+                  <img
+                    src={ChromeScreen}
+                    style={{
+                      width: '95%',
+                      margin: 'auto',
+                      marginTop: 100,
+                      // boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+                      // background: 'white',
+                    }}
+                  />
+                </div>
+              </div>
+            </Section>
+          </div>
+
           <Product className='text-center' />
 
           <Pricing className='text-center' />
@@ -391,6 +461,61 @@ function App() {
               // </motion.div>
             )}
           </Section>
+
+          <div style={{ background: '#f9fbfd', marginTop: '20vh' }}>
+            <Section style={{ paddingBottom: '12vh' }}>
+              <div style={{ display: 'flex' }}>
+                <div style={{ flex: 1 }}>
+                  <h6
+                    style={{
+                      color: colors.primary,
+                    }}
+                  >
+                    B2C PRODUCT
+                  </h6>
+                  <h2>sommifyAI for Chrome</h2>
+                  <p>
+                    Get the sommify extension for any Chrome browser and get
+                    wine recommendations on any recipe page.
+                  </p>
+                  <br />
+                  <br />
+                  <Button
+                    onClick={() => {
+                      window.open(
+                        'https://chromewebstore.google.com/detail/sommify-find-the-perfect/omffejpmkjeibjphgccejljppddmplha'
+                      );
+                    }}
+                    style={{ padding: '16px 36px', fontSize: 14 }}
+                  >
+                    Add to Chrome - it's free!
+                  </Button>
+                </div>
+                <div
+                  style={{
+                    flex: 1,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    position: 'relative',
+                  }}
+                >
+                  <img
+                    src={ChromeScreen}
+                    style={{
+                      width: 620,
+                      padding: 10,
+                      borderRadius: 20,
+                      // boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+                      // background: 'white',
+                      left: 50,
+                      top: -170,
+                      position: 'absolute',
+                    }}
+                  />
+                </div>
+              </div>
+            </Section>
+          </div>
 
           {/* <Partners /> */}
           <Product />
