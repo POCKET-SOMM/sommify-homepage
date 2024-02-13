@@ -135,23 +135,26 @@ const TitleHeading = ({ ...props }) => {
   );
 };
 
-const Footer = () => (
-  <div
-    id='footer'
-    // className='bg-secondary'
-    style={{
-      background: '#131921',
-      width: '100%',
-      color: 'white',
-      fontSize: '0.9rem',
-    }}
-  >
+const Footer = () => {
+  const { width } = useWindowDimensions();
+
+  return (
     <div
-      className='d-flex flex-column justify-content-center align-items-start'
-      style={{ width: '100%', maxWidth: 1200, margin: 'auto' }}
+      id='footer'
+      // className='bg-secondary'
+      style={{
+        background: '#131921',
+        width: '100%',
+        color: 'white',
+        fontSize: '0.9rem',
+      }}
     >
-      <div className='d-flex justify-content-center align-items-start w-100 py-5'>
-        {/* <div className='d-flex flex-column mx-4'>
+      <div
+        className='d-flex flex-column justify-content-center align-items-start'
+        style={{ width: '100%', maxWidth: 1200, margin: 'auto' }}
+      >
+        <div className='d-flex justify-content-center align-items-start w-100 py-5'>
+          {/* <div className='d-flex flex-column mx-4'>
           <h6>Company</h6>
           <span className='d-block'>
             <span
@@ -166,90 +169,102 @@ const Footer = () => (
             </span>
           </span>
         </div> */}
-        <div className='d-flex flex-column mx-4'>
-          <h6>Products</h6>
-          <span className='d-block'>
-            <span
-              className='clickable'
-              onClick={() => {
-                window.open(
-                  'https://chat.openai.com/g/g-auTVns5NJ-elizabeth-master-sommelier',
-                  '_blank'
-                );
-              }}
-            >
-              Elizabeth (GPTs demo)
+          <div
+            style={{
+              flex: 1,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            {width > 800 && <img src={Logo.MFS} style={{ height: 80 }} />}
+          </div>
+          <div className='d-flex flex-column mx-4'>
+            <h6>Products</h6>
+            <span className='d-block'>
+              <span
+                className='clickable'
+                onClick={() => {
+                  window.open(
+                    'https://chat.openai.com/g/g-auTVns5NJ-elizabeth-master-sommelier',
+                    '_blank'
+                  );
+                }}
+              >
+                Elizabeth (GPTs demo)
+              </span>
             </span>
+          </div>
+          <div className='d-flex flex-column mx-4'>
+            <h6>Socials</h6>
+            <span className='d-block'>
+              <SiCrunchbase />{' '}
+              <span
+                className='clickable'
+                onClick={() => {
+                  window.open(
+                    'https://www.crunchbase.com/organization/sommifyai'
+                  );
+                }}
+              >
+                Crunchbase
+              </span>
+            </span>
+            <span className='d-block'>
+              <SiLinkedin />{' '}
+              <span
+                className='clickable'
+                onClick={() => {
+                  window.open('https://www.linkedin.com/company/sommifyai');
+                }}
+              >
+                Linkedin
+              </span>
+            </span>
+            <span className='d-block'>
+              <SiInstagram />{' '}
+              <span
+                className='clickable'
+                onClick={() => {
+                  window.open('https://www.instagram.com/sommify.ai/');
+                }}
+              >
+                Instagram
+              </span>
+            </span>
+          </div>
+          <div style={{ flex: 1 }}></div>
+        </div>
+        <div
+          style={{ fontSize: '.9em' }}
+          className='w-100 py-4 d-flex justify-content-center'
+        >
+          <b>PocketSomm Oy 2021-2023</b>&nbsp;•&nbsp;
+          <span
+            onClick={() => {
+              window.open(
+                'https://drive.google.com/file/d/1ANL8N4lXOqdFQbZ8Mc1J4Q2OTL6LnTBI/view?usp=sharing',
+                '_blank'
+              );
+            }}
+            className='clickable'
+          >
+            Privacy policy
+          </span>
+          &nbsp;•&nbsp;
+          <span
+            onClick={() => {
+              window.open('https://icons8.com', '_blank');
+            }}
+            className='clickable'
+          >
+            Icons8
           </span>
         </div>
-        <div className='d-flex flex-column mx-4'>
-          <h6>Socials</h6>
-          <span className='d-block'>
-            <SiCrunchbase />{' '}
-            <span
-              className='clickable'
-              onClick={() => {
-                window.open(
-                  'https://www.crunchbase.com/organization/sommifyai'
-                );
-              }}
-            >
-              Crunchbase
-            </span>
-          </span>
-          <span className='d-block'>
-            <SiLinkedin />{' '}
-            <span
-              className='clickable'
-              onClick={() => {
-                window.open('https://www.linkedin.com/company/sommifyai');
-              }}
-            >
-              Linkedin
-            </span>
-          </span>
-          <span className='d-block'>
-            <SiInstagram />{' '}
-            <span
-              className='clickable'
-              onClick={() => {
-                window.open('https://www.instagram.com/sommify.ai/');
-              }}
-            >
-              Instagram
-            </span>
-          </span>
-        </div>
-      </div>
-      <div
-        style={{ fontSize: '.9em' }}
-        className='w-100 py-4 d-flex justify-content-center'
-      >
-        <b>PocketSomm Oy 2021-2023</b>&nbsp;•&nbsp;
-        <span
-          onClick={() => {
-            window.open(
-              'https://drive.google.com/file/d/1ANL8N4lXOqdFQbZ8Mc1J4Q2OTL6LnTBI/view?usp=sharing',
-              '_blank'
-            );
-          }}
-          className='clickable'
-        >
-          Privacy policy
-        </span>
-        &nbsp;•&nbsp;
-        <span
-          onClick={() => {
-            window.open('https://icons8.com', '_blank');
-          }}
-          className='clickable'
-        >
-          Icons8
-        </span>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 function App() {
   const { width, height } = useWindowDimensions();

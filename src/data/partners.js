@@ -16,11 +16,11 @@ export default [
     height: '42px',
     link: 'https://siltahouse.com',
   },
-  {
-    logo: Logo.MFS,
-    height: '56px',
-    link: 'https://www.microsoft.com/en-us/startups',
-  },
+  // {
+  //   logo: Logo.MFS,
+  //   height: '56px',
+  //   link: 'https://www.microsoft.com/en-us/startups',
+  // },
   {
     logo: Logo.inQb,
     height: '38px',
