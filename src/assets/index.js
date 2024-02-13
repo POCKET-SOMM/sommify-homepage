@@ -18,7 +18,7 @@ import WineSpill from './background/wine_spill.jpeg';
 import Heino from './partners/heino.svg';
 import Gorilla from './partners/gorilla_capital.png';
 import Silta from './partners/silta.svg';
-import MFS from './partners/mfs.png';
+import MFS from './partners/mfs2.png';
 import inQb from './partners/inqb.png';
 import Boost from './partners/boost.png';
 import NewCo from './partners/newco.png';
