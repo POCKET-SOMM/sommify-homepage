@@ -6,6 +6,7 @@ import { Form, Spinner } from 'react-bootstrap';
 import { CgCheckO } from 'react-icons/cg';
 import Button from './Button';
 import Section from './Section';
+import colors from '../data/colors';
 
 export default function ContactUs({ ...props }) {
   const [subject, setSubject] = useState('');
@@ -66,8 +67,25 @@ export default function ContactUs({ ...props }) {
           color: 'black',
         }}
       >
-        <div className='d-flex justify-content-center text-center'>
+        <div className='d-flex flex-column justify-content-center text-center'>
           <h1>Open a dialogue</h1>
+
+          <p>
+            We are always open to new ideas, suggestions, and feedback. Reach
+            out to us by either filling out the following form or sending a
+            message to one of our founders{' '}
+            <a
+              style={{
+                color: colors.primary,
+                textDecoration: 'none',
+              }}
+              href='mailto:jacob@sommify.ai'
+            >
+              jacob@sommify.ai
+            </a>{' '}
+            and we will get back to you as soon as possible.
+          </p>
+          <br />
         </div>
         <div className='d-flex w-100 flex-grow-1'>
           <Form style={{ flex: 1 }}>
