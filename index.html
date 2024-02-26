@@ -13,6 +13,22 @@
 
     gtag('config', 'G-13W66HCY8Z');
   </script>
+
+
+  <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+  <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+  <script>
+    (function () {
+      window.addEventListener('load', function () {
+        calendar.schedulingButton.load({
+          url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ064y6ez3GrfT98S6PdGId4jyiQnXv-f26MUq2z_SGNteYdF8EdEM7J7Mmx-CLYoBMrqaloyAVs?gv=true',
+          color: '#039BE5',
+          label: 'Rezervovať schôdzku',
+          target: document.getElementById('google-calendar-button-container')
+        });
+      });
+    })();
+  </script>
   <meta charset="UTF-8" />
 
   <!-- <meta name="theme-color" content="#801247" media="(prefers-color-scheme: light)"> -->
@@ -28,6 +44,9 @@
     const global = globalThis;
   </script>
 
+
+  <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+  <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
   <script src="https://elements.sommify.ai/js/v1"></script>
 
   <!-- <link id="sommify-css" rel="stylesheet" href="./src/scripts/sommify.css?reload=197" /> -->

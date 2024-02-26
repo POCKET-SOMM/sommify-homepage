@@ -194,6 +194,19 @@ const Footer = () => {
                 Elizabeth (GPTs demo)
               </span>
             </span>
+            <span className='d-block'>
+              <span
+                className='clickable'
+                onClick={() => {
+                  window.open(
+                    'https://chromewebstore.google.com/detail/sommify-find-the-perfect/omffejpmkjeibjphgccejljppddmplha',
+                    '_blank'
+                  );
+                }}
+              >
+                WinePair (Chrome extension)
+              </span>
+            </span>
           </div>
           <div className='d-flex flex-column mx-4'>
             <h6>Socials</h6>
@@ -239,7 +252,7 @@ const Footer = () => {
           style={{ fontSize: '.9em' }}
           className='w-100 py-4 d-flex justify-content-center'
         >
-          <b>PocketSomm Oy 2021-2023</b>&nbsp;•&nbsp;
+          <b>PocketSomm Oy 2021-{new Date().getFullYear()}</b>&nbsp;•&nbsp;
           <span
             onClick={() => {
               window.open(
@@ -477,8 +490,54 @@ function App() {
             )}
           </Section>
 
-          <div style={{ background: '#f9fbfd', marginTop: '20vh' }}>
-            <Section style={{ paddingBottom: '12vh' }}>
+          {/* <Partners /> */}
+          <Product />
+          <Integrate />
+
+          <Section>
+            <div className='w-100 d-flex'>
+              <div
+                className='d-flex justify-content-center align-items-center'
+                style={{ flex: 1 }}
+              >
+                <img src={Library} style={{ width: 450 }} />
+              </div>
+
+              <div className='p-4' style={{ flex: 1 }}>
+                <span
+                  className='mb-2'
+                  style={{
+                    color: '#a0a5aa',
+                    fontSize: '1.8rem',
+                    fontWeight: 600,
+                  }}
+                >
+                  Don't need the visuals?
+                </span>
+                <h1>Get creative with the API</h1>
+                <p>
+                  The basis of our solution is an API of our AI sommelier that
+                  can be used in many many ways and below we highlight a few
+                  possible use cases. There are many ways to make wine easy.
+                </p>
+              </div>
+            </div>
+            <UseCases />
+
+            {/* <APIShowcase /> */}
+          </Section>
+
+          <Pricing />
+          <ContactUs />
+          {/* 
+          <div
+            style={{
+              background: '#f9fbfd',
+              marginTop: '14vh',
+              // marginBottom: '14vh',
+            }}
+          >
+            <Section style={{ paddingBottom: '30vh' }}>
               <div style={{ display: 'flex' }}>
                 <div style={{ flex: 1 }}>
                   <h6
@@ -530,47 +589,9 @@ function App() {
                 </div>
               </div>
             </Section>
-          </div>
+          </div> */}
 
-          {/* <Partners /> */}
-          <Product />
-          <Integrate />
-          <Section>
-            <div className='w-100 d-flex'>
-              <div
-                className='d-flex justify-content-center align-items-center'
-                style={{ flex: 1 }}
-              >
-                <img src={Library} style={{ width: 450 }} />
-              </div>
-
-              <div className='p-4' style={{ flex: 1 }}>
-                <span
-                  className='mb-2'
-                  style={{
-                    color: '#a0a5aa',
-                    fontSize: '1.8rem',
-                    fontWeight: 600,
-                  }}
-                >
-                  Don't need the visuals?
-                </span>
-                <h1>Get creative with the API</h1>
-                <p>
-                  The basis of our solution is an API of our AI sommelier that
-                  can be used in many many ways and below we highlight a few
-                  possible use cases. There are many ways to make wine easy.
-                </p>
-              </div>
-            </div>
-            <UseCases />
-
-            {/* <APIShowcase /> */}
-          </Section>
-          <Pricing />
-          <ContactUs />
-
-          <div className='py-5' style={{ background: '#f0f2f4' }}>
+          <div className='py-5' style={{ background: '#a5a8ab' }}>
             <div
               className='d-flex justify-content-center align-items-center '
               style={{ maxWidth: 1200, margin: 'auto' }}
@@ -595,6 +616,7 @@ function App() {
                     onClick={() => window.open(link, '_blank')}
                     animate={{
                       filter: 'brightness(0)',
+                      // black to white
                     }}
                     whileHover={{
                       filter: 'brightness(1)',
