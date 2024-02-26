@@ -11,6 +11,7 @@ import {
 import { Logo } from '../assets';
 import Button from './Button';
 import { FiChrome } from 'react-icons/fi';
+import { CgGoogle } from 'react-icons/cg';
 
 const NAV_HEIGHT = '100px';
 
@@ -65,7 +66,7 @@ export default function Navigation({ ...props }) {
   const [navHidden, setNavHidden] = useState(false);
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
-    if (latest > prevScroll) {
+    if (latest > prevScroll && false) {
       setNavHidden(true);
     } else {
       setNavHidden(false);
@@ -159,31 +160,20 @@ export default function Navigation({ ...props }) {
             className='d-inline-flex justify-content-end'
             style={{ flex: 1 }}
           >
-            {/* <motion.div
-              style={{
-                height: '100%',
-                fontWeight: 600,
-                fontSize: 15,
-                position: 'relative',
-                flex: isBrowser ? '' : 1,
-                color: 'black',
-                marginLeft: 20,
-              }}
-            >
-              <FiChrome size={20} /> add to chrome — it's free
-            </motion.div> */}
             <Button
               border
               borderless
               variant='secondary'
               onClick={() => {
-                window.open(
-                  'https://chromewebstore.google.com/detail/sommify-find-the-perfect/omffejpmkjeibjphgccejljppddmplha'
-                );
+                window.open('https://calendar.app.google/T7EmGqNvJ4pmgueM6');
+              }}
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
               }}
             >
-              {/* Go to portal */}
-              <FiChrome size={20} /> add to chrome
+              book a call
             </Button>
           </div>
         </div>
