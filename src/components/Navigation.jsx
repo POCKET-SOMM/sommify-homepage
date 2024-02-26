@@ -108,10 +108,7 @@ export default function Navigation({ ...props }) {
       }}
     >
       <CustomView condition={width < 1300}>
-        <div
-          className='d-flex justify-conent-center align-items-center'
-          style={{ borderBottom: '1px solid' }}
-        >
+        <div className='d-flex justify-conent-center align-items-center'>
           <img
             style={{
               height: '2em',
@@ -180,7 +177,9 @@ export default function Navigation({ ...props }) {
               borderless
               variant='secondary'
               onClick={() => {
-                window.open('https://chromewebstore.google.com/detail/sommify-find-the-perfect/omffejpmkjeibjphgccejljppddmplha');
+                window.open(
+                  'https://chromewebstore.google.com/detail/sommify-find-the-perfect/omffejpmkjeibjphgccejljppddmplha'
+                );
               }}
             >
               {/* Go to portal */}

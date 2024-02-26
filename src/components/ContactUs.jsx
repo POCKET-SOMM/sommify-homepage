@@ -144,17 +144,32 @@ export default function ContactUs({ ...props }) {
                       placeholder='How to reach you?'
                     />
                   </div>
-                  <div className='p-2 d-flex justify-content-center'>
+                  <div className='p-2 d-flex justify-content-center align-items-center flex-column'>
                     <Button
                       disabled={!subject || !message || !contact}
                       variant='secondary'
                       onClick={handleSendMessage}
+                      style={{ width: 200 }}
                     >
-                      {status === 'PENDING' ? (
+                      {status === 'Pending' ? (
                         <Spinner animation='border' size='sm' />
                       ) : (
-                        'SEND'
+                        'Send message'
                       )}
+                    </Button>
+
+                    <span style={{ marginBlock: 8 }}>or</span>
+
+                    <Button
+                      onClick={() => {
+                        window.open(
+                          'https://calendar.app.google/T7EmGqNvJ4pmgueM6'
+                        );
+                      }}
+                      style={{ width: 200 }}
+                      border
+                    >
+                      Book a call
                     </Button>
                   </div>
                 </motion.div>
