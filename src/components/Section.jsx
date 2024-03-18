@@ -1,42 +1,30 @@
-import { motion } from 'framer-motion';
-import { inViewProps } from '../data/variants';
-import useWindowDimensions from '../hooks';
-import bglines from '../assets/bglines.svg';
+import { useDimensions } from '../hooks';
 
-export default function Section({ children, style, className, ...props }) {
-  const { width, height } = useWindowDimensions();
-
-  const paddingTop = width <= 760 ? '10vh' : '13vh';
-  const paddingBottom = width <= 760 ? '12vh' : '7vh';
+export default function Section({ title, children }) {
+  const { sm } = useDimensions();
 
   return (
-    <motion.div
-      {...props}
-      {...inViewProps}
-      initial={false}
-      className='w-100 position-relative section'
+    <section
+      className='section'
+      style={{
+        paddingLeft: sm ? 0 : 30,
+        position: 'relative',
+        // borderLeft: '1px dashed #E4E9F1',
+        paddingBottom: 36,
+        maxWidth: 544,
+
+        // width: 600,
+        // maxWidth: 600,
+        // margin: 'auto',
+      }}
     >
-      {/* <img
-        className='position-absolute'
-        src={pattern}
-        style={{ top: 0, right: 0, height: '100%' }}
-        // style={{ postition: 'absolute', background: `url(${pattern})` }}
-      /> */}
-      <div
-        style={{
-          paddingTop,
-          paddingBottom,
-          paddingInline: 24,
-          maxWidth: 1200,
-          // minHeight: width > 760 ? `calc(100vh)` : '',
-          margin: 'auto',
-          // background: `url(${bglines})`,
-          ...style,
-        }}
-        className={className}
-      >
-        {children}
+      <div>
+        <h3 style={{ position: 'relative' }}>
+          {!sm && <div className='line-marker' />}
+          {title}
+        </h3>
       </div>
-    </motion.div>
+      {children}
+    </section>
   );
 }
