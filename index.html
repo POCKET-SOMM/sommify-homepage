@@ -1,8 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-13W66HCY8Z"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -14,59 +13,61 @@
     gtag('config', 'G-13W66HCY8Z');
   </script>
   <meta charset="UTF-8" />
-
-  <!-- <meta name="theme-color" content="#801247" media="(prefers-color-scheme: light)"> -->
-  <!-- <meta name="theme-color" content="#801247" media="(prefers-color-scheme: dark)"> -->
-
-  <link rel="icon" type="image/svg+xml" href="/logo_maroon.svg" />
-  <link rel="stylesheet" href="node_modules/highlight.js/styles/atom-one-dark-reasonable.css" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>AI Sommelier Making Wine Easy | sommifyAI</title>
+  <link rel="icon" type="image/svg+xml" href="/lupa.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- <link rel="preload" href="./Mona-Sans.woff2" as="font" type="font/woff2" crossorigin> -->
+  <!-- <link rel="preload" href="./Hubot-Sans.woff2" as="font" type="font/woff2" crossorigin> -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
   <meta name="description"
     content="We are making wine easy. Our AI sommelier helps retail customers choose the right wine by asking questions to find the right wine to pair with a meal or for a particular occasion. The suggested wines are from the retailer’s portfolio, so in addition to its accessibility, the AI sommelier is the perfect sales driver. The AI is built on the world-class wine knowledge of Julie Dupouy. Tags: sommify | sommifyAI | sommify.ai | aisomm | winetech | AI sommelier | artificial intelligence sommelier | digital sommelier | online sommelier" />
-  <script>
-    const global = globalThis;
-  </script>
+  <title>
+    AI sommelier helping companies sell wine through memorable experiences
+  </title>
 
-  <script src="https://elements.sommify.ai/js/v1"></script>
 
-  <!-- <link rel="stylesheet" href="./src/scripts/sommify.css?reload=176" /> -->
-  <!-- <script src="./src/scripts/sommify.js?reload=176"></script> -->
+  <!-- Google Calendar Appointment Scheduling begin -->
+  <!-- <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+  <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script> -->
+  <!-- end Google Calendar Appointment Scheduling -->
+
 </head>
 
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 
+
   <script>
-    const widget = Sommify.createWidget({
-      apiKey: 'somm-6fb46e10-e84c-4601-a35f-ce505fcc2410',
-      noRedirects: true,
-      // mobile: { fullscreen: false }
-      // position: 'bottom-left',
-      // localization: 'cs',
-      overlayOpacity: 0.35
-    });
+    // wait 2 seconds for the page to load
+    // setTimeout(function () {
+    //   const elementId = 'calendar-button';
+    //   const target = document.getElementById(elementId);
 
-    window.Widget = widget;
+    //   calendar.schedulingButton.load({
+    //     url: 'https://calendar.google.com/calendar/appointments/AcZssZ2mzIg5lKAVFzLu7R4umL4rgYYr7WV8yIOHwA8=?gv=true',
+    //     color: '#039BE5',
+    //     label: 'setting up a call',
+    //     target,
+    //   });
+    // }, 500);
 
-    widget.mount();
+    // (function () {
+    //   const elementId = 'calendar-button';
+    //   const target = document.getElementById(elementId);
+
+    //   window.addEventListener('load', function () {
+    //     calendar.schedulingButton.load({
+    //       url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ064y6ez3GrfT98S6PdGId4jyiQnXv-f26MUq2z_SGNteYdF8EdEM7J7Mmx-CLYoBMrqaloyAVs?gv=true',
+    //       color: '#039BE5',
+    //       label: 'setting up a call',
+    //       target,
+    //     });
+    //   });
+    // })();
   </script>
-
-  <!-- <script type="application/ld+json">
-      {
-        "@context": "https://schema.org/",
-        "@type": "Recipe",
-        "name": "Party Coffee Cake",
-        "author": {
-          "@type": "Person",
-          "name": "Mary Stone"
-        },
-        "datePublished": "2018-03-10",
-        "description": "This coffee cake is awesome and perfect for parties.",
-        "prepTime": "PT20M"
-      }
-    </script> -->
 </body>
 
 </html>

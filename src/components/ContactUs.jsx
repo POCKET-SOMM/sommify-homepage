@@ -1,13 +1,11 @@
-import axios from 'axios';
 import { useAnimation, motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import { useEffect, useState } from 'react';
-import { Form, Spinner } from 'react-bootstrap';
-import { CgCheckO } from 'react-icons/cg';
-import Button from './Button';
-import Section from './Section';
+import { CgAirplane, CgCheck, CgCheckO, CgClose, CgMail } from 'react-icons/cg';
+import { RotatingLines } from 'react-loader-spinner';
+import { TbMailX, TbMailCheck } from 'react-icons/tb';
+import Button2 from './Button2';
 
-export default function ContactUs({ ...props }) {
+export default function ContactUs({ open, ...props }) {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [contact, setContact] = useState('');
@@ -17,28 +15,43 @@ export default function ContactUs({ ...props }) {
   const handleContactChange = (e) => setContact(e.target.value);
 
   const [status, setStatus] = useState('IDLE');
-  const controls = useAnimation();
-  const [ref, inView] = useInView();
-
-  useEffect(() => {
-    if (inView) {
-      controls.start('visible');
-    }
-  }, [controls, inView]);
+  const disabled = !subject || !message || !contact || status === 'PENDING';
 
   const variants = {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.3 } },
     hidden: { opacity: 0, y: '5vh' },
   };
 
-  const handleSendMessage = () => {
+  useEffect(() => {
+    // reset form
+    if (open) {
+      setSubject('');
+      setMessage('');
+      setContact('');
+      setStatus('IDLE');
+    }
+  }, [open]);
+
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+
+    if (disabled) return;
+
     setStatus('PENDING');
-    axios
-      .post('https://api.sommify.ai/user/contact', {
+
+    // console.log('Sending message...', { subject, contact, message });
+
+    fetch('https://api.sommify.ai/user/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
         subject,
         contact,
         message,
-      })
+      }),
+    })
       .then((res) => {
         setStatus('SUCCESS');
       })
@@ -48,103 +61,215 @@ export default function ContactUs({ ...props }) {
   };
 
   return (
-    <Section id='contact'>
-      <motion.div
-        className='d-flex flex-column mb-5'
-        ref={ref}
-        animate={controls}
-        initial='hidden'
-        variants={variants}
+    <div
+      style={{
+        width: '100%',
+        boxSizing: 'border-box',
+        // paddingBlock: '14vh 10vh',
+        borderRadius: '2em',
+        marginInline: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      <div
+        style={{ display: 'flex', alignItems: 'center', marginBottom: '1.1em' }}
+      >
+        <h2 style={{ margin: 0 }}>Open a dialogue</h2>
+      </div>
+
+      <p>
+        We are always open to new ideas, suggestions, and feedback. Reach out to
+        us by either filling out the following form or sending a message to one
+        of our founders{' '}
+        <a
+          style={{
+            cursor: 'pointer',
+          }}
+          href='mailto:jacob@sommify.ai'
+        >
+          jacob@sommify.ai
+        </a>{' '}
+        and we will get back to you as soon as possible.
+      </p>
+
+      <br />
+
+      <form
         style={{
           width: '100%',
-          maxWidth: '600px',
-          // paddingBlock: '14vh 10vh',
-          borderRadius: '2em',
-          left: 0,
-          right: 0,
           margin: 'auto',
-          color: 'black',
+          position: 'relative',
         }}
       >
-        <div className='d-flex justify-content-center text-center'>
-          <h1>Open a dialogue</h1>
-        </div>
-        <div className='d-flex w-100 flex-grow-1'>
-          <Form style={{ flex: 1 }}>
-            <AnimatePresence>
-              <div
-                key='contact-us-form'
-                className='d-flex flex-column h-100 position-relative'
+        <AnimatePresence>
+          {status === 'FAILED' && (
+            <div
+              style={{
+                position: 'absolute',
+                top: 60,
+                left: 0,
+                right: 0,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <motion.div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                }}
+                initial={{ y: '3em', opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
               >
-                {status === 'SUCCESS' && (
-                  <div
-                    // style={{ flex: 1 }}
-                    className='h-100 w-100 d-flex justify-content-center align-items-center position-absolute'
-                  >
-                    <motion.div
-                      className='text-secondary d-flex flex-column justify-content-center align-items-center text-center'
-                      initial={{ y: '3em', opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                    >
-                      <CgCheckO size='6em' className='mb-4' />
-                      <h4>MESSAGE SENT</h4>
-                    </motion.div>
-                  </div>
+                <TbMailX size='4em' />
+                <span style={{ opacity: 0.7, marginTop: 20 }}>
+                  Sending failed
+                </span>
+              </motion.div>
+            </div>
+          )}
+          {status === 'SUCCESS' && (
+            <div
+              style={{
+                position: 'absolute',
+                top: 60,
+                left: 0,
+                right: 0,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <motion.div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                }}
+                initial={{ y: '3em', opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+              >
+                <TbMailCheck size='4em' />
+                <span style={{ opacity: 0.7, marginTop: 20 }}>
+                  Message sent
+                </span>
+              </motion.div>
+            </div>
+          )}
+          <motion.div
+            animate={{
+              opacity: status === 'IDLE' || status === 'PENDING' ? 1 : 0,
+            }}
+            exit={{ opacity: 0, position: 'fixed' }}
+            transition={{ duration: 0.4 }}
+            style={{ width: '100%' }}
+          >
+            <label>Subject</label>
+            <input
+              value={subject}
+              onChange={handleSubjectChange}
+              placeholder='What is this message about?'
+              className='w-100'
+            />
+            <label>Message</label>
+            <textarea
+              value={message}
+              onChange={handleMessageChange}
+              rows={3}
+              className='w-100 py-3'
+              placeholder='Your message...'
+              style={{ resize: 'none', height: '8em' }}
+            />
+            <label>Contact</label>
+            <input
+              value={contact}
+              onChange={handleContactChange}
+              className='w-100'
+              placeholder='How to reach you?'
+            />
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'end',
+                alignItems: 'center',
+                marginTop: 20,
+                width: '100%',
+              }}
+            >
+              <Button2
+                onClick={handleSendMessage}
+                disabled={disabled}
+                style={{ width: 150 }}
+              >
+                {status === 'PENDING' ? (
+                  <span>
+                    <RotatingLines
+                      visible={true}
+                      height='12'
+                      width='12'
+                      strokeColor='white'
+                      strokeWidth='5'
+                      animationDuration='0.75'
+                      ariaLabel='rotating-lines-loading'
+                      wrapperStyle={{}}
+                      wrapperClass=''
+                    />{' '}
+                    <span style={{ marginLeft: 6 }}>Sending</span>
+                  </span>
+                ) : (
+                  <span style={{ display: 'flex', alignItems: 'center' }}>
+                    <CgMail style={{ marginRight: 6, fontSize: '1.25em' }} />{' '}
+                    Send message
+                  </span>
                 )}
-                <motion.div
-                  animate={{ opacity: status === 'SUCCESS' ? 0 : 1 }}
-                  exit={{ opacity: 0, position: 'fixed' }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <div className='p-2'>
-                    <Form.Label>SUBJECT</Form.Label>
-                    <Form.Control
-                      value={subject}
-                      onChange={handleSubjectChange}
-                      placeholder='What is this message about?'
-                      className='w-100'
-                    />
-                  </div>
-                  <div className='p-2 d-flex flex-column' style={{ flex: 1 }}>
-                    <Form.Label>MESSAGE</Form.Label>
-                    <Form.Control
-                      value={message}
-                      onChange={handleMessageChange}
-                      as='textarea'
-                      rows={3}
-                      className='w-100 py-3'
-                      placeholder='Your message...'
-                      style={{ resize: 'none', height: '8em' }}
-                    />
-                  </div>
-                  <div className='p-2 mb-3'>
-                    <Form.Label>CONTACT</Form.Label>
-                    <Form.Control
-                      value={contact}
-                      onChange={handleContactChange}
-                      className='w-100'
-                      placeholder='How to reach you?'
-                    />
-                  </div>
-                  <div className='p-2 d-flex justify-content-center'>
-                    <Button
-                      disabled={!subject || !message || !contact}
-                      variant='secondary'
-                      onClick={handleSendMessage}
-                    >
-                      {status === 'PENDING' ? (
-                        <Spinner animation='border' size='sm' />
-                      ) : (
-                        'SEND'
-                      )}
-                    </Button>
-                  </div>
-                </motion.div>
-              </div>
-            </AnimatePresence>
-          </Form>
-        </div>
-      </motion.div>
-    </Section>
+              </Button2>
+              {/* <motion.button
+                animate={{
+                  opacity: disabled ? 0.5 : 1,
+                }}
+                initial={false}
+                variant='secondary'
+                onClick={handleSendMessage}
+                style={{
+                  width: 150,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                {status === 'PENDING' ? (
+                  <span>
+                    <RotatingLines
+                      visible={true}
+                      height='12'
+                      width='12'
+                      strokeColor='white'
+                      strokeWidth='5'
+                      animationDuration='0.75'
+                      ariaLabel='rotating-lines-loading'
+                      wrapperStyle={{}}
+                      wrapperClass=''
+                    />{' '}
+                    <span style={{ marginLeft: 6 }}>Sending</span>
+                  </span>
+                ) : (
+                  <span style={{ display: 'flex', alignItems: 'center' }}>
+                    <CgMail style={{ marginRight: 6, fontSize: '1.25em' }} />{' '}
+                    Send message
+                  </span>
+                )}
+              </motion.button> */}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </form>
+    </div>
   );
 }

@@ -1,10 +1,225 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Mono&display=swap');
+// define colors
+$color-primary: #d11174;
+$color-background: #fcfcfe;
+$color-black: #1c1d1e;
+$color-text: #34355c;
 
-$theme-colors: (
-  'primary': #c52c76,
-  'dark': #000,
-  'secondary': rgb(0, 0, 0),
-  'light': #f8f8f8,
-);
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('./fonts/Mona-Sans.woff2') format('woff2 supports variations'),
+    url('./fonts/Mona-Sans.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+}
 
-@import '../node_modules/bootstrap/scss/bootstrap';
+@font-face {
+  font-family: 'Hubot Sans';
+  src: url('./fonts/Hubot-Sans.woff2') format('woff2 supports variations'),
+    url('./fonts/Hubot-Sans.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+}
+
+html {
+  font-family: 'Mona Sans';
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 16px;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  color: $color-text;
+}
+
+.line-marker {
+  background-color: $color-primary;
+  // height: 1.5em;
+  height: 100%;
+  width: 3px;
+  position: absolute;
+  left: -18px;
+  top: 0;
+  border-radius: 99px;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
+  // no overscroll
+  overscroll-behavior: none;
+}
+
+b {
+  font-weight: 600;
+}
+
+.header {
+  max-width: 780px;
+  width: 92%;
+}
+
+#root {
+  margin: 0 auto;
+  max-width: 740px;
+  width: 92%;
+  // padding-top: 4vw;
+
+  min-width: 320px;
+}
+
+button {
+  font-family: 'Mona Sans';
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: none;
+  outline: none;
+  // cursor: pointer;
+}
+
+// button.call-to-action {
+//   font-family: 'Mona Sans';
+//   font-size: 16px;
+//   font-weight: 600;
+//   padding: 0.5em 1em;
+//   border-radius: 999px;
+//   cursor: pointer;
+//   transition: background-color 0.2s ease-in-out;
+//   background: linear-gradient(180deg, #ffffff 0%, #ebf1f7 100%);
+// }
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+}
+.footer {
+  font-size: 11.5px;
+  letter-spacing: 0.035rem;
+}
+.footer a {
+  color: $color-text;
+  text-decoration: underline;
+}
+
+// headers
+h1 {
+  font-size: 50px;
+  margin-bottom: 2em;
+  font-weight: 700 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.02em;
+  color: $color-black;
+}
+
+h2 {
+  font-size: 32px;
+  margin-bottom: 1em;
+  font-weight: 700 !important;
+  color: $color-black;
+}
+
+h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 0px;
+  color: $color-black;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 44px;
+  }
+  h2 {
+    font-size: 28px;
+  }
+  h3 {
+    font-size: 16px;
+  }
+}
+
+mark {
+  color: $color-primary;
+  background-color: transparent;
+}
+
+.hubot-sans {
+  font-family: 'Hubot Sans', monospace !important;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  font-style: normal;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  color: $color-text;
+  font-size: 13px;
+}
+
+input,
+textarea {
+  font-family: 'Mona Sans';
+  font-size: 14px;
+  padding: 0.8em 1.2em;
+  border-radius: 6px;
+  border: none;
+  background: #f4f7fc;
+  margin-bottom: 1em;
+  transition: border-color 0.2s ease-in-out;
+  color: $color-black;
+  box-sizing: border-box;
+  width: 100%;
+
+  &::placeholder {
+    color: #80858a;
+  }
+}
+
+form button {
+  margin-top: 1em;
+  background: $color-black !important;
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+  width: auto;
+}
+
+button.qxCTlb {
+  font-size: 15px;
+  color: $color-primary !important;
+  font-family: 'Mona Sans';
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+  min-height: 0;
+  // line-height: 1.5;
+  display: inline;
+  height: 1em;
+  background: transparent !important;
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 100ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
