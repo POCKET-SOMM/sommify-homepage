@@ -6,12 +6,12 @@ export default function BulletPoint({ children, dehighlight }) {
       style={{
         listStyle: 'none',
         position: 'relative',
-        paddingLeft: 20,
+        // paddingLeft: 20,
         opacity: dehighlight ? 0.5 : 1,
-        marginBottom: '0.1em',
+        marginBottom: '0.5em',
       }}
     >
-      <CgArrowRight
+      {/* <CgArrowRight
         style={{
           // width: '10px',
           // height: '2px',
@@ -22,7 +22,7 @@ export default function BulletPoint({ children, dehighlight }) {
           left: 0,
           // borderRadius: 99,
         }}
-      />
+      /> */}
       {/* <div
         style={{
           width: '10px',
