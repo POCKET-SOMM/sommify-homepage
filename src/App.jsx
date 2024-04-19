@@ -7,7 +7,18 @@ import Footer from './components/Footer';
 import Modal from 'react-modal';
 import ContactUs from './components/ContactUs';
 import CalendarButton from './components/CalendarButton';
-import Tesco from './assets/tesco.svg';
+
+import Tesco from './assets/partners/tesco_color.png';
+import Edamam from './assets/partners/edamam.webp';
+import MarleySpoon from './assets/partners/marley_spoon.svg';
+import WinePlanet from './assets/partners/wineplanet.png';
+
+import Decanter from './assets/press/decanter.svg';
+import HS from './assets/press/hs.svg';
+import Kauppalehti from './assets/press/kl.svg';
+import Silta from './assets/press/silta.svg';
+import TS from './assets/press/t&s.svg';
+
 import Polygon from './assets/polygon.svg';
 import Button2 from './components/Button2';
 import {
@@ -21,6 +32,8 @@ import { useDimensions } from './hooks';
 import Header from './components/Header';
 import ModalBooking from './components/ModalBooking';
 import ModalContactUs from './components/ModalContactUs';
+import { BsArrowRight } from 'react-icons/bs';
+import LogoLink from './components/LogoLink';
 
 function App() {
   const [dialogueOpen, setDialogueOpen] = useState(false);
@@ -28,18 +41,18 @@ function App() {
 
   const { sm, md, lg } = useDimensions();
 
-  useEffect(() => {
-    var vid = document.getElementById('vid');
-    vid.addEventListener('timeupdate', function () {
-      if (this.currentTime >= 20.0) {
-        this.currentTime = 0.0;
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   var vid = document.getElementById('vid');
+  //   vid.addEventListener('timeupdate', function () {
+  //     if (this.currentTime >= 20.0) {
+  //       this.currentTime = 0.0;
+  //     }
+  //   });
+  // }, []);
 
   return (
     <div id='content'>
-      <div
+      {/* <div
         style={{
           width: '100%',
           position: 'absolute',
@@ -77,8 +90,6 @@ function App() {
             style={{
               position: 'absolute',
               left: 0,
-              // bottom: 0,
-              // borderRadius: 999,
               top: 0,
               height: '100%',
               background:
@@ -100,7 +111,7 @@ function App() {
             }}
           />
         )}
-      </div>
+      </div> */}
 
       <Header
         bookACall={() => {
@@ -132,7 +143,7 @@ function App() {
         <Button>Try our tech</Button>
       </div> */}
 
-      <Section title='What are the problems sommify is solving?'>
+      <Section title='What are the problems* sommify is solving?'>
         <BulletPoint>
           72% of customers would <b>pay more</b> for wine if it were exactly
           paired to their needs
@@ -150,73 +161,34 @@ function App() {
         <div
           style={{
             padding: '16px 0px',
-            // border: '1px solid #000000',
             borderRadius: 6,
             display: 'inline-flex',
             marginInline: 20,
             marginBottom: 16,
+            maxHeight: 50,
+            overflowY: 'hidden',
             justifyContent: 'center',
             alignItems: 'center',
             overflow: 'hidden',
-            // width: '100%',
-            // boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.1)',
           }}
         >
-          <img
-            src={Tesco}
-            alt=''
-            width={'auto'}
-            height={26}
-            style={{
-              filter: 'invert(1)',
-            }}
-          />
-          <div
-            style={{
-              flex: 1,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginLeft: 24,
-              fontSize: 14,
-              opacity: 0.6,
-            }}
-          >
-            more coming soon...
-          </div>
-
-          {/* <div style={{ display: 'flex', position: 'relative' }}>
-            {[1, 2].map((i) => (
-              <div
-                style={{
-                  border: '1px dashed #ffffff',
-                  width: 100,
-                  height: 50,
-                  borderRadius: 9,
-                  marginLeft: 24,
-                  filter: 'blur(5px)',
-                }}
-              ></div>
-            ))}
-
-            <span
+          {[
+            { src: Tesco, alt: '', width: 'auto', height: 26 },
+            { src: Edamam, alt: '', width: 'auto', height: 72 },
+            { src: MarleySpoon, alt: '', width: 'auto', height: 150 },
+            { src: WinePlanet, alt: '', width: 'auto', height: 30 },
+          ].map((img, i) => (
+            <img
+              key={i}
+              src={img.src}
+              alt={img.alt}
               style={{
-                position: 'absolute',
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                fontSize: 14,
-                fontWeight: 500,
-                color: '#50555a',
+                width: img.width,
+                height: img.height,
+                marginInline: 8,
               }}
-            >
-              more coming soon...
-            </span>
-          </div> */}
+            />
+          ))}
         </div>
 
         <BulletPoint>
@@ -232,9 +204,9 @@ function App() {
           solution than store average during pilots
         </BulletPoint>
         <BulletPoint>
-          95% of the 1k+ people we have interviewed in the 🇳🇱 Netherlands, 🇺🇸 US
-          and 🇬🇧 UK would <b>like our solutions</b> to be a part of their
-          purchase experience
+          95% of the 1k+ people we have interviewed in the Netherlands, US and
+          UK would <b>like our solutions</b> to be a part of their purchase
+          experience
         </BulletPoint>
         <BulletPoint>
           <b>1+mil wine-food pairings</b> already done for our customers
@@ -243,23 +215,23 @@ function App() {
           <b>60k wines</b> and 1.5mil recipes were used to train the AI
         </BulletPoint>
         <BulletPoint>
-          Backed by investors like <b>Heino Group</b> with a focus on the food &
-          drink industry
+          Backed by investors like <a href='https://heino.fi'>Heino Group</a>{' '}
+          with a focus on the food & drink industry
         </BulletPoint>
       </Section>
       <Section title='What sommify currently does to solve the problems'>
         <BulletPoint>
-          <b>🤖 Automate pairing:</b> We pair your wines to your meals/recipes
-          and vice versa
+          <b>Automate pairing:</b> We pair your wines to your meals/recipes and
+          vice versa
         </BulletPoint>
         <BulletPoint>
-          <b>⚡ Data generation:</b> We analyze your wines and we liven them up
+          <b>Data generation:</b> We analyze your wines and we liven them up
           with data we know customers need to make purchase decisions
         </BulletPoint>
         <BulletPoint>
-          <b>🔎 Help customers find the right wine:</b> They can ask questions
-          like <i>“wine for pasta alla norma for under 20€ from France”</i> and
-          get wines suggested from your portfolio
+          <b>Help customers find the right wine:</b> They can ask questions like{' '}
+          <i>“wine for pasta alla norma for under 20€ from France”</i> and get
+          wines suggested from your portfolio
         </BulletPoint>
         <BulletPoint dehighlight>
           We also build unique customer experiences for enterprise
@@ -267,7 +239,7 @@ function App() {
       </Section>
       <Section title='Engage with us'>
         <BulletPoint>
-          <b>💬 Discuss:</b> Speak with us by{' '}
+          <b>Discuss:</b> Speak with us by{' '}
           <mark
             style={{ cursor: 'pointer' }}
             onClick={() => {
@@ -287,7 +259,7 @@ function App() {
           </mark>
         </BulletPoint>
         <BulletPoint>
-          <b>💰 Refer:</b> Warm intro to get 20% of deal value by{' '}
+          <b>Refer:</b> Warm intro to get 20% of deal value by{' '}
           <mark
             style={{ cursor: 'pointer' }}
             onClick={() => {
@@ -298,11 +270,53 @@ function App() {
           </mark>{' '}
         </BulletPoint>
         <BulletPoint>
-          <b>🕹️ Try:</b> Check out our{' '}
+          <b>Try:</b> Check out our{' '}
           <a href='https://playground.sommify.ai' target='_blank'>
             demo page
           </a>
         </BulletPoint>
+      </Section>
+
+      <Section title='As seen on'>
+        {[
+          {
+            src: Decanter,
+            alt: '',
+            width: 'auto',
+            height: 120,
+            href: 'https://www.decanter.com/wine/ai-and-wine-a-taste-of-the-future-523210/',
+          },
+          {
+            src: Kauppalehti,
+            alt: '',
+            width: 'auto',
+            height: 30,
+            href: 'https://www.kauppalehti.fi/uutiset/suomalaisyhtio-sai-67-miljardin-myyntia-tekevan-kauppajatin-ensimmaiseksi-maksavaksi-asiakkaakseen/8409b91d-2bd7-4cfc-8057-20c889a4b66b',
+          },
+          {
+            src: HS,
+            alt: '',
+            width: 'auto',
+            height: 24,
+            href: 'https://www.hs.fi/visio/art-2000010003755.html',
+          },
+          {
+            src: Silta,
+            alt: '',
+            width: 'auto',
+            height: 20,
+            href: 'https://blog.siltahouse.com/how-to-survive-in-san-francisco-as-a-founder-the-complete-survival-guide/',
+          },
+          {
+            src: TS,
+            alt: '',
+            width: 'auto',
+            height: 40,
+            href: 'https://www.tekniikkatalous.fi/uutiset/suomalaisyhtion-johtaja-paatti-soittaa-67000-m-liikevaihtoa-tekevalle-maailman-suurimmalle-viinimyyjalle-heti-nappasi-maksavaksi-asiakkaaksi/196b7cdf-32bf-4223-9412-7968321f4e9e',
+          },
+        ].map((img, i) => (
+          <LogoLink img={img} key={i} />
+        ))}
       </Section>
 
       <div
@@ -311,6 +325,7 @@ function App() {
           justifyContent: 'space-between',
           alignItems: 'center',
           marginBlock: 50,
+          maxWidth: 644,
         }}
       >
         <Button2

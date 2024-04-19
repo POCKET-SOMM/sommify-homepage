@@ -27,8 +27,8 @@ export default function Button2({
     ? colors.primaryHover
     : colors.defaultHover;
 
-  const color = '#ffffff';
-  const colorHover = '#ffffff';
+  const color = transparent ? '#000000' : '#ffffff';
+  const colorHover = transparent ? '#000000' : '#ffffff';
   const borderRadius = 999;
 
   return (

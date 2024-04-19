@@ -61,6 +61,7 @@ export default function Header({ bookACall }) {
         )}
         {!sm && (
           <Button2
+            primary
             onClick={() =>
               window.open('https://playground.sommify.ai', '_blank')
             }
