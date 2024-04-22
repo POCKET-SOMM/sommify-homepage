@@ -8,17 +8,6 @@ import Modal from 'react-modal';
 import ContactUs from './components/ContactUs';
 import CalendarButton from './components/CalendarButton';
 
-import Tesco from './assets/partners/tesco_color.png';
-import Edamam from './assets/partners/edamam.webp';
-import MarleySpoon from './assets/partners/marley_spoon.svg';
-import WinePlanet from './assets/partners/wineplanet.png';
-
-import Decanter from './assets/press/decanter.svg';
-import HS from './assets/press/hs.svg';
-import Kauppalehti from './assets/press/kl.svg';
-import Silta from './assets/press/silta.svg';
-import TS from './assets/press/t&s.svg';
-
 import Polygon from './assets/polygon.svg';
 import Button2 from './components/Button2';
 import {
@@ -34,6 +23,10 @@ import ModalBooking from './components/ModalBooking';
 import ModalContactUs from './components/ModalContactUs';
 import { BsArrowRight } from 'react-icons/bs';
 import LogoLink from './components/LogoLink';
+import Carousel from './components/Carousel';
+
+import press from './data/press';
+import partners from './data/partners';
 
 function App() {
   const [dialogueOpen, setDialogueOpen] = useState(false);
@@ -128,8 +121,7 @@ function App() {
       >
         {/* We have built an  */}
         {!sm ? 'AI sommelier helping ' : 'Helping '}
-        companies sell wine through{' '}
-        <span style={{ color: '#8a939d' }}>memorable experiences</span>
+        companies sell wine through memorable experiences
       </h1>
       {/* <div
         style={{
@@ -158,38 +150,50 @@ function App() {
         </BulletPoint>
       </Section>
       <Section title='Why work with sommify on solving the problems?'>
-        <div
+        <Carousel elements={[...partners, ...partners]} />
+
+        {/* <div
           style={{
             padding: '16px 0px',
             borderRadius: 6,
             display: 'inline-flex',
+            flexWrap: 'wrap',
             marginInline: 20,
             marginBottom: 16,
-            maxHeight: 50,
+            // maxHeight: 50,
             overflowY: 'hidden',
-            justifyContent: 'center',
+            justifyContent: 'start',
             alignItems: 'center',
-            overflow: 'hidden',
           }}
         >
           {[
             { src: Tesco, alt: '', width: 'auto', height: 26 },
-            { src: Edamam, alt: '', width: 'auto', height: 72 },
-            // { src: MarleySpoon, alt: '', width: 'auto', height: 150 },
-            { src: WinePlanet, alt: '', width: 'auto', height: 30 },
+            { src: Edamam, alt: '', width: 'auto', height: 32 },
+            { src: WinePlanet, alt: '', width: 'auto', height: 60 },
           ].map((img, i) => (
-            <img
-              key={i}
-              src={img.src}
-              alt={img.alt}
+            <div
               style={{
-                width: img.width,
-                height: img.height,
-                marginInline: 8,
+                width: 180,
+                height: 60,
+                overflow: 'hidden',
+                display: 'flex',
+                justifyContent: 'start',
+                alignItems: 'center',
+                filter: 'brightness(0)'
               }}
-            />
+            >
+              <img
+                key={i}
+                src={img.src}
+                alt={img.alt}
+                style={{
+                  width: img.width,
+                  height: img.height,
+                }}
+              />
+            </div>
           ))}
-        </div>
+        </div> */}
 
         <BulletPoint>
           We are trusted by <b>Tesco</b> and other technological pioneers in the
@@ -233,8 +237,8 @@ function App() {
           <i>“wine for pasta alla norma for under 20€ from France”</i> and get
           wines suggested from your portfolio
         </BulletPoint>
-        <BulletPoint dehighlight>
-          We also build unique customer experiences for enterprise
+        <BulletPoint>
+          We also build unique <b>custom experiences</b> for enterprise
         </BulletPoint>
       </Section>
       <Section title='Engage with us'>
@@ -278,48 +282,10 @@ function App() {
       </Section>
 
       <Section title='As seen on'>
-        {[
-          {
-            src: Decanter,
-            alt: '',
-            width: 'auto',
-            height: 120,
-            href: 'https://www.decanter.com/wine/ai-and-wine-a-taste-of-the-future-523210/',
-          },
-          {
-            src: Kauppalehti,
-            alt: '',
-            width: 'auto',
-            height: 30,
-            href: 'https://www.kauppalehti.fi/uutiset/suomalaisyhtio-sai-67-miljardin-myyntia-tekevan-kauppajatin-ensimmaiseksi-maksavaksi-asiakkaakseen/8409b91d-2bd7-4cfc-8057-20c889a4b66b',
-          },
-          {
-            src: HS,
-            alt: '',
-            width: 'auto',
-            height: 24,
-            href: 'https://www.hs.fi/visio/art-2000010003755.html',
-          },
-          {
-            src: Silta,
-            alt: '',
-            width: 'auto',
-            height: 20,
-            href: 'https://blog.siltahouse.com/how-to-survive-in-san-francisco-as-a-founder-the-complete-survival-guide/',
-          },
-          {
-            src: TS,
-            alt: '',
-            width: 'auto',
-            height: 40,
-            href: 'https://www.tekniikkatalous.fi/uutiset/suomalaisyhtion-johtaja-paatti-soittaa-67000-m-liikevaihtoa-tekevalle-maailman-suurimmalle-viinimyyjalle-heti-nappasi-maksavaksi-asiakkaaksi/196b7cdf-32bf-4223-9412-7968321f4e9e',
-          },
-        ].map((img, i) => (
-          <LogoLink img={img} key={i} />
-        ))}
+        <Carousel elements={press} />
       </Section>
 
-      <div
+      {/* <div
         style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -345,7 +311,7 @@ function App() {
         >
           Try our tech <FaChevronRight style={{ marginLeft: 6 }} />
         </Button2>
-      </div>
+      </div> */}
 
       <Footer />
 

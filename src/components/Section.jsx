@@ -11,7 +11,7 @@ export default function Section({ title, children }) {
         position: 'relative',
         // borderLeft: '1px dashed #E4E9F1',
         paddingBottom: 36,
-        maxWidth: 544,
+        maxWidth: 600,
 
         // width: 600,
         // maxWidth: 600,
