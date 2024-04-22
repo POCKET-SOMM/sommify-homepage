@@ -175,7 +175,7 @@ function App() {
           {[
             { src: Tesco, alt: '', width: 'auto', height: 26 },
             { src: Edamam, alt: '', width: 'auto', height: 72 },
-            { src: MarleySpoon, alt: '', width: 'auto', height: 150 },
+            // { src: MarleySpoon, alt: '', width: 'auto', height: 150 },
             { src: WinePlanet, alt: '', width: 'auto', height: 30 },
           ].map((img, i) => (
             <img
