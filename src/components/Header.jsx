@@ -1,4 +1,4 @@
-import { FaBars, FaChevronRight } from 'react-icons/fa';
+import { FaBars, FaBook, FaChevronRight, FaPhone } from 'react-icons/fa';
 import { useDimensions } from '../hooks';
 import Button2 from './Button2';
 import { motion } from 'framer-motion';
@@ -53,10 +53,21 @@ export default function Header({ bookACall }) {
           }}
         />
         {!sm && (
+          <Button2
+            transparent
+            onClick={() => {
+              window.open('https://docs.sommify.ai', '_blank');
+            }}
+          >
+            Read docs
+          </Button2>
+        )}
+        {!sm && (
           <Button2 transparent onClick={bookACall}>
             {/* <FaRegCalendar style={{ marginRight: '.5em', fontSize: '0.9em' }} /> */}
             Book a call
-            <FaChevronRight style={{ marginLeft: '.5em', fontSize: '0.9em' }} />
+            <FaPhone style={{ marginLeft: '.5em', fontSize: '0.9em' }} />
+            {/* <FaChevronRight style={{ marginLeft: '.5em', fontSize: '0.9em' }} /> */}
           </Button2>
         )}
         {!sm && (
