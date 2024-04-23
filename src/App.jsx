@@ -195,30 +195,30 @@ function App() {
           ))}
         </div> */}
 
-        <BulletPoint>
+        <BulletPoint list>
           We are trusted by <b>Tesco</b> and other technological pioneers in the
           industry
         </BulletPoint>
-        <BulletPoint>
+        <BulletPoint list>
           Our AI is built on <b>20+ years of wine expertise</b> of Julie Dupouy,
           a world-class sommelier
         </BulletPoint>
-        <BulletPoint>
+        <BulletPoint list>
           50%+ <b>higher average bottle cost</b> added to cart through our
           solution than store average during pilots
         </BulletPoint>
-        <BulletPoint>
+        <BulletPoint list>
           95% of the 1k+ people we have interviewed in the Netherlands, US and
           UK would <b>like our solutions</b> to be a part of their purchase
           experience
         </BulletPoint>
-        <BulletPoint>
+        <BulletPoint list>
           <b>1+mil wine-food pairings</b> already done for our customers
         </BulletPoint>
-        <BulletPoint>
+        <BulletPoint list>
           <b>60k wines</b> and 1.5mil recipes were used to train the AI
         </BulletPoint>
-        <BulletPoint>
+        <BulletPoint list>
           Backed by investors like <a href='https://heino.fi'>Heino Group</a>{' '}
           with a focus on the food & drink industry
         </BulletPoint>
