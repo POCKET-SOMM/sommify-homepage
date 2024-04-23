@@ -31,7 +31,6 @@ export default function BulletPoint({ children, dehighlight, list }) {
             width: '4px',
             height: '4px',
             background: '#000',
-            // opacity: 0.2,
             position: 'absolute',
             top: '0.75em',
             left: -19,
