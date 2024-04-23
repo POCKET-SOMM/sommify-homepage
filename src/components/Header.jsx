@@ -53,6 +53,14 @@ export default function Header({ bookACall }) {
           }}
         />
         {!sm && (
+          <Button2 transparent onClick={bookACall}>
+            {/* <FaRegCalendar style={{ marginRight: '.5em', fontSize: '0.9em' }} /> */}
+            Book a call
+            <FaPhone style={{ marginLeft: '.5em', fontSize: '0.9em' }} />
+            {/* <FaChevronRight style={{ marginLeft: '.5em', fontSize: '0.9em' }} /> */}
+          </Button2>
+        )}
+        {!sm && (
           <Button2
             transparent
             onClick={() => {
@@ -60,14 +68,7 @@ export default function Header({ bookACall }) {
             }}
           >
             Read docs
-          </Button2>
-        )}
-        {!sm && (
-          <Button2 transparent onClick={bookACall}>
-            {/* <FaRegCalendar style={{ marginRight: '.5em', fontSize: '0.9em' }} /> */}
-            Book a call
-            <FaPhone style={{ marginLeft: '.5em', fontSize: '0.9em' }} />
-            {/* <FaChevronRight style={{ marginLeft: '.5em', fontSize: '0.9em' }} /> */}
+            <FaChevronRight style={{ marginLeft: '.5em', fontSize: '0.9em' }} />
           </Button2>
         )}
         {!sm && (
