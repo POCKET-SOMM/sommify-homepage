@@ -141,11 +141,11 @@ function App() {
           paired to their needs
         </BulletPoint>
         <BulletPoint>
-          Because of a <b>lack of information</b>, 80% of customers buy wine
-          based on the label or price
+          80% of customers buy wine based on the label or price because of a{' '}
+          <b>lack of information</b>
         </BulletPoint>
         <BulletPoint>
-          54% of wine consumers are <b>afraid to ask questions</b> they want
+          54% of wine consumers are <b>afraid to ask</b> questions they want
           about wine
         </BulletPoint>
       </Section>
@@ -204,33 +204,29 @@ function App() {
           a world-class sommelier
         </BulletPoint>
         <BulletPoint list>
-          50%+ <b>higher average bottle cost</b> added to cart through our
-          solution than store average during pilots
+          50%+ <b>higher average bottle price</b> sold through our solution than
+          store average during pilots
         </BulletPoint>
         <BulletPoint list>
-          95% of the 1k+ people we have interviewed in the Netherlands, US and
-          UK would <b>like our solutions</b> to be a part of their purchase
-          experience
+          95% of the 1k+ people that have tested our solution would{' '}
+          <b>like our solutions</b> to be a part of their purchase experience
         </BulletPoint>
         <BulletPoint list>
           <b>1+mil wine-food pairings</b> already done for our customers
-        </BulletPoint>
-        <BulletPoint list>
-          <b>60k wines</b> and 1.5mil recipes were used to train the AI
         </BulletPoint>
         <BulletPoint list>
           Backed by investors like <a href='https://heino.fi'>Heino Group</a>{' '}
           with a focus on the food & drink industry
         </BulletPoint>
       </Section>
-      <Section title='What sommify currently does to solve the problems'>
+      <Section title='How is sommify solving the problems?'>
         <BulletPoint>
           <b>Automate pairing:</b> We pair your wines to your meals/recipes and
           vice versa
         </BulletPoint>
         <BulletPoint>
-          <b>Data generation:</b> We analyze your wines and we liven them up
-          with data we know customers need to make purchase decisions
+          <b>Data generation:</b> We analyze your wines and give you data to
+          optimize search and offer information about what you are selling
         </BulletPoint>
         <BulletPoint>
           <b>Help customers find the right wine:</b> They can ask questions like{' '}
@@ -238,19 +234,19 @@ function App() {
           wines suggested from your portfolio
         </BulletPoint>
         <BulletPoint>
-          We also build unique <b>custom experiences</b> for enterprise
+          We also build unique custom experiences for enterprise customers
         </BulletPoint>
       </Section>
       <Section title='Engage with us'>
         <BulletPoint>
-          <b>Discuss:</b> Speak with us by{' '}
+          <b>Reach out:</b>{' '}
           <mark
             style={{ cursor: 'pointer' }}
             onClick={() => {
               setDialogueOpen(true);
             }}
           >
-            contacting us
+            Contact us
           </mark>{' '}
           or{' '}
           <mark
@@ -259,22 +255,15 @@ function App() {
               setBookingOpen(true);
             }}
           >
-            setting up a call
+            set up a call
           </mark>
         </BulletPoint>
         <BulletPoint>
-          <b>Refer:</b> Warm intro to get 20% of deal value by{' '}
-          <mark
-            style={{ cursor: 'pointer' }}
-            onClick={() => {
-              setDialogueOpen(true);
-            }}
-          >
-            contacting us
-          </mark>{' '}
+          <b>Refer:</b> Introduce us to someone who needs our solution for a
+          deal cut
         </BulletPoint>
         <BulletPoint>
-          <b>Try:</b> Check out our{' '}
+          <b>Try:</b> Check out our solutions on the{' '}
           <a href='https://playground.sommify.ai' target='_blank'>
             demo page
           </a>
