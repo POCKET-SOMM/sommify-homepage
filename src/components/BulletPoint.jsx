@@ -25,19 +25,19 @@ export default function BulletPoint({ children, dehighlight, list }) {
           }}
         />
       )} */}
-      {list && (
-        <div
-          style={{
-            width: '4px',
-            height: '4px',
-            background: '#000',
-            position: 'absolute',
-            top: '0.75em',
-            left: -19,
-            borderRadius: 99,
-          }}
-        />
-      )}
+      {/* {list && ( */}
+      <div
+        style={{
+          width: '4px',
+          height: '4px',
+          background: '#000',
+          position: 'absolute',
+          top: '0.75em',
+          left: -19,
+          borderRadius: 99,
+        }}
+      />
+      {/* )} */}
       {children}
     </li>
   );

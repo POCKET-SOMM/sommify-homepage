@@ -60,7 +60,7 @@ export default function Carousel({ elements = [1, 2, 3, 4, 5, 6] }) {
       style={{
         display: 'flex',
         width: '100%',
-        overflowX: 'auto',
+        overflowX: 'hidden',
         overflowY: 'hidden',
         position: 'relative',
         height: ELEMENT_HEIGHT + 2 * ELEMENT_MARGIN,
