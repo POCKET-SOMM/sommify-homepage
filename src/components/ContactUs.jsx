@@ -4,6 +4,7 @@ import { CgAirplane, CgCheck, CgCheckO, CgClose, CgMail } from 'react-icons/cg';
 import { RotatingLines } from 'react-loader-spinner';
 import { TbMailX, TbMailCheck } from 'react-icons/tb';
 import Button2 from './Button2';
+import { useDimensions } from '../hooks';
 
 export default function ContactUs({ open, ...props }) {
   const [subject, setSubject] = useState('');
@@ -21,6 +22,8 @@ export default function ContactUs({ open, ...props }) {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.3 } },
     hidden: { opacity: 0, y: '5vh' },
   };
+
+  const { sm, md, lg } = useDimensions();
 
   useEffect(() => {
     // reset form
@@ -73,9 +76,11 @@ export default function ContactUs({ open, ...props }) {
       }}
     >
       <div
-        style={{ display: 'flex', alignItems: 'center', marginBottom: '1.1em' }}
+        style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em' }}
       >
-        <h2 style={{ margin: 0 }}>Open a dialogue</h2>
+        <h2 style={{ margin: 0, fontSize: md ? '1.5em' : 'default' }}>
+          Open a dialogue
+        </h2>
       </div>
 
       <p>
@@ -92,8 +97,6 @@ export default function ContactUs({ open, ...props }) {
         </a>{' '}
         and we will get back to you as soon as possible.
       </p>
-
-      <br />
 
       <form
         style={{
@@ -199,7 +202,6 @@ export default function ContactUs({ open, ...props }) {
                 display: 'flex',
                 justifyContent: 'end',
                 alignItems: 'center',
-                marginTop: 20,
                 width: '100%',
               }}
             >

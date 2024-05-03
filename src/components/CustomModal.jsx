@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useDimensions } from '../hooks';
 
 export default function CustomModal({ isOpen, close, children, style }) {
-  const { sm } = useDimensions();
+  const { sm, md } = useDimensions();
 
   return (
     <Modal
@@ -31,7 +31,7 @@ export default function CustomModal({ isOpen, close, children, style }) {
           boxSizing: 'border-box',
           width: 860,
           // height: 800,
-          maxHeight: '80vh',
+          maxHeight: '82vh',
           display: 'flex',
           flexDirection: 'column',
           // justifyContent: 'center',
@@ -80,6 +80,7 @@ export default function CustomModal({ isOpen, close, children, style }) {
           height: '100%',
           overflow: 'auto',
           padding: sm ? 25 : 50,
+          paddingTop: md || sm ? 25 : 50,
           boxSizing: 'border-box',
         }}
       >
