@@ -1,30 +1,18 @@
-import { CgArrowRight } from 'react-icons/cg';
+import { useDimensions } from '../hooks';
 
 export default function BulletPoint({ children, dehighlight, list }) {
+  const { sm } = useDimensions();
+
   return (
     <li
       style={{
         listStyle: 'none',
         position: 'relative',
-        // paddingLeft: 20,
+        paddingLeft: sm ? 20 : 0,
         opacity: dehighlight ? 0.5 : 1,
         marginBottom: '0.5em',
       }}
     >
-      {/* {list && (
-        <CgArrowRight
-          style={{
-            // width: '10px',
-            // height: '2px',
-            // background: '#00050a',
-            opacity: 0.2,
-            position: 'absolute',
-            top: '0.2em',
-            left: -20,
-            // borderRadius: 99,
-          }}
-        />
-      )} */}
       {list && (
         <div
           style={{
@@ -33,7 +21,7 @@ export default function BulletPoint({ children, dehighlight, list }) {
             background: '#000',
             position: 'absolute',
             top: '0.75em',
-            left: -19,
+            left: sm ? 0 : -19,
             borderRadius: 99,
           }}
         />
