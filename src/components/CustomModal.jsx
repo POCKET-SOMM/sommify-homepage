@@ -25,13 +25,13 @@ export default function CustomModal({ isOpen, close, children, style }) {
           transform: 'translate(-50%, -50%)',
           background: 'white',
           borderRadius: 10,
-          padding: sm ? 25 : 50,
+          padding: 0,
           border: 'none',
           maxWidth: '96vw',
           boxSizing: 'border-box',
           width: 860,
           // height: 800,
-          maxHeight: '88vh',
+          maxHeight: '80vh',
           display: 'flex',
           flexDirection: 'column',
           // justifyContent: 'center',
@@ -74,7 +74,18 @@ export default function CustomModal({ isOpen, close, children, style }) {
           }}
         />
       </motion.button>
-      {children}
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          overflow: 'auto',
+          padding: sm ? 25 : 50,
+          boxSizing: 'border-box',
+        }}
+      >
+        {children}
+      </div>
+      {/* {children} */}
     </Modal>
   );
 }
