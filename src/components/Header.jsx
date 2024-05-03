@@ -1,8 +1,9 @@
-import { FaBars, FaChevronRight } from 'react-icons/fa';
+import { FaBars, FaBook, FaChevronRight, FaPhone } from 'react-icons/fa';
 import { useDimensions } from '../hooks';
 import Button2 from './Button2';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import Logo from '../assets/logo.svg';
 
 export default function Header({ bookACall }) {
   const { sm } = useDimensions();
@@ -42,7 +43,7 @@ export default function Header({ bookACall }) {
         }}
       >
         <motion.img
-          src='logo.svg'
+          src={Logo}
           style={{
             width: sm ? 110 : 130,
             marginRight: 'auto',
@@ -56,7 +57,25 @@ export default function Header({ bookACall }) {
           <Button2 transparent onClick={bookACall}>
             {/* <FaRegCalendar style={{ marginRight: '.5em', fontSize: '0.9em' }} /> */}
             Book a call
+            <FaPhone style={{ marginLeft: '.5em', fontSize: '0.9em' }} />
+            {/* <FaChevronRight style={{ marginLeft: '.5em', fontSize: '0.9em' }} /> */}
+          </Button2>
+        )}
+        {!sm && (
+          <Button2
+            transparent
+            onClick={() => {
+              window.open('https://docs.sommify.ai', '_blank');
+            }}
+            style={{
+              marginRight: 16,
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            Read docs
             <FaChevronRight style={{ marginLeft: '.5em', fontSize: '0.9em' }} />
+            {/* <FaBook style={{ marginLeft: '.5em', fontSize: '0.9em' }} /> */}
           </Button2>
         )}
         {!sm && (
