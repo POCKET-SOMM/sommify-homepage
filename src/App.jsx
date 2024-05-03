@@ -136,15 +136,15 @@ function App() {
       </div> */}
 
       <Section title='What are the problems* sommify is solving?'>
-        <BulletPoint>
+        <BulletPoint list>
           72% of customers would <b>pay more</b> for wine if it were exactly
           paired to their needs
         </BulletPoint>
-        <BulletPoint>
+        <BulletPoint list>
           80% of customers buy wine based on the label or price because of a{' '}
           <b>lack of information</b>
         </BulletPoint>
-        <BulletPoint>
+        <BulletPoint list>
           54% of wine consumers are <b>afraid to ask</b> questions they want
           about wine
         </BulletPoint>
@@ -259,8 +259,16 @@ function App() {
           </mark>
         </BulletPoint>
         <BulletPoint>
-          <b>Refer:</b> Introduce us to someone who needs our solution for a
-          deal cut
+          <b>Refer:</b>{' '}
+          <mark
+            style={{ cursor: 'pointer' }}
+            onClick={() => {
+              setDialogueOpen(true);
+            }}
+          >
+            Introduce us
+          </mark>{' '}
+          to someone who needs our solution for a deal cut
         </BulletPoint>
         <BulletPoint>
           <b>Try:</b> Check out our solutions on the{' '}
