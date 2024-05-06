@@ -78,7 +78,7 @@ export default function ContactUs({ open, ...props }) {
       <div
         style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em' }}
       >
-        <h2 style={{ margin: 0, fontSize: md ? '1.5em' : 'default' }}>
+        <h2 style={{ margin: 0, fontSize: sm || md ? '1.5em' : '2rem' }}>
           Open a dialogue
         </h2>
       </div>
