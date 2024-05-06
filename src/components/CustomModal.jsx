@@ -17,7 +17,7 @@ export default function CustomModal({ isOpen, close, children, style }) {
           zIndex: 100,
         },
         content: {
-          top: '50%',
+          top: sm || md ? 'calc(50% + 20px)' : '50%',
           left: '50%',
           right: 'auto',
           bottom: 'auto',
@@ -31,7 +31,7 @@ export default function CustomModal({ isOpen, close, children, style }) {
           boxSizing: 'border-box',
           width: 860,
           // height: 800,
-          maxHeight: '82vh',
+          maxHeight: '88vh',
           display: 'flex',
           flexDirection: 'column',
           // justifyContent: 'center',
