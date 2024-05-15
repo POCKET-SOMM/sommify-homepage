@@ -152,49 +152,6 @@ function App() {
       <Section title='Why work with sommify on solving the problems?'>
         <Carousel elements={[...partners, ...partners]} />
 
-        {/* <div
-          style={{
-            padding: '16px 0px',
-            borderRadius: 6,
-            display: 'inline-flex',
-            flexWrap: 'wrap',
-            marginInline: 20,
-            marginBottom: 16,
-            // maxHeight: 50,
-            overflowY: 'hidden',
-            justifyContent: 'start',
-            alignItems: 'center',
-          }}
-        >
-          {[
-            { src: Tesco, alt: '', width: 'auto', height: 26 },
-            { src: Edamam, alt: '', width: 'auto', height: 32 },
-            { src: WinePlanet, alt: '', width: 'auto', height: 60 },
-          ].map((img, i) => (
-            <div
-              style={{
-                width: 180,
-                height: 60,
-                overflow: 'hidden',
-                display: 'flex',
-                justifyContent: 'start',
-                alignItems: 'center',
-                filter: 'brightness(0)'
-              }}
-            >
-              <img
-                key={i}
-                src={img.src}
-                alt={img.alt}
-                style={{
-                  width: img.width,
-                  height: img.height,
-                }}
-              />
-            </div>
-          ))}
-        </div> */}
-
         <BulletPoint list>
           We are trusted by <b>Tesco</b> and other technological pioneers in the
           industry
