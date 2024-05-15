@@ -74,10 +74,12 @@ export default function Carousel({ elements = [1, 2, 3, 4, 5, 6] }) {
             initial={false}
             animate={{
               left: (index - 1) * (ELEMENT_WIDTH + ELEMENT_MARGIN),
-              filter: 'brightness(0)',
+              // filter: 'brightness(0)',
+              // grayscale filter
+              filter: 'grayscale(1)',
               opacity: 0.3,
             }}
-            whileHover={{ filter: 'brightness(1)', opacity: 1 }}
+            whileHover={{ filter: 'grayscale(0)', opacity: 1 }}
             transition={{
               left: {
                 duration: TICK_RATE,
