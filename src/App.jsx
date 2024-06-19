@@ -161,7 +161,8 @@ function App() {
           a world-class sommelier
         </BulletPoint>
         <BulletPoint list>
-          <b>40% conversion</b> with static pairings during Tesco pilot
+          <b>40% conversion</b> of recipe shoppers into wine purchasers during
+          Tesco pilot
         </BulletPoint>
         <BulletPoint list>
           50%+ <b>higher average bottle price</b> sold through our solution than
