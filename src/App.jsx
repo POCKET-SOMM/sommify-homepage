@@ -152,49 +152,6 @@ function App() {
       <Section title='Why work with sommify on solving the problems?'>
         <Carousel elements={[...partners, ...partners]} />
 
-        {/* <div
-          style={{
-            padding: '16px 0px',
-            borderRadius: 6,
-            display: 'inline-flex',
-            flexWrap: 'wrap',
-            marginInline: 20,
-            marginBottom: 16,
-            // maxHeight: 50,
-            overflowY: 'hidden',
-            justifyContent: 'start',
-            alignItems: 'center',
-          }}
-        >
-          {[
-            { src: Tesco, alt: '', width: 'auto', height: 26 },
-            { src: Edamam, alt: '', width: 'auto', height: 32 },
-            { src: WinePlanet, alt: '', width: 'auto', height: 60 },
-          ].map((img, i) => (
-            <div
-              style={{
-                width: 180,
-                height: 60,
-                overflow: 'hidden',
-                display: 'flex',
-                justifyContent: 'start',
-                alignItems: 'center',
-                filter: 'brightness(0)'
-              }}
-            >
-              <img
-                key={i}
-                src={img.src}
-                alt={img.alt}
-                style={{
-                  width: img.width,
-                  height: img.height,
-                }}
-              />
-            </div>
-          ))}
-        </div> */}
-
         <BulletPoint list>
           We are trusted by <b>Tesco</b> and other technological pioneers in the
           industry
@@ -204,15 +161,15 @@ function App() {
           a world-class sommelier
         </BulletPoint>
         <BulletPoint list>
+          <b>40% conversion</b> with static pairings during Tesco pilot
+        </BulletPoint>
+        <BulletPoint list>
           50%+ <b>higher average bottle price</b> sold through our solution than
           store average during pilots
         </BulletPoint>
         <BulletPoint list>
           95% of the 1k+ people that have tested our solution would{' '}
           <b>like our solutions</b> to be a part of their purchase experience
-        </BulletPoint>
-        <BulletPoint list>
-          <b>1+mil wine-food pairings</b> already done for our customers
         </BulletPoint>
         <BulletPoint list>
           Backed by investors like <a href='https://heino.fi'>Heino Group</a>{' '}
@@ -229,9 +186,10 @@ function App() {
           optimize search and offer information about what you are selling
         </BulletPoint>
         <BulletPoint>
-          <b>Help customers find the right wine:</b> They can ask questions like{' '}
-          <i>“wine for pasta alla norma for under 20€ from France”</i> and get
-          wines suggested from your portfolio
+          <b>Help customers find the right wine:</b> Combining our world-class
+          AI sommelier, an LLM and your store’s inventory we have built the
+          ultimate advisor chat for your online or in-store experience We also
+          build unique custom experiences for enterprise customers
         </BulletPoint>
         <BulletPoint>
           We also build unique custom experiences for enterprise customers
