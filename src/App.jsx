@@ -189,8 +189,7 @@ function App() {
         <BulletPoint>
           <b>Help customers find the right wine:</b> Combining our world-class
           AI sommelier, an LLM and your store’s inventory we have built the
-          ultimate advisor chat for your online or in-store experience We also
-          build unique custom experiences for enterprise customers
+          ultimate advisor chat for your online or in-store experience
         </BulletPoint>
         <BulletPoint>
           We also build unique custom experiences for enterprise customers
