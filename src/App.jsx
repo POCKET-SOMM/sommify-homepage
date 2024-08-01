@@ -161,7 +161,8 @@ function App() {
           a world-class sommelier
         </BulletPoint>
         <BulletPoint list>
-          <b>40% conversion</b> with static pairings during Tesco pilot
+          <b>40% conversion</b> of recipe shoppers into wine purchasers during
+          Tesco pilot
         </BulletPoint>
         <BulletPoint list>
           50%+ <b>higher average bottle price</b> sold through our solution than
@@ -188,8 +189,7 @@ function App() {
         <BulletPoint>
           <b>Help customers find the right wine:</b> Combining our world-class
           AI sommelier, an LLM and your store’s inventory we have built the
-          ultimate advisor chat for your online or in-store experience We also
-          build unique custom experiences for enterprise customers
+          ultimate advisor chat for your online or in-store experience
         </BulletPoint>
         <BulletPoint>
           We also build unique custom experiences for enterprise customers
