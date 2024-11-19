@@ -1,9 +1,18 @@
-import { FaBars, FaBook, FaChevronRight, FaPhone } from 'react-icons/fa';
+import {
+  FaBars,
+  FaBook,
+  FaCalendar,
+  FaChevronRight,
+  FaPhone,
+  FaRegCalendar,
+} from 'react-icons/fa';
 import { useDimensions } from '../hooks';
 import Button2 from './Button2';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Logo from '../assets/logo.svg';
+import { IoCalendarNumber } from 'react-icons/io5';
+import { SiGooglemeet } from 'react-icons/si';
 
 export default function Header({ bookACall }) {
   const { sm } = useDimensions();
@@ -57,7 +66,8 @@ export default function Header({ bookACall }) {
           <Button2 transparent onClick={bookACall}>
             {/* <FaRegCalendar style={{ marginRight: '.5em', fontSize: '0.9em' }} /> */}
             Book a call
-            <FaPhone style={{ marginLeft: '.5em', fontSize: '0.9em' }} />
+            {/* <FaPhone style={{ marginLeft: '.5em', fontSize: '0.9em' }} /> */}
+            <SiGooglemeet style={{ marginLeft: '.5em', fontSize: '1.2em' }} />
             {/* <FaChevronRight style={{ marginLeft: '.5em', fontSize: '0.9em' }} /> */}
           </Button2>
         )}
