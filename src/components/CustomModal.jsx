@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { motion } from 'framer-motion';
 import { useDimensions } from '../hooks';
 
-export default function CustomModal({ isOpen, close, children, style }) {
+export default function CustomModal({ isOpen, close, children, noBody, style }) {
   const { sm, md } = useDimensions();
 
   return (
@@ -23,7 +23,7 @@ export default function CustomModal({ isOpen, close, children, style }) {
           bottom: 'auto',
           marginRight: '-50%',
           transform: 'translate(-50%, -50%)',
-          background: 'white',
+          background: noBody ? 'transparent' : 'white',
           borderRadius: 10,
           padding: 0,
           border: 'none',
