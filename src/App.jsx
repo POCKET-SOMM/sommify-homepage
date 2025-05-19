@@ -119,9 +119,7 @@ function App() {
           marginTop: sm ? '20vh' : 250,
         }}
       >
-        {/* We have built an  */}
-        {!sm ? 'AI sommelier helping ' : 'Helping '}
-        companies sell wine through memorable experiences
+        AI sommelier for wine sales
       </h1>
       {/* <div
         style={{
@@ -135,21 +133,25 @@ function App() {
         <Button>Try our tech</Button>
       </div> */}
 
-      <Section title='What are the problems* sommify is solving?'>
+      <Section title='What solutions does sommify offer?'>
         <BulletPoint list>
-          72% of customers would <b>pay more</b> for wine if it were exactly
-          paired to their needs
+          <a href='https://playground.sommify.ai' target='_blank'>
+            For retailers
+          </a>{' '}
+          we increase sales through accessibility (chatbots, avatars, automated
+          wine-food pairing and data enhancement)
         </BulletPoint>
         <BulletPoint list>
-          80% of customers buy wine based on the label or price because of a{' '}
-          <b>lack of information</b>
+          <a href='https://roadshow.sommify.ai' target='_blank'>
+            For distributors
+          </a>{' '}
+          we scale wine sales teams 10x by automating offer creation
         </BulletPoint>
         <BulletPoint list>
-          54% of wine consumers are <b>afraid to ask</b> questions they want
-          about wine
+          <b>Custom</b> AI experiences are available for enterprise clients.
         </BulletPoint>
       </Section>
-      <Section title='Why work with sommify on solving the problems?'>
+      <Section title='Why work with sommify?'>
         <Carousel elements={[...partners, ...partners]} />
 
         <BulletPoint list>
@@ -157,27 +159,20 @@ function App() {
           industry
         </BulletPoint>
         <BulletPoint list>
-          Our AI is built on <b>20+ years of wine expertise</b> of Julie Dupouy,
-          a world-class sommelier
+          Our AI is built on over <b>20 years of wine expertise</b> of{' '}
+          <a href='https://www.juliedupouy.com/'>Julie Dupouy</a>
         </BulletPoint>
         <BulletPoint list>
-          <b>40% conversion</b> of recipe shoppers into wine purchasers during
-          Tesco pilot
+          Proven ROI e.g. <b>40% conversion</b> of Tesco recipe shoppers into
+          wine purchasers and <b>50%+ higher average bottle price</b> sold
+          through our solution than store average during pilots
         </BulletPoint>
         <BulletPoint list>
-          50%+ <b>higher average bottle price</b> sold through our solution than
-          store average during pilots
-        </BulletPoint>
-        <BulletPoint list>
-          95% of the 1k+ people that have tested our solution would{' '}
-          <b>like our solutions</b> to be a part of their purchase experience
-        </BulletPoint>
-        <BulletPoint list>
-          Backed by investors like <a href='https://heino.fi'>Heino Group</a>{' '}
-          with a focus on the food & drink industry
+          Backed by <b>investors with a food & drink focus</b> like{' '}
+          <a href='https://heino.fi'>Heino Group</a>{' '}
         </BulletPoint>
       </Section>
-      <Section title='How is sommify solving the problems?'>
+      {/* <Section title='How is sommify solving the problems?'>
         <BulletPoint>
           <b>Automate pairing:</b> We pair your wines to your meals/recipes and
           vice versa
@@ -194,27 +189,42 @@ function App() {
         <BulletPoint>
           We also build unique custom experiences for enterprise customers
         </BulletPoint>
-      </Section>
+      </Section> */}
       <Section title='Engage with us'>
         <BulletPoint>
-          <b>Reach out:</b>{' '}
-          <mark
-            style={{ cursor: 'pointer' }}
-            onClick={() => {
-              setDialogueOpen(true);
-            }}
-          >
-            Contact us
-          </mark>{' '}
+          <b>Explore</b> our{' '}
+          <a href='https://playground.sommify.ai' target='_blank'>
+            retailer
+          </a>{' '}
           or{' '}
+          <a href='https://roadshow.sommify.ai' target='_blank'>
+            distributor
+          </a>{' '}
+          demos and share your feedback.
+        </BulletPoint>
+        <BulletPoint>
+          <b>Adopt</b> our technology and become a customer by{' '}
           <mark
             style={{ cursor: 'pointer' }}
             onClick={() => {
               setBookingOpen(true);
             }}
           >
-            set up a call
+            booking a call
+          </mark>{' '}
+          or{' '}
+          <mark
+            style={{ cursor: 'pointer' }}
+            onClick={() => {
+              setDialogueOpen(true);
+            }}
+          >
+            contacting us
           </mark>
+        </BulletPoint>
+        <BulletPoint>
+          <b>Partner</b> with us to enhance your digital offering, we also offer
+          revenue share models.
         </BulletPoint>
         <BulletPoint>
           <b>Refer:</b>{' '}
@@ -228,15 +238,9 @@ function App() {
           </mark>{' '}
           to someone who needs our solution for a deal cut
         </BulletPoint>
-        <BulletPoint>
-          <b>Try:</b> Check out our solutions on the{' '}
-          <a href='https://playground.sommify.ai' target='_blank'>
-            demo page
-          </a>
-        </BulletPoint>
       </Section>
 
-      <Section title='As seen on'>
+      <Section title='Featured in'>
         <Carousel elements={press} />
       </Section>
 

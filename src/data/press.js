@@ -3,11 +3,12 @@ import HS from '../assets/press/hs.png';
 import Kauppalehti from '../assets/press/kl.svg';
 import Silta from '../assets/press/silta.svg';
 import TS from '../assets/press/t&s.svg';
+import Cash from '../assets/press/cash.svg';
 
 export default [
   {
     src: Decanter,
-    alt: '',
+    alt: 'Decanter',
     width: 'auto',
     height: 120,
     href: 'https://www.decanter.com/wine/ai-and-wine-a-taste-of-the-future-523210/',
@@ -25,6 +26,13 @@ export default [
     width: 'auto',
     height: 120,
     href: 'https://www.hs.fi/visio/art-2000010003755.html',
+  },
+  {
+    src: Cash,
+    alt: 'Cash',
+    width: 'auto',
+    height: 40,
+    href: 'https://www.cash.at/handel/news/cash-inno-up-start-up-challenge-wein-intelligenz-am-pos-32960',
   },
   {
     src: Silta,

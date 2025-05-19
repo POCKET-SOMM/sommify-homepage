@@ -232,42 +232,6 @@ export default function ContactUs({ open, ...props }) {
                   </span>
                 )}
               </Button2>
-              {/* <motion.button
-                animate={{
-                  opacity: disabled ? 0.5 : 1,
-                }}
-                initial={false}
-                variant='secondary'
-                onClick={handleSendMessage}
-                style={{
-                  width: 150,
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                {status === 'PENDING' ? (
-                  <span>
-                    <RotatingLines
-                      visible={true}
-                      height='12'
-                      width='12'
-                      strokeColor='white'
-                      strokeWidth='5'
-                      animationDuration='0.75'
-                      ariaLabel='rotating-lines-loading'
-                      wrapperStyle={{}}
-                      wrapperClass=''
-                    />{' '}
-                    <span style={{ marginLeft: 6 }}>Sending</span>
-                  </span>
-                ) : (
-                  <span style={{ display: 'flex', alignItems: 'center' }}>
-                    <CgMail style={{ marginRight: 6, fontSize: '1.25em' }} />{' '}
-                    Send message
-                  </span>
-                )}
-              </motion.button> */}
             </div>
           </motion.div>
         </AnimatePresence>
