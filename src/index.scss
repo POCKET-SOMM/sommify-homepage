@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 // define colors
 $color-primary: #d11174;
 $color-background: #fcfcfe;
@@ -59,29 +63,29 @@ b {
 }
 
 .header {
-  max-width: 720px;
+  max-width: 840px;
   width: 92%;
 }
 
 #root {
   margin: 0 auto;
-  max-width: 720px;
+  max-width: 840px;
   width: 92%;
   // padding-top: 4vw;
 
   min-width: 320px;
 }
 
-button {
-  font-family: 'Mona Sans';
-  font-size: 14px;
-  font-weight: 600;
-  padding: 8px 14px;
-  border-radius: 999px;
-  border: none;
-  outline: none;
-  // cursor: pointer;
-}
+// button {
+//   font-family: 'Mona Sans';
+//   font-size: 14px;
+//   font-weight: 600;
+//   padding: 8px 14px;
+//   border-radius: 999px;
+//   border: none;
+//   outline: none;
+//   // cursor: pointer;
+// }
 
 // button.call-to-action {
 //   font-family: 'Mona Sans';
@@ -109,9 +113,9 @@ a {
 
 // headers
 h1 {
-  font-size: 50px;
+  font-size: 44px;
   margin-bottom: 2em;
-  font-weight: 700 !important;
+  font-weight: 550 !important;
   line-height: 1.1 !important;
   letter-spacing: -0.02em;
   color: $color-black;
@@ -188,28 +192,28 @@ textarea {
   }
 }
 
-form button {
-  margin-top: 1em;
-  background: $color-black !important;
-  color: white;
-  font-weight: 600;
-  font-size: 13px;
-  width: auto;
-}
+// form button {
+//   margin-top: 1em;
+//   background: $color-black !important;
+//   color: white;
+//   font-weight: 600;
+//   font-size: 13px;
+//   width: auto;
+// }
 
-button.qxCTlb {
-  font-size: 15px;
-  color: $color-primary !important;
-  font-family: 'Mona Sans';
-  font-weight: 400;
-  padding: 0;
-  margin: 0;
-  min-height: 0;
-  // line-height: 1.5;
-  display: inline;
-  height: 1em;
-  background: transparent !important;
-}
+// button.qxCTlb {
+//   font-size: 15px;
+//   color: $color-primary !important;
+//   font-family: 'Mona Sans';
+//   font-weight: 400;
+//   padding: 0;
+//   margin: 0;
+//   min-height: 0;
+//   // line-height: 1.5;
+//   display: inline;
+//   height: 1em;
+//   background: transparent !important;
+// }
 
 .ReactModal__Overlay {
   opacity: 0;
@@ -222,4 +226,27 @@ button.qxCTlb {
 
 .ReactModal__Overlay--before-close {
   opacity: 0;
+}
+
+.scroller {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.scroller-inner {
+  display: flex;
+  animation: scroll 20s linear infinite;
+}
+.scroller-track {
+  // display: flex;
+  gap: 8px;
+  margin-left: 8px;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }

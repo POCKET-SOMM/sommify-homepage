@@ -30,7 +30,7 @@ export default function Footer({}) {
           PRIVACY POLICY
         </a>
       </span>
-      <span style={{ opacity: 0.6 }}>*sources: SVB, Wine Enthusiast</span>
+      {/* <span style={{ opacity: 0.6 }}>*sources: SVB, Wine Enthusiast</span> */}
     </div>
   );
 }
