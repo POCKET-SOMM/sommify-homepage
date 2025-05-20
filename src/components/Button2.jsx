@@ -32,29 +32,32 @@ export default function Button2({
   const borderRadius = 999;
 
   return (
-    <motion.button
-      animate={{
-        background: backgroundIdle,
-        color: color,
-        opacity: disabled ? 0.5 : 1,
-      }}
-      whileHover={{
-        background: backgroundHover,
-        color: colorHover,
-      }}
-      initial={false}
+    <div
+      // animate={{
+      //   background: backgroundIdle,
+      //   color: color,
+      //   opacity: disabled ? 0.5 : 1,
+      // }}
+      // whileHover={{
+      //   background: backgroundHover,
+      //   color: colorHover,
+      // }}
+      // initial={false}
       style={{
-        borderRadius,
-        fontSize: '14px !important',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginRight: 8,
+        // borderRadius,
+        // fontSize: '14px !important',
+        // display: 'flex',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        // marginRight: 8,
+        // fontWeight: 500,
         cursor: disabled ? 'default' : 'pointer',
+        opacity: disabled ? 0.1 : 1,
       }}
+      className='text-black text-sm gap-2  flex gap-1 items-center justify-center h-8 px-3 font-medium'
       {...props}
     >
       {children}
-    </motion.button>
+    </div>
   );
 }

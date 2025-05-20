@@ -12,6 +12,7 @@ import Polygon from './assets/polygon.svg';
 import Button2 from './components/Button2';
 import {
   FaBars,
+  FaCaretDown,
   FaChevronLeft,
   FaChevronRight,
   FaRegCalendar,
@@ -27,6 +28,10 @@ import Carousel from './components/Carousel';
 
 import press from './data/press';
 import partners from './data/partners';
+import Dropdown from './components/Dropdown';
+import { LuLogOut } from 'react-icons/lu';
+import LogoScroller from './components/LogoScroller';
+import LogoMarquee from './components/LogoMarquee';
 
 function App() {
   const [dialogueOpen, setDialogueOpen] = useState(false);
@@ -113,13 +118,12 @@ function App() {
       />
       <h1
         style={{
-          fontWeight: 600,
           lineHeight: 1.25,
-          marginBottom: '1.6em',
+          marginBottom: '1.4em',
           marginTop: sm ? '20vh' : 250,
         }}
       >
-        AI sommelier for wine sales
+        AI sommelier for wine sales.
       </h1>
       {/* <div
         style={{
@@ -148,11 +152,12 @@ function App() {
           we scale wine sales teams 10x by automating offer creation
         </BulletPoint>
         <BulletPoint list>
-          <b>Custom</b> AI experiences are available for enterprise clients.
+          <b>Custom</b> AI experiences are available for enterprise clients
         </BulletPoint>
       </Section>
       <Section title='Why work with sommify?'>
-        <Carousel elements={[...partners, ...partners]} />
+        {/* <Carousel elements={[...partners, ...partners]} /> */}
+        <LogoMarquee elements={[...partners, ...partners]} />
 
         <BulletPoint list>
           We are trusted by <b>Tesco</b> and other technological pioneers in the
@@ -160,7 +165,9 @@ function App() {
         </BulletPoint>
         <BulletPoint list>
           Our AI is built on over <b>20 years of wine expertise</b> of{' '}
-          <a href='https://www.juliedupouy.com/'>Julie Dupouy</a>
+          <a href='https://www.juliedupouy.com/' target='_blank'>
+            Julie Dupouy
+          </a>
         </BulletPoint>
         <BulletPoint list>
           Proven ROI e.g. <b>40% conversion</b> of Tesco recipe shoppers into
@@ -241,7 +248,8 @@ function App() {
       </Section>
 
       <Section title='Featured in'>
-        <Carousel elements={press} />
+        {/* <Carousel elements={press} /> */}
+        <LogoMarquee elements={press} />
       </Section>
 
       {/* <div

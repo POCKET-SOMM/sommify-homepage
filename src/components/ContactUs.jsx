@@ -5,6 +5,7 @@ import { RotatingLines } from 'react-loader-spinner';
 import { TbMailX, TbMailCheck } from 'react-icons/tb';
 import Button2 from './Button2';
 import { useDimensions } from '../hooks';
+import Button from './Button';
 
 export default function ContactUs({ open, ...props }) {
   const [subject, setSubject] = useState('');
@@ -42,7 +43,10 @@ export default function ContactUs({ open, ...props }) {
 
     setStatus('PENDING');
 
-    // console.log('Sending message...', { subject, contact, message });
+    // // temporary - simulate sending message
+    // setTimeout(() => {
+    //   setStatus('SUCCESS');
+    // }, 2000);
 
     fetch('https://api.sommify.ai/user/contact', {
       method: 'POST',
@@ -104,6 +108,11 @@ export default function ContactUs({ open, ...props }) {
           margin: 'auto',
           position: 'relative',
         }}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSendMessage(e);
+        }}
+        {...props}
       >
         <AnimatePresence>
           {status === 'FAILED' && (
@@ -197,26 +206,15 @@ export default function ContactUs({ open, ...props }) {
               className='w-100'
               placeholder='How to reach you?'
             />
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'end',
-                alignItems: 'center',
-                width: '100%',
-              }}
-            >
-              <Button2
-                onClick={handleSendMessage}
-                disabled={disabled}
-                style={{ width: 150 }}
-              >
+            <div className='flex justify-end items-center w-full pt-6'>
+              <Button disabled={disabled} style={{ width: 150 }} type='submit'>
                 {status === 'PENDING' ? (
-                  <span>
+                  <div className='flex items-center'>
                     <RotatingLines
                       visible={true}
                       height='12'
                       width='12'
-                      strokeColor='white'
+                      strokeColor='black'
                       strokeWidth='5'
                       animationDuration='0.75'
                       ariaLabel='rotating-lines-loading'
@@ -224,14 +222,14 @@ export default function ContactUs({ open, ...props }) {
                       wrapperClass=''
                     />{' '}
                     <span style={{ marginLeft: 6 }}>Sending</span>
-                  </span>
+                  </div>
                 ) : (
                   <span style={{ display: 'flex', alignItems: 'center' }}>
                     <CgMail style={{ marginRight: 6, fontSize: '1.25em' }} />{' '}
                     Send message
                   </span>
                 )}
-              </Button2>
+              </Button>
             </div>
           </motion.div>
         </AnimatePresence>

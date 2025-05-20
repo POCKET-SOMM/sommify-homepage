@@ -11,7 +11,7 @@ export default function Section({ title, children }) {
         position: 'relative',
         // borderLeft: '1px dashed #E4E9F1',
         paddingBottom: 36,
-        maxWidth: 600,
+        maxWidth: 800,
 
         // width: 600,
         // maxWidth: 600,
@@ -19,7 +19,7 @@ export default function Section({ title, children }) {
       }}
     >
       <div>
-        <h3 style={{ position: 'relative' }}>
+        <h3 className='mb-4' style={{ position: 'relative' }}>
           {!sm && <div className='line-marker' />}
           {title}
         </h3>

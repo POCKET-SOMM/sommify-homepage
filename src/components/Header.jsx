@@ -1,7 +1,11 @@
 import {
   FaBars,
   FaBook,
+  FaBookOpen,
   FaCalendar,
+  FaCalendarAlt,
+  FaCalendarPlus,
+  FaCaretDown,
   FaChevronRight,
   FaPhone,
   FaRegCalendar,
@@ -13,6 +17,32 @@ import { useState } from 'react';
 import Logo from '../assets/logo.svg';
 import { IoCalendarNumber } from 'react-icons/io5';
 import { SiGooglemeet } from 'react-icons/si';
+import { LuBookOpen, LuCalendar, LuCalendarDays, LuContainer, LuLogOut } from 'react-icons/lu';
+import Dropdown from './Dropdown';
+import { VscBook, VscCalendar, VscProject } from 'react-icons/vsc';
+import { HiMiniBookOpen, HiMiniCalendar, HiMiniCalendarDays } from 'react-icons/hi2';
+import { HiBookOpen } from 'react-icons/hi';
+
+const retailerProducts = [
+  {
+    name: 'Chat',
+    icon: '💬',
+    description: 'Let the user chat with an AI',
+    href: 'https://playground.sommify.ai/products/chat',
+  },
+  {
+    name: 'Plus',
+    icon: '🍇',
+    description: 'Enhance your data',
+    href: 'https://playground.sommify.ai/products/plus',
+  },
+  {
+    name: 'Pair',
+    icon: '🧀',
+    description: 'Pair recipes and wines',
+    href: 'https://playground.sommify.ai/products/pair',
+  },
+];
 
 export default function Header({ bookACall }) {
   const { sm } = useDimensions();
@@ -43,14 +73,7 @@ export default function Header({ bookACall }) {
         color: '#ffffff',
       }}
     >
-      <div
-        style={{
-          display: 'flex',
-          width: '100%',
-          height: 70,
-          alignItems: 'center',
-        }}
-      >
+      <div className='flex w-full h-16 items-center gap-2'>
         <motion.img
           src={Logo}
           style={{
@@ -64,11 +87,11 @@ export default function Header({ bookACall }) {
         />
         {!sm && (
           <Button2 transparent onClick={bookACall}>
-            {/* <FaRegCalendar style={{ marginRight: '.5em', fontSize: '0.9em' }} /> */}
+            <LuCalendarDays className='mr-1 text-base' />
+            {/* <HiMiniCalendarDays className='mr-1 text-base' /> */}
+            {/* <VscCalendar className='mr-1 text-base' /> */}
             Book a call
-            {/* <FaPhone style={{ marginLeft: '.5em', fontSize: '0.9em' }} /> */}
-            <SiGooglemeet style={{ marginLeft: '.5em', fontSize: '1.2em' }} />
-            {/* <FaChevronRight style={{ marginLeft: '.5em', fontSize: '0.9em' }} /> */}
+            {/* <FaRegCalendar className='ml-1' /> */}
           </Button2>
         )}
         {!sm && (
@@ -77,41 +100,91 @@ export default function Header({ bookACall }) {
             onClick={() => {
               window.open('https://docs.sommify.ai', '_blank');
             }}
-            style={{
-              marginRight: 16,
-              display: 'flex',
-              alignItems: 'center',
-            }}
+            // style={{
+            //   marginRight: 16,
+            //   display: 'flex',
+            //   alignItems: 'center',
+            // }}
           >
+            <LuBookOpen className='mr-1 text-base' />
+            {/* <VscBook className='mr-1 text-base' /> */}
             Read docs
-            <FaChevronRight style={{ marginLeft: '.5em', fontSize: '0.9em' }} />
+            {/* <FaChevronRight style={{ marginLeft: '.5em', fontSize: '0.9em' }} /> */}
             {/* <FaBook style={{ marginLeft: '.5em', fontSize: '0.9em' }} /> */}
           </Button2>
         )}
         {!sm && (
-          <Button2
-            primary
-            onClick={() =>
-              window.open('https://playground.sommify.ai', '_blank')
-            }
-          >
-            Try our tech{' '}
-            <FaChevronRight style={{ marginLeft: '.5em', fontSize: '0.9em' }} />
-          </Button2>
-        )}
+          // <Button2
+          //   primary
+          //   onClick={() =>
+          //     window.open('https://playground.sommify.ai', '_blank')
+          //   }
+          // >
+          //   Products
+          //   {/* Try our tech{' '} */}
+          //   <FaChevronRight style={{ marginLeft: '.5em', fontSize: '0.9em' }} />
+          // </Button2>
 
-        {sm && (
+          <Dropdown
+            menuContent={
+              <div className='flex flex-col min-w-[140px] justify-stretch'>
+                <div className='text-xs text-slate-500 font-medium px-2 py-1'>
+                  For distributors
+                </div>
+
+                <a
+                  href='https://roadshow.sommify.ai'
+                  target='_blank'
+                  className='px-2 py-1 flex items-center text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 rounded-md cursor-pointer truncate'
+                >
+                  <i className='mr-2'>📈</i>
+                  <span>Agent</span>
+                  <span className='text-slate-400 ml-1 font-normal pr-4'>
+                    - Rapid offer generation
+                  </span>
+                  <FaChevronRight className='text-slate-300 text-xs ml-auto' />
+                </a>
+
+                <div className='text-xs text-slate-500 font-medium px-2 py-1 mt-2'>
+                  For retailers
+                </div>
+
+                {retailerProducts.map((product) => (
+                  <a
+                    href={product.href}
+                    target='_blank'
+                    className='px-2 py-1.5 flex items-center text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 rounded-md cursor-pointer truncate'
+                  >
+                    <i className='mr-2'>{product.icon}</i>
+                    <span>{product.name}</span>
+                    <span className='text-slate-400 ml-1 font-normal pr-4'>
+                      - {product.description}
+                    </span>
+                    <FaChevronRight className='text-slate-300 text-xs ml-auto' />
+                  </a>
+                ))}
+              </div>
+            }
+            className='px-3 cursor-pointer flex h-8 rounded-md items-center justify-center text-black text-sm font-medium'
+          >
+            <LuContainer className='mr-2 text-base' />
+            Try products
+            <FaCaretDown className='ml-2' />
+          </Dropdown>
+        )}
+        {/* {sm && (
           <FaBars
-            color='#fff'
             size='1.4em'
             style={{
               cursor: 'pointer',
+              color: '#00050a',
+              minWidth: 40,
             }}
             onClick={() => {
               setOpen(!open);
             }}
           />
-        )}
+        )} */}
       </div>
 
       <motion.div
