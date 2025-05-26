@@ -33,6 +33,10 @@ import { LuLogOut } from 'react-icons/lu';
 import LogoScroller from './components/LogoScroller';
 import LogoMarquee from './components/LogoMarquee';
 
+import AgentBackground from './assets/product/AgentBackground.jpg';
+import AgentGenerate from './assets/product/AgentGenerate.png';
+import AgentBrowse from './assets/product/AgentBrowse.png';
+
 function App() {
   const [dialogueOpen, setDialogueOpen] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
@@ -116,25 +120,61 @@ function App() {
           setBookingOpen(true);
         }}
       />
-      <h1
-        style={{
-          lineHeight: 1.25,
-          marginBottom: '1.4em',
-          marginTop: sm ? '20vh' : 250,
-        }}
-      >
-        AI sommelier for wine sales.
-      </h1>
-      {/* <div
-        style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'start',
-          alignItems: 'center',
-          marginBottom: 100,
-        }}
-      >
-        <Button>Try our tech</Button>
+      <div className='w-full'>
+        <h1
+          style={{
+            lineHeight: 1.25,
+            marginBottom: '1.4em',
+            marginTop: sm ? '20vh' : 250,
+            marginInline: 'auto',
+          }}
+        >
+          {/* We built an
+          <br /> */}
+          AI sommelier for wine sales.
+        </h1>
+      </div>
+
+      {/* <div className='flex justify-center mb-8'>
+        <div className='p-1 rounded-full bg-slate-50 flex gap-1'>
+          <div className='cursor-pointer h-12 w-36 rounded-full bg-white border border-slate-100 shadow-sm flex items-center justify-center font-medium'>
+            Distributor
+          </div>
+          <div className='cursor-pointer hover:bg-slate-100 h-12 w-36 rounded-full flex items-center justify-center font-medium'>
+            Retail
+          </div>
+        </div>
+      </div>
+
+      <div className='w-full bg-red-100 rounded-xl overflow-hidden mb-24 relative flex h-[600px]'>
+        <div className='bg-slate-50 w-[400px] top-0 left-0 flex flex-col items-start justify-center p-12'>
+          <span className='text-3xl font-[450] mb-10 mt-auto'>Agent</span>
+          <p className='text-xl font-[450] mb-24'>
+            Sell wines smarter with automated pairing
+          </p>
+          <span className='text-base font-[450] flex items-center gap-4 p-3 px-5 rounded-full bg-slate-100 mx-auto mt-auto'>
+            Visit platform <FaChevronRight className='text-xs' />
+          </span>
+        </div>
+        <div className='flex-1 h-full bg-red-200 relative'>
+          <img
+            src={AgentBackground}
+            className='absolute h-full w-full object-cover z-0'
+          />
+
+          <div className='w-full h-full absolute flex items-center justify-center z-10'>
+            <img
+              src={AgentBrowse}
+              className='h-5/6 rounded-lg absolute shadow-xl'
+              style={{ transform: 'translate(-100px, -30px)' }}
+            />
+            <img
+              src={AgentGenerate}
+              className='h-4/5 rounded-lg absolute shadow-xl border border-slate-100'
+              style={{ transform: 'translate(100px, 30px)' }}
+            />
+          </div>
+        </div>
       </div> */}
 
       <Section title='What solutions does sommify offer?'>
