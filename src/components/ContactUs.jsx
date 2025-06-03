@@ -69,19 +69,18 @@ export default function ContactUs({ open, ...props }) {
 
   return (
     <div
-      style={{
-        width: '100%',
-        boxSizing: 'border-box',
-        // paddingBlock: '14vh 10vh',
-        borderRadius: '2em',
-        marginInline: 'auto',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
+      className='flex flex-col gap-4 p-6 bg-white w-full mx-auto rounded-xl'
+      // style={{
+      //   width: '100%',
+      //   boxSizing: 'border-box',
+      //   // paddingBlock: '14vh 10vh',
+      //   borderRadius: '2em',
+      //   marginInline: 'auto',
+      //   display: 'flex',
+      //   flexDirection: 'column',
+      // }}
     >
-      <div
-        style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em' }}
-      >
+      <div className='flex items-center mb-1'>
         <h2 style={{ margin: 0, fontSize: sm || md ? '1.5em' : '2rem' }}>
           Open a dialogue
         </h2>
@@ -103,11 +102,12 @@ export default function ContactUs({ open, ...props }) {
       </p>
 
       <form
-        style={{
-          width: '100%',
-          margin: 'auto',
-          position: 'relative',
-        }}
+        className='flex flex-col gap-4 w-full'
+        // style={{
+        //   width: '100%',
+        //   margin: 'auto',
+        //   position: 'relative',
+        // }}
         onSubmit={(e) => {
           e.preventDefault();
           handleSendMessage(e);
@@ -182,6 +182,7 @@ export default function ContactUs({ open, ...props }) {
             exit={{ opacity: 0, position: 'fixed' }}
             transition={{ duration: 0.4 }}
             style={{ width: '100%' }}
+            className='flex flex-col gap-4'
           >
             <label>Subject</label>
             <input

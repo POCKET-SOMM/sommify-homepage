@@ -14,12 +14,12 @@ export default function Footer({}) {
         // margin: 'auto',
       }}
     >
-      <span>
+      {/* <span>
         FOLLOW OUR JOURNEY ON{' '}
         <a href='https://www.linkedin.com/company/sommifyai/' target='_blank'>
           LINKEDIN
         </a>
-      </span>
+      </span> */}
       {/* <span>DOCUMENTATION</span> */}
       <span>
         POCKETSOMM OY 2021-2025,{' '}

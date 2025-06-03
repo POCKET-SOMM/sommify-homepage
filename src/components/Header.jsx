@@ -17,11 +17,22 @@ import { useState } from 'react';
 import Logo from '../assets/logo.svg';
 import { IoCalendarNumber } from 'react-icons/io5';
 import { SiGooglemeet } from 'react-icons/si';
-import { LuBookOpen, LuCalendar, LuCalendarDays, LuContainer, LuLogOut } from 'react-icons/lu';
+import {
+  LuBookOpen,
+  LuCalendar,
+  LuCalendarDays,
+  LuContainer,
+  LuLogOut,
+} from 'react-icons/lu';
 import Dropdown from './Dropdown';
 import { VscBook, VscCalendar, VscProject } from 'react-icons/vsc';
-import { HiMiniBookOpen, HiMiniCalendar, HiMiniCalendarDays } from 'react-icons/hi2';
+import {
+  HiMiniBookOpen,
+  HiMiniCalendar,
+  HiMiniCalendarDays,
+} from 'react-icons/hi2';
 import { HiBookOpen } from 'react-icons/hi';
+import ButtonFlat from './ButtonFlat';
 
 const retailerProducts = [
   {
@@ -58,12 +69,13 @@ export default function Header({ bookACall }) {
       }}
       className='header'
       style={{
+        maxWidth: 1200,
         display: 'flex',
         flexDirection: 'column',
         position: 'absolute',
         left: 0,
         right: 0,
-        top: '3vw',
+        top: 0,
         margin: 'auto',
         boxSizing: 'border-box',
         paddingInline: sm ? 20 : 0,
@@ -85,46 +97,29 @@ export default function Header({ bookACall }) {
             window.open('https://sommify.ai', '_self');
           }}
         />
-        {!sm && (
+
+        <ButtonFlat variant='transparent' onClick={bookACall}>
+          Talk to a founder
+        </ButtonFlat>
+
+        {/* {!sm && (
           <Button2 transparent onClick={bookACall}>
             <LuCalendarDays className='mr-1 text-base' />
-            {/* <HiMiniCalendarDays className='mr-1 text-base' /> */}
-            {/* <VscCalendar className='mr-1 text-base' /> */}
             Book a call
-            {/* <FaRegCalendar className='ml-1' /> */}
           </Button2>
-        )}
-        {!sm && (
+        )} */}
+        {/* {!sm && (
           <Button2
             transparent
             onClick={() => {
               window.open('https://docs.sommify.ai', '_blank');
             }}
-            // style={{
-            //   marginRight: 16,
-            //   display: 'flex',
-            //   alignItems: 'center',
-            // }}
           >
             <LuBookOpen className='mr-1 text-base' />
-            {/* <VscBook className='mr-1 text-base' /> */}
             Read docs
-            {/* <FaChevronRight style={{ marginLeft: '.5em', fontSize: '0.9em' }} /> */}
-            {/* <FaBook style={{ marginLeft: '.5em', fontSize: '0.9em' }} /> */}
           </Button2>
-        )}
-        {!sm && (
-          // <Button2
-          //   primary
-          //   onClick={() =>
-          //     window.open('https://playground.sommify.ai', '_blank')
-          //   }
-          // >
-          //   Products
-          //   {/* Try our tech{' '} */}
-          //   <FaChevronRight style={{ marginLeft: '.5em', fontSize: '0.9em' }} />
-          // </Button2>
-
+        )} */}
+        {/* {!sm && (
           <Dropdown
             menuContent={
               <div className='flex flex-col min-w-[140px] justify-stretch'>
@@ -171,7 +166,7 @@ export default function Header({ bookACall }) {
             Try products
             <FaCaretDown className='ml-2' />
           </Dropdown>
-        )}
+        )} */}
         {/* {sm && (
           <FaBars
             size='1.4em'

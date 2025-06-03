@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('../fonts/Mona-Sans.woff2') format('woff2 supports variations'),
+    url('../fonts/Mona-Sans.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+}
+
+@font-face {
+  font-family: 'Hubot Sans';
+  src: url('../fonts/Hubot-Sans.woff2') format('woff2 supports variations'),
+    url('../fonts/Hubot-Sans.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+}
+
+html {
+  font-family: 'Mona Sans';
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 16px;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
+  // no overscroll
+  overscroll-behavior: none;
+}
+
+#root {
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 92%;
+  min-width: 320px;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 550;
+  margin: 0;
+}
+h2 {
+  font-size: 2rem;
+  font-weight: 550;
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+h3 {
+  font-size: 1.1rem;
+  font-weight: 450;
+  margin: 0;
+}
+
+.hubot-sans {
+  font-family: 'Hubot Sans', monospace !important;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  font-style: normal;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+input,
+textarea {
+  font-family: 'Mona Sans';
+  font-size: 14px;
+  padding: 0.8em 1.2em;
+  border-radius: 6px;
+  border: none;
+  background: #f4f7fc;
+  margin-bottom: 1em;
+  transition: border-color 0.2s ease-in-out;
+  box-sizing: border-box;
+  width: 100%;
+
+  &::placeholder {
+    color: #80858a;
+  }
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 100ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
