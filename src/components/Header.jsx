@@ -56,7 +56,7 @@ const retailerProducts = [
 ];
 
 export default function Header({ bookACall }) {
-  const { sm } = useDimensions();
+  const { sm, lg } = useDimensions();
   const [open, setOpen] = useState(false);
 
   return (
@@ -69,7 +69,7 @@ export default function Header({ bookACall }) {
       }}
       className='header'
       style={{
-        maxWidth: 1200,
+        maxWidth: 1100,
         display: 'flex',
         flexDirection: 'column',
         position: 'absolute',
@@ -78,7 +78,7 @@ export default function Header({ bookACall }) {
         top: 0,
         margin: 'auto',
         boxSizing: 'border-box',
-        paddingInline: sm ? 20 : 0,
+        paddingInline: lg ? 0 : 24,
         // justifyContent: 'space-between',
         marginBottom: sm ? 100 : 190,
         borderRadius: 10,

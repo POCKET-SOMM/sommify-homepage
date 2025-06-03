@@ -4,7 +4,7 @@ export default function StepLadder({ steps = [] }) {
       {steps.map((step, i) => (
         <div
           key={i}
-          className='flex items-center gap-4 mb-6 h-24 border border-slate-200 rounded-lg p-6 cursor-pointer shadow-sm'
+          className='flex text-start items-center gap-4 mb-6 h-24 border border-slate-200 rounded-lg p-6 cursor-pointer shadow-sm'
           style={{
             width: 'calc(100% - 60px)',
             margin: i % 2 !== 0 ? '0 60px 0 0' : '0 0 0 60px',
