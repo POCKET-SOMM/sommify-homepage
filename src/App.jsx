@@ -49,16 +49,13 @@ const ModeSwitcher = ({ key, mode, setMode }) => {
       <motion.div
         // layout
         layoutId={key}
-        className='absolute rounded-full bg-white border border-slate-100 shadow-sm'
+        className='absolute rounded-full bg-white border border-slate-100 shadow-sm h-12 w-36 top-[3px]'
         initial={false}
         transition={{
           duration: 0.35,
           ease: [0.4, 0, 0.2, 1], // easeInOut
         }}
         style={{
-          width: '9rem', // w-36
-          height: '3rem', // h-12
-          top: '0.25rem',
           left: mode === 'distributor' ? '0.25rem' : 'calc(9rem + 0.5rem)',
         }}
       />
@@ -107,9 +104,9 @@ function App() {
       ],
       bg: AgentBackground,
       fg: (
-        <div className='w-full h-full relative flex items-center justify-start z-10 min-h-[600px]'>
-          <div className='h-[600px] relative'>
-            <div className='h-[600px] w-[420px] absolute top-0 left-0 rounded-xl p-2 backdrop-blur-sm bg-white/40 flex items-center justify-center border border-slate-100'>
+        <div className='w-full h-full relative flex items-center justify-start z-10 min-h-[600px] px-16'>
+          <div className='h-[500px] relative'>
+            <div className='h-[500px] w-[350px] absolute top-0 left-0 rounded-xl p-2 backdrop-blur-sm bg-white/40 flex items-center justify-center border border-slate-100'>
               <img
                 src={AgentBrowse}
                 className='rounded-lg shadow-xl w-full h-full'
@@ -121,7 +118,7 @@ function App() {
                   ? 'translate(150px, 70px)'
                   : 'translate(120px, 50px)',
               }}
-              className='rounded-xl w-[380px] absolute p-2 backdrop-blur-sm bg-white/40 flex items-center justify-center border border-slate-100'
+              className='rounded-xl w-[320px] absolute p-2 backdrop-blur-sm bg-white/40 flex items-center justify-center border border-slate-100'
             >
               <img
                 src={AgentGenerate}
@@ -206,12 +203,12 @@ function App() {
             style={{
               transform: lg ? 'translate(-100px, 0px)' : 'translate(0px, 0px)',
             }}
-            className='rounded-xl h-[50%] min-h-[400px] p-2 backdrop-blur-sm bg-white/40 flex items-center justify-center border border-slate-100'
+            className='rounded-xl h-[330px] p-2 backdrop-blur-sm bg-white/40 flex items-center justify-center border border-slate-100'
           >
             <img src={Avatar} className='rounded-lg shadow-2xl h-full w-auto' />
 
             {lg && (
-              <div className='w-[360px] text-sm flex flex-col gap-4 items-start justify-center ml-6 absolute left-[55%] top-[20%] font-[450]'>
+              <div className='w-[330px] text-sm flex flex-col gap-4 items-start justify-center ml-6 absolute left-[50%] top-[33%] font-[450]'>
                 <div className='ml-6 p-4 px-6 rounded-[36px] rounded-tr-lg shadow-md bg-blue-600 text-white flex flex-col'>
                   {/* <span className='text-xs mb-1 font-[550]'>Customer</span> */}
                   "Can you recommend a bottle of red for my boss?"
@@ -294,12 +291,12 @@ function App() {
 
   return (
     <div id='content' className='text-slate-800'>
-      {/* <Header
+      <Header
         bookACall={() => {
           setBookingOpen(true);
         }}
-      /> */}
-      <div className='my-6 w-full flex items-center justify-center gap-2'>
+      />
+      {/* <div className='my-6 w-full flex items-center justify-center gap-2'>
         <svg
           width='120'
           height='auto'
@@ -360,7 +357,7 @@ function App() {
             fill='#1E293B'
           />
         </svg>
-      </div>
+      </div> */}
 
       <div className='w-full text-center mt-[30vh] mb-16 text-slate-800'>
         {lg && (
@@ -403,7 +400,7 @@ function App() {
       </div>
 
       <div
-        style={{ height: lg ? 750 : 'auto' }}
+        style={{ height: lg ? 690 : 'auto' }}
         className='w-full rounded-xl overflow-hidden mb-24 relative flex justify-center bg-gradient-to-br from-slate-50 to-slate-200'
       >
         <div
@@ -421,16 +418,16 @@ function App() {
                 duration: 0.25,
                 ease: 'easeInOut',
               }}
-              className='w-full h-full flex flex-col items-start justify-center p-8 md:p-12'
+              className='w-full h-full flex flex-col items-start justify-center p-8 md:p-16'
             >
-              <span className='text-xs font-[450] text-slate-400 mb-2 hubot-sans'>
+              <span className='text-xs font-[450] text-slate-400 mb-2 hubot-sans mt-auto'>
                 PRODUCT
               </span>
               <span className='text-[28px] font-[450] mb-3'>
                 {product[mode].title}
               </span>
               <p className='text-lg font-[400]'>{product[mode].description}</p>
-              <div className='flex gap-2 mb-6 py-12 mt-6 w-full'>
+              <div className='flex gap-2 mb-6 py-12 mt-auto w-full justify-center'>
                 {product[mode].actions.map((action, index) => (
                   <a href={action.href} target='_blank'>
                     <ButtonFlat
@@ -499,7 +496,7 @@ function App() {
         )}
       </div>
 
-      <div className='flex my-64 flex-wrap items-center justify-center gap-16'>
+      <div className='flex my-52 flex-wrap items-center justify-center gap-16'>
         <div
           className='flex flex-col justify-center items-center flex-1'
           style={{
@@ -541,7 +538,7 @@ function App() {
         )}
       </div>
 
-      <div className='flex flex-col items-center justify-center my-64'>
+      <div className='flex flex-col items-center justify-center my-52'>
         <h2>Why work with us?</h2>
         <h3>Lead the future of wine with us and our partners</h3>
 
@@ -587,12 +584,12 @@ function App() {
                 'The future of the wine industry will be led by those who adopt digital solutions early. Be among the innovative first movers to secure your future.',
             },
           ].map((item, i) => (
-            <div className='w-[320px] h-[300px] border border-slate-200 shadow-sm rounded-xl flex flex-col items-center justify-start p-10'>
+            <div className='w-[300px] h-[280px] border border-slate-200 shadow-sm rounded-xl flex flex-col items-center justify-start p-10'>
               {/* <span className='text-6xl mb-8'>{item.emoji}</span> */}
-              <img src={item.emoji} className='h-[60px] w-[60px] mb-6' />
+              <img src={item.emoji} className='h-[50px] w-[50px] mb-6' />
               <span className='text-lg font-[550] mb-6'>{item.title}</span>
               <span
-                className='text-center font-[400] text-sm'
+                className='text-center font-[400]'
                 style={{ lineHeight: '1.2' }}
               >
                 {item.content}
@@ -604,7 +601,7 @@ function App() {
         <LogoMarquee elements={[...partners, ...partners, ...partners]} />
       </div>
 
-      <div className='flex flex-col items-center justify-center my-64'>
+      <div className='flex flex-col items-center justify-center my-52'>
         <h2>Simple pricing.</h2>
         <h3 className='mb-10'>Pay only for what you need, no hidden fees.</h3>
 
@@ -622,7 +619,7 @@ function App() {
             className='flex gap-8 flex-wrap items-center justify-center'
           >
             {product[mode].plans.map((plan, i) => (
-              <div className='w-[400px] max-w-[96vw] h-[500px] border border-slate-200 shadow-sm overflow-hidden rounded-xl flex flex-col items-center justify-start'>
+              <div className='w-[360px] max-w-[96vw] h-[400px] border border-slate-200 shadow-sm overflow-hidden rounded-xl flex flex-col items-center justify-start'>
                 <div className='w-full bg-slate-50 flex items-center justify-center gap-4 h-16 border-b border-slate-200'>
                   <img src={plan.emoji} className='h-[30px] w-[30px]' />
                   <span className='font-[450]'>{plan.title}</span>
@@ -673,7 +670,7 @@ function App() {
         </AnimatePresence>
       </div>
 
-      <div className='flex flex-col md:flex-row items-center justify-center mt-64 mb-16 bg-slate-50 rounded-xl p-8 lg:p-24 h-[60vh] md:h-52 gap-16'>
+      <div className='flex flex-col md:flex-row items-center justify-center mt-52 mb-16 bg-slate-50 rounded-xl p-8 lg:p-24 h-[60vh] md:h-52 gap-16'>
         <div className='flex-1 flex items-center '>
           <h2>Engage with us.</h2>
         </div>
