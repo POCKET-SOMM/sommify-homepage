@@ -4,6 +4,7 @@ import Kauppalehti from '../assets/press/kl.svg';
 import Silta from '../assets/press/silta.svg';
 import TS from '../assets/press/t&s.svg';
 import Cash from '../assets/press/cash.svg';
+import TheBuyer from '../assets/press/thebuyer.png';
 
 export default [
   {
@@ -12,6 +13,13 @@ export default [
     width: 'auto',
     height: 120,
     href: 'https://www.decanter.com/wine/ai-and-wine-a-taste-of-the-future-523210/',
+  },
+  {
+    src: TheBuyer,
+    alt: 'The Buyer',
+    width: 'auto',
+    height: 30,
+    href: 'https://www.the-buyer.net/insight/how-sommify-s-ai-solution-can-help-the-on-trade-and-its-suppliers-sell-more-wine',
   },
   {
     src: Kauppalehti,
