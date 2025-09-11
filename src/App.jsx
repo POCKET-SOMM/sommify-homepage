@@ -62,9 +62,8 @@ const ModeSwitcher = ({ key, mode, setMode }) => {
 
       {/* Distributor button */}
       <div
-        className={`cursor-pointer h-12 w-36 rounded-full flex items-center justify-center font-medium z-10 ${
-          mode === 'distributor' ? 'text-slate-800' : 'hover:text-slate-800'
-        }`}
+        className={`cursor-pointer h-12 w-36 rounded-full flex items-center justify-center font-medium z-10 ${mode === 'distributor' ? 'text-slate-800' : 'hover:text-slate-800'
+          }`}
         onClick={() => setMode('distributor')}
       >
         Distribution
@@ -72,9 +71,8 @@ const ModeSwitcher = ({ key, mode, setMode }) => {
 
       {/* Retail button */}
       <div
-        className={`cursor-pointer h-12 w-36 rounded-full flex items-center justify-center font-medium z-10 ${
-          mode === 'retail' ? 'text-slate-800' : 'hover:text-slate-800'
-        }`}
+        className={`cursor-pointer h-12 w-36 rounded-full flex items-center justify-center font-medium z-10 ${mode === 'retail' ? 'text-slate-800' : 'hover:text-slate-800'
+          }`}
         onClick={() => setMode('retail')}
       >
         Retail
@@ -99,7 +97,7 @@ function App() {
         { label: 'Try demo', href: 'https://roadshow.sommify.ai' },
         {
           label: 'Demo video',
-          href: 'https://www.youtube.com/watch?v=56tS1MnntOE',
+          href: 'https://youtu.be/tEZ78X2Kv0Q',
         },
       ],
       bg: AgentBackground,
@@ -434,7 +432,7 @@ function App() {
                       key={index}
                       variant={index === 0 ? 'primary' : 'transparent'}
                       disabled={action.comingSoon}
-                      // onClick={action.onClick}
+                    // onClick={action.onClick}
                     >
                       {action.label}
                       {action.comingSoon && (
