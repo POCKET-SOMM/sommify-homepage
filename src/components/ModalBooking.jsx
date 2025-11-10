@@ -11,13 +11,14 @@ export default function ModalBooking({ isOpen, close }) {
         height: 800,
         width: 1400,
         padding: 0,
+        background: 'white'
       }}
     >
-      {/* <iframe
+      <iframe
         src='https://calendar.google.com/calendar/u/0/appointments/AcZssZ2mzIg5lKAVFzLu7R4umL4rgYYr7WV8yIOHwA8=?gv=true'
         style={{ width: '100%', height: '100%', border: 'none' }}
-      /> */}
-      <InlineWidget url='https://calendly.com/sommifyai?hide_gdpr_banner=1' />
+      />
+      {/* <InlineWidget url='https://calendly.com/sommifyai?hide_gdpr_banner=1' /> */}
     </CustomModal>
   );
 }
