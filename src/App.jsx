@@ -12,6 +12,9 @@ import LogoMarquee from './components/LogoMarquee';
 import AgentBackground from './assets/product/AgentBackground2.jpg';
 import AgentGenerate from './assets/product/AgentGenerate.png';
 import AgentBrowse from './assets/product/AgentBrowse.png';
+import Agent2Pricing from './assets/product/Agent2Pricing.png';
+import Agent2Margin from './assets/product/Agent2Margin.png';
+import Agent2Export from './assets/product/Agent2Export.png';
 import Avatar from './assets/product/Avatar.png';
 import WineBottle from './assets/product/WineBottle.webp';
 
@@ -105,24 +108,24 @@ function App() {
       ],
       bg: AgentBackground,
       fg: (
-        <div className='w-full h-full relative flex items-center justify-start z-10 min-h-[600px] px-16'>
+        <div className='w-full h-full relative flex items-center justify-start z-10 min-h-[600px] px-0 lg:px-16'>
           <div className='h-[500px] relative'>
-            <div className='h-[500px] w-[350px] absolute top-0 left-0 rounded-xl p-2 backdrop-blur-sm bg-white/40 flex items-center justify-center border border-slate-100'>
+            <div className='h-[500px] w-[400px] absolute top-0 left-0 rounded-xl p-2 backdrop-blur-sm bg-white/40 flex items-center justify-center border border-slate-100'>
               <img
-                src={AgentBrowse}
+                src={Agent2Pricing}
                 className='rounded-lg shadow-xl w-full h-full'
               />
             </div>
             <div
               style={{
                 transform: lg
-                  ? 'translate(150px, 70px)'
-                  : 'translate(120px, 50px)',
+                  ? 'translate(190px, 90px)'
+                  : 'translate(100px, 150px)',
               }}
-              className='rounded-xl w-[320px] absolute p-2 backdrop-blur-sm bg-white/40 flex items-center justify-center border border-slate-100'
+              className='rounded-xl w-[300px] absolute p-2 backdrop-blur-sm bg-white/40 flex items-center justify-center border border-slate-100'
             >
               <img
-                src={AgentGenerate}
+                src={Agent2Export}
                 className='h-full shadow-xl rounded-lg'
               />
             </div>
@@ -363,7 +366,7 @@ function App() {
                 duration: 0.25,
                 ease: 'easeInOut',
               }}
-              className='w-full h-full flex flex-col items-start justify-center p-8 md:p-16'
+              className='w-full h-full flex flex-col items-start justify-center p-4 md:p-16'
             >
               <span className='text-xs font-[450] text-slate-400 mb-2 hubot-sans mt-auto'>
                 PRODUCT
