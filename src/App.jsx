@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import Footer from './components/Footer';
 import CalendarButton from './components/CalendarButton';
 import { FaChevronRight } from 'react-icons/fa';
@@ -24,7 +24,7 @@ import Rocket from './assets/emoji/rocket.png';
 import Spyglass from './assets/emoji/spyglass.png';
 import Briefcase from './assets/emoji/briefcase.png';
 import { MdArrowOutward } from 'react-icons/md';
-import { FaCheck, FaLinkedin } from 'react-icons/fa6';
+import { FaCheck, FaLinkedin, FaPlus } from 'react-icons/fa6';
 import Button from './components/Button';
 import Button2 from './components/Button2';
 import ButtonFlat from './components/ButtonFlat';
@@ -182,10 +182,10 @@ function App() {
             'Same filters as admin',
             'Direct customer support link'
           ],
-          action: {
-            label: 'Try demo',
-            href: 'https://roadshow.sommify.ai',
-          },
+          // action: {
+          //   label: 'Try demo',
+          //   href: 'https://roadshow.sommify.ai',
+          // },
           // action: {
           //   label: 'Talk to a founder',
           //   onClick: () => {
@@ -577,52 +577,59 @@ function App() {
             className='flex gap-8 flex-wrap items-center justify-center'
           >
             {product[mode].plans.map((plan, i) => (
-              <div className='w-[360px] max-w-[96vw] h-[450px] border border-slate-200 shadow-sm overflow-hidden rounded-xl flex flex-col items-center justify-start'>
-                <div className='w-full bg-slate-50 flex items-center justify-center gap-4 h-16 border-b border-slate-200'>
-                  <img src={plan.emoji} className='h-[30px] w-[30px]' />
-                  <span className='font-[450]'>{plan.title}</span>
-                </div>
-                <div className='w-full flex flex-col items-center justify-start p-4'>
-                  {/* <img src={plan.emoji} className='h-[40px] w-[40px] mb-4' /> */}
-                  {/* <span className='font-[450] mb-6'>{plan.title}</span> */}
-                  <p></p>
-                  <div className='w-full pt-3 flex items-end justify-center gap-1'>
-                    <span className='text-4xl font-[550] text-slate-800'>
-                      <span>{plan.price}</span>
-                    </span>
-                    <span className='font-[400] text-slate-800 text-sm mb-0.5'>
-                      {plan.period}
-                    </span>
+              <Fragment key={i}>
+                {i > 0 && (
+                  <div className='text-4xl text-slate-300'>
+                    <FaPlus />
                   </div>
+                )}
+                <div className='w-[360px] max-w-[96vw] h-[450px] border border-slate-200 shadow-sm overflow-hidden rounded-xl flex flex-col items-center justify-start'>
+                  <div className='w-full bg-slate-50 flex items-center justify-center gap-4 h-16 border-b border-slate-200'>
+                    <img src={plan.emoji} className='h-[30px] w-[30px]' />
+                    <span className='font-[450]'>{plan.title}</span>
+                  </div>
+                  <div className='w-full flex flex-col items-center justify-start p-4'>
+                    {/* <img src={plan.emoji} className='h-[40px] w-[40px] mb-4' /> */}
+                    {/* <span className='font-[450] mb-6'>{plan.title}</span> */}
+                    <p></p>
+                    <div className='w-full pt-3 flex items-end justify-center gap-1'>
+                      <span className='text-4xl font-[550] text-slate-800'>
+                        <span>{plan.price}</span>
+                      </span>
+                      <span className='font-[400] text-slate-800 text-sm mb-0.5'>
+                        {plan.period}
+                      </span>
+                    </div>
 
-                  {/* <span className='text-5xl font-[600] mb-1 text-slate-800'>
+                    {/* <span className='text-5xl font-[600] mb-1 text-slate-800'>
                   <span>{plan.price}</span>
                 </span>
                 <span className='font-[400] mb-10 text-slate-800'>
                   {plan.period}
                 </span> */}
-                </div>
-                <ul className='text-left w-full flex flex-col items-start my-auto px-10'>
-                  {plan.features.map((feature, index) => (
-                    <li key={index} className='mb-1'>
-                      <span className='w-4 h-4 rounded-full bg-slate-200 inline-flex mr-2 text-slate-800 text-xs items-center justify-center'>
-                        <FaCheck />
-                      </span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+                  </div>
+                  <ul className='text-left w-full flex flex-col items-start my-auto px-10'>
+                    {plan.features.map((feature, index) => (
+                      <li key={index} className='mb-1'>
+                        <span className='w-4 h-4 rounded-full bg-slate-200 inline-flex mr-2 text-slate-800 text-xs items-center justify-center'>
+                          <FaCheck />
+                        </span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
 
-                <a
-                  href={plan.action.href}
-                  target='_blank'
-                  className='mt-auto mb-10'
-                >
-                  <ButtonFlat onClick={plan.action?.onClick}>
-                    {plan.action.label}
-                  </ButtonFlat>
-                </a>
-              </div>
+                  {plan.action ? <a
+                    href={plan.action.href}
+                    target='_blank'
+                    className='mt-auto mb-10'
+                  >
+                    <ButtonFlat onClick={plan.action?.onClick}>
+                      {plan.action.label}
+                    </ButtonFlat>
+                  </a> : <div className='mt-auto mb-10' />}
+                </div>
+              </Fragment>
             ))}
           </motion.div>
         </AnimatePresence>
