@@ -1,4 +1,4 @@
-export default function Footer({}) {
+export default function Footer({ }) {
   return (
     <div
       class='hubot-sans footer'
@@ -22,7 +22,7 @@ export default function Footer({}) {
       </span> */}
       {/* <span>DOCUMENTATION</span> */}
       <span>
-        POCKETSOMM OY 2021-2025,{' '}
+        {/* POCKETSOMM OY 2021-2025,{' '} */}
         <a
           href='https://drive.google.com/file/d/1ANL8N4lXOqdFQbZ8Mc1J4Q2OTL6LnTBI/view?usp=sharing'
           target='_blank'
