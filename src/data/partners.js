@@ -5,6 +5,7 @@ import Philipson from '../assets/partners/philipson.svg';
 import MarleySpoon from '../assets/partners/marley_spoon.svg';
 import Dagrofa from '../assets/partners/dagrofa.png';
 import Everything from '../assets/partners/everything.svg';
+import Hartwall from '../assets/partners/hartwall.png';
 
 export default [
   {
@@ -14,6 +15,12 @@ export default [
     height: 33,
   },
   // { src: Edamam, alt: '', width: 'auto', height: 33 },
+  {
+    src: Hartwall,
+    alt: 'Hartwall logo',
+    width: 'auto',
+    height: 60
+  },
   {
     src: MarleySpoon,
     alt: '',
