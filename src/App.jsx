@@ -139,59 +139,28 @@ function App() {
       ],
       plans: [
         {
-          price: '€99',
-          emoji: Spyglass,
+          price: '€70',
+          emoji: Briefcase,
           title: (
             <span className='italic'>
-              First user (Admin)
+              Rate per user
             </span>
           ),
 
-          period: '/per month',
+          period: '/per customer',
           icon: null,
           features: [
-            'Free integration',
-            'No fixed term, cancel anytime',
-            'Unlimited offers',
-            'Unlimited material generation',
-            'Custom sales presentation',
-            'Custom filters',
-            'Analytics',
-            'Direct customer support link',
+            'No minimum amount of users',
+            'Unlimited usage',
+            'Custom material generation',
+            'Insights',
+            'Customer support slack channel',
+            'Cancel anytime',
           ],
           action: {
             label: 'Try demo',
             href: 'https://roadshow.sommify.ai',
           },
-        },
-        {
-          price: '€49',
-          period: '/per month',
-          emoji: Briefcase,
-          title: (
-            <span className='italic'>
-              Every additional user
-            </span>
-          ),
-          icon: null,
-          features: [
-            'Unlimited offers',
-            'Unlimited material generation',
-            'Order history for account',
-            'Sales presentation from admin',
-            'Same filters as admin',
-            'Direct customer support link'
-          ],
-          // action: {
-          //   label: 'Try demo',
-          //   href: 'https://roadshow.sommify.ai',
-          // },
-          // action: {
-          //   label: 'Talk to a founder',
-          //   onClick: () => {
-          //     setBookingOpen(true);
-          //   },
-          // },
         },
       ],
     },
@@ -561,7 +530,7 @@ function App() {
 
       <div className='flex flex-col items-center justify-center my-52'>
         <h2>Simple pricing.</h2>
-        <h3 className='mb-10'>Pay only for what you need, no hidden fees.</h3>
+        <h3 className='mb-10'>Same transparent terms from boutique to enterprise.</h3>
 
         {/* <div className='flex justify-center mb-16'>
           <ModeSwitcher key='second' mode={mode} setMode={setMode} />
