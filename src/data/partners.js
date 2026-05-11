@@ -6,7 +6,7 @@ import MarleySpoon from '../assets/partners/marley_spoon.svg';
 import Dagrofa from '../assets/partners/dagrofa.png';
 import Everything from '../assets/partners/everything.svg';
 import Hartwall from '../assets/partners/hartwall.png';
-import UbThirsty from '../assets/partners/ub_thirsty.png';
+import UbThirsty from '../assets/partners/thirstyzone.png';
 
 export default [
   {
@@ -51,8 +51,8 @@ export default [
   },
   {
     src: UbThirsty,
-    alt: 'UB Thirsty logo',
+    alt: 'Thirsty zone',
     width: 'auto',
-    height: 40,
+    height: 24,
   }
 ];

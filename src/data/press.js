@@ -5,6 +5,7 @@ import Silta from '../assets/press/silta.svg';
 import TS from '../assets/press/t&s.svg';
 import Cash from '../assets/press/cash.svg';
 import TheBuyer from '../assets/press/thebuyer.png';
+import Viinilehti from '../assets/press/viinilehti.png';
 
 export default [
   {
@@ -48,6 +49,13 @@ export default [
     width: 'auto',
     height: 20,
     href: 'https://blog.siltahouse.com/how-to-survive-in-san-francisco-as-a-founder-the-complete-survival-guide/',
+  },
+  {
+    src: Viinilehti,
+    alt: 'Lehtiluukku',
+    width: 'auto',
+    height: 80,
+    href: 'https://www.lehtiluukku.fi/esikatselu/viini/01-2024/369641.html'
   },
   {
     src: TS,
