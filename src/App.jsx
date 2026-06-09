@@ -103,7 +103,7 @@ function App() {
         {
           label: 'Demo video',
           // href: 'https://youtu.be/tEZ78X2Kv0Q',
-          href: 'https://youtu.be/uwlT4ZjH0uM'
+          href: 'https://youtu.be/tBCFX6vdcZQ'
         },
       ],
       bg: AgentBackground,
