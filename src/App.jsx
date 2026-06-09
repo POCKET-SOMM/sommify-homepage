@@ -172,7 +172,7 @@ function App() {
         { label: 'Try demo', comingSoon: true },
         {
           label: 'Demo video',
-          href: 'https://youtube.com/shorts/jA6zDVFgKQ0',
+          href: 'https://youtu.be/tBCFX6vdcZQ',
         },
       ],
       bg: AgentBackground,
