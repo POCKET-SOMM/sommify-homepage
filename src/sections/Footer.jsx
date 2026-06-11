@@ -2,11 +2,12 @@ import { SocialLink } from "../components/SocialLink.jsx";
 import { useIsMobile } from "../hooks/useMediaQuery.js";
 import { SOCIALS } from "../config.js";
 
-const COLS = [
-  { h: "Platform", links: ["Menu offers", "Wine-list match", "Beau", "Pricing", "Sales materials"] },
-  { h: "Company", links: ["About", "Careers", "News", "Contact"] },
-  { h: "Resources", links: ["Docs", "Guides", "Changelog", "Status"] },
-];
+// Footer link columns — hidden for now.
+// const COLS = [
+//   { h: "Platform", links: ["Menu offers", "Wine-list match", "Beau", "Pricing", "Sales materials"] },
+//   { h: "Company", links: ["About", "Careers", "News", "Contact"] },
+//   { h: "Resources", links: ["Docs", "Guides", "Changelog", "Status"] },
+// ];
 
 export function Footer() {
   const isMobile = useIsMobile();
@@ -36,6 +37,7 @@ function DesktopFooter() {
               The AI platform for wine sales. Catalogue in, curated offer out.
             </div>
           </div>
+          {/* Platform / Company / Resources columns — hidden for now.
           <div style={{ display: "flex", gap: 72, flexWrap: "wrap" }}>
             {COLS.map((c) => (
               <div key={c.h}>
@@ -64,6 +66,7 @@ function DesktopFooter() {
               </div>
             ))}
           </div>
+          */}
         </div>
 
         <div
@@ -108,6 +111,7 @@ function MobileFooter() {
           The AI platform for wine sales. Catalogue in, curated offer out.
         </div>
       </div>
+      {/* Platform / Company / Resources columns — hidden for now.
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "32px 24px" }}>
         {COLS.map((c) => (
           <div key={c.h}>
@@ -136,6 +140,7 @@ function MobileFooter() {
           </div>
         ))}
       </div>
+      */}
       <div
         style={{
           display: "flex", flexDirection: "column", gap: 18, marginTop: 44, paddingTop: 26,

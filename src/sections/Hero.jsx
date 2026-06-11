@@ -1,7 +1,6 @@
 import { RotatingWord } from "../components/RotatingWord.jsx";
 import { CTAGroup } from "../components/CTAGroup.jsx";
 import { Button } from "../components/Button.jsx";
-import { useModals } from "../components/ModalProvider.jsx";
 import { useIsMobile } from "../hooks/useMediaQuery.js";
 
 const LEAD =
@@ -9,7 +8,6 @@ const LEAD =
 
 export function Hero() {
   const isMobile = useIsMobile();
-  const { openBooking } = useModals();
 
   if (isMobile) {
     return (
@@ -47,6 +45,7 @@ export function Hero() {
           <CTAGroup align="center" size="lg" />
         </div>
 
+        {/* Platform visualization (vineyard + product mock) hidden on mobile for now.
         <div style={{ marginTop: 44 }}>
           <div
             style={{
@@ -88,6 +87,7 @@ export function Hero() {
             </div>
           </div>
         </div>
+        */}
       </div>
     );
   }
@@ -201,7 +201,7 @@ export function Hero() {
               variant="white"
               size="lg"
               arrow
-              onClick={openBooking}
+              onClick={() => { window.location.href = "https://roadshow.sommify.ai"; }}
               style={{
                 background: "white",
                 backdropFilter: "blur(14px) saturate(1.5)",
