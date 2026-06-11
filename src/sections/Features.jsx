@@ -271,7 +271,7 @@ function FeaturesTabbed() {
 // scaled down to fit the narrow column.
 function FeaturesStacked() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 52, marginTop: 48 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 120, marginTop: 48 }}>
       {FEATURES.map((f) => {
         const Desktop = DESKTOP_VISUALS[f.key];
         return (
@@ -279,7 +279,7 @@ function FeaturesStacked() {
             <Kicker mobile>{f.kicker}</Kicker>
             <h3
               style={{
-                fontFamily: "var(--serif-news)", fontWeight: 400, margin: 0,
+                fontFamily: "var(--sans)", fontWeight: 500, margin: 0,
                 fontSize: 27, lineHeight: 1.14, letterSpacing: "-0.015em", color: "#18181b",
               }}
             >
