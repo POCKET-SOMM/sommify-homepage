@@ -3,6 +3,8 @@ export const CONTACT_ENDPOINT = "https://api.sommify.ai/user/contact";
 export const FOUNDER_EMAIL = "jacob@sommify.ai";
 export const BOOKING_URL =
   "https://calendar.google.com/calendar/u/0/appointments/AcZssZ2mzIg5lKAVFzLu7R4umL4rgYYr7WV8yIOHwA8=?gv=true";
+export const ROADSHOW_URL = "https://roadshow.sommify.ai";
+export const TUTORIAL_VIDEO_URL = "https://youtu.be/tBCFX6vdcZQ";
 
 export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/company/sommifyai/",
@@ -14,8 +16,8 @@ export const SOCIAL_LINKS = {
 // Ordered list rendered in the footer + Engage social rows.
 export const SOCIALS = [
   { n: "linkedin", label: "LinkedIn", href: SOCIAL_LINKS.linkedin },
-  { n: "instagram", label: "Instagram", href: SOCIAL_LINKS.instagram },
-  { n: "youtube", label: "YouTube", href: SOCIAL_LINKS.youtube },
+  // { n: "instagram", label: "Instagram", href: SOCIAL_LINKS.instagram },
+  // { n: "youtube", label: "YouTube", href: SOCIAL_LINKS.youtube },
   // { n: "crunchbase", label: "Crunchbase", href: SOCIAL_LINKS.crunchbase },
 ];
 

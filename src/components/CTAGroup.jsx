@@ -1,12 +1,34 @@
 import { useIsMobile } from "../hooks/useMediaQuery.js";
 import { useModals } from "./ModalProvider.jsx";
 import { Button } from "./Button.jsx";
+import { ROADSHOW_URL } from "../config.js";
 
-// Primary "Contact us" (opens the contact modal) + secondary "Talk to a founder →"
-// (opens the booking modal). Centered + inline on desktop; full-width stacked on mobile.
-export function CTAGroup({ align = "left", size = "md" }) {
+// Primary button + secondary "Talk to a founder →" (opens the booking modal).
+// `primary` picks the primary action:
+//   "contact" (default) → "Contact us", opens the contact modal
+//   "tryout"            → "Try it out", links out to the roadshow (new tab)
+// Centered + inline on desktop; full-width stacked on mobile.
+export function CTAGroup({ align = "left", size = "md", primary = "contact" }) {
   const isMobile = useIsMobile();
   const { openContact, openBooking } = useModals();
+
+  const primaryBtn = (block) =>
+    primary === "tryout" ? (
+      <Button
+        variant="black"
+        size={isMobile ? "lg" : size}
+        block={block}
+        arrow
+        href={ROADSHOW_URL}
+        rel="noopener noreferrer"
+      >
+        Try it out
+      </Button>
+    ) : (
+      <Button variant="black" size={isMobile ? "lg" : size} block={block} onClick={openContact}>
+        Contact us
+      </Button>
+    );
 
   if (isMobile) {
     return (
@@ -16,10 +38,8 @@ export function CTAGroup({ align = "left", size = "md" }) {
           width: "100%", maxWidth: 320, margin: "30px auto 0",
         }}
       >
-        <Button variant="black" size="lg" block onClick={openContact}>
-          Contact us
-        </Button>
-        <Button variant="white" size="lg" block arrow onClick={openBooking}>
+        {primaryBtn(true)}
+        <Button variant="white" size="lg" block onClick={openBooking}>
           Talk to a founder
         </Button>
       </div>
@@ -33,10 +53,8 @@ export function CTAGroup({ align = "left", size = "md" }) {
         justifyContent: align === "center" ? "center" : "flex-start",
       }}
     >
-      <Button variant="black" size={size} onClick={openContact}>
-        Contact us
-      </Button>
-      <Button variant="white" size={size} arrow onClick={openBooking}>
+      {primaryBtn(false)}
+      <Button variant="white" size={size} onClick={openBooking}>
         Talk to a founder
       </Button>
     </div>

@@ -52,7 +52,7 @@ function WineMiniCard({ src, sub, title, price, c, dim, badge }) {
         <span
           style={{
             position: "absolute", top: -8, right: -8, width: 23, height: 23, borderRadius: 999,
-            background: "var(--accent, #1f8a5b)", color: "#fff", display: "flex", alignItems: "center",
+            background: "var(--accent, #D11174)", color: "#fff", display: "flex", alignItems: "center",
             justifyContent: "center", boxShadow: "0 3px 8px -2px rgba(0,0,0,0.3)", border: "2px solid #fff",
           }}
         >
@@ -610,14 +610,21 @@ function MenuDoc({ ex, active, onClick }) {
       }}
     >
       <div style={{ display: "flex", height: 13 }}>
-        <div style={{ flex: 1, background: "#fff", borderTop: `1.5px solid ${line}`, borderLeft: `1.5px solid ${line}`, borderTopLeftRadius: 6 }} />
+        <div style={{
+          flex: 1,
+          background: "#fff",
+          borderTop: `1.5px solid ${line}`,
+          borderLeft: `1.5px solid ${line}`,
+          borderTopLeftRadius: 6,
+          transition: "border-color .2s ease"
+        }} />
         <svg width="13" height="13" viewBox="0 0 16 16" style={{ display: "block", flexShrink: 0 }}>
           <path d="M0 0L16 16H0V0Z" fill="#fff" stroke={line} strokeWidth="1.5" />
         </svg>
       </div>
       <div
         style={{
-          width: 86, height: 98, background: "#fff", border: `1.5px solid ${line}`, borderTop: "none",
+          width: 86, height: 98, background: "#fff", borderInline: `1.5px solid ${line}`, borderBottom: `1.5px solid ${line}`, borderTop: "none",
           borderBottomLeftRadius: 6, borderBottomRightRadius: 6, borderTopRightRadius: 2,
           padding: "8px 9px 9px", position: "relative", overflow: "hidden",
           boxShadow: active ? "0 12px 24px -12px rgba(0,0,0,0.28)" : "0 6px 16px -14px rgba(0,0,0,0.18)",

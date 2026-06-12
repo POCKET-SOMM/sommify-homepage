@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 //   size:    "sm" | "md" | "lg"                     — default "md"
 //   block:   stretch to full width (vs inline)
 //   arrow:   show a trailing → that nudges right on hover
+//   href:    render as an <a> link instead of a <button> (pass target/rel via …rest)
 //   disabled, type, onClick, …rest
 const SIZES = {
   sm: { fontSize: 14.5, padding: "10px 20px", arrow: 15 },
@@ -34,18 +35,25 @@ export function Button({
   arrow = false,
   disabled = false,
   type = "button",
+  href,
   onClick,
   style,
   ...rest
 }) {
   const s = SIZES[size] || SIZES.md;
   const isWhite = variant === "white";
+  const isLink = href != null;
+  const Comp = isLink ? motion.a : motion.button;
+
+  // An <a> has no `type`/`disabled`; a disabled link drops its href so it isn't navigable.
+  const elementProps = isLink
+    ? { href: disabled ? undefined : href, target: "_blank" }
+    : { type, disabled };
 
   return (
-    <motion.button
-      type={type}
+    <Comp
+      {...elementProps}
       onClick={onClick}
-      disabled={disabled}
       initial="rest"
       animate="rest"
       whileHover={disabled ? undefined : "hover"}
@@ -66,8 +74,9 @@ export function Button({
         alignItems: "center",
         justifyContent: "center",
         gap: 8,
+        textDecoration: "none",
         border: isWhite ? "1px solid rgba(0,0,0,0.18)" : "1px solid transparent",
-        background: isWhite ? "transparent" : "#0a0a0a",
+        background: isWhite ? "#fff" : "#0a0a0a",
         color: isWhite ? "#0a0a0a" : "#fff",
         opacity: disabled ? 0.45 : 1,
         ...style,
@@ -85,6 +94,6 @@ export function Button({
           <ArrowRight size={s.arrow} strokeWidth={2} />
         </motion.div>
       )}
-    </motion.button>
+    </Comp>
   );
 }

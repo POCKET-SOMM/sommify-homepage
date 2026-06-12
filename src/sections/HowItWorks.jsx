@@ -1,3 +1,4 @@
+import { Button } from "../components/Button.jsx";
 import { useIsMobile } from "../hooks/useMediaQuery.js";
 
 function Kicker({ children }) {
@@ -30,8 +31,7 @@ const STEPS = [
     title: "Share your data",
     body: (
       <>
-        You share your wine data with us in any way you have it stored — spreadsheet, PDF, ERP
-        export. We adapt to your format.
+        Share your wine data however you've got it stored: spreadsheet, PDF, ERP export, JSON feed… we adapt to your format.
       </>
     ),
   },
@@ -79,8 +79,7 @@ export function HowItWorks() {
               color: "#52525b", margin: "16px 0 0", maxWidth: 560,
             }}
           >
-            No long onboarding, no integration project. You hand us your catalogue on a Monday and
-            you're selling differently by Thursday.
+            No long onboarding, no integration project. Give us your catalogue Monday, and by Thursday you'll wonder how you worked without it.
           </p>
         </div>
 
@@ -239,8 +238,9 @@ function PayoffCard() {
       />
       <div
         style={{
-          background: "var(--ink-bg)", borderRadius: 18, padding: "24px 24px 26px",
-          marginTop: -8, boxShadow: "0 30px 60px -36px rgba(0,0,0,0.4)",
+          background: "#0a0a0a", borderRadius: 18, padding: "24px 24px 26px",
+          marginTop: -8,
+          // boxShadow: "0 30px 60px -36px rgba(0,0,0,0.4)",
         }}
       >
         <div
@@ -254,11 +254,14 @@ function PayoffCard() {
         <div
           style={{
             fontFamily: "var(--sans)", fontWeight: 550, fontSize: 25, lineHeight: 1.15,
-            letterSpacing: "-0.01em", color: "var(--ink-fg)",
+            letterSpacing: "-0.01em", color: "#fff", marginBottom: 32,
           }}
         >
-          Easier wine sales.
+          Easier wine sales
         </div>
+        <Button block variant="white">
+          Talk to a founder
+        </Button>
       </div>
     </div>
   );

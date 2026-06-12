@@ -25,7 +25,7 @@ export function CustomerLogos() {
           padding: isMobile ? "0 22px" : 0, lineHeight: 1.5,
         }}
       >
-        Trusted by customers across several markets
+        Trusted by companies worldwide
       </div>
       <LogoMarquee
         elements={elements}

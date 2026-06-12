@@ -73,8 +73,11 @@ const HATCH_BG =
   "repeating-linear-gradient(45deg, rgba(0,0,0,0.035) 0, rgba(0,0,0,0.035) 1px, transparent 1px, transparent 7px)";
 
 function PriceCard({ hatch, eyebrow, price, unit, sub, features, cta, ctaArrow, isMobile, onCta }) {
+  const [hover, setHover] = useState(false);
   return (
     <div
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
       style={{
         flex: "1 1 0", minWidth: isMobile ? 0 : 320, maxWidth: isMobile ? "none" : 460,
         display: "flex", flexDirection: "column", background: "var(--card)",
@@ -84,9 +87,11 @@ function PriceCard({ hatch, eyebrow, price, unit, sub, features, cta, ctaArrow, 
         boxShadow: isMobile
           ? "0 30px 70px -50px rgba(0,0,0,0.28), 0 6px 18px -14px rgba(0,0,0,0.10)"
           : hatch
-          ? "0 40px 90px -54px rgba(0,0,0,0.30), 0 8px 24px -18px rgba(0,0,0,0.12)"
-          : "0 40px 90px -54px rgba(0,0,0,0.28), 0 8px 24px -18px rgba(0,0,0,0.10)",
+            ? "0 40px 90px -54px rgba(0,0,0,0.30), 0 8px 24px -18px rgba(0,0,0,0.12)"
+            : "0 40px 90px -54px rgba(0,0,0,0.28), 0 8px 24px -18px rgba(0,0,0,0.10)",
         padding: isMobile ? "28px 24px 26px" : "40px 40px 36px",
+        transform: !isMobile && hover ? "scale(1.025)" : "scale(1)",
+        transition: "transform .25s cubic-bezier(.2,.7,.2,1)",
       }}
     >
       <div
@@ -155,11 +160,11 @@ function PriceCard({ hatch, eyebrow, price, unit, sub, features, cta, ctaArrow, 
         ))}
       </div>
 
-      <div style={{ marginTop: "auto" }}>
+      {/* <div style={{ marginTop: "auto" }}>
         <Button variant="black" size="lg" block arrow={ctaArrow} onClick={onCta}>
           {cta}
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -171,8 +176,8 @@ export function Pricing() {
   const standard = {
     eyebrow: "Standard",
     price: "€70",
-    unit: "/ mo · per user",
-    sub: "Billed per user, per month.",
+    unit: "/ mo · per seat",
+    sub: "Buy seats for your team.",
     features: [
       "No user minimums",
       "Unlimited usage of all features",
@@ -187,7 +192,7 @@ export function Pricing() {
     hatch: true,
     eyebrow: "Enterprise",
     price: "Custom",
-    sub: "Tailored to your team and brand.",
+    sub: "Tailored for your team and company.",
     features: [
       "White label the platform",
       "Custom components",

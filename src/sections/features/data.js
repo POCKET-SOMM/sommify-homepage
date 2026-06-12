@@ -71,7 +71,7 @@ export const FEATURES = [
   },
   {
     key: "match",
-    kicker: "02 · Wine-list match",
+    kicker: "02 · Wine-list offers",
     flip: true,
     title: "Build offers around your customer's wine list.",
     body: "Hand sommify a customer's wine list and it matches every line to the closest wine in your portfolio — applying your margins and replacement rules. Their list, rebuilt entirely from the wines you actually carry.",
@@ -79,14 +79,14 @@ export const FEATURES = [
   },
   {
     key: "beau",
-    kicker: "03 · Beau",
+    kicker: "03 · Beau chat",
     title: "Talk through your portfolio with Beau.",
     body: "Beau is your AI sommelier — ask anything, in plain language. General wine knowledge, what's in stock, what pairs with a dish, what to pitch under a budget. He reads intent, not keywords, and he knows your whole range.",
     meta: ["AI sommelier", "Portfolio-aware", "Ask anything"],
   },
   {
     key: "pricing",
-    kicker: "04 · Pricing",
+    kicker: "04 · Pricing help",
     flip: true,
     title: "Get pricing help for you and your customers.",
     body: "Set bottle and by-the-glass prices, see live margins, and layer volume discounts per customer. Pricing strategies that protect the deal instead of guessing at it — for your team and for the buyer across the table.",

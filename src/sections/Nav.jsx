@@ -6,7 +6,7 @@ import { useIsMobile } from "../hooks/useMediaQuery.js";
 import { useScrollSpy, scrollToSection } from "../hooks/useScrollSpy.js";
 import { useModals } from "../components/ModalProvider.jsx";
 import { Button } from "../components/Button.jsx";
-import { SECTIONS } from "../config.js";
+import { ROADSHOW_URL, SECTIONS } from "../config.js";
 
 const SECTION_IDS = SECTIONS.map((s) => s.id);
 
@@ -118,8 +118,8 @@ function DesktopNav() {
                 </button>
               );
             })}
-            <Button variant="black" size="sm" arrow onClick={openBooking}>
-              Talk to a founder
+            <Button variant="black" size="sm" arrow href={ROADSHOW_URL}>
+              Try it out
             </Button>
           </div>
         </motion.div>

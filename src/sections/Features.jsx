@@ -226,7 +226,7 @@ function FeaturesTabbed() {
             key={active}
             onAnimationEnd={advance}
             style={{
-              height: "100%", borderRadius: 99, background: "var(--accent, rgba(0,0,0,0.32))",
+              height: "100%", borderRadius: 99, background: "var(--accent, #D11174)",
               animation: "cdGrow 6s linear forwards", animationPlayState: paused ? "paused" : "running",
             }}
           />

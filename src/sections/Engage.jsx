@@ -28,7 +28,7 @@ export function Engage() {
             color: "var(--accent, var(--muted))", marginBottom: isMobile ? 16 : 22,
           }}
         >
-          Let's talk wine
+          Let's talk
         </div>
         <h2
           style={{
@@ -46,8 +46,7 @@ export function Engage() {
             margin: isMobile ? "18px auto 0" : "24px 0 38px",
           }}
         >
-          Book a walkthrough, or talk to a founder about your catalogue. We answer fast, and we
-          speak wine.
+          Book a walkthrough, or talk to a founder about your unique challenge. We know the industry and we love learning more.
         </p>
 
         <CTAGroup align="center" size="lg" />

@@ -114,12 +114,20 @@ button { font-family: var(--sans); }
 .heroStage:hover .heroFrame { transform: scale(0.975); }
 .heroOverlay { opacity: 0; transition: opacity 0.45s ease; }
 .heroStage:hover .heroOverlay { opacity: 1; }
-.heroTryBtn {
-  opacity: 0; transform: translateY(8px) scale(0.98);
-  transition: opacity 0.4s ease, transform 0.4s ease; pointer-events: none;
+/* Play button: dark by default so it reads over the bright (un-hovered) product
+   screen; flips to white once the stage hover darkens the image behind it. */
+.heroPlayBtn {
+  background: rgba(12, 11, 16, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+  transition: background 0.45s ease, border-color 0.45s ease, color 0.45s ease, transform 0.25s ease;
 }
-.heroStage:hover .heroTryBtn { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
-.heroTryBtn:hover { background: #fff; }
+.heroStage:hover .heroPlayBtn {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #0a0a0a;
+}
+.heroPlayBtn:hover { transform: scale(1.06); }
 .heroHint { opacity: 0; transform: translateY(-6px); transition: opacity 0.4s ease, transform 0.4s ease; }
 .heroStage:hover .heroHint { opacity: 1; transform: translateY(0); }
 

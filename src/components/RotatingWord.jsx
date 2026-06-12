@@ -25,7 +25,7 @@ export function RotatingWord({ style = {} }) {
         opacity: show ? 1 : 0,
         transform: show ? "translateY(0)" : "translateY(0.18em)",
         fontStyle: "italic",
-        color: "var(--accent, currentColor)",
+        color: "var(--accent, #0a0a0a)",
         ...style,
       }}
     >

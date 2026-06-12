@@ -1,13 +1,16 @@
+import { Play } from "lucide-react";
 import { RotatingWord } from "../components/RotatingWord.jsx";
 import { CTAGroup } from "../components/CTAGroup.jsx";
-import { Button } from "../components/Button.jsx";
+import { useModals } from "../components/ModalProvider.jsx";
 import { useIsMobile } from "../hooks/useMediaQuery.js";
 
 const LEAD =
-  "Catalogue in, curated offer out. sommify pairs your wines to a restaurant's menu, prices every pour, and exports a beautiful branded document.";
+  // "Catalogue in, curated offer out. sommify pairs your wines to a restaurant's menu, prices every pour, and exports a beautiful branded document.";
+  "Catalogue in, curated offers out. The platform helps you select the wines for your customers, prices every pour, and exports beautiful branded documents.";
 
 export function Hero() {
   const isMobile = useIsMobile();
+  const { openVideo } = useModals();
 
   if (isMobile) {
     return (
@@ -42,7 +45,7 @@ export function Hero() {
           >
             {LEAD}
           </p>
-          <CTAGroup align="center" size="lg" />
+          <CTAGroup align="center" size="lg" primary="tryout" />
         </div>
 
         {/* Platform visualization (vineyard + product mock) hidden on mobile for now.
@@ -124,7 +127,7 @@ export function Hero() {
         >
           {LEAD}
         </p>
-        <CTAGroup align="center" size="lg" />
+        <CTAGroup align="center" size="lg" primary="tryout" />
       </div>
 
       <div style={{ position: "relative", maxWidth: 1380, margin: "0 auto", padding: "40px 40px 0" }}>
@@ -196,23 +199,19 @@ export function Hero() {
               alignItems: "center", justifyContent: "center", pointerEvents: "none",
             }}
           >
-            <Button
-              className="heroTryBtn"
-              variant="white"
-              size="lg"
-              arrow
-              onClick={() => { window.location.href = "https://roadshow.sommify.ai"; }}
+            <button
+              className="heroPlayBtn"
+              onClick={openVideo}
+              aria-label="Watch tutorial"
               style={{
-                background: "white",
-                backdropFilter: "blur(14px) saturate(1.5)",
-                WebkitBackdropFilter: "blur(14px) saturate(1.5)",
-                border: "1px solid rgba(0,0,0,0.15)",
-                color: "#0a0a0a", fontWeight: 550,
-                boxShadow: "0 10px 44px -14px rgba(0,0,0,0.25)",
+                pointerEvents: "auto", width: 76, height: 76, borderRadius: 999,
+                backdropFilter: "blur(10px) saturate(1.4)", WebkitBackdropFilter: "blur(10px) saturate(1.4)",
+                display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer",
+                boxShadow: "0 10px 44px -14px rgba(0,0,0,0.35)",
               }}
             >
-              Try it out
-            </Button>
+              <Play size={28} fill="currentColor" style={{ marginLeft: 3 }} />
+            </button>
           </div>
         </div>
       </div>

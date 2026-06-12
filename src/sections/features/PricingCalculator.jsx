@@ -21,10 +21,10 @@ const DEFAULT_TIERS = [
 ];
 
 export const PRICING_WINES = [
-  { src: '/bottles/theophile.jpg', name: 'Théophile Haru Rosé', menu: 42, cost: 16 },
+  { src: '/bottles/moric.jpg', name: 'Moric Blaufränkisch', menu: 58, cost: 24 },
   { src: '/bottles/georg.jpg', name: 'Georg Mosbacher GG', menu: 68, cost: 27 },
   { src: '/bottles/chateau.jpg', name: 'Château La Mission', menu: 145, cost: 64 },
-  { src: '/bottles/moric.jpg', name: 'Moric Blaufränkisch', menu: 58, cost: 24 },
+  { src: '/bottles/theophile.jpg', name: 'Théophile Haru Rosé', menu: 42, cost: 16 },
 ];
 
 function Line({ label, value }) {
@@ -40,7 +40,7 @@ export default function PricingCalculator({
   wines = PRICING_WINES,
   tiers = DEFAULT_TIERS,
   bottlesPerDay = 8,
-  accent = '#1f8a5b',
+  accent = '#d11174',
   defaultTier = 2,
   wineIndex = 0,
 }) {
@@ -73,7 +73,7 @@ export default function PricingCalculator({
   const perYear = Math.round(profit * bottlesPerDay * 365);
 
   return (
-    <div style={{ position: 'relative', display: 'inline-block', padding: '0 0 0 52px' }}>
+    <div style={{ position: 'relative', display: 'inline-block', padding: '0 0 0 80px' }}>
       {/* bottle behind, to the left (white bg drops out via multiply) */}
       <img
         ref={imgRef}
@@ -81,7 +81,7 @@ export default function PricingCalculator({
         alt=""
         style={{
           position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)',
-          height: '82%', width: 'auto', zIndex: 0, mixBlendMode: 'multiply', pointerEvents: 'none',
+          height: '82%', width: 'auto', zIndex: 2, mixBlendMode: 'multiply', pointerEvents: 'none',
         }}
       />
 
@@ -114,14 +114,14 @@ export default function PricingCalculator({
             </div>
             <div style={{ position: 'relative', height: 8, borderRadius: 99, background: 'rgba(0,0,0,0.08)' }}>
               <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: `${margin * 100}%`, borderRadius: 99, background: accent, transition: 'width .45s cubic-bezier(.2,.7,.2,1)' }} />
-              <div
+              {/* <div
                 style={{
                   position: 'absolute', top: '50%', left: `${margin * 100}%`,
                   width: 16, height: 16, borderRadius: 999, background: '#fff', border: `2px solid ${accent}`,
                   transform: 'translate(-50%, -50%)', boxShadow: '0 2px 6px -1px rgba(0,0,0,0.25)',
                   transition: 'left .45s cubic-bezier(.2,.7,.2,1)',
                 }}
-              />
+              /> */}
             </div>
           </div>
 
