@@ -22,7 +22,7 @@ export function Hero() {
               textTransform: "uppercase", color: "var(--accent, #9a9a9a)", marginBottom: 20,
             }}
           >
-            AI for wine sales
+            AI platform for wine sales
           </div>
           <h1
             style={{
@@ -105,7 +105,7 @@ export function Hero() {
             textTransform: "uppercase", color: "var(--accent, #9a9a9a)", marginBottom: 28,
           }}
         >
-          AI for wine sales
+          AI platform for wine sales
         </div>
         <h1
           style={{

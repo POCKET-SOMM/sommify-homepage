@@ -1,11 +1,11 @@
 import { useState, useRef, useLayoutEffect } from "react";
 import { useIsMobile } from "../hooks/useMediaQuery.js";
-import { FEATURES } from "./features/data.js";
 import {
   MenuOfferPicker, ReplacementPairs, BeauChat, BEAU_USE_CASES, ExportsMock,
 } from "./features/DesktopVisuals.jsx";
 import PricingCalculator, { PRICING_WINES } from "./features/PricingCalculator.jsx";
 import { MenuToOffer } from "./features/MobileVisuals.jsx";
+import { FEATURES } from "./features/data.js";
 
 const DESKTOP_VISUALS = {
   menu: MenuOfferPicker,
