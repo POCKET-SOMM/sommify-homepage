@@ -19,6 +19,7 @@ export function VideoModal({ open, onClose }) {
             src={TUTORIAL_VIDEO_URL}
             playing
             controls
+            config={{ youtube: { playerVars: { rel: 0 } } }}
             width="100%"
             height="100%"
             style={{ position: "absolute", inset: 0 }}

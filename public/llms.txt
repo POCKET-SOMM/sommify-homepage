@@ -1,0 +1,36 @@
+# sommify
+
+> sommify is the AI platform for B2B wine sales. Catalogue in, curated offer out — it pairs your wines to a restaurant's menu, prices every pour, and exports beautiful branded sales materials. Built for wine distributors, wholesalers, importers and their sales teams.
+
+## About
+- sommify turns a wine catalogue into curated, priced, customer-ready offers in minutes.
+- Who it's for: wine distributors, wholesalers, importers, and wine sales teams who pitch to restaurants and retailers.
+- Outcome: every client gets sommelier-level pairings and a clean, branded offer, without the manual spreadsheet/InDesign work.
+- Go live in about three days — no long onboarding or integration project.
+
+## Features
+- Menu offers: drop in any restaurant's menu and sommify builds a wine offer to match, dish by dish, priced and ready to send.
+- Wine-list offers: feed it a customer's wine list and it matches every line to the closest wine in your portfolio, applying your margins and replacement rules.
+- Beau (AI sommelier): an AI sommelier and sales assistant — ask about wine knowledge, what's in stock, pairings, or what to pitch under a budget, and get answers in seconds.
+- Pricing help: set bottle and by-the-glass prices, see live margins, and layer volume discounts per customer.
+- Sales materials: automatically generate sales-presentation decks, dish-by-dish pairing guides, and clean wine lists — white-labelled to your brand and exported as PPTX, PDF, DOC or XLSX in sixteen languages.
+
+## Pricing
+- Standard: €70 per seat / month. No user minimums, unlimited usage of all features, custom sales presentation, multiple language support, team and user insights.
+- Enterprise: custom pricing. White-label the platform, custom components, self-service version for customers, internal knowledge base in chat, direct support Slack channel.
+- No integration fee. Cancel anytime. Transparent contract.
+
+## How it works
+- Day 1 — Share your data: send your wine data in any format (spreadsheet, PDF, ERP export, JSON feed); sommify adapts to it.
+- Day 2 — We build it out: sommify processes your data and builds out your experience end to end.
+- Day 3 — You go live: receive a branded domain (e.g. yourcompany.sommify.ai) or an iframe to embed in your own environment.
+
+## Contact
+- Talk to a founder: jacob@sommify.ai
+- Website: https://sommify.ai/
+
+## Links
+- Home: https://sommify.ai/
+- LinkedIn: https://www.linkedin.com/company/sommifyai/
+- Instagram: https://www.instagram.com/sommify.ai/
+- YouTube: https://www.youtube.com/@sommifyAI

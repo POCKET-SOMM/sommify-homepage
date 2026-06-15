@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Send the origin as Referer so embedded YouTube validates (avoids player error 153). -->
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <link rel="icon" type="image/svg+xml" href="/lupa.svg" />
   <meta name="theme-color" content="#ffffff" />
 
@@ -21,23 +23,159 @@
   <meta property="og:description"
     content="Catalogue in, curated offer out. sommify pairs your wines to a restaurant's menu, prices every pour, and exports a beautiful branded document." />
   <meta property="og:url" content="https://sommify.ai/" />
-  <meta property="og:image" content="/assets/product-screen.png" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image" content="https://sommify.ai/assets/product-screen.png" />
+  <meta property="og:image:alt" content="sommify — building a curated, branded wine offer" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="sommify — the platform for wine sales" />
   <meta name="twitter:description" content="Catalogue in, curated offer out. The AI platform for wine sales." />
-  <meta name="twitter:image" content="/assets/product-screen.png" />
+  <meta name="twitter:image" content="https://sommify.ai/assets/product-screen.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;450;500;550;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap"
     rel="stylesheet" />
+
+  <!-- Structured data for search engines and AI answer engines (GEO). -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://sommify.ai/#organization",
+        "name": "sommify",
+        "url": "https://sommify.ai/",
+        "logo": "https://sommify.ai/logo.svg",
+        "description": "The AI platform for B2B wine sales. Catalogue in, curated offer out.",
+        "email": "jacob@sommify.ai",
+        "sameAs": [
+          "https://www.linkedin.com/company/sommifyai/",
+          "https://www.instagram.com/sommify.ai/",
+          "https://www.youtube.com/@sommifyAI"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://sommify.ai/#website",
+        "name": "sommify",
+        "url": "https://sommify.ai/",
+        "publisher": { "@id": "https://sommify.ai/#organization" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "sommify",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "url": "https://sommify.ai/",
+        "publisher": { "@id": "https://sommify.ai/#organization" },
+        "description": "sommify pairs your wines to a restaurant's menu, prices every pour, and exports beautiful branded sales materials — built for wine distributors, wholesalers and their sales teams.",
+        "featureList": [
+          "Build wine offers around a customer's food menu",
+          "Match a customer's wine list to your portfolio",
+          "Beau — an AI sommelier and sales assistant",
+          "Pricing help with live margins and volume tiers",
+          "White-labelled sales materials exported as PPTX, PDF, DOC or XLSX in 16 languages"
+        ],
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "Standard",
+            "price": "70",
+            "priceCurrency": "EUR",
+            "description": "Per seat, per month. Unlimited usage of all features, custom sales presentation, multiple language support, team and user insights."
+          },
+          {
+            "@type": "Offer",
+            "name": "Enterprise",
+            "description": "Custom pricing. White-label the platform, custom components, self-service version for customers, internal knowledge base in chat, direct support Slack channel."
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is sommify?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "sommify is an AI platform for B2B wine sales. You give it your wine catalogue and it builds curated, priced, customer-ready offers — pairing wines to a restaurant's menu, matching a customer's wine list to your portfolio, pricing every pour, and exporting branded sales materials."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Who is sommify for?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Wine distributors, wholesalers, importers, and wine sales teams who sell to restaurants and retailers."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does it take to get started?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "About three days. You share your wine data in any format on day one, sommify builds out your experience on day two, and you go live on day three with a branded domain or an embeddable iframe — no long onboarding or integration project."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much does sommify cost?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Standard plan is €70 per seat per month with no user minimums and unlimited usage of all features. Enterprise pricing is custom and adds white-labelling, custom components, a self-service version for customers, an internal knowledge base in chat, and a direct support Slack channel. No integration fee and you can cancel anytime."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What formats and languages can sommify export?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "sommify generates sales-presentation decks, dish-by-dish pairing guides, and clean wine lists, white-labelled to your brand and exported as PPTX, PDF, DOC or XLSX in sixteen languages."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is Beau?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Beau is sommify's AI sommelier and sales assistant. You can ask it general wine knowledge, what's in stock, what pairs with a dish, or what to pitch under a budget, and get answers in seconds — it knows your whole range."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
   <div id="root"></div>
+  <!-- Factual fallback for non-JS crawlers (the app renders client-side). Hidden from normal users. -->
+  <noscript>
+    <h1>The platform for wine sales</h1>
+    <p>sommify is the AI platform for B2B wine sales. Catalogue in, curated offers out — it helps
+      you select the wines for your customers, prices every pour, and exports beautiful branded
+      documents. Built for wine distributors, wholesalers, importers and their sales teams.</p>
+    <h2>What sommify does</h2>
+    <ul>
+      <li><strong>Menu offers</strong> — drop in any restaurant's menu and sommify builds a wine offer to match, dish by dish, priced and ready to send.</li>
+      <li><strong>Wine-list offers</strong> — feed it a customer's wine list and it matches every line to the closest wine in your portfolio, applying your margins and replacement rules.</li>
+      <li><strong>Beau</strong> — an AI sommelier and sales assistant that answers wine, stock, pairing and pitch questions in seconds.</li>
+      <li><strong>Pricing help</strong> — set bottle and by-the-glass prices, see live margins, and layer volume discounts per customer.</li>
+      <li><strong>Sales materials</strong> — auto-generate decks, pairing guides and wine lists, white-labelled to your brand and exported as PPTX, PDF, DOC or XLSX in sixteen languages.</li>
+    </ul>
+    <h2>How it works</h2>
+    <p>Three steps, three days to go live: share your wine data in any format, sommify builds out
+      your experience, then you go live with a branded domain or an embeddable iframe.</p>
+    <h2>Pricing</h2>
+    <p>Standard: €70 per seat / month. Enterprise: custom. No integration fee, cancel anytime.</p>
+    <p>Talk to a founder: <a href="mailto:jacob@sommify.ai">jacob@sommify.ai</a></p>
+  </noscript>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 

@@ -1,4 +1,5 @@
 import { Button } from "../components/Button.jsx";
+import { useModals } from "../components/ModalProvider.jsx";
 import { useIsMobile } from "../hooks/useMediaQuery.js";
 
 function Kicker({ children }) {
@@ -228,6 +229,7 @@ function MobileTimeline() {
 }
 
 function PayoffCard() {
+  const { openBooking } = useModals();
   return (
     <div style={{ position: "relative" }}>
       <div
@@ -259,7 +261,7 @@ function PayoffCard() {
         >
           Easier wine sales
         </div>
-        <Button block variant="white">
+        <Button block variant="white" arrow onClick={openBooking}>
           Talk to a founder
         </Button>
       </div>
