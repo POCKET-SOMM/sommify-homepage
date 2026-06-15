@@ -6,7 +6,7 @@ import { useIsMobile } from "../hooks/useMediaQuery.js";
 
 const LEAD =
   // "Catalogue in, curated offer out. sommify pairs your wines to a restaurant's menu, prices every pour, and exports a beautiful branded document.";
-  "Catalogue in, curated offers out. The platform helps you select the wines for your customers, prices every pour, and exports beautiful branded documents.";
+  "Catalogue in, curated offers out. It helps you select the wines for your customers, prices every pour, and exports beautiful branded documents. Built for wine distributors, wholesalers, importers and their sales teams.";
 
 // Desktop hero visual: true = clean full video card (no background image, nothing cropped);
 // false = original vineyard "stage" where the video peeks up and is cropped at the bottom.
