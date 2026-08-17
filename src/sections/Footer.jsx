@@ -35,7 +35,7 @@ function DesktopFooter() {
                 lineHeight: 1.6, maxWidth: 300,
               }}
             >
-              The AI platform for wine sales. Catalogue in, curated offer out.
+              The AI assistant for B2B wine sales. Catalogue in, curated offer out.
             </div>
           </div>
           Platform / Company / Resources columns — hidden for now.
@@ -107,7 +107,7 @@ function MobileFooter() {
             lineHeight: 1.6, maxWidth: 280,
           }}
         >
-          The AI platform for wine sales. Catalogue in, curated offer out.
+          The AI assistant for B2B wine sales. Catalogue in, curated offer out.
         </div>
       </div>
       {/* Platform / Company / Resources columns — hidden for now.

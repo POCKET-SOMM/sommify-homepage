@@ -27,7 +27,7 @@ export function Hero() {
               textTransform: "uppercase", color: "var(--accent, #9a9a9a)", marginBottom: 20,
             }}
           >
-            AI platform for wine sales
+            AI assistant for B2B wine sales
           </div>
           <h1
             style={{
@@ -35,7 +35,7 @@ export function Hero() {
               fontSize: 52, lineHeight: 0.98, letterSpacing: "-0.01em", color: "#0a0a0a",
             }}
           >
-            <span style={{ display: "block" }}>The platform</span>
+            <span style={{ display: "block" }}>The assistant</span>
             <span style={{ display: "block" }}>for</span>
             <span style={{ display: "block" }}>
               <RotatingWord style={{ fontFamily: "var(--sans)" }} />
@@ -110,7 +110,7 @@ export function Hero() {
             textTransform: "uppercase", color: "var(--accent, #9a9a9a)", marginBottom: 28,
           }}
         >
-          AI platform for wine sales
+          AI assistant for B2B wine sales
         </div>
         <h1
           style={{
@@ -118,7 +118,7 @@ export function Hero() {
             fontSize: 92, lineHeight: 1.0, letterSpacing: "-0.01em",
           }}
         >
-          <span style={{ display: "block" }}>The platform for</span>
+          <span style={{ display: "block" }}>The assistant for</span>
           <span style={{ display: "block" }}>
             <RotatingWord style={{ fontFamily: "var(--sans)" }} />
           </span>

@@ -3,6 +3,7 @@ import { IconCheck } from "../components/icons.jsx";
 import { useIsMobile } from "../hooks/useMediaQuery.js";
 import { useModals } from "../components/ModalProvider.jsx";
 import { Button } from "../components/Button.jsx";
+import { CONTRACT_PDF_URL } from "../config.js";
 
 function Check() {
   return (
@@ -53,7 +54,7 @@ function ContractLink({ isMobile }) {
       onMouseLeave={() => setHover(false)}
       onFocus={() => setHover(true)}
       onBlur={() => setHover(false)}
-      // TODO: wire to the real contract PDF download
+      onClick={() => window.open(CONTRACT_PDF_URL, "_blank", "noopener,noreferrer")}
       style={{
         display: "inline-flex", alignItems: "center", gap: 7,
         background: "transparent", border: "none", padding: 0, cursor: "pointer",
