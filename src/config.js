@@ -4,7 +4,7 @@ export const FOUNDER_EMAIL = "jacob@sommify.ai";
 export const BOOKING_URL =
   "https://calendar.google.com/calendar/u/0/appointments/AcZssZ2mzIg5lKAVFzLu7R4umL4rgYYr7WV8yIOHwA8=?gv=true";
 export const ROADSHOW_URL = "https://roadshow.sommify.ai";
-export const TUTORIAL_VIDEO_URL = "https://youtu.be/ZN9vREhYiUs";
+export const TUTORIAL_VIDEO_URL = "https://youtu.be/K0LrMs3LNxw";
 export const CONTRACT_PDF_URL =
   "/sommify-platform-agreement.pdf";
 
